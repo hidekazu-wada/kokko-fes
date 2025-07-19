@@ -220,7 +220,7 @@ Always change to the `astro/` directory before running npm commands, as the main
 
 ### 🔴 最高優先度（必須機能）
 
-- [ ] **年度別アーカイブページ実装**
+- [x] **年度別アーカイブページ実装** ✅ 完了
   - `/[year].astro` - 年度別トップページ（例：/2024）
   - `/[year]/[category].astro` - 年度別カテゴリーページ（例：/2024/miru）
   - `/[year]/[category]/[slug].astro` - 年度別コンテンツ詳細

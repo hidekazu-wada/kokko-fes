@@ -1,0 +1,478 @@
+---
+import MySiteLayout from '../../../layouts/MySiteLayout.astro';
+import { getEventConfigs, getNews } from '../../../lib/microcms';
+import type { EventConfig, News } from '../../../types/microcms';
+
+export async function getStaticPaths() {
+  try {
+    const response = await getEventConfigs();
+    const archivedConfigs = response.contents.filter(
+      (config: EventConfig) => 
+        config.status === 'archived' || 
+        (Array.isArray(config.status) && config.status.includes('archived'))
+    );
+
+    return archivedConfigs.map((config: EventConfig) => ({
+      params: { year: config.year },
+      props: { eventConfig: config }
+    }));
+  } catch (error) {
+    console.error('Error generating static paths for archived news:', error);
+    return [];
+  }
+}
+
+const { eventConfig } = Astro.props;
+const { year } = Astro.params;
+
+let newsList: News[] = [];
+let error: string | null = null;
+
+try {
+  if (eventConfig) {
+    const newsResponse = await getNews(eventConfig.year);
+    newsList = newsResponse.contents;
+  }
+} catch (e) {
+  error = 'お知らせの取得に失敗しました';
+  console.error('Error fetching news:', e);
+}
+---
+
+<MySiteLayout>
+  <!-- アーカイブ通知バー -->
+  <div class="archive-notice">
+    <div class="archive-notice__content">
+      📋 これは{eventConfig.year}年のアーカイブです
+      <a href="/" class="archive-notice__link">最新の開催情報はこちら</a>
+    </div>
+  </div>
+
+  <div class="news-page">
+    <div class="news-header">
+      <h1 class="news-title">お知らせ</h1>
+      <div class="year-badge">{eventConfig.year}年</div>
+      <nav class="breadcrumb">
+        <a href="/">ホーム</a>
+        <span class="breadcrumb-separator">></span>
+        <a href={`/${eventConfig.year}`}>{eventConfig.year}年</a>
+        <span class="breadcrumb-separator">></span>
+        <span class="breadcrumb-current">お知らせ</span>
+      </nav>
+    </div>
+
+    {error ? (
+      <div class="error">
+        <p>{error}</p>
+      </div>
+    ) : newsList.length > 0 ? (
+      <div class="news-list">
+        {newsList.map(news => (
+          <article class="news-card">
+            <a href={`/${eventConfig.year}/news/${news.slug}`} class="news-link">
+              <div class="news-meta">
+                <time class="news-date">
+                  {new Date(news.date).toLocaleDateString('ja-JP')}
+                </time>
+                <span class="news-category">{news.category}</span>
+              </div>
+              <h2 class="news-card-title">{news.title}</h2>
+              <div class="read-more">
+                詳細を見る →
+              </div>
+            </a>
+          </article>
+        ))}
+      </div>
+    ) : (
+      <div class="no-news">
+        <p>{eventConfig.year}年のお知らせはありません。</p>
+      </div>
+    )}
+
+    <div class="back-link">
+      <a href={`/${eventConfig.year}`}>{eventConfig.year}年のトップページに戻る</a>
+      <a href="/archive">他の年度を見る</a>
+      <a href="/" class="primary-link">最新の開催情報</a>
+    </div>
+  </div>
+</MySiteLayout>
+
+<style lang="scss">
+  @import '../../../styles/mixins.scss';
+  @import '../../../styles/functions.scss';
+
+  .archive-notice {
+    background: #f39c12;
+    color: white;
+    padding: spx(12px) 0;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    
+    @include tablet-up {
+      padding: tpx(16px) 0;
+    }
+    
+    @include desktop-up {
+      padding: ppx(20px) 0;
+    }
+
+    &__content {
+      font-size: spx(14px);
+      font-weight: 600;
+      
+      @include tablet-up {
+        font-size: tpx(16px);
+      }
+      
+      @include desktop-up {
+        font-size: ppx(18px);
+      }
+    }
+
+    &__link {
+      color: white;
+      text-decoration: underline;
+      margin-left: spx(16px);
+      
+      @include tablet-up {
+        margin-left: tpx(20px);
+      }
+      
+      @include desktop-up {
+        margin-left: ppx(24px);
+      }
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  .news-page {
+    min-height: 100vh;
+    padding: spx(20px);
+    
+    @include tablet-up {
+      padding: tpx(40px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(60px);
+      max-width: ppx(1000px);
+      margin: 0 auto;
+    }
+  }
+
+  .news-header {
+    text-align: center;
+    margin-bottom: spx(40px);
+    
+    @include tablet-up {
+      margin-bottom: tpx(60px);
+    }
+    
+    @include desktop-up {
+      margin-bottom: ppx(80px);
+    }
+  }
+
+  .news-title {
+    @include zen-kaku-gothic-new-bold;
+    font-size: spx(28px);
+    color: #2c3e50;
+    margin-bottom: spx(12px);
+    
+    @include tablet-up {
+      font-size: tpx(36px);
+      margin-bottom: tpx(16px);
+    }
+    
+    @include desktop-up {
+      font-size: ppx(48px);
+      margin-bottom: ppx(20px);
+    }
+  }
+
+  .year-badge {
+    display: inline-block;
+    background: #e67e22;
+    color: white;
+    padding: spx(6px) spx(16px);
+    border-radius: spx(20px);
+    font-size: spx(14px);
+    font-weight: 600;
+    margin-bottom: spx(16px);
+    
+    @include tablet-up {
+      padding: tpx(8px) tpx(20px);
+      border-radius: tpx(24px);
+      font-size: tpx(16px);
+      margin-bottom: tpx(20px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(10px) ppx(24px);
+      border-radius: ppx(28px);
+      font-size: ppx(18px);
+      margin-bottom: ppx(24px);
+    }
+  }
+
+  .breadcrumb {
+    font-size: spx(14px);
+    color: #7f8c8d;
+    
+    @include tablet-up {
+      font-size: tpx(16px);
+    }
+    
+    @include desktop-up {
+      font-size: ppx(18px);
+    }
+
+    a {
+      color: #3498db;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &-separator {
+      margin: 0 spx(8px);
+      
+      @include tablet-up {
+        margin: 0 tpx(10px);
+      }
+      
+      @include desktop-up {
+        margin: 0 ppx(12px);
+      }
+    }
+
+    &-current {
+      font-weight: 600;
+    }
+  }
+
+  .news-list {
+    display: grid;
+    gap: spx(20px);
+    margin-bottom: spx(40px);
+    
+    @include tablet-up {
+      gap: tpx(24px);
+      margin-bottom: tpx(60px);
+    }
+    
+    @include desktop-up {
+      gap: ppx(30px);
+      margin-bottom: ppx(80px);
+    }
+  }
+
+  .news-card {
+    background: white;
+    border-radius: spx(12px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    
+    @include tablet-up {
+      border-radius: tpx(16px);
+    }
+    
+    @include desktop-up {
+      border-radius: ppx(20px);
+    }
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  .news-link {
+    display: block;
+    padding: spx(20px);
+    text-decoration: none;
+    color: inherit;
+    
+    @include tablet-up {
+      padding: tpx(24px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(30px);
+    }
+  }
+
+  .news-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: spx(12px);
+    flex-wrap: wrap;
+    gap: spx(8px);
+    
+    @include tablet-up {
+      margin-bottom: tpx(16px);
+      gap: tpx(12px);
+    }
+    
+    @include desktop-up {
+      margin-bottom: ppx(20px);
+      gap: ppx(16px);
+    }
+  }
+
+  .news-date {
+    font-size: spx(14px);
+    color: #7f8c8d;
+    
+    @include tablet-up {
+      font-size: tpx(16px);
+    }
+    
+    @include desktop-up {
+      font-size: ppx(18px);
+    }
+  }
+
+  .news-category {
+    background: #9b59b6;
+    color: white;
+    padding: spx(4px) spx(12px);
+    border-radius: spx(12px);
+    font-size: spx(12px);
+    font-weight: 600;
+    
+    @include tablet-up {
+      padding: tpx(6px) tpx(16px);
+      border-radius: tpx(16px);
+      font-size: tpx(14px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(8px) ppx(20px);
+      border-radius: ppx(20px);
+      font-size: ppx(16px);
+    }
+  }
+
+  .news-card-title {
+    @include zen-kaku-gothic-new-bold;
+    font-size: spx(18px);
+    color: #2c3e50;
+    margin-bottom: spx(16px);
+    line-height: 1.4;
+    
+    @include tablet-up {
+      font-size: tpx(20px);
+      margin-bottom: tpx(20px);
+    }
+    
+    @include desktop-up {
+      font-size: ppx(24px);
+      margin-bottom: ppx(24px);
+    }
+  }
+
+  .read-more {
+    font-size: spx(14px);
+    color: #3498db;
+    font-weight: 600;
+    text-align: right;
+    
+    @include tablet-up {
+      font-size: tpx(16px);
+    }
+    
+    @include desktop-up {
+      font-size: ppx(18px);
+    }
+  }
+
+  .error,
+  .no-news {
+    text-align: center;
+    padding: spx(40px) spx(20px);
+    
+    @include tablet-up {
+      padding: tpx(60px) tpx(40px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(80px) ppx(60px);
+    }
+
+    p {
+      font-size: spx(16px);
+      color: #7f8c8d;
+      
+      @include tablet-up {
+        font-size: tpx(18px);
+      }
+      
+      @include desktop-up {
+        font-size: ppx(20px);
+      }
+    }
+  }
+
+  .error p {
+    color: #e74c3c;
+  }
+
+  .back-link {
+    display: flex;
+    justify-content: center;
+    gap: spx(16px);
+    flex-wrap: wrap;
+    
+    @include tablet-up {
+      gap: tpx(20px);
+    }
+    
+    @include desktop-up {
+      gap: ppx(24px);
+    }
+    
+    a {
+      display: inline-block;
+      padding: spx(12px) spx(20px);
+      background: #95a5a6;
+      color: white;
+      text-decoration: none;
+      border-radius: spx(8px);
+      font-weight: 600;
+      transition: background-color 0.2s ease;
+      
+      @include tablet-up {
+        padding: tpx(14px) tpx(24px);
+        border-radius: tpx(10px);
+      }
+      
+      @include desktop-up {
+        padding: ppx(16px) ppx(28px);
+        border-radius: ppx(12px);
+      }
+
+      &:hover {
+        background: #7f8c8d;
+      }
+
+      &.primary-link {
+        background: #e74c3c;
+
+        &:hover {
+          background: #c0392b;
+        }
+      }
+    }
+  }
+</style>

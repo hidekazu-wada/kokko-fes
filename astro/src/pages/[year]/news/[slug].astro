@@ -1,0 +1,491 @@
+---
+import MySiteLayout from '../../../layouts/MySiteLayout.astro';
+import { getEventConfigs, getNews } from '../../../lib/microcms';
+import type { EventConfig, News } from '../../../types/microcms';
+
+export async function getStaticPaths() {
+  try {
+    const response = await getEventConfigs();
+    const archivedConfigs = response.contents.filter(
+      (config: EventConfig) => 
+        config.status === 'archived' || 
+        (Array.isArray(config.status) && config.status.includes('archived'))
+    );
+
+    const paths = [];
+
+    for (const config of archivedConfigs) {
+      const newsResponse = await getNews(config.year);
+      const newsList = newsResponse.contents;
+
+      for (const news of newsList) {
+        paths.push({
+          params: { 
+            year: config.year,
+            slug: news.slug 
+          },
+          props: { 
+            news,
+            eventConfig: config
+          }
+        });
+      }
+    }
+
+    return paths;
+  } catch (error) {
+    console.error('Error generating static paths for archived news details:', error);
+    return [];
+  }
+}
+
+const { news, eventConfig } = Astro.props;
+---
+
+<MySiteLayout>
+  <!-- アーカイブ通知バー -->
+  <div class="archive-notice">
+    <div class="archive-notice__content">
+      📋 これは{eventConfig.year}年のアーカイブです
+      <a href="/" class="archive-notice__link">最新の開催情報はこちら</a>
+    </div>
+  </div>
+
+  <div class="news-detail">
+    <div class="news-header">
+      <nav class="breadcrumb">
+        <a href="/">ホーム</a>
+        <span class="breadcrumb-separator">></span>
+        <a href={`/${eventConfig.year}`}>{eventConfig.year}年</a>
+        <span class="breadcrumb-separator">></span>
+        <a href={`/${eventConfig.year}/news`}>お知らせ</a>
+        <span class="breadcrumb-separator">></span>
+        <span class="breadcrumb-current">{news.title}</span>
+      </nav>
+    </div>
+
+    <article class="news-main">
+      <header class="news-title-section">
+        <h1 class="news-title">{news.title}</h1>
+        <div class="news-meta">
+          <span class="news-category">{news.category}</span>
+          <span class="year-badge">{eventConfig.year}年</span>
+          <time class="news-date">
+            {new Date(news.date).toLocaleDateString('ja-JP')}
+          </time>
+        </div>
+      </header>
+
+      <div class="news-content">
+        <div set:html={news.content} />
+      </div>
+    </article>
+
+    <div class="news-navigation">
+      <a href={`/${eventConfig.year}/news`} class="nav-button nav-back">
+        ← お知らせ一覧に戻る
+      </a>
+      <a href={`/${eventConfig.year}`} class="nav-button nav-year">
+        {eventConfig.year}年トップ
+      </a>
+      <a href="/" class="nav-button nav-home">
+        最新の開催情報
+      </a>
+    </div>
+  </div>
+</MySiteLayout>
+
+<style lang="scss">
+  @import '../../../styles/mixins.scss';
+  @import '../../../styles/functions.scss';
+
+  .archive-notice {
+    background: #f39c12;
+    color: white;
+    padding: spx(12px) 0;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    
+    @include tablet-up {
+      padding: tpx(16px) 0;
+    }
+    
+    @include desktop-up {
+      padding: ppx(20px) 0;
+    }
+
+    &__content {
+      font-size: spx(14px);
+      font-weight: 600;
+      
+      @include tablet-up {
+        font-size: tpx(16px);
+      }
+      
+      @include desktop-up {
+        font-size: ppx(18px);
+      }
+    }
+
+    &__link {
+      color: white;
+      text-decoration: underline;
+      margin-left: spx(16px);
+      
+      @include tablet-up {
+        margin-left: tpx(20px);
+      }
+      
+      @include desktop-up {
+        margin-left: ppx(24px);
+      }
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  .news-detail {
+    min-height: 100vh;
+    padding: spx(20px);
+    
+    @include tablet-up {
+      padding: tpx(40px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(60px);
+      max-width: ppx(1000px);
+      margin: 0 auto;
+    }
+  }
+
+  .news-header {
+    margin-bottom: spx(30px);
+    
+    @include tablet-up {
+      margin-bottom: tpx(40px);
+    }
+    
+    @include desktop-up {
+      margin-bottom: ppx(50px);
+    }
+  }
+
+  .breadcrumb {
+    font-size: spx(14px);
+    color: #7f8c8d;
+    
+    @include tablet-up {
+      font-size: tpx(16px);
+    }
+    
+    @include desktop-up {
+      font-size: ppx(18px);
+    }
+
+    a {
+      color: #3498db;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &-separator {
+      margin: 0 spx(8px);
+      
+      @include tablet-up {
+        margin: 0 tpx(10px);
+      }
+      
+      @include desktop-up {
+        margin: 0 ppx(12px);
+      }
+    }
+
+    &-current {
+      font-weight: 600;
+    }
+  }
+
+  .news-main {
+    background: white;
+    border-radius: spx(16px);
+    padding: spx(30px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    margin-bottom: spx(30px);
+    
+    @include tablet-up {
+      border-radius: tpx(20px);
+      padding: tpx(40px);
+      margin-bottom: tpx(40px);
+    }
+    
+    @include desktop-up {
+      border-radius: ppx(24px);
+      padding: ppx(50px);
+      margin-bottom: ppx(50px);
+    }
+  }
+
+  .news-title-section {
+    margin-bottom: spx(30px);
+    
+    @include tablet-up {
+      margin-bottom: tpx(40px);
+    }
+    
+    @include desktop-up {
+      margin-bottom: ppx(50px);
+    }
+  }
+
+  .news-title {
+    @include zen-kaku-gothic-new-bold;
+    font-size: spx(24px);
+    color: #2c3e50;
+    margin-bottom: spx(16px);
+    line-height: 1.4;
+    
+    @include tablet-up {
+      font-size: tpx(32px);
+      margin-bottom: tpx(20px);
+    }
+    
+    @include desktop-up {
+      font-size: ppx(40px);
+      margin-bottom: ppx(24px);
+    }
+  }
+
+  .news-meta {
+    display: flex;
+    align-items: center;
+    gap: spx(16px);
+    font-size: spx(14px);
+    flex-wrap: wrap;
+    
+    @include tablet-up {
+      gap: tpx(20px);
+      font-size: tpx(16px);
+    }
+    
+    @include desktop-up {
+      gap: ppx(24px);
+      font-size: ppx(18px);
+    }
+  }
+
+  .news-category {
+    background: #9b59b6;
+    color: white;
+    padding: spx(4px) spx(12px);
+    border-radius: spx(16px);
+    font-size: spx(12px);
+    font-weight: 600;
+    
+    @include tablet-up {
+      padding: tpx(6px) tpx(16px);
+      border-radius: tpx(20px);
+      font-size: tpx(14px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(8px) ppx(20px);
+      border-radius: ppx(24px);
+      font-size: ppx(16px);
+    }
+  }
+
+  .year-badge {
+    background: #e67e22;
+    color: white;
+    padding: spx(4px) spx(12px);
+    border-radius: spx(16px);
+    font-size: spx(12px);
+    font-weight: 600;
+    
+    @include tablet-up {
+      padding: tpx(6px) tpx(16px);
+      border-radius: tpx(20px);
+      font-size: tpx(14px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(8px) ppx(20px);
+      border-radius: ppx(24px);
+      font-size: ppx(16px);
+    }
+  }
+
+  .news-date {
+    color: #7f8c8d;
+  }
+
+  .news-content {
+    font-size: spx(16px);
+    line-height: 1.8;
+    color: #34495e;
+    
+    @include tablet-up {
+      font-size: tpx(18px);
+    }
+    
+    @include desktop-up {
+      font-size: ppx(20px);
+    }
+
+    :global(h2) {
+      @include zen-kaku-gothic-new-bold;
+      font-size: spx(20px);
+      color: #2c3e50;
+      margin: spx(30px) 0 spx(16px);
+      padding-bottom: spx(8px);
+      border-bottom: 2px solid #ecf0f1;
+      
+      @include tablet-up {
+        font-size: tpx(24px);
+        margin: tpx(40px) 0 tpx(20px);
+        padding-bottom: tpx(10px);
+      }
+      
+      @include desktop-up {
+        font-size: ppx(28px);
+        margin: ppx(50px) 0 ppx(24px);
+        padding-bottom: ppx(12px);
+      }
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
+    :global(h3) {
+      @include zen-kaku-gothic-new-bold;
+      font-size: spx(18px);
+      color: #2c3e50;
+      margin: spx(24px) 0 spx(12px);
+      
+      @include tablet-up {
+        font-size: tpx(20px);
+        margin: tpx(30px) 0 tpx(16px);
+      }
+      
+      @include desktop-up {
+        font-size: ppx(24px);
+        margin: ppx(36px) 0 ppx(20px);
+      }
+    }
+
+    :global(p) {
+      margin-bottom: spx(16px);
+      
+      @include tablet-up {
+        margin-bottom: tpx(20px);
+      }
+      
+      @include desktop-up {
+        margin-bottom: ppx(24px);
+      }
+    }
+
+    :global(ul), :global(ol) {
+      margin: spx(16px) 0;
+      padding-left: spx(24px);
+      
+      @include tablet-up {
+        margin: tpx(20px) 0;
+        padding-left: tpx(30px);
+      }
+      
+      @include desktop-up {
+        margin: ppx(24px) 0;
+        padding-left: ppx(36px);
+      }
+    }
+
+    :global(li) {
+      margin-bottom: spx(8px);
+      
+      @include tablet-up {
+        margin-bottom: tpx(10px);
+      }
+      
+      @include desktop-up {
+        margin-bottom: ppx(12px);
+      }
+    }
+  }
+
+  .news-navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: spx(16px);
+    flex-wrap: wrap;
+    
+    @include tablet-up {
+      gap: tpx(20px);
+    }
+    
+    @include desktop-up {
+      gap: ppx(24px);
+    }
+  }
+
+  .nav-button {
+    display: inline-block;
+    padding: spx(12px) spx(20px);
+    border-radius: spx(8px);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    flex: 1;
+    text-align: center;
+    min-width: spx(120px);
+    
+    @include tablet-up {
+      padding: tpx(14px) tpx(24px);
+      border-radius: tpx(10px);
+      min-width: tpx(140px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(16px) ppx(28px);
+      border-radius: ppx(12px);
+      min-width: ppx(160px);
+    }
+
+    &.nav-back {
+      background: #9b59b6;
+      color: white;
+
+      &:hover {
+        background: #8e44ad;
+        transform: translateX(-2px);
+      }
+    }
+
+    &.nav-year {
+      background: #e67e22;
+      color: white;
+
+      &:hover {
+        background: #d35400;
+      }
+    }
+
+    &.nav-home {
+      background: #e74c3c;
+      color: white;
+
+      &:hover {
+        background: #c0392b;
+      }
+    }
+  }
+</style>
