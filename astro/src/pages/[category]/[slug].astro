@@ -1,0 +1,472 @@
+---
+import MySiteLayout from '../../layouts/MySiteLayout.astro';
+import { getCurrentEventConfig, getContents } from '../../lib/microcms';
+import type { EventConfig, Content, Category } from '../../types/microcms';
+
+export async function getStaticPaths() {
+  try {
+    const eventConfig = await getCurrentEventConfig();
+    if (!eventConfig) {
+      return [];
+    }
+
+    const contentsResponse = await getContents(eventConfig.year);
+    const contents = contentsResponse.contents;
+
+    // すべてのコンテンツに対してパスを生成
+    return contents.map((content: Content) => {
+      const category = eventConfig.categories.find(
+        (cat: Category) => cat.categoryId === content.categoryId
+      );
+      
+      if (!category) {
+        console.warn(`Category not found for content: ${content.id}`);
+        return null;
+      }
+
+      return {
+        params: { 
+          category: category.slug,
+          slug: content.slug 
+        },
+        props: { 
+          content,
+          category,
+          year: eventConfig.year
+        }
+      };
+    }).filter(Boolean); // nullを除外
+  } catch (error) {
+    console.error('Error generating static paths for content details:', error);
+    return [];
+  }
+}
+
+const { content, category, year } = Astro.props;
+---
+
+<MySiteLayout>
+  <div class="content-detail">
+    <div class="content-header">
+      <nav class="breadcrumb">
+        <a href="/">ホーム</a>
+        <span class="breadcrumb-separator">></span>
+        <a href={`/${category.slug}`}>{category.name}</a>
+        <span class="breadcrumb-separator">></span>
+        <span class="breadcrumb-current">{content.title}</span>
+      </nav>
+    </div>
+
+    <article class="content-main">
+      <header class="content-title-section">
+        <h1 class="content-title">{content.title}</h1>
+        <div class="content-meta">
+          <span class="content-category">{category.name}</span>
+          <time class="content-date">
+            {new Date(content.publishedAt).toLocaleDateString('ja-JP')}
+          </time>
+        </div>
+      </header>
+
+      {content.images && content.images.length > 0 && (
+        <div class="content-images">
+          {content.images.map((image, index) => (
+            <div class="content-image" key={index}>
+              <img 
+                src={image.url} 
+                alt={`${content.title} - 画像${index + 1}`}
+                width={image.width}
+                height={image.height}
+              />
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div class="content-body">
+        <div class="content-description">
+          <h2>概要</h2>
+          <p>{content.description}</p>
+        </div>
+
+        {(content.venue || content.time) && (
+          <div class="content-details">
+            <h2>詳細情報</h2>
+            <dl class="details-list">
+              {content.venue && (
+                <>
+                  <dt>会場</dt>
+                  <dd>{content.venue}</dd>
+                </>
+              )}
+              {content.time && (
+                <>
+                  <dt>時間</dt>
+                  <dd>{content.time}</dd>
+                </>
+              )}
+            </dl>
+          </div>
+        )}
+      </div>
+    </article>
+
+    <div class="content-navigation">
+      <a href={`/${category.slug}`} class="nav-button nav-back">
+        ← {category.name}一覧に戻る
+      </a>
+      <a href="/" class="nav-button nav-home">
+        トップページに戻る
+      </a>
+    </div>
+  </div>
+</MySiteLayout>
+
+<style lang="scss">
+  @import '../../styles/mixins.scss';
+  @import '../../styles/functions.scss';
+
+  .content-detail {
+    min-height: 100vh;
+    padding: spx(20px);
+    
+    @include tablet-up {
+      padding: tpx(40px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(60px);
+      max-width: ppx(1200px);
+      margin: 0 auto;
+    }
+  }
+
+  .content-header {
+    margin-bottom: spx(30px);
+    
+    @include tablet-up {
+      margin-bottom: tpx(40px);
+    }
+    
+    @include desktop-up {
+      margin-bottom: ppx(50px);
+    }
+  }
+
+  .breadcrumb {
+    font-size: spx(14px);
+    color: #7f8c8d;
+    
+    @include tablet-up {
+      font-size: tpx(16px);
+    }
+    
+    @include desktop-up {
+      font-size: ppx(18px);
+    }
+
+    a {
+      color: #3498db;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &-separator {
+      margin: 0 spx(8px);
+      
+      @include tablet-up {
+        margin: 0 tpx(10px);
+      }
+      
+      @include desktop-up {
+        margin: 0 ppx(12px);
+      }
+    }
+
+    &-current {
+      font-weight: 600;
+    }
+  }
+
+  .content-main {
+    background: white;
+    border-radius: spx(16px);
+    padding: spx(30px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    margin-bottom: spx(30px);
+    
+    @include tablet-up {
+      border-radius: tpx(20px);
+      padding: tpx(40px);
+      margin-bottom: tpx(40px);
+    }
+    
+    @include desktop-up {
+      border-radius: ppx(24px);
+      padding: ppx(50px);
+      margin-bottom: ppx(50px);
+    }
+  }
+
+  .content-title-section {
+    margin-bottom: spx(30px);
+    
+    @include tablet-up {
+      margin-bottom: tpx(40px);
+    }
+    
+    @include desktop-up {
+      margin-bottom: ppx(50px);
+    }
+  }
+
+  .content-title {
+    @include zen-kaku-gothic-new-bold;
+    font-size: spx(24px);
+    color: #2c3e50;
+    margin-bottom: spx(16px);
+    line-height: 1.4;
+    
+    @include tablet-up {
+      font-size: tpx(32px);
+      margin-bottom: tpx(20px);
+    }
+    
+    @include desktop-up {
+      font-size: ppx(40px);
+      margin-bottom: ppx(24px);
+    }
+  }
+
+  .content-meta {
+    display: flex;
+    align-items: center;
+    gap: spx(16px);
+    font-size: spx(14px);
+    
+    @include tablet-up {
+      gap: tpx(20px);
+      font-size: tpx(16px);
+    }
+    
+    @include desktop-up {
+      gap: ppx(24px);
+      font-size: ppx(18px);
+    }
+  }
+
+  .content-category {
+    background: #3498db;
+    color: white;
+    padding: spx(4px) spx(12px);
+    border-radius: spx(16px);
+    font-size: spx(12px);
+    font-weight: 600;
+    
+    @include tablet-up {
+      padding: tpx(6px) tpx(16px);
+      border-radius: tpx(20px);
+      font-size: tpx(14px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(8px) ppx(20px);
+      border-radius: ppx(24px);
+      font-size: ppx(16px);
+    }
+  }
+
+  .content-date {
+    color: #7f8c8d;
+  }
+
+  .content-images {
+    margin-bottom: spx(30px);
+    
+    @include tablet-up {
+      margin-bottom: tpx(40px);
+    }
+    
+    @include desktop-up {
+      margin-bottom: ppx(50px);
+    }
+  }
+
+  .content-image {
+    margin-bottom: spx(16px);
+    border-radius: spx(12px);
+    overflow: hidden;
+    
+    @include tablet-up {
+      margin-bottom: tpx(20px);
+      border-radius: tpx(16px);
+    }
+    
+    @include desktop-up {
+      margin-bottom: ppx(24px);
+      border-radius: ppx(20px);
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
+
+  .content-body {
+    h2 {
+      @include zen-kaku-gothic-new-bold;
+      font-size: spx(20px);
+      color: #2c3e50;
+      margin-bottom: spx(16px);
+      padding-bottom: spx(8px);
+      border-bottom: 2px solid #ecf0f1;
+      
+      @include tablet-up {
+        font-size: tpx(24px);
+        margin-bottom: tpx(20px);
+        padding-bottom: tpx(10px);
+      }
+      
+      @include desktop-up {
+        font-size: ppx(28px);
+        margin-bottom: ppx(24px);
+        padding-bottom: ppx(12px);
+      }
+    }
+  }
+
+  .content-description {
+    margin-bottom: spx(30px);
+    
+    @include tablet-up {
+      margin-bottom: tpx(40px);
+    }
+    
+    @include desktop-up {
+      margin-bottom: ppx(50px);
+    }
+
+    p {
+      font-size: spx(16px);
+      line-height: 1.8;
+      color: #34495e;
+      
+      @include tablet-up {
+        font-size: tpx(18px);
+      }
+      
+      @include desktop-up {
+        font-size: ppx(20px);
+      }
+    }
+  }
+
+  .details-list {
+    dt {
+      @include zen-kaku-gothic-new-bold;
+      font-size: spx(16px);
+      color: #2c3e50;
+      margin-bottom: spx(8px);
+      
+      @include tablet-up {
+        font-size: tpx(18px);
+        margin-bottom: tpx(10px);
+      }
+      
+      @include desktop-up {
+        font-size: ppx(20px);
+        margin-bottom: ppx(12px);
+      }
+    }
+
+    dd {
+      font-size: spx(14px);
+      color: #34495e;
+      margin-bottom: spx(16px);
+      padding-left: spx(16px);
+      
+      @include tablet-up {
+        font-size: tpx(16px);
+        margin-bottom: tpx(20px);
+        padding-left: tpx(20px);
+      }
+      
+      @include desktop-up {
+        font-size: ppx(18px);
+        margin-bottom: ppx(24px);
+        padding-left: ppx(24px);
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .content-navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: spx(16px);
+    flex-wrap: wrap;
+    
+    @include tablet-up {
+      gap: tpx(20px);
+    }
+    
+    @include desktop-up {
+      gap: ppx(24px);
+    }
+  }
+
+  .nav-button {
+    display: inline-block;
+    padding: spx(12px) spx(20px);
+    border-radius: spx(8px);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    flex: 1;
+    text-align: center;
+    min-width: spx(120px);
+    
+    @include tablet-up {
+      padding: tpx(14px) tpx(24px);
+      border-radius: tpx(10px);
+      min-width: tpx(140px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(16px) ppx(28px);
+      border-radius: ppx(12px);
+      min-width: ppx(160px);
+    }
+
+    &.nav-back {
+      background: #3498db;
+      color: white;
+
+      &:hover {
+        background: #2980b9;
+        transform: translateX(-2px);
+      }
+    }
+
+    &.nav-home {
+      background: #95a5a6;
+      color: white;
+
+      &:hover {
+        background: #7f8c8d;
+      }
+    }
+  }
+</style>
