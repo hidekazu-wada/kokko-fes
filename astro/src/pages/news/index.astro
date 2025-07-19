@@ -1,0 +1,296 @@
+---
+import MySiteLayout from '../../layouts/MySiteLayout.astro';
+import { getNews, getCurrentEventConfig } from '../../lib/microcms';
+import type { News, EventConfig } from '../../types/microcms';
+
+let news: News[] = [];
+let eventConfig: EventConfig | null = null;
+let error: string | null = null;
+
+try {
+  eventConfig = await getCurrentEventConfig();
+  if (eventConfig) {
+    const newsResponse = await getNews(eventConfig.year);
+    news = newsResponse.contents;
+  }
+} catch (e) {
+  error = 'お知らせデータの取得に失敗しました';
+  console.error('Error fetching news:', e);
+}
+---
+
+<MySiteLayout>
+  <div class="news-page">
+    <header class="page-header">
+      <h1>お知らせ</h1>
+      {eventConfig && (
+        <p class="year-indicator">{eventConfig.year}年度</p>
+      )}
+    </header>
+
+    {error ? (
+      <div class="error">
+        <p>{error}</p>
+      </div>
+    ) : news.length > 0 ? (
+      <div class="news-list">
+        {news.map(item => (
+          <article class="news-item">
+            <a href={`/news/${item.slug}`} class="news-link">
+              <div class="news-meta">
+                <time class="news-date">{new Date(item.date).toLocaleDateString('ja-JP')}</time>
+                <span class="news-category">{item.category}</span>
+              </div>
+              <h2 class="news-title">{item.title}</h2>
+            </a>
+          </article>
+        ))}
+      </div>
+    ) : (
+      <div class="no-news">
+        <p>現在お知らせはありません</p>
+      </div>
+    )}
+
+    <div class="back-link">
+      <a href="/">トップページに戻る</a>
+    </div>
+  </div>
+</MySiteLayout>
+
+<style lang="scss">
+  @import '../../styles/mixins.scss';
+  @import '../../styles/functions.scss';
+
+  .news-page {
+    padding: spx(20px);
+    max-width: spx(800px);
+    margin: 0 auto;
+    
+    @include tablet-up {
+      padding: tpx(40px);
+      max-width: tpx(900px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(60px);
+      max-width: ppx(1000px);
+    }
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: spx(40px);
+    
+    @include tablet-up {
+      margin-bottom: tpx(50px);
+    }
+    
+    @include desktop-up {
+      margin-bottom: ppx(60px);
+    }
+
+    h1 {
+      @include zen-kaku-gothic-new-bold;
+      font-size: spx(28px);
+      color: #2c3e50;
+      margin-bottom: spx(8px);
+      
+      @include tablet-up {
+        font-size: tpx(32px);
+        margin-bottom: tpx(10px);
+      }
+      
+      @include desktop-up {
+        font-size: ppx(36px);
+        margin-bottom: ppx(12px);
+      }
+    }
+
+    .year-indicator {
+      color: #7f8c8d;
+      font-size: spx(14px);
+      
+      @include tablet-up {
+        font-size: tpx(16px);
+      }
+      
+      @include desktop-up {
+        font-size: ppx(18px);
+      }
+    }
+  }
+
+  .news-list {
+    display: flex;
+    flex-direction: column;
+    gap: spx(20px);
+    
+    @include tablet-up {
+      gap: tpx(24px);
+    }
+    
+    @include desktop-up {
+      gap: ppx(30px);
+    }
+  }
+
+  .news-item {
+    background: white;
+    border-radius: spx(8px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    
+    @include tablet-up {
+      border-radius: tpx(12px);
+    }
+    
+    @include desktop-up {
+      border-radius: ppx(16px);
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  .news-link {
+    display: block;
+    padding: spx(20px);
+    text-decoration: none;
+    color: inherit;
+    
+    @include tablet-up {
+      padding: tpx(24px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(30px);
+    }
+  }
+
+  .news-meta {
+    display: flex;
+    align-items: center;
+    gap: spx(12px);
+    margin-bottom: spx(12px);
+    
+    @include tablet-up {
+      gap: tpx(16px);
+      margin-bottom: tpx(16px);
+    }
+    
+    @include desktop-up {
+      gap: ppx(20px);
+      margin-bottom: ppx(20px);
+    }
+  }
+
+  .news-date {
+    font-size: spx(14px);
+    color: #7f8c8d;
+    
+    @include tablet-up {
+      font-size: tpx(16px);
+    }
+    
+    @include desktop-up {
+      font-size: ppx(18px);
+    }
+  }
+
+  .news-category {
+    background: #3498db;
+    color: white;
+    padding: spx(4px) spx(8px);
+    border-radius: spx(4px);
+    font-size: spx(12px);
+    font-weight: 600;
+    
+    @include tablet-up {
+      padding: tpx(6px) tpx(12px);
+      border-radius: tpx(6px);
+      font-size: tpx(14px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(8px) ppx(16px);
+      border-radius: ppx(8px);
+      font-size: ppx(16px);
+    }
+  }
+
+  .news-title {
+    @include zen-kaku-gothic-new-regular;
+    font-size: spx(18px);
+    line-height: 1.5;
+    color: #2c3e50;
+    margin: 0;
+    
+    @include tablet-up {
+      font-size: tpx(20px);
+    }
+    
+    @include desktop-up {
+      font-size: ppx(22px);
+    }
+  }
+
+  .error, .no-news {
+    text-align: center;
+    padding: spx(40px);
+    color: #7f8c8d;
+    
+    @include tablet-up {
+      padding: tpx(50px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(60px);
+    }
+  }
+
+  .error {
+    color: #e74c3c;
+  }
+
+  .back-link {
+    text-align: center;
+    margin-top: spx(40px);
+    
+    @include tablet-up {
+      margin-top: tpx(50px);
+    }
+    
+    @include desktop-up {
+      margin-top: ppx(60px);
+    }
+
+    a {
+      display: inline-block;
+      padding: spx(12px) spx(24px);
+      background: #95a5a6;
+      color: white;
+      text-decoration: none;
+      border-radius: spx(6px);
+      font-weight: 600;
+      transition: background-color 0.2s ease;
+      
+      @include tablet-up {
+        padding: tpx(14px) tpx(28px);
+        border-radius: tpx(8px);
+      }
+      
+      @include desktop-up {
+        padding: ppx(16px) ppx(32px);
+        border-radius: ppx(10px);
+      }
+
+      &:hover {
+        background: #7f8c8d;
+      }
+    }
+  }
+</style>

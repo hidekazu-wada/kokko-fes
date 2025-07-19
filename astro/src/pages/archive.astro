@@ -1,0 +1,339 @@
+---
+import MySiteLayout from '../layouts/MySiteLayout.astro';
+import { getArchivedYears, getEventConfigs } from '../lib/microcms';
+import type { EventConfig } from '../types/microcms';
+
+let archivedConfigs: EventConfig[] = [];
+let error: string | null = null;
+
+try {
+  const response = await getEventConfigs();
+  archivedConfigs = response.contents
+    .filter(config => config.status === 'archived')
+    .sort((a, b) => b.year.localeCompare(a.year));
+} catch (e) {
+  error = 'アーカイブデータの取得に失敗しました';
+  console.error('Error fetching archived configs:', e);
+}
+---
+
+<MySiteLayout>
+  <div class="archive-page">
+    <header class="page-header">
+      <h1>過去の開催</h1>
+      <p class="page-description">国庫まつりの過去の開催情報をご覧いただけます</p>
+    </header>
+
+    {error ? (
+      <div class="error">
+        <p>{error}</p>
+      </div>
+    ) : archivedConfigs.length > 0 ? (
+      <div class="archive-list">
+        {archivedConfigs.map(config => (
+          <article class="archive-item">
+            <a href={`/${config.year}`} class="archive-link">
+              <div class="archive-year">{config.year}年</div>
+              <h2 class="archive-theme">{config.theme}</h2>
+              <div class="archive-date">
+                {new Date(config.date).toLocaleDateString('ja-JP')} 開催
+              </div>
+              <div class="archive-categories">
+                {config.categories.map(category => (
+                  <span class="category-tag">{category.name}</span>
+                ))}
+              </div>
+            </a>
+          </article>
+        ))}
+      </div>
+    ) : (
+      <div class="no-archives">
+        <p>アーカイブはまだありません</p>
+      </div>
+    )}
+
+    <div class="back-link">
+      <a href="/">トップページに戻る</a>
+    </div>
+  </div>
+</MySiteLayout>
+
+<style lang="scss">
+  @import '../styles/mixins.scss';
+  @import '../styles/functions.scss';
+
+  .archive-page {
+    padding: spx(20px);
+    max-width: spx(1000px);
+    margin: 0 auto;
+    
+    @include tablet-up {
+      padding: tpx(40px);
+      max-width: tpx(1200px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(60px);
+      max-width: ppx(1400px);
+    }
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: spx(40px);
+    
+    @include tablet-up {
+      margin-bottom: tpx(50px);
+    }
+    
+    @include desktop-up {
+      margin-bottom: ppx(60px);
+    }
+
+    h1 {
+      @include zen-kaku-gothic-new-bold;
+      font-size: spx(28px);
+      color: #2c3e50;
+      margin-bottom: spx(12px);
+      
+      @include tablet-up {
+        font-size: tpx(32px);
+        margin-bottom: tpx(16px);
+      }
+      
+      @include desktop-up {
+        font-size: ppx(36px);
+        margin-bottom: ppx(20px);
+      }
+    }
+
+    .page-description {
+      color: #7f8c8d;
+      font-size: spx(16px);
+      
+      @include tablet-up {
+        font-size: tpx(18px);
+      }
+      
+      @include desktop-up {
+        font-size: ppx(20px);
+      }
+    }
+  }
+
+  .archive-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: spx(20px);
+    
+    @include tablet-up {
+      grid-template-columns: repeat(2, 1fr);
+      gap: tpx(24px);
+    }
+    
+    @include desktop-up {
+      grid-template-columns: repeat(3, 1fr);
+      gap: ppx(30px);
+    }
+  }
+
+  .archive-item {
+    background: white;
+    border-radius: spx(12px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    @include tablet-up {
+      border-radius: tpx(16px);
+    }
+    
+    @include desktop-up {
+      border-radius: ppx(20px);
+    }
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  .archive-link {
+    display: block;
+    padding: spx(24px);
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+    
+    @include tablet-up {
+      padding: tpx(30px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(36px);
+    }
+  }
+
+  .archive-year {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    padding: spx(8px) spx(16px);
+    border-radius: spx(20px);
+    font-size: spx(14px);
+    font-weight: 700;
+    display: inline-block;
+    margin-bottom: spx(16px);
+    
+    @include tablet-up {
+      padding: tpx(10px) tpx(20px);
+      border-radius: tpx(25px);
+      font-size: tpx(16px);
+      margin-bottom: tpx(20px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(12px) ppx(24px);
+      border-radius: ppx(30px);
+      font-size: ppx(18px);
+      margin-bottom: ppx(24px);
+    }
+  }
+
+  .archive-theme {
+    @include zen-kaku-gothic-new-bold;
+    font-size: spx(18px);
+    line-height: 1.4;
+    color: #2c3e50;
+    margin: 0 0 spx(12px) 0;
+    
+    @include tablet-up {
+      font-size: tpx(20px);
+      margin-bottom: tpx(16px);
+    }
+    
+    @include desktop-up {
+      font-size: ppx(22px);
+      margin-bottom: ppx(20px);
+    }
+  }
+
+  .archive-date {
+    color: #7f8c8d;
+    font-size: spx(14px);
+    margin-bottom: spx(16px);
+    
+    @include tablet-up {
+      font-size: tpx(16px);
+      margin-bottom: tpx(20px);
+    }
+    
+    @include desktop-up {
+      font-size: ppx(18px);
+      margin-bottom: ppx(24px);
+    }
+  }
+
+  .archive-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: spx(8px);
+    
+    @include tablet-up {
+      gap: tpx(10px);
+    }
+    
+    @include desktop-up {
+      gap: ppx(12px);
+    }
+  }
+
+  .category-tag {
+    background: #ecf0f1;
+    color: #2c3e50;
+    padding: spx(4px) spx(8px);
+    border-radius: spx(12px);
+    font-size: spx(12px);
+    font-weight: 600;
+    
+    @include tablet-up {
+      padding: tpx(6px) tpx(12px);
+      border-radius: tpx(15px);
+      font-size: tpx(14px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(8px) ppx(16px);
+      border-radius: ppx(18px);
+      font-size: ppx(16px);
+    }
+  }
+
+  .error, .no-archives {
+    text-align: center;
+    padding: spx(60px) spx(20px);
+    color: #7f8c8d;
+    
+    @include tablet-up {
+      padding: tpx(80px) tpx(40px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(100px) ppx(60px);
+    }
+
+    p {
+      font-size: spx(16px);
+      
+      @include tablet-up {
+        font-size: tpx(18px);
+      }
+      
+      @include desktop-up {
+        font-size: ppx(20px);
+      }
+    }
+  }
+
+  .error {
+    color: #e74c3c;
+  }
+
+  .back-link {
+    text-align: center;
+    margin-top: spx(40px);
+    
+    @include tablet-up {
+      margin-top: tpx(50px);
+    }
+    
+    @include desktop-up {
+      margin-top: ppx(60px);
+    }
+
+    a {
+      display: inline-block;
+      padding: spx(12px) spx(24px);
+      background: #95a5a6;
+      color: white;
+      text-decoration: none;
+      border-radius: spx(6px);
+      font-weight: 600;
+      transition: background-color 0.2s ease;
+      
+      @include tablet-up {
+        padding: tpx(14px) tpx(28px);
+        border-radius: tpx(8px);
+      }
+      
+      @include desktop-up {
+        padding: ppx(16px) ppx(32px);
+        border-radius: ppx(10px);
+      }
+
+      &:hover {
+        background: #7f8c8d;
+      }
+    }
+  }
+</style>

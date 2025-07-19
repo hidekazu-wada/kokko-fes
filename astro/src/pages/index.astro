@@ -1,11 +1,275 @@
 ---
 import MySiteLayout from '../layouts/MySiteLayout.astro';
+import { getCurrentEventConfig, getContents } from '../lib/microcms';
+import type { EventConfig, Content } from '../types/microcms';
+
+let eventConfig: EventConfig | null = null;
+let contents: Content[] = [];
+let error: string | null = null;
+
+try {
+  eventConfig = await getCurrentEventConfig();
+  if (eventConfig) {
+    const contentsResponse = await getContents(eventConfig.year);
+    contents = contentsResponse.contents;
+  }
+} catch (e) {
+  error = 'データの取得に失敗しました';
+  console.error('Error fetching data:', e);
+}
 ---
 
 <MySiteLayout>
-  <h1>Astro</h1>
+  <div class="hero">
+    {eventConfig ? (
+      <>
+        <h1 class="hero__title">{eventConfig.year}年 コッコ祭り</h1>
+        <p class="hero__theme">{eventConfig.theme}</p>
+        <div class="hero__dates">
+          {eventConfig.dates.map((eventDate, index) => (
+            <span class="hero__date">
+              {new Date(eventDate.date).toLocaleDateString('ja-JP')}
+              {eventDate.label && ` (${eventDate.label})`}
+              {index < eventConfig.dates.length - 1 && '・'}
+            </span>
+          ))}
+        </div>
+      </>
+    ) : error ? (
+      <div class="error">
+        <h1>コッコ祭り</h1>
+        <p>{error}</p>
+      </div>
+    ) : (
+      <div class="loading">
+        <h1>コッコ祭り</h1>
+        <p>データを読み込み中...</p>
+      </div>
+    )}
+  </div>
+
+  {eventConfig && (
+    <div class="categories">
+      <h2>カテゴリー</h2>
+      <div class="categories__grid">
+        {eventConfig.categories.map(category => (
+          <a href={`/${category.slug}`} class="category-card">
+            <h3>{category.name}</h3>
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <div class="info-links">
+    <a href="/news" class="info-link">お知らせ</a>
+    <a href="/archive" class="info-link">過去の開催</a>
+  </div>
 </MySiteLayout>
 
 <style lang="scss">
   @import '../styles/mixins.scss';
+  @import '../styles/functions.scss';
+
+  .hero {
+    text-align: center;
+    padding: spx(40px) spx(20px);
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    
+    @include tablet-up {
+      padding: tpx(80px) tpx(40px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(120px) ppx(60px);
+    }
+
+    &__title {
+      @include zen-kaku-gothic-new-bold;
+      font-size: spx(28px);
+      margin-bottom: spx(16px);
+      color: #2c3e50;
+      
+      @include tablet-up {
+        font-size: tpx(36px);
+        margin-bottom: tpx(20px);
+      }
+      
+      @include desktop-up {
+        font-size: ppx(48px);
+        margin-bottom: ppx(24px);
+      }
+    }
+
+    &__theme {
+      font-size: spx(18px);
+      margin-bottom: spx(12px);
+      color: #34495e;
+      
+      @include tablet-up {
+        font-size: tpx(22px);
+        margin-bottom: tpx(16px);
+      }
+      
+      @include desktop-up {
+        font-size: ppx(28px);
+        margin-bottom: ppx(20px);
+      }
+    }
+
+    &__date {
+      font-size: spx(16px);
+      color: #7f8c8d;
+      
+      @include tablet-up {
+        font-size: tpx(18px);
+      }
+      
+      @include desktop-up {
+        font-size: ppx(20px);
+      }
+    }
+  }
+
+  .categories {
+    padding: spx(40px) spx(20px);
+    
+    @include tablet-up {
+      padding: tpx(60px) tpx(40px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(80px) ppx(60px);
+    }
+
+    h2 {
+      @include zen-kaku-gothic-new-bold;
+      text-align: center;
+      font-size: spx(24px);
+      margin-bottom: spx(30px);
+      color: #2c3e50;
+      
+      @include tablet-up {
+        font-size: tpx(28px);
+        margin-bottom: tpx(40px);
+      }
+      
+      @include desktop-up {
+        font-size: ppx(32px);
+        margin-bottom: ppx(50px);
+      }
+    }
+
+    &__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: spx(16px);
+      
+      @include tablet-up {
+        grid-template-columns: repeat(2, 1fr);
+        gap: tpx(20px);
+      }
+      
+      @include desktop-up {
+        grid-template-columns: repeat(auto-fit, minmax(ppx(250px), 1fr));
+        gap: ppx(24px);
+      }
+    }
+  }
+
+  .category-card {
+    display: block;
+    padding: spx(20px);
+    background: white;
+    border-radius: spx(8px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: #2c3e50;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    
+    @include tablet-up {
+      padding: tpx(24px);
+      border-radius: tpx(12px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(30px);
+      border-radius: ppx(16px);
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    h3 {
+      @include zen-kaku-gothic-new-bold;
+      text-align: center;
+      font-size: spx(18px);
+      margin: 0;
+      
+      @include tablet-up {
+        font-size: tpx(20px);
+      }
+      
+      @include desktop-up {
+        font-size: ppx(22px);
+      }
+    }
+  }
+
+  .info-links {
+    display: flex;
+    justify-content: center;
+    gap: spx(20px);
+    padding: spx(40px) spx(20px);
+    
+    @include tablet-up {
+      gap: tpx(30px);
+      padding: tpx(60px) tpx(40px);
+    }
+    
+    @include desktop-up {
+      gap: ppx(40px);
+      padding: ppx(80px) ppx(60px);
+    }
+  }
+
+  .info-link {
+    padding: spx(12px) spx(24px);
+    background: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: spx(6px);
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+    
+    @include tablet-up {
+      padding: tpx(14px) tpx(28px);
+      border-radius: tpx(8px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(16px) ppx(32px);
+      border-radius: ppx(10px);
+    }
+
+    &:hover {
+      background: #2980b9;
+    }
+  }
+
+  .error, .loading {
+    text-align: center;
+    color: #e74c3c;
+    
+    h1 {
+      @include zen-kaku-gothic-new-bold;
+      margin-bottom: spx(16px);
+    }
+  }
+
+  .loading {
+    color: #7f8c8d;
+  }
 </style>

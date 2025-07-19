@@ -1,0 +1,332 @@
+---
+import MySiteLayout from '../../layouts/MySiteLayout.astro';
+import { getNewsBySlug, getNews } from '../../lib/microcms';
+import type { News } from '../../types/microcms';
+
+export async function getStaticPaths() {
+  try {
+    const newsResponse = await getNews();
+    return newsResponse.contents.map((item: News) => ({
+      params: { slug: item.slug },
+      props: { news: item },
+    }));
+  } catch (error) {
+    console.error('Error generating static paths for news:', error);
+    return [];
+  }
+}
+
+interface Props {
+  news: News;
+}
+
+const { news } = Astro.props;
+---
+
+<MySiteLayout>
+  <div class="news-detail">
+    <header class="article-header">
+      <div class="breadcrumb">
+        <a href="/">トップ</a>
+        <span class="separator">></span>
+        <a href="/news">お知らせ</a>
+        <span class="separator">></span>
+        <span class="current">{news.title}</span>
+      </div>
+      
+      <div class="article-meta">
+        <time class="article-date">{new Date(news.date).toLocaleDateString('ja-JP')}</time>
+        <span class="article-category">{news.category}</span>
+      </div>
+      
+      <h1 class="article-title">{news.title}</h1>
+    </header>
+
+    <article class="article-content">
+      <div set:html={news.content}></div>
+    </article>
+
+    <div class="article-nav">
+      <a href="/news" class="back-btn">お知らせ一覧に戻る</a>
+    </div>
+  </div>
+</MySiteLayout>
+
+<style lang="scss">
+  @import '../../styles/mixins.scss';
+  @import '../../styles/functions.scss';
+
+  .news-detail {
+    padding: spx(20px);
+    max-width: spx(800px);
+    margin: 0 auto;
+    
+    @include tablet-up {
+      padding: tpx(40px);
+      max-width: tpx(900px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(60px);
+      max-width: ppx(1000px);
+    }
+  }
+
+  .article-header {
+    margin-bottom: spx(40px);
+    
+    @include tablet-up {
+      margin-bottom: tpx(50px);
+    }
+    
+    @include desktop-up {
+      margin-bottom: ppx(60px);
+    }
+  }
+
+  .breadcrumb {
+    font-size: spx(14px);
+    margin-bottom: spx(20px);
+    color: #7f8c8d;
+    
+    @include tablet-up {
+      font-size: tpx(16px);
+      margin-bottom: tpx(24px);
+    }
+    
+    @include desktop-up {
+      font-size: ppx(18px);
+      margin-bottom: ppx(30px);
+    }
+
+    a {
+      color: #3498db;
+      text-decoration: none;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .separator {
+      margin: 0 spx(8px);
+      
+      @include tablet-up {
+        margin: 0 tpx(10px);
+      }
+      
+      @include desktop-up {
+        margin: 0 ppx(12px);
+      }
+    }
+
+    .current {
+      color: #2c3e50;
+      font-weight: 600;
+    }
+  }
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: spx(12px);
+    margin-bottom: spx(16px);
+    
+    @include tablet-up {
+      gap: tpx(16px);
+      margin-bottom: tpx(20px);
+    }
+    
+    @include desktop-up {
+      gap: ppx(20px);
+      margin-bottom: ppx(24px);
+    }
+  }
+
+  .article-date {
+    font-size: spx(14px);
+    color: #7f8c8d;
+    
+    @include tablet-up {
+      font-size: tpx(16px);
+    }
+    
+    @include desktop-up {
+      font-size: ppx(18px);
+    }
+  }
+
+  .article-category {
+    background: #3498db;
+    color: white;
+    padding: spx(4px) spx(8px);
+    border-radius: spx(4px);
+    font-size: spx(12px);
+    font-weight: 600;
+    
+    @include tablet-up {
+      padding: tpx(6px) tpx(12px);
+      border-radius: tpx(6px);
+      font-size: tpx(14px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(8px) ppx(16px);
+      border-radius: ppx(8px);
+      font-size: ppx(16px);
+    }
+  }
+
+  .article-title {
+    @include zen-kaku-gothic-new-bold;
+    font-size: spx(24px);
+    line-height: 1.4;
+    color: #2c3e50;
+    margin: 0;
+    
+    @include tablet-up {
+      font-size: tpx(28px);
+    }
+    
+    @include desktop-up {
+      font-size: ppx(32px);
+    }
+  }
+
+  .article-content {
+    background: white;
+    padding: spx(30px);
+    border-radius: spx(8px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: spx(40px);
+    
+    @include tablet-up {
+      padding: tpx(40px);
+      border-radius: tpx(12px);
+      margin-bottom: tpx(50px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(50px);
+      border-radius: ppx(16px);
+      margin-bottom: ppx(60px);
+    }
+
+    :global(p) {
+      line-height: 1.7;
+      margin-bottom: spx(16px);
+      color: #2c3e50;
+      
+      @include tablet-up {
+        margin-bottom: tpx(20px);
+      }
+      
+      @include desktop-up {
+        margin-bottom: ppx(24px);
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    :global(h2) {
+      @include zen-kaku-gothic-new-bold;
+      font-size: spx(20px);
+      color: #2c3e50;
+      margin: spx(30px) 0 spx(16px) 0;
+      padding-bottom: spx(8px);
+      border-bottom: 2px solid #3498db;
+      
+      @include tablet-up {
+        font-size: tpx(24px);
+        margin: tpx(40px) 0 tpx(20px) 0;
+        padding-bottom: tpx(10px);
+      }
+      
+      @include desktop-up {
+        font-size: ppx(28px);
+        margin: ppx(50px) 0 ppx(24px) 0;
+        padding-bottom: ppx(12px);
+      }
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
+    :global(h3) {
+      @include zen-kaku-gothic-new-bold;
+      font-size: spx(18px);
+      color: #2c3e50;
+      margin: spx(24px) 0 spx(12px) 0;
+      
+      @include tablet-up {
+        font-size: tpx(20px);
+        margin: tpx(30px) 0 tpx(16px) 0;
+      }
+      
+      @include desktop-up {
+        font-size: ppx(22px);
+        margin: ppx(36px) 0 ppx(20px) 0;
+      }
+    }
+
+    :global(ul), :global(ol) {
+      margin: spx(16px) 0;
+      padding-left: spx(20px);
+      
+      @include tablet-up {
+        margin: tpx(20px) 0;
+        padding-left: tpx(24px);
+      }
+      
+      @include desktop-up {
+        margin: ppx(24px) 0;
+        padding-left: ppx(30px);
+      }
+    }
+
+    :global(li) {
+      margin-bottom: spx(8px);
+      line-height: 1.6;
+      
+      @include tablet-up {
+        margin-bottom: tpx(10px);
+      }
+      
+      @include desktop-up {
+        margin-bottom: ppx(12px);
+      }
+    }
+  }
+
+  .article-nav {
+    text-align: center;
+  }
+
+  .back-btn {
+    display: inline-block;
+    padding: spx(12px) spx(24px);
+    background: #95a5a6;
+    color: white;
+    text-decoration: none;
+    border-radius: spx(6px);
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+    
+    @include tablet-up {
+      padding: tpx(14px) tpx(28px);
+      border-radius: tpx(8px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(16px) ppx(32px);
+      border-radius: ppx(10px);
+    }
+
+    &:hover {
+      background: #7f8c8d;
+    }
+  }
+</style>
