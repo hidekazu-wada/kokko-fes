@@ -1,0 +1,24 @@
+@import "destyle.css";
+@import "./functions.scss";
+@import "./mixins.scss";
+// フォント
+$font-didot: "Didot", serif;
+$font-noto-serif-jp: "Noto Serif JP", serif;
+
+html {
+    // Flash Of Unstyled Text
+    // visibility: hidden;
+    // opacity: 0;
+
+    // スクロールのスムーズな動き
+    scroll-behavior: smooth;
+    // &.wf-active,
+    // &.loading-delay {
+    //     visibility: visible;
+    //     opacity: 1;
+    // }
+    body {
+        @include zen-kaku-gothic-new-regular;
+        background-color: #f0f0f0;
+    }
+}
