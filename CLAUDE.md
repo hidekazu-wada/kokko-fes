@@ -214,33 +214,136 @@ Always change to the `astro/` directory before running npm commands, as the main
 3. 型安全性とレスポンシブデザインを確認
 4. 本番ビルドでエラーがないことを確認
 
+## 年度別カスタマイズ実装方針
+
+### 基本原則: 責任分離アーキテクチャ
+
+**CMS管理領域（データ層）**
+- 毎年入力が必要な最低限のデータのみ
+- テキスト、画像、お知らせ、カテゴリー、コンテンツ
+- 複雑な設定項目は追加しない
+
+**ハードコード領域（プレゼンテーション層）**
+- 年度固有のデザイン・機能
+- 特別なセクション・アニメーション
+- インタラクティブ要素
+
+### 実装パターン
+
+#### 1. 条件分岐による年度別コンポーネント呼び出し
+
+```astro
+---
+// 年度別特別コンポーネントの動的インポート
+const getYearlyComponent = async (year: string) => {
+  try {
+    return await import(`../components/yearly/${year}/Special.astro`);
+  } catch {
+    return null; // 特別コンポーネントがない年度
+  }
+};
+
+const SpecialComponent = await getYearlyComponent(eventConfig.year);
+---
+
+<!-- 共通部分：CMSデータ -->
+<Hero config={eventConfig} />
+<Categories categories={eventConfig.categories} />
+
+<!-- 年度特有部分：ハードコード -->
+{SpecialComponent && <SpecialComponent.default config={eventConfig} />}
+
+<!-- 共通部分：CMSデータ -->
+<Contents contents={eventConfig.contents} />
+```
+
+#### 2. ディレクトリ構造規則
+
+```
+src/
+├── components/
+│   ├── shared/           # 共通コンポーネント
+│   │   ├── Hero.astro
+│   │   └── Categories.astro
+│   ├── yearly/           # 年度別コンポーネント
+│   │   ├── 2024/
+│   │   │   └── Special.astro
+│   │   ├── 2025/
+│   │   │   ├── AnniversarySection.astro
+│   │   │   └── InteractiveMap.astro
+│   │   └── 2026/
+│   │       └── Special.astro
+│   └── design-system/    # デザインシステム
+│       ├── Section.astro
+│       └── Heading.astro
+```
+
+#### 3. 命名規則とベストプラクティス
+
+**ファイル命名：**
+- `Special.astro` - メインの年度別セクション
+- `[機能名]Section.astro` - 機能別セクション（例：AnniversarySection.astro）
+- `Custom[コンポーネント名].astro` - 既存コンポーネントの年度別版
+
+**コンポーネント設計：**
+```astro
+---
+// 年度別コンポーネントの共通インターフェース
+interface YearlyComponentProps {
+  year: string;
+  theme: string;
+  dates: EventDate[];
+  categories: Category[];
+}
+
+export default function Special2025(props: YearlyComponentProps) {
+  // 年度固有のロジック
+}
+---
+
+<!-- デザインシステムを活用 -->
+<DesignSystem.Section variant="special">
+  <DesignSystem.Heading level={2}>
+    {props.theme}
+  </DesignSystem.Heading>
+  <!-- 年度固有の内容 -->
+</DesignSystem.Section>
+```
+
+### 注意事項
+
+1. **一貫性の担保**
+   - 共通デザインシステムを必ず使用
+   - ブランドガイドラインを遵守
+   - 既存のSCSS関数（spx, tpx, ppx）を活用
+
+2. **保守性の確保**
+   - 過去年度のコンポーネントは原則として凍結
+   - 重大な不具合のみ修正対象
+   - 新年度の要件は新しいコンポーネントで対応
+
+3. **CMSの複雑化回避**
+   - 新しい設定項目をMicroCMSに追加しない
+   - 「便利だから」ではなく「必要だから」で判断
+   - 運用者の負荷を増やさない
+
+### 実装時の判断基準
+
+**年度別コンポーネントを作成する場合：**
+- ✅ 特定年度のみの特別企画（例：周年記念）
+- ✅ 大幅なデザイン変更
+- ✅ 新しいインタラクティブ機能
+
+**共通コンポーネントを修正する場合：**
+- ✅ 全年度に影響する改善
+- ✅ バグ修正
+- ✅ パフォーマンス向上
+
+この方針により、「運用の簡単さ」と「デザインの自由度」を両立し、長期的な保守性を確保できます。
+
 ## 🚨 要件実装タスク（重要）
 
 **このセクションは開発中のタスク管理用です。完了したタスクは削除してください。**
-
-### 🔴 最高優先度（必須機能）
-
-- [x] **年度別アーカイブページ実装** ✅ 完了
-  - `/[year].astro` - 年度別トップページ（例：/2024）
-  - `/[year]/[category].astro` - 年度別カテゴリーページ（例：/2024/miru）
-  - `/[year]/[category]/[slug].astro` - 年度別コンテンツ詳細
-  - `/[year]/news/index.astro` - 年度別お知らせ一覧
-  - `/[year]/news/[slug].astro` - 年度別お知らせ詳細
-
-- [x] **MicroCMS status型修正** ✅ 完了
-  - EventConfig.status: string[] → string に変更  
-  - getCurrentEventConfig()の条件分岐修正（配列・文字列両対応）
-  - archive.astroのfilter条件修正
-
-### 🟡 高優先度
-
-- [ ] **アーカイブ通知バー実装**
-  - 年度別ページに「これは○○年のアーカイブです」表示
-  - トップに固定表示、目立つスタイル
-
-- [ ] **archive.astro修正**
-  - status配列対応 → 文字列対応
-  - リンク先の実装確認とエラー修正
 
 ### 🟢 中優先度
 
