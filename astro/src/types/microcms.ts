@@ -32,7 +32,7 @@ export interface Category {
 export interface EventConfig extends MicroCMSDate {
   id: string;
   year: string;
-  status: string[];
+  status: string;  // "current" or "archived"
   theme: string;
   dates: EventDate[];
   categories: Category[];

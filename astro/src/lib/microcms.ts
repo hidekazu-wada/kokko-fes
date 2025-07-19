@@ -22,7 +22,10 @@ export const getEventConfigs = async (): Promise<MicroCMSListResponse<EventConfi
 // 現在の年度設定取得
 export const getCurrentEventConfig = async (): Promise<EventConfig | null> => {
   const response = await getEventConfigs();
-  return response.contents.find(config => config.status.includes('current')) || null;
+  return response.contents.find(config => 
+    config.status === 'current' || 
+    (Array.isArray(config.status) && config.status.includes('current'))
+  ) || null;
 };
 
 // 特定年度の設定取得
@@ -89,7 +92,7 @@ export const getArchivedYears = async (): Promise<string[]> => {
   const response = await client.get({
     endpoint: 'event-config',
     queries: {
-      filters: 'status[contains]archived',
+      filters: 'status[equals]archived',
       fields: 'year',
     },
   });

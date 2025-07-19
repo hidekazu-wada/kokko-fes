@@ -36,7 +36,13 @@ try {
               <div class="archive-year">{config.year}年</div>
               <h2 class="archive-theme">{config.theme}</h2>
               <div class="archive-date">
-                {new Date(config.date).toLocaleDateString('ja-JP')} 開催
+                {config.dates.map((eventDate, index) => (
+                  <span>
+                    {new Date(eventDate.date).toLocaleDateString('ja-JP')}
+                    {eventDate.label && ` (${eventDate.label})`}
+                    {index < config.dates.length - 1 && '・'}
+                  </span>
+                ))} 開催
               </div>
               <div class="archive-categories">
                 {config.categories.map(category => (
