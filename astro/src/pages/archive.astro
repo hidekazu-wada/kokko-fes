@@ -8,9 +8,17 @@ let error: string | null = null;
 
 try {
   const response = await getEventConfigs();
+  console.log('All event configs:', response.contents);
+  console.log('Configs with archived status:', response.contents.filter(config => config.status === 'archived'));
+  
   archivedConfigs = response.contents
-    .filter(config => config.status === 'archived')
+    .filter(config => 
+      config.status === 'archived' || 
+      (Array.isArray(config.status) && config.status.includes('archived'))
+    )
     .sort((a, b) => b.year.localeCompare(a.year));
+    
+  console.log('Final archived configs:', archivedConfigs);
 } catch (e) {
   error = 'アーカイブデータの取得に失敗しました';
   console.error('Error fetching archived configs:', e);

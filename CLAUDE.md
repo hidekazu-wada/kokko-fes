@@ -228,8 +228,8 @@ Always change to the `astro/` directory before running npm commands, as the main
   - `/[year]/news/[slug].astro` - 年度別お知らせ詳細
 
 - [x] **MicroCMS status型修正** ✅ 完了
-  - EventConfig.status: string[] → string に変更
-  - getCurrentEventConfig()の条件分岐修正
+  - EventConfig.status: string[] → string に変更  
+  - getCurrentEventConfig()の条件分岐修正（配列・文字列両対応）
   - archive.astroのfilter条件修正
 
 ### 🟡 高優先度

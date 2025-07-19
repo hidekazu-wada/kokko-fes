@@ -1,0 +1,36 @@
+---
+import { getEventConfigs } from '../lib/microcms';
+
+let response;
+let error = null;
+
+try {
+  response = await getEventConfigs();
+} catch (e) {
+  error = e;
+}
+---
+
+<html>
+<head>
+  <title>API Debug</title>
+</head>
+<body>
+  <h1>MicroCMS API Debug</h1>
+  
+  {error ? (
+    <div>
+      <h2>Error:</h2>
+      <pre>{JSON.stringify(error, null, 2)}</pre>
+    </div>
+  ) : (
+    <div>
+      <h2>Event Configs:</h2>
+      <pre>{JSON.stringify(response, null, 2)}</pre>
+      
+      <h2>Archived Configs:</h2>
+      <pre>{JSON.stringify(response.contents.filter(config => config.status === 'archived'), null, 2)}</pre>
+    </div>
+  )}
+</body>
+</html>

@@ -1,0 +1,525 @@
+---
+import MySiteLayout from '../../layouts/MySiteLayout.astro';
+import { getEventConfigs, getContents } from '../../lib/microcms';
+import type { EventConfig, Content, Category } from '../../types/microcms';
+
+export async function getStaticPaths() {
+  try {
+    const response = await getEventConfigs();
+    const archivedConfigs = response.contents.filter(
+      (config: EventConfig) => 
+        config.status === 'archived' || 
+        (Array.isArray(config.status) && config.status.includes('archived'))
+    );
+
+    const paths = [];
+    
+    for (const config of archivedConfigs) {
+      for (const category of config.categories) {
+        paths.push({
+          params: { 
+            year: config.year,
+            category: category.slug 
+          },
+          props: { 
+            eventConfig: config,
+            category: category
+          }
+        });
+      }
+    }
+
+    return paths;
+  } catch (error) {
+    console.error('Error generating static paths for archived category pages:', error);
+    return [];
+  }
+}
+
+const { eventConfig, category } = Astro.props;
+const { year, category: categorySlug } = Astro.params;
+
+let contents: Content[] = [];
+let error: string | null = null;
+
+try {
+  if (eventConfig && category) {
+    const contentsResponse = await getContents(eventConfig.year);
+    contents = contentsResponse.contents.filter(
+      (content: Content) => content.categoryId === category.categoryId
+    );
+  }
+} catch (e) {
+  error = 'コンテンツの取得に失敗しました';
+  console.error('Error fetching contents:', e);
+}
+---
+
+<MySiteLayout>
+  <!-- アーカイブ通知バー -->
+  <div class="archive-notice">
+    <div class="archive-notice__content">
+      📋 これは{eventConfig.year}年のアーカイブです
+      <a href="/" class="archive-notice__link">最新の開催情報はこちら</a>
+    </div>
+  </div>
+
+  <div class="category-page">
+    <div class="category-header">
+      <h1 class="category-title">{category.name}</h1>
+      <div class="year-badge">{eventConfig.year}年</div>
+      <nav class="breadcrumb">
+        <a href="/">ホーム</a>
+        <span class="breadcrumb-separator">></span>
+        <a href={`/${eventConfig.year}`}>{eventConfig.year}年</a>
+        <span class="breadcrumb-separator">></span>
+        <span class="breadcrumb-current">{category.name}</span>
+      </nav>
+    </div>
+
+    {error ? (
+      <div class="error">
+        <p>{error}</p>
+      </div>
+    ) : contents.length > 0 ? (
+      <div class="contents-grid">
+        {contents.map(content => (
+          <article class="content-card">
+            <a href={`/${eventConfig.year}/${category.slug}/${content.slug}`} class="content-link">
+              {content.images && content.images.length > 0 && (
+                <div class="content-image">
+                  <img 
+                    src={content.images[0].url} 
+                    alt={content.title}
+                    width={content.images[0].width}
+                    height={content.images[0].height}
+                  />
+                </div>
+              )}
+              <div class="content-info">
+                <h2 class="content-title">{content.title}</h2>
+                <p class="content-description">{content.description}</p>
+                {content.venue && (
+                  <p class="content-venue">
+                    <span class="content-label">会場:</span> {content.venue}
+                  </p>
+                )}
+                {content.time && (
+                  <p class="content-time">
+                    <span class="content-label">時間:</span> {content.time}
+                  </p>
+                )}
+                <div class="read-more">
+                  詳細を見る →
+                </div>
+              </div>
+            </a>
+          </article>
+        ))}
+      </div>
+    ) : (
+      <div class="no-contents">
+        <p>{eventConfig.year}年の{category.name}にはコンテンツがありません。</p>
+      </div>
+    )}
+
+    <div class="back-link">
+      <a href={`/${eventConfig.year}`}>{eventConfig.year}年のトップページに戻る</a>
+      <a href="/archive">他の年度を見る</a>
+      <a href="/" class="primary-link">最新の開催情報</a>
+    </div>
+  </div>
+</MySiteLayout>
+
+<style lang="scss">
+  @import '../../styles/mixins.scss';
+  @import '../../styles/functions.scss';
+
+  .archive-notice {
+    background: #f39c12;
+    color: white;
+    padding: spx(12px) 0;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    
+    @include tablet-up {
+      padding: tpx(16px) 0;
+    }
+    
+    @include desktop-up {
+      padding: ppx(20px) 0;
+    }
+
+    &__content {
+      font-size: spx(14px);
+      font-weight: 600;
+      
+      @include tablet-up {
+        font-size: tpx(16px);
+      }
+      
+      @include desktop-up {
+        font-size: ppx(18px);
+      }
+    }
+
+    &__link {
+      color: white;
+      text-decoration: underline;
+      margin-left: spx(16px);
+      
+      @include tablet-up {
+        margin-left: tpx(20px);
+      }
+      
+      @include desktop-up {
+        margin-left: ppx(24px);
+      }
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  .category-page {
+    min-height: 100vh;
+    padding: spx(20px);
+    
+    @include tablet-up {
+      padding: tpx(40px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(60px);
+    }
+  }
+
+  .category-header {
+    text-align: center;
+    margin-bottom: spx(40px);
+    
+    @include tablet-up {
+      margin-bottom: tpx(60px);
+    }
+    
+    @include desktop-up {
+      margin-bottom: ppx(80px);
+    }
+  }
+
+  .category-title {
+    @include zen-kaku-gothic-new-bold;
+    font-size: spx(28px);
+    color: #2c3e50;
+    margin-bottom: spx(12px);
+    
+    @include tablet-up {
+      font-size: tpx(36px);
+      margin-bottom: tpx(16px);
+    }
+    
+    @include desktop-up {
+      font-size: ppx(48px);
+      margin-bottom: ppx(20px);
+    }
+  }
+
+  .year-badge {
+    display: inline-block;
+    background: #e67e22;
+    color: white;
+    padding: spx(6px) spx(16px);
+    border-radius: spx(20px);
+    font-size: spx(14px);
+    font-weight: 600;
+    margin-bottom: spx(16px);
+    
+    @include tablet-up {
+      padding: tpx(8px) tpx(20px);
+      border-radius: tpx(24px);
+      font-size: tpx(16px);
+      margin-bottom: tpx(20px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(10px) ppx(24px);
+      border-radius: ppx(28px);
+      font-size: ppx(18px);
+      margin-bottom: ppx(24px);
+    }
+  }
+
+  .breadcrumb {
+    font-size: spx(14px);
+    color: #7f8c8d;
+    
+    @include tablet-up {
+      font-size: tpx(16px);
+    }
+    
+    @include desktop-up {
+      font-size: ppx(18px);
+    }
+
+    a {
+      color: #3498db;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &-separator {
+      margin: 0 spx(8px);
+      
+      @include tablet-up {
+        margin: 0 tpx(10px);
+      }
+      
+      @include desktop-up {
+        margin: 0 ppx(12px);
+      }
+    }
+
+    &-current {
+      font-weight: 600;
+    }
+  }
+
+  .contents-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: spx(20px);
+    margin-bottom: spx(40px);
+    max-width: spx(800px);
+    margin-left: auto;
+    margin-right: auto;
+    
+    @include tablet-up {
+      grid-template-columns: repeat(2, 1fr);
+      gap: tpx(24px);
+      margin-bottom: tpx(60px);
+      max-width: tpx(900px);
+    }
+    
+    @include desktop-up {
+      grid-template-columns: repeat(3, 1fr);
+      gap: ppx(30px);
+      margin-bottom: ppx(80px);
+      max-width: ppx(1200px);
+    }
+  }
+
+  .content-card {
+    background: white;
+    border-radius: spx(12px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    
+    @include tablet-up {
+      border-radius: tpx(16px);
+    }
+    
+    @include desktop-up {
+      border-radius: ppx(20px);
+    }
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  .content-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+  }
+
+  .content-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .content-info {
+    padding: spx(20px);
+    
+    @include tablet-up {
+      padding: tpx(24px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(30px);
+    }
+  }
+
+  .content-title {
+    @include zen-kaku-gothic-new-bold;
+    font-size: spx(18px);
+    color: #2c3e50;
+    margin-bottom: spx(12px);
+    
+    @include tablet-up {
+      font-size: tpx(20px);
+      margin-bottom: tpx(16px);
+    }
+    
+    @include desktop-up {
+      font-size: ppx(22px);
+      margin-bottom: ppx(20px);
+    }
+  }
+
+  .content-description {
+    font-size: spx(14px);
+    color: #34495e;
+    line-height: 1.6;
+    margin-bottom: spx(16px);
+    
+    @include tablet-up {
+      font-size: tpx(16px);
+      margin-bottom: tpx(20px);
+    }
+    
+    @include desktop-up {
+      font-size: ppx(18px);
+      margin-bottom: ppx(24px);
+    }
+  }
+
+  .content-venue,
+  .content-time {
+    font-size: spx(13px);
+    color: #7f8c8d;
+    margin-bottom: spx(8px);
+    
+    @include tablet-up {
+      font-size: tpx(14px);
+      margin-bottom: tpx(10px);
+    }
+    
+    @include desktop-up {
+      font-size: ppx(16px);
+      margin-bottom: ppx(12px);
+    }
+  }
+
+  .content-label {
+    font-weight: 600;
+    color: #34495e;
+  }
+
+  .read-more {
+    margin-top: spx(16px);
+    padding-top: spx(16px);
+    border-top: 1px solid #ecf0f1;
+    font-size: spx(14px);
+    color: #3498db;
+    font-weight: 600;
+    text-align: center;
+    
+    @include tablet-up {
+      margin-top: tpx(20px);
+      padding-top: tpx(20px);
+      font-size: tpx(16px);
+    }
+    
+    @include desktop-up {
+      margin-top: ppx(24px);
+      padding-top: ppx(24px);
+      font-size: ppx(18px);
+    }
+  }
+
+  .error,
+  .no-contents {
+    text-align: center;
+    padding: spx(40px) spx(20px);
+    
+    @include tablet-up {
+      padding: tpx(60px) tpx(40px);
+    }
+    
+    @include desktop-up {
+      padding: ppx(80px) ppx(60px);
+    }
+
+    p {
+      font-size: spx(16px);
+      color: #7f8c8d;
+      
+      @include tablet-up {
+        font-size: tpx(18px);
+      }
+      
+      @include desktop-up {
+        font-size: ppx(20px);
+      }
+    }
+  }
+
+  .error p {
+    color: #e74c3c;
+  }
+
+  .back-link {
+    display: flex;
+    justify-content: center;
+    gap: spx(16px);
+    flex-wrap: wrap;
+    
+    @include tablet-up {
+      gap: tpx(20px);
+    }
+    
+    @include desktop-up {
+      gap: ppx(24px);
+    }
+    
+    a {
+      display: inline-block;
+      padding: spx(12px) spx(20px);
+      background: #95a5a6;
+      color: white;
+      text-decoration: none;
+      border-radius: spx(8px);
+      font-weight: 600;
+      transition: background-color 0.2s ease;
+      
+      @include tablet-up {
+        padding: tpx(14px) tpx(24px);
+        border-radius: tpx(10px);
+      }
+      
+      @include desktop-up {
+        padding: ppx(16px) ppx(28px);
+        border-radius: ppx(12px);
+      }
+
+      &:hover {
+        background: #7f8c8d;
+      }
+
+      &.primary-link {
+        background: #e74c3c;
+
+        &:hover {
+          background: #c0392b;
+        }
+      }
+    }
+  }
+</style>
