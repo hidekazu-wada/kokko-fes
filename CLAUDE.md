@@ -341,15 +341,176 @@ export default function Special2025(props: YearlyComponentProps) {
 
 この方針により、「運用の簡単さ」と「デザインの自由度」を両立し、長期的な保守性を確保できます。
 
+## 宿泊予約サイトリンク管理
+
+### 概要
+「泊まる」カテゴリーは外部の宿泊予約サイト（じゃらん、楽天トラベルなど）へのリンクとしてハードコード実装されています。年度や地域によってリンク先を変更したい場合の編集方法を記録します。
+
+### 編集対象ファイル
+
+**1. 現在年のカテゴリーページ**
+- ファイル: `src/pages/[category].astro`
+- 編集箇所: 行61-88（宿泊予約サイトのリンク部分）
+
+**2. 過去年のカテゴリーページ**  
+- ファイル: `src/pages/[year]/[category].astro`
+- 編集箇所: 行90-117（宿泊予約サイトのリンク部分）
+
+### 年度別リンク変更の実装方法
+
+#### 過去年用ファイル (`src/pages/[year]/[category].astro`) での条件分岐
+
+```astro
+<div class="booking-sites">
+  {eventConfig.year === '2024' ? (
+    <>
+      <!-- 2024年の宿泊予約サイト -->
+      <a href="https://www.jalan.net/" class="booking-card jalan" target="_blank" rel="noopener noreferrer">
+        <div class="booking-logo">
+          <span class="booking-name">じゃらん</span>
+        </div>
+        <div class="booking-description">
+          豊富な宿泊プランとお得な料金で予約
+        </div>
+        <div class="external-link-indicator">
+          外部サイト 🔗
+        </div>
+      </a>
+      <a href="https://travel.rakuten.co.jp/" class="booking-card rakuten" target="_blank" rel="noopener noreferrer">
+        <div class="booking-logo">
+          <span class="booking-name">楽天トラベル</span>
+        </div>
+        <div class="booking-description">
+          楽天ポイントが貯まる・使える
+        </div>
+        <div class="external-link-indicator">
+          外部サイト 🔗
+        </div>
+      </a>
+    </>
+  ) : eventConfig.year === '2025' ? (
+    <>
+      <!-- 2025年の宿泊予約サイト（例：別のサイト） -->
+      <a href="https://www.booking.com/" class="booking-card booking" target="_blank" rel="noopener noreferrer">
+        <div class="booking-logo">
+          <span class="booking-name">Booking.com</span>
+        </div>
+        <div class="booking-description">
+          世界最大の宿泊予約サイト
+        </div>
+        <div class="external-link-indicator">
+          外部サイト 🔗
+        </div>
+      </a>
+      <a href="https://www.agoda.com/" class="booking-card agoda" target="_blank" rel="noopener noreferrer">
+        <div class="booking-logo">
+          <span class="booking-name">Agoda</span>
+        </div>
+        <div class="booking-description">
+          アジア圏の宿泊施設に強い
+        </div>
+        <div class="external-link-indicator">
+          外部サイト 🔗
+        </div>
+      </a>
+    </>
+  ) : (
+    <>
+      <!-- デフォルト（その他の年度） -->
+      <a href="https://www.jalan.net/" class="booking-card jalan" target="_blank" rel="noopener noreferrer">
+        <!-- デフォルトのじゃらんリンク -->
+      </a>
+      <a href="https://travel.rakuten.co.jp/" class="booking-card rakuten" target="_blank" rel="noopener noreferrer">
+        <!-- デフォルトの楽天トラベルリンク -->
+      </a>
+    </>
+  )}
+</div>
+```
+
+#### 現在年用ファイル (`src/pages/[category].astro`) での条件分岐
+
+```astro
+<div class="booking-sites">
+  {year === '2024' ? (
+    <!-- 2024年の宿泊予約サイト -->
+  ) : year === '2025' ? (
+    <!-- 2025年の宿泊予約サイト -->
+  ) : (
+    <!-- デフォルト -->
+  )}
+</div>
+```
+
+### スタイル追加が必要な場合
+
+新しい宿泊予約サイトを追加する場合は、対応するCSSクラスを追加してください：
+
+```scss
+.booking-card {
+  // 既存のスタイル
+
+  &.booking {
+    border-color: #003580;
+    
+    &:hover {
+      border-color: #002654;
+    }
+  }
+
+  &.agoda {
+    border-color: #FF5722;
+    
+    &:hover {
+      border-color: #E64A19;
+    }
+  }
+}
+
+.booking-name {
+  // 既存のスタイル
+  
+  .booking & {
+    color: #003580;
+  }
+  
+  .agoda & {
+    color: #FF5722;
+  }
+}
+```
+
+### 変更作業のルール
+
+1. **現在公開年の直接編集**
+   - 現在公開中の年度（currentステータス）については、直接編集が可能
+   - `src/pages/[category].astro` ファイルを編集
+
+2. **過去年度の条件分岐**
+   - 複数年度を管理する場合は条件分岐を使用
+   - `src/pages/[year]/[category].astro` ファイルで `eventConfig.year` による分岐
+
+3. **両ファイルの同期**
+   - 現在年と過去年の両方のファイルを編集する必要あり
+   - 一貫性を保つため、同じロジックを両ファイルに適用
+
+4. **新しいサイト追加時の手順**
+   - HTMLマークアップを追加
+   - 対応するCSSスタイルを追加
+   - ブランドカラーとホバー効果を設定
+
+### 注意事項
+
+- target="_blank" と rel="noopener noreferrer" を必ず設定
+- 外部サイトであることを明示する「外部サイト 🔗」表示を維持
+- レスポンシブ対応（spx, tpx, ppx関数）を使用
+- 新しいサイトのブランドガイドラインに従った色設定
+
 ## 🚨 要件実装タスク（重要）
 
 **このセクションは開発中のタスク管理用です。完了したタスクは削除してください。**
 
 ### 🟢 中優先度
-
-- [ ] **「泊まる」カテゴリー外部リンク対応**
-  - じゃらん、楽天トラベルへの外部リンク機能
-  - 外部リンクであることの明示
 
 - [ ] **基本ページ追加**
   - イベント情報ページ

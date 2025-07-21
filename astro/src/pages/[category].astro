@@ -26,14 +26,19 @@ const { category: categorySlug } = Astro.params;
 let contents: Content[] = [];
 let error: string | null = null;
 
-try {
-  const contentsResponse = await getContents(year);
-  contents = contentsResponse.contents.filter(
-    (content: Content) => content.categoryId === category.categoryId
-  );
-} catch (e) {
-  error = 'コンテンツの取得に失敗しました';
-  console.error('Error fetching contents:', e);
+// 泊まるカテゴリーは外部リンクでハードコード対応
+const isAccommodationCategory = category?.slug === 'tomaru';
+
+if (!isAccommodationCategory) {
+  try {
+    const contentsResponse = await getContents(year);
+    contents = contentsResponse.contents.filter(
+      (content: Content) => content.categoryId === category.categoryId
+    );
+  } catch (e) {
+    error = 'コンテンツの取得に失敗しました';
+    console.error('Error fetching contents:', e);
+  }
 }
 ---
 
@@ -51,6 +56,36 @@ try {
     {error ? (
       <div class="error">
         <p>{error}</p>
+      </div>
+    ) : isAccommodationCategory ? (
+      <div class="accommodation-links">
+        <p class="accommodation-description">
+          宿泊施設の予約は以下の宿泊予約サイトをご利用ください。
+        </p>
+        <div class="booking-sites">
+          <a href="https://www.jalan.net/" class="booking-card jalan" target="_blank" rel="noopener noreferrer">
+            <div class="booking-logo">
+              <span class="booking-name">じゃらん</span>
+            </div>
+            <div class="booking-description">
+              豊富な宿泊プランとお得な料金で予約
+            </div>
+            <div class="external-link-indicator">
+              外部サイト 🔗
+            </div>
+          </a>
+          <a href="https://travel.rakuten.co.jp/" class="booking-card rakuten" target="_blank" rel="noopener noreferrer">
+            <div class="booking-logo">
+              <span class="booking-name">楽天トラベル</span>
+            </div>
+            <div class="booking-description">
+              楽天ポイントが貯まる・使える
+            </div>
+            <div class="external-link-indicator">
+              外部サイト 🔗
+            </div>
+          </a>
+        </div>
       </div>
     ) : contents.length > 0 ? (
       <div class="contents-grid">
@@ -368,6 +403,161 @@ try {
 
   .error p {
     color: #e74c3c;
+  }
+
+  .accommodation-links {
+    max-width: spx(800px);
+    margin: 0 auto spx(40px);
+    
+    @include tablet-up {
+      max-width: tpx(900px);
+      margin-bottom: tpx(60px);
+    }
+    
+    @include desktop-up {
+      max-width: ppx(1000px);
+      margin-bottom: ppx(80px);
+    }
+  }
+
+  .accommodation-description {
+    text-align: center;
+    font-size: spx(16px);
+    color: #34495e;
+    margin-bottom: spx(30px);
+    
+    @include tablet-up {
+      font-size: tpx(18px);
+      margin-bottom: tpx(40px);
+    }
+    
+    @include desktop-up {
+      font-size: ppx(20px);
+      margin-bottom: ppx(50px);
+    }
+  }
+
+  .booking-sites {
+    display: grid;
+    gap: spx(20px);
+    
+    @include tablet-up {
+      grid-template-columns: repeat(2, 1fr);
+      gap: tpx(24px);
+    }
+    
+    @include desktop-up {
+      gap: ppx(30px);
+    }
+  }
+
+  .booking-card {
+    display: block;
+    background: white;
+    border-radius: spx(16px);
+    padding: spx(30px);
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 3px solid transparent;
+    
+    @include tablet-up {
+      border-radius: tpx(20px);
+      padding: tpx(40px);
+    }
+    
+    @include desktop-up {
+      border-radius: ppx(24px);
+      padding: ppx(50px);
+    }
+
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    }
+
+    &.jalan {
+      border-color: #ff6b35;
+      
+      &:hover {
+        border-color: #e55a2b;
+      }
+    }
+
+    &.rakuten {
+      border-color: #bf0000;
+      
+      &:hover {
+        border-color: #a00000;
+      }
+    }
+  }
+
+  .booking-logo {
+    margin-bottom: spx(16px);
+    
+    @include tablet-up {
+      margin-bottom: tpx(20px);
+    }
+    
+    @include desktop-up {
+      margin-bottom: ppx(24px);
+    }
+  }
+
+  .booking-name {
+    @include zen-kaku-gothic-new-bold;
+    font-size: spx(24px);
+    color: #2c3e50;
+    
+    @include tablet-up {
+      font-size: tpx(28px);
+    }
+    
+    @include desktop-up {
+      font-size: ppx(32px);
+    }
+    
+    .jalan & {
+      color: #ff6b35;
+    }
+    
+    .rakuten & {
+      color: #bf0000;
+    }
+  }
+
+  .booking-description {
+    font-size: spx(14px);
+    color: #7f8c8d;
+    margin-bottom: spx(20px);
+    line-height: 1.6;
+    
+    @include tablet-up {
+      font-size: tpx(16px);
+      margin-bottom: tpx(24px);
+    }
+    
+    @include desktop-up {
+      font-size: ppx(18px);
+      margin-bottom: ppx(28px);
+    }
+  }
+
+  .external-link-indicator {
+    font-size: spx(12px);
+    color: #95a5a6;
+    font-weight: 600;
+    text-align: right;
+    
+    @include tablet-up {
+      font-size: tpx(14px);
+    }
+    
+    @include desktop-up {
+      font-size: ppx(16px);
+    }
   }
 
   .back-link {
