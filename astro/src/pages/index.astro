@@ -1,5 +1,6 @@
 ---
 import MySiteLayout from '../layouts/MySiteLayout.astro';
+import GlobalNavigation from '../components/GlobalNavigation.astro';
 import { getCurrentEventConfig, getContents } from '../lib/microcms';
 import type { EventConfig, Content } from '../types/microcms';
 
@@ -20,6 +21,7 @@ try {
 ---
 
 <MySiteLayout>
+  <GlobalNavigation />
   <div class="hero">
     {eventConfig ? (
       <>

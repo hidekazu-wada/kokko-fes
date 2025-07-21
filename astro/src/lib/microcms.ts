@@ -3,6 +3,9 @@ import type {
   EventConfig, 
   Content, 
   News, 
+  EventInfo,
+  AccessInfo,
+  ContactInfo,
   MicroCMSListResponse 
 } from '../types/microcms';
 
@@ -97,4 +100,61 @@ export const getArchivedYears = async (): Promise<string[]> => {
     },
   });
   return response.contents.map((config: EventConfig) => config.year).sort((a: string, b: string) => b.localeCompare(a));
+};
+
+// イベント情報取得
+export const getEventInfo = async (year?: string): Promise<MicroCMSListResponse<EventInfo>> => {
+  const filters = year ? `year[equals]${year}` : '';
+  
+  return await client.get({
+    endpoint: 'event-info',
+    queries: filters ? { filters } : {},
+  });
+};
+
+// 現在年度のイベント情報取得
+export const getCurrentEventInfo = async (): Promise<EventInfo[]> => {
+  const currentConfig = await getCurrentEventConfig();
+  if (!currentConfig) return [];
+  
+  const response = await getEventInfo(currentConfig.year);
+  return response.contents;
+};
+
+// アクセス情報取得
+export const getAccessInfo = async (year?: string): Promise<AccessInfo | null> => {
+  const filters = year ? `year[equals]${year}` : '';
+  
+  const response = await client.get({
+    endpoint: 'access-info',
+    queries: filters ? { filters } : {},
+  });
+  return response.contents[0] || null;
+};
+
+// 現在年度のアクセス情報取得
+export const getCurrentAccessInfo = async (): Promise<AccessInfo | null> => {
+  const currentConfig = await getCurrentEventConfig();
+  if (!currentConfig) return null;
+  
+  return await getAccessInfo(currentConfig.year);
+};
+
+// お問い合わせ情報取得
+export const getContactInfo = async (year?: string): Promise<ContactInfo | null> => {
+  const filters = year ? `year[equals]${year}` : '';
+  
+  const response = await client.get({
+    endpoint: 'contact-info',
+    queries: filters ? { filters } : {},
+  });
+  return response.contents[0] || null;
+};
+
+// 現在年度のお問い合わせ情報取得
+export const getCurrentContactInfo = async (): Promise<ContactInfo | null> => {
+  const currentConfig = await getCurrentEventConfig();
+  if (!currentConfig) return null;
+  
+  return await getContactInfo(currentConfig.year);
 };

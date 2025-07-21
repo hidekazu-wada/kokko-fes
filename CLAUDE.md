@@ -341,6 +341,349 @@ export default function Special2025(props: YearlyComponentProps) {
 
 この方針により、「運用の簡単さ」と「デザインの自由度」を両立し、長期的な保守性を確保できます。
 
+## 年度別ページ管理システム
+
+### 基本構造：現在年度と過去年度の住み分け
+
+**ディレクトリ構造による管理方式**
+
+```
+src/pages/
+├── index.astro                    # 現在年度のトップページ
+├── event.astro                    # 現在年度のイベント情報
+├── access.astro                   # 現在年度のアクセス情報
+├── contact.astro                  # 現在年度のお問い合わせ
+├── [category].astro               # 現在年度のカテゴリページ
+├── news/                          # 現在年度のお知らせ
+└── [year]/                        # 過去年度管理ディレクトリ
+    ├── index.astro                # 年度別トップページ  
+    ├── event.astro                # 年度別イベント情報
+    ├── access.astro               # 年度別アクセス情報
+    ├── contact.astro              # 年度別お問い合わせ
+    ├── [category].astro           # 年度別カテゴリページ
+    └── news/                      # 年度別お知らせ
+```
+
+### URL構造の設計思想
+
+**現在年度（currentステータス）：**
+- `/` → 現在開催中・準備中の祭り情報
+- `/event`, `/access`, `/contact` → 現在年度の詳細情報
+- `/miru`, `/taberu`, `/asobu` → 現在年度のカテゴリ
+
+**過去年度（archivedステータス）：**
+- `/2024/`, `/2025/` → 過去の開催記録
+- `/2024/event`, `/2024/access` → 過去年度の詳細情報（記録保存用）
+- `/2024/miru`, `/2024/taberu` → 過去年度のカテゴリ（記録保存用）
+
+### 年度別表示カスタマイズの実装方法
+
+#### 1. 条件分岐による年度別表示
+
+```astro
+---
+// 年度情報を取得
+const { year } = Astro.props; // [year]ディレクトリの場合
+// または
+const eventConfig = await getCurrentEventConfig(); // 現在年度の場合
+const currentYear = eventConfig?.year;
+---
+
+<!-- 年度別デザイン適用例 -->
+<div class={`event-header ${year === '2024' ? 'retro-theme' : year === '2025' ? 'modern-theme' : 'default-theme'}`}>
+  {year === '2024' ? (
+    <div class="retro-design">
+      <h1>懐かしの2024年コッコ祭り</h1>
+      <p class="retro-subtitle">思い出に残る一日でした</p>
+    </div>
+  ) : year === '2025' ? (
+    <div class="modern-design">
+      <h1>未来を見つめる2025年</h1>
+      <p class="modern-subtitle">新時代のコッコ祭り</p>
+    </div>
+  ) : (
+    <div class="standard-design">
+      <h1>{year}年コッコ祭り</h1>
+    </div>
+  )}
+</div>
+```
+
+#### 2. 年度別スタイル定義
+
+```scss
+// 年度別カラーテーマ
+.event-header {
+  &.retro-theme {
+    background: linear-gradient(135deg, #f4a261 0%, #e76f51 100%);
+    
+    .retro-subtitle {
+      font-family: serif;
+      font-style: italic;
+    }
+  }
+  
+  &.modern-theme {
+    background: linear-gradient(135deg, #2a9d8f 0%, #264653 100%);
+    
+    .modern-subtitle {
+      font-weight: 300;
+      letter-spacing: 0.05em;
+    }
+  }
+  
+  &.default-theme {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+}
+```
+
+#### 3. 年度別コンテンツ表示制御
+
+```astro
+---
+// 年度固有の情報表示
+const showSpecialContent = (year: string) => {
+  const specialYears = {
+    '2024': { 
+      message: '初回開催記念', 
+      badge: 'FIRST',
+      color: '#e76f51' 
+    },
+    '2025': { 
+      message: '5周年記念', 
+      badge: '5th ANNIVERSARY',
+      color: '#2a9d8f' 
+    }
+  };
+  
+  return specialYears[year] || null;
+};
+
+const specialInfo = showSpecialContent(year);
+---
+
+{specialInfo && (
+  <div class="special-banner" style={`border-color: ${specialInfo.color}`}>
+    <span class="special-badge">{specialInfo.badge}</span>
+    <p class="special-message">{specialInfo.message}</p>
+  </div>
+)}
+```
+
+#### 4. 機能の有効/無効制御
+
+```astro
+---
+// 年度別機能制御
+const getYearFeatures = (year: string) => {
+  const features = {
+    '2024': {
+      hasVirtualTour: false,
+      hasLiveStreaming: false,
+      hasQRCodeMenu: true
+    },
+    '2025': {
+      hasVirtualTour: true,
+      hasLiveStreaming: true,
+      hasQRCodeMenu: true
+    }
+  };
+  
+  return features[year] || {
+    hasVirtualTour: false,
+    hasLiveStreaming: false,
+    hasQRCodeMenu: false
+  };
+};
+
+const features = getYearFeatures(year);
+---
+
+<!-- 機能別表示制御 -->
+{features.hasVirtualTour && (
+  <section class="virtual-tour">
+    <h3>バーチャル会場ツアー</h3>
+    <!-- VRツアーコンテンツ -->
+  </section>
+)}
+
+{features.hasLiveStreaming && (
+  <section class="live-streaming">
+    <h3>ライブ配信</h3>
+    <!-- ライブ配信コンテンツ -->
+  </section>
+)}
+```
+
+### 年度管理のベストプラクティス
+
+#### 1. 過去年度の情報保護
+- 過去年度ページは「記録保存」として位置づけ
+- 現在情報への誘導リンクを必ず含める
+- 「この情報は○年開催時のものです」注意書きを表示
+
+#### 2. MicroCMSデータの年度管理
+```typescript
+// API呼び出し時の年度指定
+const getCurrentData = () => getCurrentEventConfig(); // 現在年度
+const getHistoricalData = (year: string) => getEventConfigByYear(year); // 指定年度
+```
+
+#### 3. パンくずナビゲーションの統一
+```astro
+<!-- 現在年度 -->
+<nav class="breadcrumb">
+  <a href="/">ホーム</a> > <span>イベント情報</span>
+</nav>
+
+<!-- 過去年度 -->
+<nav class="breadcrumb">
+  <a href="/">ホーム</a> > 
+  <a href="/archive">過去の開催</a> > 
+  <a href="/{year}">{year}年</a> > 
+  <span>イベント情報</span>
+</nav>
+```
+
+#### 4. 年度切り替え時の運用フロー
+1. 新年度のevent-configでstatusを'current'に設定
+2. 前年度のevent-configでstatusを'archived'に変更
+3. 必要に応じて年度別カスタマイズを`/[year]/`ディレクトリに実装
+4. 現在年度用ページ（`/pages/`直下）は自動的に新年度データを参照
+
+### MicroCMS側で行う年度管理操作
+
+#### 1. 新年度開始時の作業
+
+**event-config（イベント設定）の更新**
+```json
+// 新年度の設定を作成（例：2026年）
+{
+  "year": "2026",
+  "status": "current",  // 現在年度として設定
+  "theme": "2026年のテーマ",
+  "dates": [...],
+  "categories": [...]
+}
+
+// 前年度の設定を更新（例：2025年）
+{
+  "year": "2025", 
+  "status": "archived",  // アーカイブ年度に変更
+  "theme": "2025年のテーマ",
+  "dates": [...],
+  "categories": [...]
+}
+```
+
+**新年度のコンテンツ作成**
+- `contents`：新年度のカテゴリ別コンテンツを作成
+- `news`：新年度のお知らせを作成
+- `event-info`：新年度のイベント情報を作成（必要に応じて）
+- `access-info`：新年度のアクセス情報を作成（必要に応じて）
+- `contact-info`：新年度のお問い合わせ情報を作成（必要に応じて）
+
+#### 2. 過去年度データの修正・追加
+
+**既存年度の情報を修正する場合**
+- 対象年度の`year`フィールドで絞り込み
+- 該当する年度のデータのみを編集
+- `status`は`archived`のまま維持
+
+**過去年度に不足情報を追加する場合**
+```json
+// 例：2024年にイベント情報が無かった場合の追加
+{
+  "title": "2024年限定イベント",
+  "description": "...",
+  "year": "2024",  // 追加対象の年度を指定
+  "schedule": "...",
+  "venue": "..."
+}
+```
+
+#### 3. 年度別APIエンドポイント管理
+
+**各APIエンドポイントでの年度管理**
+
+**contents（コンテンツ）**
+- `year`フィールドで年度を指定
+- `categoryId`で種別を指定
+- 例：`year[equals]2024[and]categoryId[equals]miru`
+
+**news（お知らせ）**
+- `year`フィールドで年度を指定
+- 例：`year[equals]2024`
+
+**event-info（イベント情報）**
+- `year`フィールドで年度を指定
+- リスト形式：複数のイベントを年度別に管理
+
+**access-info（アクセス情報）**
+- `year`フィールドで年度を指定
+- オブジェクト形式：年度ごとに1つの会場情報
+
+**contact-info（お問い合わせ情報）**
+- `year`フィールドで年度を指定
+- オブジェクト形式：年度ごとに1つのお問い合わせ先
+
+#### 4. データ整合性チェック
+
+**確認すべき項目**
+- [ ] `event-config`で`status: "current"`が1つだけ存在する
+- [ ] 過去年度は全て`status: "archived"`になっている
+- [ ] 各年度のコンテンツに`year`フィールドが正しく設定されている
+- [ ] カテゴリIDと年度の組み合わせが適切に設定されている
+
+**データの確認方法**
+```
+フィルター検索例：
+- 現在年度確認：status[equals]current
+- 特定年度確認：year[equals]2024
+- 年度別コンテンツ確認：year[equals]2024[and]categoryId[equals]miru
+```
+
+#### 5. 年度アーカイブ時の注意事項
+
+**アーカイブ前に確認**
+- 該当年度の全てのコンテンツが完成している
+- 画像やファイルが正しくアップロードされている
+- リンク切れや誤字脱字がない
+
+**アーカイブ後の運用**
+- 過去年度のデータは原則として修正しない
+- 重大な誤りがある場合のみ例外的に修正
+- 修正時は影響範囲を慎重に確認
+
+#### 6. 年度データの削除について
+
+**削除の判断基準**
+- 法的保存義務の確認
+- 利用者からの参照頻度
+- サーバー容量の制限
+
+**削除時の手順**
+1. 関連する全てのAPIエンドポイントからデータを削除
+2. 画像やファイルも併せて削除
+3. サイト側の`getStaticPaths()`から該当年度を除外
+
+**例：古い年度の完全削除**
+```typescript
+// [year]ページのgetStaticPaths()から除外
+export async function getStaticPaths() {
+  // const years = ['2022', '2023', '2024', '2025']; // 2022年を削除前
+  const years = ['2023', '2024', '2025']; // 2022年を削除後
+  
+  return years.map(year => ({
+    params: { year },
+    props: { year }
+  }));
+}
+```
+
+この方式により、年度ごとの情報管理と表示カスタマイズが体系的に行えます。
+
 ## 宿泊予約サイトリンク管理
 
 ### 概要
@@ -506,21 +849,112 @@ export default function Special2025(props: YearlyComponentProps) {
 - レスポンシブ対応（spx, tpx, ppx関数）を使用
 - 新しいサイトのブランドガイドラインに従った色設定
 
-## 🚨 要件実装タスク（重要）
+## 🚨 現在のサイト状況とタスク管理
 
-**このセクションは開発中のタスク管理用です。完了したタスクは削除してください。**
+**最終更新: 2025年7月21日**
 
-### 🟢 中優先度
+### ✅ 実装完了済み
 
-- [ ] **基本ページ追加**
-  - イベント情報ページ
-  - アクセスページ
-  - お問い合わせページ
+**コア機能**
+- [x] **基本ページ構造**
+  - トップページ（index.astro）
+  - カテゴリページ（[category].astro）
+  - コンテンツ詳細ページ（[category]/[slug].astro）
+  - お知らせページ（news/index.astro, news/[slug].astro）
+  - アーカイブページ（archive.astro）
 
-### 🔵 低優先度
+- [x] **年度別管理ページ**
+  - 年度別トップ（[year].astro）
+  - 年度別カテゴリ（[year]/[category].astro）
+  - 年度別コンテンツ詳細（[year]/[category]/[slug].astro）
+  - 年度別お知らせ（[year]/news/index.astro, [year]/news/[slug].astro）
+
+- [x] **新規追加ページ（現在年度）**
+  - イベント情報ページ（event.astro）
+  - アクセスページ（access.astro）
+  - お問い合わせページ（contact.astro）
+
+- [x] **新規追加ページ（年度別）**
+  - 年度別イベント情報（[year]/event.astro）
+  - 年度別アクセス（[year]/access.astro）
+  - 年度別お問い合わせ（[year]/contact.astro）
+
+- [x] **UI/UXコンポーネント**
+  - グローバルナビゲーション（GlobalNavigation.astro）
+  - レスポンシブ対応（モバイル・タブレット・デスクトップ）
+  - パンくずナビゲーション
+  - 年度識別とナビゲーション
+
+- [x] **MicroCMS統合**
+  - API関数ライブラリ（microcms.ts）
+  - TypeScript型定義（types/microcms.ts）
+  - 年度別データ取得機能
+  - エラーハンドリング
+
+**ビルド状況**
+- ✅ 正常ビルド完了（37ページ生成）
+- ✅ 全てのルートが正常に生成
+- ⚠️ SCSS deprecation warnings（動作に影響なし）
+
+### 🔵 低優先度・将来改善
+
+- [ ] **技術的改善**
+  - SCSS @import → @use への移行（deprecation warning解消）
+  - 画像最適化の追加
+  - パフォーマンス最適化
 
 - [ ] **SEO最適化**
-  - メタタグ設定
+  - メタタグ設定の詳細化
   - 構造化データ実装
+  - サイトマップ生成
 
-**注意**: 上記タスクは要件との差分分析結果です。作業完了後は該当項目を削除してください。
+- [ ] **アクセシビリティ改善**
+  - ARIA属性の追加
+  - キーボードナビゲーション
+  - カラーコントラスト最適化
+
+### 🏗️ サイト構成状況
+
+**URL構造（実装済み）**
+```
+/ (現在年度トップ)
+├── /miru, /taberu, /asobu, /tsukuru, /tomaru (現在年度カテゴリ)
+├── /event (現在年度イベント情報)
+├── /access (現在年度アクセス)
+├── /contact (現在年度お問い合わせ)
+├── /news (現在年度お知らせ)
+├── /archive (過去開催一覧)
+└── /[year]/ (年度別)
+    ├── /[year]/miru, /[year]/taberu など (年度別カテゴリ)
+    ├── /[year]/event (年度別イベント情報)
+    ├── /[year]/access (年度別アクセス)
+    ├── /[year]/contact (年度別お問い合わせ)
+    └── /[year]/news (年度別お知らせ)
+```
+
+**MicroCMS統合状況**
+- ✅ event-config（イベント設定）
+- ✅ contents（コンテンツ）
+- ✅ news（お知らせ）
+- 🆕 event-info（イベント情報）- 型定義・API関数実装済み
+- 🆕 access-info（アクセス情報）- 型定義・API関数実装済み
+- 🆕 contact-info（お問い合わせ情報）- 型定義・API関数実装済み
+
+### 📝 運用ガイド
+
+**現在の運用状況**
+- 2025年が現在年度（status: current）
+- 2024年がアーカイブ年度（status: archived）
+- 「作る」カテゴリのデモコンテンツ実装済み
+
+**今後の運用で必要な作業**
+1. **新規APIエンドポイント作成**（必要に応じて）
+   - event-info
+   - access-info  
+   - contact-info
+
+2. **年度切り替え時**（年度別ページ管理システム参照）
+   - event-configのstatus更新
+   - 新年度コンテンツ作成
+
+**注意**: 実装済みタスクは上記✅完了済みセクションで管理。新規タスクのみこのセクションに追加してください。

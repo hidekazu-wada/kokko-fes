@@ -62,6 +62,41 @@ export interface News extends MicroCMSDate {
   slug: string;
 }
 
+// イベント情報型定義
+export interface EventInfo extends MicroCMSDate {
+  id: string;
+  title: string;
+  description: string;
+  schedule: string;
+  venue: string;
+  capacity?: string;
+  fee?: string;
+  application: string;
+  contact: string;
+  year: string;
+}
+
+// アクセス情報型定義
+export interface AccessInfo extends MicroCMSDate {
+  id: string;
+  venue_name: string;
+  address: string;
+  access_methods: string;
+  parking?: string;
+  map_embed?: string;
+  year: string;
+}
+
+// お問い合わせ情報型定義
+export interface ContactInfo extends MicroCMSDate {
+  id: string;
+  general_contact: string;
+  event_contact?: string;
+  media_contact?: string;
+  volunteer_contact?: string;
+  year: string;
+}
+
 // MicroCMS API レスポンス型
 export interface MicroCMSListResponse<T> {
   contents: T[];

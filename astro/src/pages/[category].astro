@@ -1,5 +1,6 @@
 ---
 import MySiteLayout from '../layouts/MySiteLayout.astro';
+import GlobalNavigation from '../components/GlobalNavigation.astro';
 import { getCurrentEventConfig, getContents } from '../lib/microcms';
 import type { EventConfig, Content, Category } from '../types/microcms';
 
@@ -43,6 +44,7 @@ if (!isAccommodationCategory) {
 ---
 
 <MySiteLayout>
+  <GlobalNavigation />
   <div class="category-page">
     <div class="category-header">
       <h1 class="category-title">{category.name}</h1>

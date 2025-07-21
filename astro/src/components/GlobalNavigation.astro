@@ -1,0 +1,141 @@
+---
+// グローバルナビゲーション定義
+const navigation = [
+  { name: 'トップ', href: '/', type: 'static' },
+  { name: '遊ぶ', href: '/asobu', type: 'category' },
+  { name: '食べる', href: '/taberu', type: 'category' },
+  { name: '作る', href: '/tsukuru', type: 'category' },
+  { name: '見る', href: '/miru', type: 'category' },
+  { name: '泊まる', href: '/tomaru', type: 'category' },
+  { name: 'イベント情報', href: '/event', type: 'static' },
+  { name: 'アクセス', href: '/access', type: 'static' },
+  { name: 'お問い合わせ', href: '/contact', type: 'static' }
+];
+
+// 現在のパスを取得
+const currentPath = Astro.url.pathname;
+---
+
+<nav class="global-navigation">
+  <div class="nav-container">
+    <ul class="nav-list">
+      {navigation.map((item) => (
+        <li class="nav-item">
+          <a 
+            href={item.href} 
+            class={`nav-link ${currentPath === item.href ? 'active' : ''}`}
+          >
+            {item.name}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<style lang="scss">
+@import '../styles/functions.scss';
+@import '../styles/mixins.scss';
+
+.global-navigation {
+  background-color: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-container {
+  max-width: ppx(1200px);
+  margin: 0 auto;
+  padding: 0 spx(20px);
+  
+  @include tablet-up {
+    padding: 0 tpx(40px);
+  }
+  
+  @include desktop-up {
+    padding: 0 ppx(40px);
+  }
+}
+
+.nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: spx(8px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  
+  @include tablet-up {
+    gap: tpx(16px);
+    flex-wrap: nowrap;
+  }
+  
+  @include desktop-up {
+    gap: ppx(24px);
+  }
+}
+
+.nav-item {
+  flex: 1;
+  min-width: spx(80px);
+  
+  @include tablet-up {
+    flex: none;
+    min-width: auto;
+  }
+}
+
+.nav-link {
+  display: block;
+  padding: spx(12px) spx(8px);
+  text-decoration: none;
+  color: #333;
+  font-weight: 400;
+  font-size: spx(14px);
+  text-align: center;
+  border-radius: spx(4px);
+  transition: all 0.2s ease;
+  
+  @include tablet-up {
+    padding: tpx(16px) tpx(12px);
+    font-size: tpx(16px);
+  }
+  
+  @include desktop-up {
+    padding: ppx(16px) ppx(16px);
+    font-size: ppx(16px);
+  }
+  
+  &:hover {
+    background-color: #f5f5f5;
+    color: #007acc;
+  }
+  
+  &.active {
+    background-color: #007acc;
+    color: #fff;
+    
+    &:hover {
+      background-color: #005a8b;
+    }
+  }
+}
+
+// モバイル用のレスポンシブ調整
+@media (max-width: 743px) {
+  .nav-list {
+    justify-content: center;
+  }
+  
+  .nav-item {
+    min-width: spx(70px);
+  }
+  
+  .nav-link {
+    font-size: spx(12px);
+    padding: spx(10px) spx(4px);
+  }
+}
+</style>
