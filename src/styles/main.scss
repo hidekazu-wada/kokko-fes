@@ -18,10 +18,12 @@ html {
     //     opacity: 1;
     // }
     body {
-        @include zen-kaku-gothic-new-regular;
         background-color: #f0f0f0;
         font-family: "Zen Kaku Gothic New", sans-serif;
         font-weight: 400;
         font-style: normal;
+        main {
+            padding-top: 0;
+        }
     }
 }

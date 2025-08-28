@@ -29,13 +29,18 @@ import heroImage from "../images/top/hero-img.svg";
           <h1 class="hero__title">
             <img class="hero__logo" src={logo.src} alt="コッコ祭り" />
           </h1>
-          <time class="hero__date" datetime="2025-12-07T12:00/2025-12-08T15:00">
-            <span class="hero__date-item">2025.12.7</span>
-            <span class="hero__date-item">（土）12:00〜23:00 </span>
-            <span class="hero__date-item">/ 8</span>
-            <span class="hero__date-item">（日）9:00〜15:00</span>
-          </time>
-          <address class="hero__venue">HAMAYOUリゾート</address>
+          <div class="hero__date-wrapper">
+            <time
+              class="hero__date"
+              datetime="2025-12-07T12:00/2025-12-08T15:00"
+            >
+              <span class="hero__date-item">2025.12.7</span>
+              <span class="hero__date-item small">（土）12:00〜23:00 </span>
+              <span class="hero__date-item">/ 8</span>
+              <span class="hero__date-item small">（日）9:00〜15:00</span>
+            </time>
+          </div>
+          <address class="hero__venue">HAMAYOU リゾート</address>
         </div>
         <img class="hero__image" src={heroImage.src} alt="ヒーローイメージ" />
       </section>
@@ -50,6 +55,17 @@ import heroImage from "../images/top/hero-img.svg";
   @import "../styles/mixins";
 
   .hero {
+    background: var(--base_1, #fffcf2);
+    padding-top: spx(301);
+    padding-bottom: spx(49);
+    @include tablet-up {
+      padding-top: ppx(120) * 1.2;
+      padding-bottom: ppx(214) * 1.2;
+    }
+    @include desktop-up {
+      padding-top: ppx(120);
+      padding-bottom: ppx(214);
+    }
     &__content {
     }
 
@@ -59,6 +75,7 @@ import heroImage from "../images/top/hero-img.svg";
     &__logo {
       display: block;
       width: spx(354);
+      margin-inline: auto;
       @include tablet-up {
         width: ppx(567) * 1.2;
       }
@@ -66,21 +83,80 @@ import heroImage from "../images/top/hero-img.svg";
         width: ppx(567);
       }
     }
+    &__date-wrapper {
+      width: spx(667);
+      height: spx(60);
+      background-color: white;
+      border-radius: spx(50);
+      display: flex;
+      justify-content: center;
+      margin-inline: auto;
+      margin-top: spx(34);
+      @include tablet-up {
+        width: ppx(1066) * 1.2;
+        height: ppx(95) * 1.2;
+        border-radius: ppx(80) * 1.2;
+        margin-top: ppx(42) * 1.2;
+      }
+      @include desktop-up {
+        width: ppx(1066);
+        height: ppx(95);
+        border-radius: ppx(80);
+        margin-top: ppx(42);
+      }
+    }
 
     &__date {
       &-item {
         color: var(--base_5, #102a4d);
-        font-size: 59px;
-        font-style: normal;
+        font-size: spx(37);
         font-weight: 700;
         line-height: normal;
+        @include tablet-up {
+          font-size: ppx(59) * 1.2;
+        }
+        @include desktop-up {
+          font-size: ppx(59);
+        }
+        &.small {
+          font-size: spx(25);
+          @include tablet-up {
+            font-size: ppx(40) * 1.2;
+          }
+          @include desktop-up {
+            font-size: ppx(40);
+          }
+        }
       }
     }
 
     &__venue {
+      color: var(--base_5, #102a4d);
+      font-size: spx(36);
+      font-weight: 700;
+      line-height: normal;
+      text-align: center;
+      margin-top: spx(15);
+      @include tablet-up {
+        font-size: ppx(45) * 1.2;
+        margin-top: ppx(37) * 1.2;
+      }
+      @include desktop-up {
+        font-size: ppx(45);
+        margin-top: ppx(37);
+      }
     }
 
     &__image {
+      display: block;
+      width: 100%;
+      margin-top: spx(62);
+      @include tablet-up {
+        margin-top: ppx(42) * 1.2;
+      }
+      @include desktop-up {
+        margin-top: ppx(42);
+      }
     }
   }
 </style>
