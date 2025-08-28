@@ -1,6 +1,10 @@
 ---
 // メインSCSSファイルをインポート
 import '../styles/main.scss';
+
+// 画像
+import logo from '../images/common/logo.svg';
+import heroImage from '../images/top/hero-img.svg';
 ---
 
 <html lang="ja">
@@ -9,37 +13,79 @@ import '../styles/main.scss';
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
+		<!-- Google fonts -->
+		 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;900&display=swap" rel="stylesheet">
 		<title>Astro</title>
 	</head>
 	<body>
-		<h1>Kuwarubi</h1>
-		<p class="test">SCSSテスト</p>
+		<main>
+			<section class="hero">
+				<div class="hero__content">
+					<h1 class="hero__title">
+						<img class="hero__logo" src={logo.src} alt="コッコ祭り">
+					</h1>
+					<time class="hero__date" datetime="2025-12-07T12:00/2025-12-08T15:00">
+						<span class="hero__date-item">2025.12.7</span> 
+						<span class="hero__date-item">（土）12:00〜23:00 </span>
+						<span class="hero__date-item">/ 8</span>
+						<span class="hero__date-item">（日）9:00〜15:00</span>
+					</time>
+					<address class="hero__venue">HAMAYOUリゾート</address>
+				</div>
+				<img class="hero__image" src={heroImage.src} alt="ヒーローイメージ">
+			</section>
+		</main>
 	</body>
 </html>
 
 <style lang="scss">
-// 必要なmixin/functionをインポート
+/* 必要なmixin/functionをインポート */
 @import '../styles/variables';
 @import '../styles/functions';
 @import '../styles/mixins';
 
-$primary-color: #ff6b35;
+.hero {
+	&__content { 
+		
+	}
+	
+	&__title {
+		
+	}
+	
+	&__logo {
+		display: block;
+		width: spx(354);
+		@include tablet-up {
+			width: ppx(567)*1.2;
+		
+		}
+		@include desktop-up {
+			width: ppx(567);
 
-.test {
-	color: $primary-color;
-	font-size: spx(20);
-	@include tablet-up {
-		font-size: tpx(24);
-		color: rgb(0, 255, 110);
-	}
-	@include desktop-up {
-		font-size: ppx(28);
-		color: rgb(0, 110, 255);
+		}
+		
 	}
 	
-	&:hover {
-		color: darken($primary-color, 20%);
+	&__date {
+		
+		&-item {
+			color: var(--base_5, #102A4D);
+font-size: 59px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+		}
 	}
 	
+	&__venue {
+		
+	}
+	
+	&__image {
+		
+	}
 }
 </style>

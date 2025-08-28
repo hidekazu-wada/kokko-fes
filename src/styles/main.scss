@@ -1,14 +1,8 @@
 // メインSCSSファイル - すべてのスタイルをここでまとめます
-
-// 1. 変数（最初に読み込む）
+@import "reset";
 @import "variables";
-
-// 2. 関数とミックスイン（変数の後に読み込む）
 @import "functions";
 @import "mixins";
-
-// 3. リセットCSS
-@import "reset";
 
 // 4. その他のスタイル（必要に応じて追加）
 html {
@@ -26,5 +20,8 @@ html {
     body {
         @include zen-kaku-gothic-new-regular;
         background-color: #f0f0f0;
+        font-family: "Zen Kaku Gothic New", sans-serif;
+        font-weight: 400;
+        font-style: normal;
     }
 }
