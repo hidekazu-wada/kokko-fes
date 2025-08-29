@@ -5,6 +5,10 @@ import "../styles/main.scss";
 // 画像
 import logo from "../images/common/logo.svg";
 import heroImage from "../images/top/hero-img.svg";
+import cloudImage from "../images/top/hero-cloud.svg";
+import conceptTitle from "../images/top/concept-title.svg";
+import newsHeadMobile from "../images/top/news-head-mobile.svg";
+import newsHeadTabletUp from "../images/top/news-head-tablet-up.svg";
 ---
 
 <html lang="ja">
@@ -43,6 +47,146 @@ import heroImage from "../images/top/hero-img.svg";
           <address class="hero__venue">HAMAYOU リゾート</address>
         </div>
         <img class="hero__image" src={heroImage.src} alt="ヒーローイメージ" />
+        <img
+          class="hero__cloud-image cloud-1"
+          src={cloudImage.src}
+          alt="雲のイメージ"
+        />
+        <img
+          class="hero__cloud-image cloud-2"
+          src={cloudImage.src}
+          alt="雲のイメージ"
+        />
+        <img
+          class="hero__cloud-image cloud-3"
+          src={cloudImage.src}
+          alt="雲のイメージ"
+        />
+        <img
+          class="hero__cloud-image cloud-4"
+          src={cloudImage.src}
+          alt="雲のイメージ"
+        />
+        <img
+          class="hero__cloud-image cloud-5"
+          src={cloudImage.src}
+          alt="雲のイメージ"
+        />
+      </section>
+      <section class="concept">
+        <svg
+          class="concept__wave"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 2559 170"
+          fill="none"
+        >
+          <path
+            d="M2559 0H0.00146484V70C0.00146484 70 315.501 170 639.751 170C964.001 170 1481.5 20 1812 20C2142.5 20 2559 120 2559 120V0Z"
+            fill="#FFFCF2"></path>
+        </svg>
+        <div class="concept__container">
+          <header class="concept__header">
+            <figure class="concept__title-image">
+              <img src={conceptTitle.src} alt="concept" />
+            </figure>
+            <h2 class="concept__title">
+              ゆったり安らぐ<br />
+              のびのび遊ぶ
+            </h2>
+          </header>
+          <p class="concept__description">
+            急速に変化する世界、慌ただしい日常から離れて、大人も子供も心身をデトックス。西湖の豊かな自然に囲まれた環境で、ゆったりと過ごし、感性を解放する2日間。HAMAYOUリゾートが長年培ってきた自然体験のノウハウと、豊かな環境資源を活かした多様なコンテンツをお楽しみください。きっと、かけがえのない思い出と新たな発見が、皆様の日常生活へとつながる「ハレの日」となることでしょう。ぜひ、ご家族やお友達と一緒に、西湖の自然の中で心豊かな時間をお過ごしください。
+          </p>
+        </div>
+      </section>
+      <section class="news">
+        <picture class="news__head-image">
+          <source
+            media="(min-width: 1024px)"
+            srcset={newsHeadTabletUp.src.toString()}
+          />
+          <source
+            media="(min-width: 744px)"
+            srcset={newsHeadTabletUp.src.toString()}
+          />
+          <img
+            src={newsHeadMobile.src}
+            alt="kokko festival"
+            class="news__head-img"
+          />
+        </picture>
+        <div class="news__container">
+          <header>
+            <h2 class="news__title">
+              <span>お知らせ・最新情報</span>
+            </h2>
+          </header>
+          <ul class="news__list">
+            <li class="news__item">
+              <article class="news__article">
+                <header class="news__article-header">
+                  <time class="news__date" datetime="2025-08-19"
+                    >2025/08/19</time
+                  >
+                  <div class="news__category-wrapper">
+                    <span class="news__category">イベント情報</span>
+                  </div>
+                </header>
+                <h3 class="news__article-title">
+                  <a href="#" class="news__link">
+                    今年の特別企画「伝統工芸体験コーナー」について
+                  </a>
+                </h3>
+              </article>
+            </li>
+            <li class="news__item">
+              <article class="news__article">
+                <header class="news__article-header">
+                  <time class="news__date" datetime="2025-08-19"
+                    >2025/08/19</time
+                  >
+                  <div class="news__category-wrapper">
+                    <span class="news__category">イベント情報</span>
+                  </div>
+                </header>
+                <h3 class="news__article-title">
+                  <a href="#" class="news__link">
+                    今年の特別企画「伝統工芸体験コーナー」について
+                  </a>
+                </h3>
+              </article>
+            </li>
+            <li class="news__item">
+              <article class="news__article">
+                <header class="news__article-header">
+                  <time class="news__date" datetime="2025-08-19"
+                    >2025/08/19</time
+                  >
+                  <div class="news__category-wrapper">
+                    <span class="news__category">イベント情報</span>
+                  </div>
+                </header>
+                <h3 class="news__article-title">
+                  <a href="#" class="news__link">
+                    今年の特別企画「伝統工芸体験コーナー」について
+                  </a>
+                </h3>
+              </article>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section class="category">
+        <svg
+          class="category__wave"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 2559 170"
+          fill="none"
+        >
+          <path
+            d="M2559 0H0.00146484V70C0.00146484 70 315.501 170 639.751 170C964.001 170 1481.5 20 1812 20C2142.5 20 2559 120 2559 120V0Z"
+            fill="#FFFCF2"></path>
+        </svg>
       </section>
     </main>
   </body>
@@ -57,16 +201,18 @@ import heroImage from "../images/top/hero-img.svg";
   .hero {
     background: var(--base_1, #fffcf2);
     padding-top: spx(301);
-    padding-bottom: spx(49);
+    padding-bottom: spx(10);
     @include tablet-up {
       padding-top: ppx(120) * 1.2;
-      padding-bottom: ppx(214) * 1.2;
+      padding-bottom: ppx(70) * 1.2;
     }
     @include desktop-up {
       padding-top: ppx(120);
-      padding-bottom: ppx(214);
+      padding-bottom: ppx(70);
     }
     &__content {
+      position: relative;
+      z-index: 2;
     }
 
     &__title {
@@ -151,11 +297,388 @@ import heroImage from "../images/top/hero-img.svg";
       display: block;
       width: 100%;
       margin-top: spx(62);
+      position: relative;
+      z-index: 2;
       @include tablet-up {
         margin-top: ppx(42) * 1.2;
       }
       @include desktop-up {
         margin-top: ppx(42);
+      }
+    }
+
+    &__cloud-image {
+      position: absolute;
+      z-index: 1;
+      display: block;
+      animation: cloudMove 8s infinite;
+      &.cloud-1 {
+        width: spx(402);
+        top: spx(111);
+        left: spx(-61);
+        @include tablet-up {
+          width: ppx(621) * 1.2;
+          top: ppx(313) * 1.2;
+          left: unset;
+          right: ppx(323) * 1.2;
+        }
+        @include desktop-up {
+          width: ppx(621);
+          top: ppx(313);
+          right: ppx(323);
+        }
+      }
+      &.cloud-2 {
+        width: spx(402);
+        top: spx(275);
+        right: spx(-205);
+        @include tablet-up {
+          width: ppx(621) * 1.2;
+          right: unset;
+          top: ppx(540) * 1.2;
+          left: ppx(161) * 1.2;
+        }
+        @include desktop-up {
+          width: ppx(621);
+          top: ppx(540);
+          left: ppx(161);
+        }
+      }
+      &.cloud-3 {
+        width: spx(214);
+        top: spx(463);
+        left: spx(26);
+        @include tablet-up {
+          width: ppx(621) * 1.2;
+          top: ppx(567) * 1.2;
+          left: unset;
+          right: ppx(-368) * 1.2;
+        }
+        @include desktop-up {
+          width: ppx(621);
+          top: ppx(567);
+          right: ppx(-368);
+        }
+      }
+      &.cloud-4 {
+        width: spx(177);
+        top: spx(816);
+        right: spx(38);
+        @include tablet-up {
+          width: ppx(304) * 1.2;
+          top: ppx(921) * 1.2;
+          right: unset;
+          left: ppx(161) * 1.2;
+        }
+        @include desktop-up {
+          width: ppx(304);
+          top: ppx(921);
+          left: ppx(161);
+        }
+      }
+      &.cloud-5 {
+        display: none;
+        @include tablet-up {
+          display: block;
+          width: ppx(291) * 1.2;
+          top: ppx(934) * 1.2;
+          right: ppx(79) * 1.2;
+        }
+        @include desktop-up {
+          width: ppx(291);
+          top: ppx(934);
+          right: ppx(79);
+        }
+      }
+      @keyframes cloudMove {
+        0% {
+          transform: translateX(0);
+        }
+        50% {
+          transform: translateX(20%);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+    }
+  }
+  .concept {
+    background-color: white;
+    &__wave {
+      display: block;
+      width: 100%;
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+    &__container {
+      display: flex;
+      flex-flow: column;
+      gap: spx(46);
+      margin-top: spx(90);
+      padding-bottom: spx(50);
+      @include tablet-up {
+        flex-flow: row;
+        gap: ppx(330) * 1.2;
+        justify-content: center;
+        margin-top: ppx(150) * 1.2;
+        padding-bottom: ppx(90) * 1.2;
+      }
+      @include desktop-up {
+        gap: ppx(330);
+        margin-top: ppx(150);
+        padding-bottom: ppx(90);
+      }
+    }
+    &__header {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+    &__title-image {
+      width: spx(405);
+      margin-inline: auto;
+      @include tablet-up {
+        margin-inline: unset;
+        width: ppx(405) * 1.2;
+      }
+      @include desktop-up {
+        width: ppx(405);
+      }
+      img {
+        display: block;
+        width: 100%;
+      }
+    }
+    &__title {
+      color: var(--base_5, #102a4d);
+      font-size: spx(60);
+      font-weight: 700;
+      line-height: 160%;
+      letter-spacing: spx(6);
+      text-align: center;
+      @include tablet-up {
+        text-align: left;
+        font-size: ppx(90) * 1.2;
+        letter-spacing: ppx(9) * 1.2;
+      }
+      @include desktop-up {
+        font-size: ppx(90);
+        letter-spacing: ppx(9);
+      }
+    }
+    &__description {
+      color: var(--base_5, #102a4d);
+      font-family: "Zen Kaku Gothic Antique";
+      font-size: spx(28);
+      font-weight: 700;
+      line-height: 180%;
+      width: spx(560);
+      margin-inline: auto;
+      @include tablet-up {
+        margin-inline: unset;
+        font-size: ppx(30) * 1.2;
+        width: ppx(695) * 1.2;
+      }
+      @include desktop-up {
+        font-size: ppx(30);
+        width: ppx(695);
+      }
+    }
+  }
+  .news {
+    @include tablet-up {
+    }
+    @include desktop-up {
+    }
+    &__head-image {
+      width: 100%;
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+    &__head-img {
+      display: block;
+      width: 100%;
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+    &__container {
+      background: var(--base_2, #fcf2c9);
+      padding-top: spx(40);
+      padding-bottom: spx(60);
+      @include tablet-up {
+        padding-top: ppx(77) * 1.2;
+        padding-bottom: ppx(191) * 1.2;
+      }
+      @include desktop-up {
+        padding-top: ppx(77);
+        padding-bottom: ppx(191);
+      }
+    }
+    &__title {
+      width: spx(370);
+      height: spx(74);
+      display: grid;
+      place-items: center;
+      background-color: white;
+      border-radius: spx(50);
+      margin-inline: auto;
+      @include tablet-up {
+        width: ppx(460) * 1.2;
+        height: ppx(92) * 1.2;
+        border-radius: ppx(50) * 1.2;
+      }
+      @include desktop-up {
+        width: ppx(460);
+        height: ppx(92);
+        border-radius: ppx(50);
+      }
+      span {
+        color: var(--base_5, #102a4d);
+        font-size: spx(30);
+        font-weight: 700;
+        line-height: 180%;
+        @include tablet-up {
+          font-size: ppx(40) * 1.2;
+        }
+        @include desktop-up {
+          font-size: ppx(40);
+        }
+      }
+    }
+    &__list {
+      display: flex;
+      flex-flow: column;
+      gap: spx(20);
+      width: spx(560);
+      margin-inline: auto;
+      margin-top: spx(64);
+      @include tablet-up {
+        gap: ppx(30) * 1.2;
+        width: ppx(1350) * 1.2;
+        margin-top: ppx(134) * 1.2;
+      }
+      @include desktop-up {
+        gap: ppx(30);
+        width: ppx(1350);
+        margin-top: ppx(134);
+      }
+    }
+    &__item {
+      &:after {
+        content: "";
+        display: block;
+        background: linear-gradient(
+            to right,
+            var(--base_5, #102a4d),
+            var(--base_5, #102a4d) 25%,
+            rgba(0, 0, 0, 0) 25%,
+            rgba(0, 0, 0, 0) 100%
+          )
+          0% 0%;
+        background-size: 4px 1px;
+        width: 100%;
+        height: 1px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: spx(18);
+        @include tablet-up {
+          margin-top: ppx(30) * 1.2;
+        }
+        @include desktop-up {
+          margin-top: ppx(30);
+        }
+      }
+    }
+    &__link {
+    }
+    &__article {
+      display: flex;
+      flex-flow: column;
+      gap: spx(8);
+      @include tablet-up {
+        display: grid;
+        grid-template-columns: max-content auto;
+        align-items: baseline;
+        gap: ppx(30) * 1.2;
+        padding: 0 ppx(20) * 1.2;
+      }
+      @include desktop-up {
+        gap: ppx(30);
+        padding: 0 ppx(20);
+      }
+    }
+    &__article-header {
+      display: flex;
+      gap: spx(15);
+      align-items: center;
+      @include tablet-up {
+        gap: ppx(30) * 1.2;
+      }
+      @include desktop-up {
+        gap: ppx(30);
+      }
+    }
+    &__date {
+      color: var(--base_5, #102a4d);
+      font-size: spx(30);
+      font-weight: 700;
+      line-height: 160%;
+      @include tablet-up {
+        font-size: ppx(30) * 1.2;
+        line-height: 180%;
+      }
+      @include desktop-up {
+        font-size: ppx(30);
+      }
+    }
+    &__category-wrapper {
+      width: spx(220);
+      height: spx(47);
+      border-radius: spx(15);
+      background: var(--logo_color_3, #c99e2d);
+      display: grid;
+      place-items: center;
+      @include tablet-up {
+        width: ppx(220) * 1.2;
+        height: ppx(50) * 1.2;
+        border-radius: ppx(15) * 1.2;
+      }
+      @include desktop-up {
+        width: ppx(220);
+        height: ppx(50);
+        border-radius: ppx(15);
+      }
+    }
+    &__category {
+      color: var(--base_1, #fffcf2);
+      font-size: spx(26);
+      font-weight: 700;
+      line-height: 180%;
+      @include tablet-up {
+        font-size: ppx(28) * 1.2;
+      }
+      @include desktop-up {
+        font-size: ppx(28);
+      }
+    }
+    &__article-title {
+      color: var(--base_5, #102a4d);
+      font-size: spx(26);
+      font-weight: 700;
+      line-height: 160%;
+      @include tablet-up {
+        font-size: ppx(30) * 1.2;
+      }
+      @include desktop-up {
+        font-size: ppx(30);
       }
     }
   }
