@@ -3,12 +3,23 @@
 import "../styles/main.scss";
 
 // 画像
+import { getImage } from "astro:assets";
 import logo from "../images/common/logo.svg";
 import heroImage from "../images/top/hero-img.svg";
 import cloudImage from "../images/top/hero-cloud.svg";
 import conceptTitle from "../images/top/concept-title.svg";
 import newsHeadMobile from "../images/top/news-head-mobile.svg";
 import newsHeadTabletUp from "../images/top/news-head-tablet-up.svg";
+import logoOnlyCircle from "../images/common/logo-only-circle.svg";
+import categorySlideAsobu from "../images/top/category-slide-asobu.png";
+import categoryFukidasi from "../images/top/category-fukidasi.svg";
+
+// フォーマット
+const Slide01 = await getImage({
+  src: categorySlideAsobu,
+  format: "webp",
+  widths: [660, 900, 1315],
+});
 ---
 
 <html lang="ja">
@@ -187,6 +198,211 @@ import newsHeadTabletUp from "../images/top/news-head-tablet-up.svg";
             d="M2559 0H0.00146484V70C0.00146484 70 315.501 170 639.751 170C964.001 170 1481.5 20 1812 20C2142.5 20 2559 120 2559 120V0Z"
             fill="#FFFCF2"></path>
         </svg>
+        <h2 class="">
+          <span>コッコ祭りを</span>
+          <span>楽しむ</span>
+        </h2>
+        <div>
+          <div class="">遊ぶ</div>
+          <div class="">食べる</div>
+          <div class="">作る</div>
+          <div class="">見る</div>
+          <div class="">泊まる</div>
+        </div>
+        <div class="">
+          <div>
+            <div>
+              <img src={logoOnlyCircle.src} alt="" />
+              <div class="">
+                <span>遊</span>ぶ
+              </div>
+            </div>
+            <div class="">
+              ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
+            </div>
+            <div>
+              <picture class="">
+                <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+                <source
+                  media="(min-width: 1024px)"
+                  srcset={Slide01.srcSet.toString()}
+                />
+                <!-- タブレット（744px以上）→ 中解像度版 -->
+                <source
+                  media="(min-width: 744px)"
+                  srcset={Slide01.srcSet.toString()}
+                />
+                <!-- スマホ（744px未満）→ 最小解像度版 -->
+                <img src={Slide01.src} alt="遊ぶ" class="" />
+              </picture>
+              <div>
+                <img src={categoryFukidasi.src} alt="吹き出し" class="" />
+                <div class="">うわぁ、高い!! <br />ゆらゆら揺れて楽しいな</div>
+              </div>
+            </div>
+            <div class="">
+              <a href="#">
+                <div class="">MORE ＞</div>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <div>
+              <img src={logoOnlyCircle.src} alt="" />
+              <div class="">
+                <span>食</span>べる
+              </div>
+            </div>
+            <div class="">
+              ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
+            </div>
+            <div>
+              <picture class="">
+                <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+                <source
+                  media="(min-width: 1024px)"
+                  srcset={Slide01.srcSet.toString()}
+                />
+                <!-- タブレット（744px以上）→ 中解像度版 -->
+                <source
+                  media="(min-width: 744px)"
+                  srcset={Slide01.srcSet.toString()}
+                />
+                <!-- スマホ（744px未満）→ 最小解像度版 -->
+                <img src={Slide01.src} alt="食べる" class="" />
+              </picture>
+              <div>
+                <img src={categoryFukidasi.src} alt="吹き出し" class="" />
+                <div class="">
+                  ミシュランシェフ監修<br />濃厚クラムチャウダー
+                </div>
+              </div>
+            </div>
+            <div class="">
+              <a href="#">
+                <div class="">MORE ＞</div>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <div>
+              <img src={logoOnlyCircle.src} alt="" />
+              <div class="">
+                <span>作</span>る
+              </div>
+            </div>
+            <div class="">
+              ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
+            </div>
+            <div>
+              <picture class="">
+                <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+                <source
+                  media="(min-width: 1024px)"
+                  srcset={Slide01.srcSet.toString()}
+                />
+                <!-- タブレット（744px以上）→ 中解像度版 -->
+                <source
+                  media="(min-width: 744px)"
+                  srcset={Slide01.srcSet.toString()}
+                />
+                <!-- スマホ（744px未満）→ 最小解像度版 -->
+                <img src={Slide01.src} alt="作る" class="" />
+              </picture>
+              <div>
+                <img src={categoryFukidasi.src} alt="吹き出し" class="" />
+                <div class="">
+                  hogehoge<br />hogehogehoge
+                </div>
+              </div>
+            </div>
+            <div class="">
+              <a href="#">
+                <div class="">MORE ＞</div>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <div>
+              <img src={logoOnlyCircle.src} alt="" />
+              <div class="">
+                <span>見</span>る
+              </div>
+            </div>
+            <div class="">
+              ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
+            </div>
+            <div>
+              <picture class="">
+                <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+                <source
+                  media="(min-width: 1024px)"
+                  srcset={Slide01.srcSet.toString()}
+                />
+                <!-- タブレット（744px以上）→ 中解像度版 -->
+                <source
+                  media="(min-width: 744px)"
+                  srcset={Slide01.srcSet.toString()}
+                />
+                <!-- スマホ（744px未満）→ 最小解像度版 -->
+                <img src={Slide01.src} alt="見る" class="" />
+              </picture>
+              <div>
+                <img src={categoryFukidasi.src} alt="吹き出し" class="" />
+                <div class="">
+                  hogehoge<br />hogehogehoge
+                </div>
+              </div>
+            </div>
+            <div class="">
+              <a href="#">
+                <div class="">MORE ＞</div>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <div>
+              <img src={logoOnlyCircle.src} alt="" />
+              <div class="">
+                <span>泊</span>まる
+              </div>
+            </div>
+            <div class="">
+              ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
+            </div>
+            <div>
+              <picture class="">
+                <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+                <source
+                  media="(min-width: 1024px)"
+                  srcset={Slide01.srcSet.toString()}
+                />
+                <!-- タブレット（744px以上）→ 中解像度版 -->
+                <source
+                  media="(min-width: 744px)"
+                  srcset={Slide01.srcSet.toString()}
+                />
+                <!-- スマホ（744px未満）→ 最小解像度版 -->
+                <img src={Slide01.src} alt="泊まる" class="" />
+              </picture>
+              <div>
+                <img src={categoryFukidasi.src} alt="吹き出し" class="" />
+                <div class="">
+                  hogehoge<br />hogehogehoge
+                </div>
+              </div>
+            </div>
+            <div class="">
+              <a href="#">
+                <div class="">MORE ＞</div>
+              </a>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
   </body>
