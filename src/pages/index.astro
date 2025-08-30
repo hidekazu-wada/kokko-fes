@@ -12,11 +12,35 @@ import newsHeadMobile from "../images/top/news-head-mobile.svg";
 import newsHeadTabletUp from "../images/top/news-head-tablet-up.svg";
 import logoOnlyCircle from "../images/common/logo-only-circle.svg";
 import categorySlideAsobu from "../images/top/category-slide-asobu.png";
+import categorySlideTaberu from "../images/top/category-slide-taberu.png";
+import categorySlideTsukuru from "../images/top/category-slide-tsukuru.png";
+import categorySlideMiru from "../images/top/category-slide-miru.png";
+import categorySlideTomaru from "../images/top/category-slide-tomaru.png";
 import categoryFukidasi from "../images/top/category-fukidasi.svg";
 
 // フォーマット
 const Slide01 = await getImage({
   src: categorySlideAsobu,
+  format: "webp",
+  widths: [660, 900, 1315],
+});
+const Slide02 = await getImage({
+  src: categorySlideTaberu,
+  format: "webp",
+  widths: [660, 900, 1315],
+});
+const Slide03 = await getImage({
+  src: categorySlideTsukuru,
+  format: "webp",
+  widths: [660, 900, 1315],
+});
+const Slide04 = await getImage({
+  src: categorySlideMiru,
+  format: "webp",
+  widths: [660, 900, 1315],
+});
+const Slide05 = await getImage({
+  src: categorySlideTomaru,
   format: "webp",
   widths: [660, 900, 1315],
 });
@@ -354,16 +378,16 @@ const Slide01 = await getImage({
                 <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
                 <source
                   media="(min-width: 1024px)"
-                  srcset={Slide01.srcSet.toString()}
+                  srcset={Slide02.srcSet.toString()}
                 />
                 <!-- タブレット（744px以上）→ 中解像度版 -->
                 <source
                   media="(min-width: 744px)"
-                  srcset={Slide01.srcSet.toString()}
+                  srcset={Slide02.srcSet.toString()}
                 />
                 <!-- スマホ（744px未満）→ 最小解像度版 -->
                 <img
-                  src={Slide01.src}
+                  src={Slide02.src}
                   alt="食べる"
                   class="category__item-image"
                 />
@@ -405,16 +429,16 @@ const Slide01 = await getImage({
                 <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
                 <source
                   media="(min-width: 1024px)"
-                  srcset={Slide01.srcSet.toString()}
+                  srcset={Slide03.srcSet.toString()}
                 />
                 <!-- タブレット（744px以上）→ 中解像度版 -->
                 <source
                   media="(min-width: 744px)"
-                  srcset={Slide01.srcSet.toString()}
+                  srcset={Slide03.srcSet.toString()}
                 />
                 <!-- スマホ（744px未満）→ 最小解像度版 -->
                 <img
-                  src={Slide01.src}
+                  src={Slide03.src}
                   alt="作る"
                   class="category__item-image"
                 />
@@ -456,16 +480,16 @@ const Slide01 = await getImage({
                 <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
                 <source
                   media="(min-width: 1024px)"
-                  srcset={Slide01.srcSet.toString()}
+                  srcset={Slide04.srcSet.toString()}
                 />
                 <!-- タブレット（744px以上）→ 中解像度版 -->
                 <source
                   media="(min-width: 744px)"
-                  srcset={Slide01.srcSet.toString()}
+                  srcset={Slide04.srcSet.toString()}
                 />
                 <!-- スマホ（744px未満）→ 最小解像度版 -->
                 <img
-                  src={Slide01.src}
+                  src={Slide04.src}
                   alt="見る"
                   class="category__item-image"
                 />
@@ -507,16 +531,16 @@ const Slide01 = await getImage({
                 <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
                 <source
                   media="(min-width: 1024px)"
-                  srcset={Slide01.srcSet.toString()}
+                  srcset={Slide05.srcSet.toString()}
                 />
                 <!-- タブレット（744px以上）→ 中解像度版 -->
                 <source
                   media="(min-width: 744px)"
-                  srcset={Slide01.srcSet.toString()}
+                  srcset={Slide05.srcSet.toString()}
                 />
                 <!-- スマホ（744px未満）→ 最小解像度版 -->
                 <img
-                  src={Slide01.src}
+                  src={Slide05.src}
                   alt="泊まる"
                   class="category__item-image"
                 />
@@ -1057,9 +1081,12 @@ const Slide01 = await getImage({
       }
     }
     &__header {
+      margin-top: spx(70);
       @include tablet-up {
+        margin-top: ppx(80) * 1.2;
       }
       @include desktop-up {
+        margin-top: ppx(80);
       }
     }
 
@@ -1070,6 +1097,7 @@ const Slide01 = await getImage({
         font-size: spx(38);
         line-height: 120%;
         font-weight: 700;
+        text-align: center;
         @include tablet-up {
           font-size: ppx(59) * 1.2;
         }
@@ -1089,16 +1117,25 @@ const Slide01 = await getImage({
     }
 
     &__nav {
+      margin-top: spx(40);
       @include tablet-up {
+        margin-top: ppx(61) * 1.2;
       }
       @include desktop-up {
+        margin-top: ppx(61);
       }
     }
 
     &__nav-list {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: spx(15);
       @include tablet-up {
+        gap: ppx(20) * 1.2;
       }
       @include desktop-up {
+        gap: ppx(20);
       }
     }
 
@@ -1118,11 +1155,8 @@ const Slide01 = await getImage({
       }
       @include hover {
         &:hover {
-          span {
-            color: white;
-          }
           .circle path {
-            fill: var(--logo_color_3, #c99e2d);
+            fill: var(--base_2, #fcf2c9);
           }
         }
       }
@@ -1156,9 +1190,12 @@ const Slide01 = await getImage({
     }
 
     &__content {
+      margin-top: spx(40);
       @include tablet-up {
+        margin-top: ppx(64) * 1.2;
       }
       @include desktop-up {
+        margin-top: ppx(64);
       }
     }
 
@@ -1214,9 +1251,11 @@ const Slide01 = await getImage({
         @include tablet-up {
           gap: ppx(49) * 1.2;
           justify-content: flex-start;
+          margin-left: ppx(295) * 1;
         }
         @include desktop-up {
           gap: ppx(49);
+          margin-left: ppx(295);
         }
       }
 
@@ -1263,14 +1302,19 @@ const Slide01 = await getImage({
         line-height: 180%;
         width: spx(560);
         margin-inline: auto;
+        margin-top: spx(20);
         @include tablet-up {
           font-size: ppx(30) * 1.2;
           width: ppx(695) * 1.2;
           margin-inline: unset;
+          margin-top: ppx(69) * 1.2;
+          margin-left: ppx(280) * 1;
         }
         @include desktop-up {
           font-size: ppx(30);
           width: ppx(695);
+          margin-top: ppx(69);
+          margin-left: ppx(280);
         }
       }
 
@@ -1279,10 +1323,12 @@ const Slide01 = await getImage({
         width: max-content;
         margin-left: auto;
         margin-right: 0;
+        margin-top: spx(79);
         @include tablet-up {
           position: absolute;
           top: 0;
           right: 0;
+          margin-top: 0;
         }
         @include desktop-up {
         }
@@ -1303,9 +1349,9 @@ const Slide01 = await getImage({
         border-radius: spx(45) 0 0 spx(45);
 
         @include tablet-up {
-          width: ppx(1315) * 1.2;
-          height: ppx(916) * 1.2;
-          border-radius: ppx(90) * 1.2 0 0 ppx(90) * 1.2;
+          width: ppx(1315) * 1;
+          height: ppx(916) * 1;
+          border-radius: ppx(90) * 1 0 0 ppx(90) * 1;
         }
         @include desktop-up {
           width: ppx(1315);
@@ -1319,8 +1365,8 @@ const Slide01 = await getImage({
         top: spx(-69);
         right: spx(52);
         @include tablet-up {
-          top: ppx(-138) * 1.2;
-          right: ppx(104) * 1.2;
+          top: ppx(-138) * 1;
+          right: ppx(104) * 1;
         }
         @include desktop-up {
           top: ppx(-69);
@@ -1332,8 +1378,8 @@ const Slide01 = await getImage({
           width: spx(240);
           height: spx(150);
           @include tablet-up {
-            width: ppx(480) * 1.2;
-            height: ppx(300) * 1.2;
+            width: ppx(480) * 1;
+            height: ppx(300) * 1;
           }
           @include desktop-up {
             width: ppx(480);
@@ -1354,10 +1400,10 @@ const Slide01 = await getImage({
           top: spx(31);
           left: spx(12);
           @include tablet-up {
-            font-size: ppx(37) * 1.2;
-            width: ppx(410) * 1.2;
-            top: ppx(63) * 1.2;
-            left: ppx(25) * 1.2;
+            font-size: ppx(37) * 1;
+            width: ppx(410) * 1;
+            top: ppx(63) * 1;
+            left: ppx(25) * 1;
           }
           @include desktop-up {
             font-size: ppx(37);
@@ -1369,9 +1415,14 @@ const Slide01 = await getImage({
       }
 
       &-footer {
+        margin-top: spx(20);
         @include tablet-up {
+          margin-top: ppx(30) * 1.2;
+          margin-left: ppx(800) * 1.1;
         }
         @include desktop-up {
+          margin-top: ppx(30);
+          margin-left: ppx(800);
         }
       }
 
@@ -1382,6 +1433,7 @@ const Slide01 = await getImage({
         height: spx(65);
         border-radius: spx(40);
         background: var(--logo_color_1, #528ca2);
+        transition: background 0.3s ease;
         margin-inline: auto;
         @include tablet-up {
           width: ppx(175) * 1.2;
@@ -1393,6 +1445,11 @@ const Slide01 = await getImage({
           width: ppx(175);
           height: ppx(69);
           border-radius: ppx(40);
+        }
+        @include hover {
+          &:hover {
+            background: var(--logo_color_3, #c99e2d);
+          }
         }
 
         &-text {

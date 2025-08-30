@@ -9,8 +9,12 @@
     "hogehogehoge",
     "kaku",
     "kuwarubi",
+    "miru",
     "stylable",
-    "styleable"
+    "styleable",
+    "taberu",
+    "tomaru",
+    "tsukuru"
   ],
   "[astro]": {
     "editor.formatOnSave": true,
