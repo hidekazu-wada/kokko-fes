@@ -824,7 +824,6 @@ const Slide01 = await getImage({
     }
     &__description {
       color: var(--base_5, #102a4d);
-      font-family: "Zen Kaku Gothic Antique";
       font-size: spx(28);
       font-weight: 700;
       line-height: 180%;
@@ -1068,7 +1067,6 @@ const Slide01 = await getImage({
       &-text {
         display: block;
         color: var(--base_5, #102a4d);
-        font-family: "Zen Kaku Gothic Antique";
         font-size: spx(38);
         line-height: 120%;
         font-weight: 700;
@@ -1166,8 +1164,11 @@ const Slide01 = await getImage({
 
     &__item {
       @include tablet-up {
+        position: relative;
+        height: ppx(916) * 1.2;
       }
       @include desktop-up {
+        height: ppx(916);
       }
 
       &--play {
@@ -1206,26 +1207,48 @@ const Slide01 = await getImage({
       }
 
       &-header {
+        display: flex;
+        align-items: center;
+        gap: spx(20);
+        justify-content: center;
         @include tablet-up {
+          gap: ppx(49) * 1.2;
+          justify-content: flex-start;
         }
         @include desktop-up {
+          gap: ppx(49);
         }
       }
 
       &-icon {
+        display: block;
+        width: spx(80);
+        height: spx(80);
+        border-radius: 50%;
         @include tablet-up {
+          width: ppx(129) * 1.2;
+          height: ppx(129) * 1.2;
         }
         @include desktop-up {
+          width: ppx(129);
+          height: ppx(129);
         }
       }
 
       &-title {
+        color: #000;
+        font-size: spx(83);
+        font-weight: 700;
+        line-height: 130%;
         @include tablet-up {
+          font-size: ppx(150) * 1.2;
         }
         @include desktop-up {
+          font-size: ppx(150);
         }
 
         &-accent {
+          color: var(--logo_color_3, #c99e2d);
           @include tablet-up {
           }
           @include desktop-up {
@@ -1234,14 +1257,32 @@ const Slide01 = await getImage({
       }
 
       &-description {
+        color: var(--base_5, #102a4d);
+        font-size: spx(28);
+        font-weight: 700;
+        line-height: 180%;
+        width: spx(560);
+        margin-inline: auto;
         @include tablet-up {
+          font-size: ppx(30) * 1.2;
+          width: ppx(695) * 1.2;
+          margin-inline: unset;
         }
         @include desktop-up {
+          font-size: ppx(30);
+          width: ppx(695);
         }
       }
 
       &-figure {
+        position: relative;
+        width: max-content;
+        margin-left: auto;
+        margin-right: 0;
         @include tablet-up {
+          position: absolute;
+          top: 0;
+          right: 0;
         }
         @include desktop-up {
         }
@@ -1255,29 +1296,74 @@ const Slide01 = await getImage({
       }
 
       &-image {
+        display: block;
+        width: spx(660);
+        height: spx(460);
+        object-fit: cover;
+        border-radius: spx(45) 0 0 spx(45);
+
         @include tablet-up {
+          width: ppx(1315) * 1.2;
+          height: ppx(916) * 1.2;
+          border-radius: ppx(90) * 1.2 0 0 ppx(90) * 1.2;
         }
         @include desktop-up {
+          width: ppx(1315);
+          height: ppx(916);
+          border-radius: ppx(90) 0 0 ppx(90);
         }
       }
 
       &-bubble {
+        position: absolute;
+        top: spx(-69);
+        right: spx(52);
         @include tablet-up {
+          top: ppx(-138) * 1.2;
+          right: ppx(104) * 1.2;
         }
         @include desktop-up {
+          top: ppx(-69);
+          right: ppx(52);
         }
 
         &-bg {
+          display: block;
+          width: spx(240);
+          height: spx(150);
           @include tablet-up {
+            width: ppx(480) * 1.2;
+            height: ppx(300) * 1.2;
           }
           @include desktop-up {
+            width: ppx(480);
+            height: ppx(300);
           }
         }
 
         &-text {
+          color: var(--base_5, #102a4d);
+          font-size: spx(18);
+          font-weight: 700;
+          line-height: 160%;
+          transform: rotate(5.674deg);
+          transform-origin: center;
+          text-align: center;
+          width: spx(205);
+          position: absolute;
+          top: spx(31);
+          left: spx(12);
           @include tablet-up {
+            font-size: ppx(37) * 1.2;
+            width: ppx(410) * 1.2;
+            top: ppx(63) * 1.2;
+            left: ppx(25) * 1.2;
           }
           @include desktop-up {
+            font-size: ppx(37);
+            width: ppx(410);
+            top: ppx(63);
+            left: ppx(25);
           }
         }
       }
@@ -1290,15 +1376,35 @@ const Slide01 = await getImage({
       }
 
       &-link {
+        display: grid;
+        place-items: center;
+        width: spx(167);
+        height: spx(65);
+        border-radius: spx(40);
+        background: var(--logo_color_1, #528ca2);
+        margin-inline: auto;
         @include tablet-up {
+          width: ppx(175) * 1.2;
+          height: ppx(69) * 1.2;
+          border-radius: ppx(40) * 1.2;
+          margin-inline: unset;
         }
         @include desktop-up {
+          width: ppx(175);
+          height: ppx(69);
+          border-radius: ppx(40);
         }
 
         &-text {
+          color: var(--base_1, #fffcf2);
+          font-size: spx(28);
+          font-weight: 700;
+          line-height: 180%;
           @include tablet-up {
+            font-size: ppx(30) * 1.2;
           }
           @include desktop-up {
+            font-size: ppx(30);
           }
         }
       }
