@@ -19,5 +19,18 @@
   "[astro]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "emmet.includeLanguages": {
+    "astro": "html"
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "html.autoClosingTags": true,
+  "html.completion.attributeDefaultValue": "doublequotes",
+  "editor.suggest.insertMode": "replace",
+  "editor.acceptSuggestionOnCommitCharacter": true,
+  "editor.acceptSuggestionOnEnter": "on",
+  "editor.tabCompletion": "on",
+  "editor.suggest.snippetsPreventQuickSuggestions": false,
+  "editor.snippetSuggestions": "top",
+  "editor.wordBasedSuggestions": "matchingDocuments"
 }
