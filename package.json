@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "astro": "^5.12.8",
-    "sass": "^1.89.2"
+    "sass": "^1.89.2",
+    "swiper": "^11.2.10"
   },
   "devDependencies": {
     "prettier-plugin-astro": "^0.14.1"

@@ -1,6 +1,8 @@
 ---
 // メインSCSSファイルをインポート
 import "../styles/main.scss";
+// Swiper CSS
+import "swiper/swiper-bundle.css";
 
 // 画像
 import { getImage } from "astro:assets";
@@ -228,9 +230,9 @@ const Slide05 = await getImage({
             <span class="category__title-text large">楽しむ</span>
           </h2>
         </header>
-        <nav class="category__nav">
-          <ul class="category__nav-list">
-            <li class="category__nav-item">
+        <nav class="category__nav swiper" id="categoryNavSwiper">
+          <ul class="category__nav-list swiper-wrapper">
+            <li class="category__nav-item swiper-slide">
               <span>遊ぶ</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -245,7 +247,7 @@ const Slide05 = await getImage({
                   fill="white"></path>
               </svg>
             </li>
-            <li class="category__nav-item">
+            <li class="category__nav-item swiper-slide">
               <span>食べる</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -260,7 +262,7 @@ const Slide05 = await getImage({
                   fill="white"></path>
               </svg>
             </li>
-            <li class="category__nav-item">
+            <li class="category__nav-item swiper-slide">
               <span>作る</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -275,7 +277,7 @@ const Slide05 = await getImage({
                   fill="white"></path>
               </svg>
             </li>
-            <li class="category__nav-item">
+            <li class="category__nav-item swiper-slide">
               <span>見る</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -290,7 +292,7 @@ const Slide05 = await getImage({
                   fill="white"></path>
               </svg>
             </li>
-            <li class="category__nav-item">
+            <li class="category__nav-item swiper-slide">
               <span>泊まる</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -307,264 +309,356 @@ const Slide05 = await getImage({
             </li>
           </ul>
         </nav>
-        <section class="category__content">
-          <article class="category__item category__item--play">
-            <header class="category__item-header">
-              <img
-                src={logoOnlyCircle.src}
-                alt=""
-                class="category__item-icon"
-              />
-              <h3 class="category__item-title">
-                <span class="category__item-title-accent">遊</span>ぶ
-              </h3>
-            </header>
-            <p class="category__item-description">
-              ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
-            </p>
-            <figure class="category__item-figure">
-              <picture class="category__item-picture">
-                <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-                <source
-                  media="(min-width: 1024px)"
-                  srcset={Slide01.srcSet.toString()}
-                />
-                <!-- タブレット（744px以上）→ 中解像度版 -->
-                <source
-                  media="(min-width: 744px)"
-                  srcset={Slide01.srcSet.toString()}
-                />
-                <!-- スマホ（744px未満）→ 最小解像度版 -->
+        <section class="category__content swiper" id="categoryContentSwiper">
+          <div class="swiper-wrapper">
+            <article class="category__item category__item--play swiper-slide">
+              <header class="category__item-header">
                 <img
-                  src={Slide01.src}
-                  alt="遊ぶ"
-                  class="category__item-image"
+                  src={logoOnlyCircle.src}
+                  alt=""
+                  class="category__item-icon"
                 />
-              </picture>
-              <div class="category__item-bubble">
-                <img
-                  src={categoryFukidasi.src}
-                  alt="吹き出し"
-                  class="category__item-bubble-bg"
-                />
-                <div class="category__item-bubble-text">
-                  うわぁ、高い!! <br />ゆらゆら揺れて楽しいな
+                <h3 class="category__item-title">
+                  <span class="category__item-title-accent">遊</span>ぶ
+                </h3>
+              </header>
+              <p class="category__item-description">
+                ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
+              </p>
+              <figure class="category__item-figure">
+                <picture class="category__item-picture">
+                  <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+                  <source
+                    media="(min-width: 1024px)"
+                    srcset={Slide01.srcSet.toString()}
+                  />
+                  <!-- タブレット（744px以上）→ 中解像度版 -->
+                  <source
+                    media="(min-width: 744px)"
+                    srcset={Slide01.srcSet.toString()}
+                  />
+                  <!-- スマホ（744px未満）→ 最小解像度版 -->
+                  <img
+                    src={Slide01.src}
+                    alt="遊ぶ"
+                    class="category__item-image"
+                  />
+                </picture>
+                <div class="category__item-bubble">
+                  <img
+                    src={categoryFukidasi.src}
+                    alt="吹き出し"
+                    class="category__item-bubble-bg"
+                  />
+                  <div class="category__item-bubble-text">
+                    うわぁ、高い!! <br />ゆらゆら揺れて楽しいな
+                  </div>
                 </div>
-              </div>
-            </figure>
-            <footer class="category__item-footer">
-              <a href="#" class="category__item-link">
-                <div class="category__item-link-text">MORE ＞</div>
-              </a>
-            </footer>
-          </article>
+              </figure>
+              <footer class="category__item-footer">
+                <a href="#" class="category__item-link">
+                  <div class="category__item-link-text">MORE ＞</div>
+                </a>
+              </footer>
+            </article>
 
-          <article class="category__item category__item--eat">
-            <header class="category__item-header">
-              <img
-                src={logoOnlyCircle.src}
-                alt=""
-                class="category__item-icon"
-              />
-              <h3 class="category__item-title">
-                <span class="category__item-title-accent">食</span>べる
-              </h3>
-            </header>
-            <p class="category__item-description">
-              ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
-            </p>
-            <figure class="category__item-figure">
-              <picture class="category__item-picture">
-                <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-                <source
-                  media="(min-width: 1024px)"
-                  srcset={Slide02.srcSet.toString()}
-                />
-                <!-- タブレット（744px以上）→ 中解像度版 -->
-                <source
-                  media="(min-width: 744px)"
-                  srcset={Slide02.srcSet.toString()}
-                />
-                <!-- スマホ（744px未満）→ 最小解像度版 -->
+            <article class="category__item category__item--eat swiper-slide">
+              <header class="category__item-header">
                 <img
-                  src={Slide02.src}
-                  alt="食べる"
-                  class="category__item-image"
+                  src={logoOnlyCircle.src}
+                  alt=""
+                  class="category__item-icon"
                 />
-              </picture>
-              <div class="category__item-bubble">
-                <img
-                  src={categoryFukidasi.src}
-                  alt="吹き出し"
-                  class="category__item-bubble-bg"
-                />
-                <div class="category__item-bubble-text">
-                  ミシュランシェフ監修<br />濃厚クラムチャウダー
+                <h3 class="category__item-title">
+                  <span class="category__item-title-accent">食</span>べる
+                </h3>
+              </header>
+              <p class="category__item-description">
+                ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
+              </p>
+              <figure class="category__item-figure">
+                <picture class="category__item-picture">
+                  <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+                  <source
+                    media="(min-width: 1024px)"
+                    srcset={Slide02.srcSet.toString()}
+                  />
+                  <!-- タブレット（744px以上）→ 中解像度版 -->
+                  <source
+                    media="(min-width: 744px)"
+                    srcset={Slide02.srcSet.toString()}
+                  />
+                  <!-- スマホ（744px未満）→ 最小解像度版 -->
+                  <img
+                    src={Slide02.src}
+                    alt="食べる"
+                    class="category__item-image"
+                  />
+                </picture>
+                <div class="category__item-bubble">
+                  <img
+                    src={categoryFukidasi.src}
+                    alt="吹き出し"
+                    class="category__item-bubble-bg"
+                  />
+                  <div class="category__item-bubble-text">
+                    ミシュランシェフ監修<br />濃厚クラムチャウダー
+                  </div>
                 </div>
-              </div>
-            </figure>
-            <footer class="category__item-footer">
-              <a href="#" class="category__item-link">
-                <div class="category__item-link-text">MORE ＞</div>
-              </a>
-            </footer>
-          </article>
+              </figure>
+              <footer class="category__item-footer">
+                <a href="#" class="category__item-link">
+                  <div class="category__item-link-text">MORE ＞</div>
+                </a>
+              </footer>
+            </article>
 
-          <article class="category__item category__item--create">
-            <header class="category__item-header">
-              <img
-                src={logoOnlyCircle.src}
-                alt=""
-                class="category__item-icon"
-              />
-              <h3 class="category__item-title">
-                <span class="category__item-title-accent">作</span>る
-              </h3>
-            </header>
-            <p class="category__item-description">
-              ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
-            </p>
-            <figure class="category__item-figure">
-              <picture class="category__item-picture">
-                <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-                <source
-                  media="(min-width: 1024px)"
-                  srcset={Slide03.srcSet.toString()}
-                />
-                <!-- タブレット（744px以上）→ 中解像度版 -->
-                <source
-                  media="(min-width: 744px)"
-                  srcset={Slide03.srcSet.toString()}
-                />
-                <!-- スマホ（744px未満）→ 最小解像度版 -->
+            <article class="category__item category__item--create swiper-slide">
+              <header class="category__item-header">
                 <img
-                  src={Slide03.src}
-                  alt="作る"
-                  class="category__item-image"
+                  src={logoOnlyCircle.src}
+                  alt=""
+                  class="category__item-icon"
                 />
-              </picture>
-              <div class="category__item-bubble">
-                <img
-                  src={categoryFukidasi.src}
-                  alt="吹き出し"
-                  class="category__item-bubble-bg"
-                />
-                <div class="category__item-bubble-text">
-                  hogehoge<br />hogehogehoge
+                <h3 class="category__item-title">
+                  <span class="category__item-title-accent">作</span>る
+                </h3>
+              </header>
+              <p class="category__item-description">
+                ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
+              </p>
+              <figure class="category__item-figure">
+                <picture class="category__item-picture">
+                  <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+                  <source
+                    media="(min-width: 1024px)"
+                    srcset={Slide03.srcSet.toString()}
+                  />
+                  <!-- タブレット（744px以上）→ 中解像度版 -->
+                  <source
+                    media="(min-width: 744px)"
+                    srcset={Slide03.srcSet.toString()}
+                  />
+                  <!-- スマホ（744px未満）→ 最小解像度版 -->
+                  <img
+                    src={Slide03.src}
+                    alt="作る"
+                    class="category__item-image"
+                  />
+                </picture>
+                <div class="category__item-bubble">
+                  <img
+                    src={categoryFukidasi.src}
+                    alt="吹き出し"
+                    class="category__item-bubble-bg"
+                  />
+                  <div class="category__item-bubble-text">
+                    hogehoge<br />hogehogehoge
+                  </div>
                 </div>
-              </div>
-            </figure>
-            <footer class="category__item-footer">
-              <a href="#" class="category__item-link">
-                <div class="category__item-link-text">MORE ＞</div>
-              </a>
-            </footer>
-          </article>
+              </figure>
+              <footer class="category__item-footer">
+                <a href="#" class="category__item-link">
+                  <div class="category__item-link-text">MORE ＞</div>
+                </a>
+              </footer>
+            </article>
 
-          <article class="category__item category__item--see">
-            <header class="category__item-header">
-              <img
-                src={logoOnlyCircle.src}
-                alt=""
-                class="category__item-icon"
-              />
-              <h3 class="category__item-title">
-                <span class="category__item-title-accent">見</span>る
-              </h3>
-            </header>
-            <p class="category__item-description">
-              ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
-            </p>
-            <figure class="category__item-figure">
-              <picture class="category__item-picture">
-                <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-                <source
-                  media="(min-width: 1024px)"
-                  srcset={Slide04.srcSet.toString()}
-                />
-                <!-- タブレット（744px以上）→ 中解像度版 -->
-                <source
-                  media="(min-width: 744px)"
-                  srcset={Slide04.srcSet.toString()}
-                />
-                <!-- スマホ（744px未満）→ 最小解像度版 -->
+            <article class="category__item category__item--see swiper-slide">
+              <header class="category__item-header">
                 <img
-                  src={Slide04.src}
-                  alt="見る"
-                  class="category__item-image"
+                  src={logoOnlyCircle.src}
+                  alt=""
+                  class="category__item-icon"
                 />
-              </picture>
-              <div class="category__item-bubble">
-                <img
-                  src={categoryFukidasi.src}
-                  alt="吹き出し"
-                  class="category__item-bubble-bg"
-                />
-                <div class="category__item-bubble-text">
-                  hogehoge<br />hogehogehoge
+                <h3 class="category__item-title">
+                  <span class="category__item-title-accent">見</span>る
+                </h3>
+              </header>
+              <p class="category__item-description">
+                ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
+              </p>
+              <figure class="category__item-figure">
+                <picture class="category__item-picture">
+                  <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+                  <source
+                    media="(min-width: 1024px)"
+                    srcset={Slide04.srcSet.toString()}
+                  />
+                  <!-- タブレット（744px以上）→ 中解像度版 -->
+                  <source
+                    media="(min-width: 744px)"
+                    srcset={Slide04.srcSet.toString()}
+                  />
+                  <!-- スマホ（744px未満）→ 最小解像度版 -->
+                  <img
+                    src={Slide04.src}
+                    alt="見る"
+                    class="category__item-image"
+                  />
+                </picture>
+                <div class="category__item-bubble">
+                  <img
+                    src={categoryFukidasi.src}
+                    alt="吹き出し"
+                    class="category__item-bubble-bg"
+                  />
+                  <div class="category__item-bubble-text">
+                    hogehoge<br />hogehogehoge
+                  </div>
                 </div>
-              </div>
-            </figure>
-            <footer class="category__item-footer">
-              <a href="#" class="category__item-link">
-                <div class="category__item-link-text">MORE ＞</div>
-              </a>
-            </footer>
-          </article>
+              </figure>
+              <footer class="category__item-footer">
+                <a href="#" class="category__item-link">
+                  <div class="category__item-link-text">MORE ＞</div>
+                </a>
+              </footer>
+            </article>
 
-          <article class="category__item category__item--stay">
-            <header class="category__item-header">
-              <img
-                src={logoOnlyCircle.src}
-                alt=""
-                class="category__item-icon"
-              />
-              <h3 class="category__item-title">
-                <span class="category__item-title-accent">泊</span>まる
-              </h3>
-            </header>
-            <p class="category__item-description">
-              ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
-            </p>
-            <figure class="category__item-figure">
-              <picture class="category__item-picture">
-                <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-                <source
-                  media="(min-width: 1024px)"
-                  srcset={Slide05.srcSet.toString()}
-                />
-                <!-- タブレット（744px以上）→ 中解像度版 -->
-                <source
-                  media="(min-width: 744px)"
-                  srcset={Slide05.srcSet.toString()}
-                />
-                <!-- スマホ（744px未満）→ 最小解像度版 -->
+            <article class="category__item category__item--stay swiper-slide">
+              <header class="category__item-header">
                 <img
-                  src={Slide05.src}
-                  alt="泊まる"
-                  class="category__item-image"
+                  src={logoOnlyCircle.src}
+                  alt=""
+                  class="category__item-icon"
                 />
-              </picture>
-              <div class="category__item-bubble">
-                <img
-                  src={categoryFukidasi.src}
-                  alt="吹き出し"
-                  class="category__item-bubble-bg"
-                />
-                <div class="category__item-bubble-text">
-                  hogehoge<br />hogehogehoge
+                <h3 class="category__item-title">
+                  <span class="category__item-title-accent">泊</span>まる
+                </h3>
+              </header>
+              <p class="category__item-description">
+                ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
+              </p>
+              <figure class="category__item-figure">
+                <picture class="category__item-picture">
+                  <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+                  <source
+                    media="(min-width: 1024px)"
+                    srcset={Slide05.srcSet.toString()}
+                  />
+                  <!-- タブレット（744px以上）→ 中解像度版 -->
+                  <source
+                    media="(min-width: 744px)"
+                    srcset={Slide05.srcSet.toString()}
+                  />
+                  <!-- スマホ（744px未満）→ 最小解像度版 -->
+                  <img
+                    src={Slide05.src}
+                    alt="泊まる"
+                    class="category__item-image"
+                  />
+                </picture>
+                <div class="category__item-bubble">
+                  <img
+                    src={categoryFukidasi.src}
+                    alt="吹き出し"
+                    class="category__item-bubble-bg"
+                  />
+                  <div class="category__item-bubble-text">
+                    hogehoge<br />hogehogehoge
+                  </div>
                 </div>
-              </div>
-            </figure>
-            <footer class="category__item-footer">
-              <a href="#" class="category__item-link">
-                <div class="category__item-link-text">MORE ＞</div>
-              </a>
-            </footer>
-          </article>
+              </figure>
+              <footer class="category__item-footer">
+                <a href="#" class="category__item-link">
+                  <div class="category__item-link-text">MORE ＞</div>
+                </a>
+              </footer>
+            </article>
+          </div>
         </section>
       </section>
     </main>
+
+    <script>
+      import Swiper from "swiper";
+
+      console.log("=== CATEGORY SWIPER INTEGRATION ===");
+
+      document.addEventListener("DOMContentLoaded", function () {
+        console.log("Initializing Category Swipers...");
+
+        try {
+          // ① サムネイルSwiper（ナビゲーション）
+          const thumbsSwiper = new Swiper("#categoryNavSwiper", {
+            slidesPerView: "auto",
+            freeMode: true,
+            watchSlidesProgress: true,
+
+            // デバッグ用
+            on: {
+              click: function (swiper) {
+                console.log("Thumb clicked:", swiper.clickedIndex);
+              },
+            },
+          });
+          console.log("Navigation Swiper created:", thumbsSwiper);
+
+          // ② メインSwiper（コンテンツ）
+          const mainSwiper = new Swiper("#categoryContentSwiper", {
+            slidesPerView: 1,
+            spaceBetween: 0,
+            speed: 500, // トランジション速度を500msに設定
+
+            // サムネイル連動
+            thumbs: {
+              swiper: thumbsSwiper,
+            },
+
+            // デバッグ・UI更新
+            on: {
+              slideChange: function (swiper) {
+                const activeIndex = swiper.activeIndex;
+                console.log("Content slide changed to:", activeIndex);
+
+                // 手動でサムネイルのアクティブクラスを管理
+                const navItems = document.querySelectorAll(
+                  ".category__nav-item",
+                );
+                navItems.forEach((item, index) => {
+                  if (index === activeIndex) {
+                    item.classList.add("swiper-slide-thumb-active");
+                  } else {
+                    item.classList.remove("swiper-slide-thumb-active");
+                  }
+                });
+              },
+            },
+          });
+          console.log("Content Swiper created:", mainSwiper);
+
+          console.log(
+            "Swiper connection:",
+            mainSwiper.thumbs?.swiper === thumbsSwiper,
+          );
+
+          // 手動でサムネイルクリックイベントを強化
+          const navItems = document.querySelectorAll(".category__nav-item");
+          navItems.forEach((item, index) => {
+            item.addEventListener("click", function () {
+              console.log(`Manual nav click: ${index}`);
+              mainSwiper.slideTo(index);
+
+              // クリック時にもアクティブクラス管理
+              navItems.forEach((navItem, navIndex) => {
+                if (navIndex === index) {
+                  navItem.classList.add("swiper-slide-thumb-active");
+                } else {
+                  navItem.classList.remove("swiper-slide-thumb-active");
+                }
+              });
+            });
+          });
+
+          // 初期状態で最初のサムネイルをアクティブに設定
+          if (navItems.length > 0) {
+            navItems[0].classList.add("swiper-slide-thumb-active");
+          }
+        } catch (error) {
+          console.error("Error creating Category Swipers:", error);
+        }
+      });
+    </script>
   </body>
 </html>
 
@@ -1160,6 +1254,16 @@ const Slide05 = await getImage({
           }
         }
       }
+      &.swiper-slide-thumb-active {
+        span {
+          color: white;
+        }
+        svg {
+          path {
+            fill: var(--logo_color_3, #c99e2d);
+          }
+        }
+      }
       span {
         position: absolute;
         top: 50%;
@@ -1193,9 +1297,11 @@ const Slide05 = await getImage({
       margin-top: spx(40);
       @include tablet-up {
         margin-top: ppx(64) * 1.2;
+        overflow: visible; // Swiperコンテナでもバブルを表示
       }
       @include desktop-up {
         margin-top: ppx(64);
+        overflow: visible; // Swiperコンテナでもバブルを表示
       }
     }
 
@@ -1203,9 +1309,11 @@ const Slide05 = await getImage({
       @include tablet-up {
         position: relative;
         height: ppx(916) * 1.2;
+        overflow: visible; // バブルがはみ出ても表示されるように
       }
       @include desktop-up {
         height: ppx(916);
+        overflow: visible; // バブルがはみ出ても表示されるように
       }
 
       &--play {
