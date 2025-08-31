@@ -572,6 +572,7 @@ const Slide05 = await getImage({
 
     <script>
       import Swiper from "swiper";
+      import { EffectFade } from "swiper/modules";
 
       console.log("=== CATEGORY SWIPER INTEGRATION ===");
 
@@ -599,6 +600,11 @@ const Slide05 = await getImage({
             slidesPerView: 1,
             spaceBetween: 0,
             speed: 500, // トランジション速度を500msに設定
+            modules: [EffectFade],
+            effect: "fade", // フェード効果を設定
+            fadeEffect: {
+              crossFade: true
+            },
 
             // サムネイル連動
             thumbs: {
@@ -612,9 +618,7 @@ const Slide05 = await getImage({
                 console.log("Content slide changed to:", activeIndex);
 
                 // 手動でサムネイルのアクティブクラスを管理
-                const navItems = document.querySelectorAll(
-                  ".category__nav-item",
-                );
+                const navItems = document.querySelectorAll(".category__nav-item");
                 navItems.forEach((item, index) => {
                   if (index === activeIndex) {
                     item.classList.add("swiper-slide-thumb-active");
