@@ -19,6 +19,9 @@ import categorySlideTsukuru from "../images/top/category-slide-tsukuru.png";
 import categorySlideMiru from "../images/top/category-slide-miru.png";
 import categorySlideTomaru from "../images/top/category-slide-tomaru.png";
 import categoryFukidasi from "../images/top/category-fukidasi.svg";
+import overviewImage from "../images/top/overview-img.svg";
+import overviewBottomMobile from "../images/top/overview-bottom-mobile.svg";
+import overviewBottomTabletUp from "../images/top/overview-bottom-tablet-up.svg";
 
 // フォーマット
 const Slide01 = await getImage({
@@ -568,6 +571,79 @@ const Slide05 = await getImage({
           </div>
         </section>
       </section>
+      <section class="overview">
+        <svg
+          class="overview__wave"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 2559 170"
+          fill="none"
+        >
+          <path
+            d="M2559 0H0.00146484V70C0.00146484 70 315.501 170 639.751 170C964.001 170 1481.5 20 1812 20C2142.5 20 2559 120 2559 120V0Z"
+            fill="#FFFCF2"></path>
+        </svg>
+
+        <img src={overviewImage.src} alt="開催概要" class="overview__image" />
+
+        <article class="overview__content">
+          <header class="overview__header">
+            <h2 class="overview__title">
+              <span>開催概要</span>
+            </h2>
+          </header>
+          <dl class="overview__details">
+            <div class="overview__item">
+              <dt class="overview__term">開催日時</dt>
+              <dd class="overview__description">
+                <time class="overview__date" datetime="2025-12">2025年12月</time
+                >
+                <div class="overview__schedule">
+                  <time
+                    class="overview__time"
+                    datetime="2025-12-07T12:00/2025-12-07T23:00"
+                    >7日（土）12:00〜23:00、</time
+                  >
+                  <time
+                    class="overview__time"
+                    datetime="2025-12-08T09:00/2025-12-08T15:00"
+                    >8日（日）9:00〜15:00</time
+                  >
+                </div>
+              </dd>
+            </div>
+            <div class="overview__item">
+              <dt class="overview__term">開催場所</dt>
+              <dd class="overview__description">
+                <address class="overview__address">
+                  <span class="overview__postal-code">〒401-0332</span>
+                  <div class="overview__location">
+                    <span class="overview__prefecture"
+                      >山梨県南都留郡 富士河口湖町西湖・</span
+                    >
+                    <span class="overview__venue">HAMAYOUリゾート</span>
+                  </div>
+                </address>
+              </dd>
+            </div>
+          </dl>
+        </article>
+
+        <picture class="overview__bottom-image-wrapper">
+          <source
+            media="(min-width: 1024px)"
+            srcset={overviewBottomTabletUp.src}
+          />
+          <source
+            media="(min-width: 744px)"
+            srcset={overviewBottomTabletUp.src}
+          />
+          <img
+            src={overviewBottomMobile.src}
+            alt="開催概要"
+            class="overview__bottom-image"
+          />
+        </picture>
+      </section>
     </main>
 
     <script>
@@ -603,7 +679,7 @@ const Slide05 = await getImage({
             modules: [EffectFade],
             effect: "fade", // フェード効果を設定
             fadeEffect: {
-              crossFade: true
+              crossFade: true,
             },
 
             // サムネイル連動
@@ -618,7 +694,9 @@ const Slide05 = await getImage({
                 console.log("Content slide changed to:", activeIndex);
 
                 // 手動でサムネイルのアクティブクラスを管理
-                const navItems = document.querySelectorAll(".category__nav-item");
+                const navItems = document.querySelectorAll(
+                  ".category__nav-item",
+                );
                 navItems.forEach((item, index) => {
                   if (index === activeIndex) {
                     item.classList.add("swiper-slide-thumb-active");
@@ -628,11 +706,13 @@ const Slide05 = await getImage({
                 });
 
                 // バブルアニメーション制御
-                const bubbles = document.querySelectorAll(".category__item-bubble");
+                const bubbles = document.querySelectorAll(
+                  ".category__item-bubble",
+                );
                 bubbles.forEach((bubble, index) => {
                   // まずすべてのバブルを非表示にする
                   bubble.classList.remove("bubble-show");
-                  
+
                   // アクティブなスライドのバブルをワンテンポ置いて表示
                   if (index === activeIndex) {
                     setTimeout(() => {
@@ -667,11 +747,13 @@ const Slide05 = await getImage({
               });
 
               // クリック時のバブルアニメーション制御
-              const bubbles = document.querySelectorAll(".category__item-bubble");
+              const bubbles = document.querySelectorAll(
+                ".category__item-bubble",
+              );
               bubbles.forEach((bubble, bubbleIndex) => {
                 // まずすべてのバブルを非表示にする
                 bubble.classList.remove("bubble-show");
-                
+
                 // クリックされたスライドのバブルをワンテンポ置いて表示
                 if (bubbleIndex === index) {
                   setTimeout(() => {
@@ -685,9 +767,11 @@ const Slide05 = await getImage({
           // 初期状態で最初のサムネイルをアクティブに設定
           if (navItems.length > 0) {
             navItems[0].classList.add("swiper-slide-thumb-active");
-            
+
             // 初期状態で最初のバブルもワンテンポ置いて表示
-            const firstBubble = document.querySelector(".category__item-bubble");
+            const firstBubble = document.querySelector(
+              ".category__item-bubble",
+            );
             if (firstBubble) {
               setTimeout(() => {
                 firstBubble.classList.add("bubble-show");
@@ -1207,6 +1291,13 @@ const Slide05 = await getImage({
   // カテゴリーセクション
   .category {
     background: var(--base_1, #fffcf2);
+    padding-bottom: spx(49);
+    @include tablet-up {
+      padding-bottom: ppx(87) * 1.2;
+    }
+    @include desktop-up {
+      padding-bottom: ppx(87);
+    }
     &__wave {
       display: block;
       width: 100%;
@@ -1515,8 +1606,10 @@ const Slide05 = await getImage({
         // バブルアニメーション用設定
         opacity: 0;
         transform: scale(0.8);
-        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        
+        transition:
+          opacity 0.5s ease-out,
+          transform 0.5s ease-out;
+
         @include tablet-up {
           top: ppx(-138) * 1;
           right: ppx(104) * 1;
@@ -1525,17 +1618,18 @@ const Slide05 = await getImage({
           top: ppx(-69);
           right: ppx(52);
         }
-        
+
         // アクティブ時のスタイル
         &.bubble-show {
           opacity: 1;
           transform: scale(1);
           animation: gentle-swing 3s ease-in-out infinite;
         }
-        
+
         // ゆらゆら揺れるアニメーション
         @keyframes gentle-swing {
-          0%, 100% {
+          0%,
+          100% {
             transform: scale(1) translateY(0) rotate(0deg);
           }
           25% {
@@ -1637,6 +1731,183 @@ const Slide05 = await getImage({
             font-size: ppx(30);
           }
         }
+      }
+    }
+  }
+
+  .overview {
+    background: var(--base_5, #102a4d);
+    @include tablet-up {
+    }
+    @include desktop-up {
+    }
+
+    &__wave {
+      display: block;
+      width: 100%;
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__image {
+      display: block;
+      width: spx(667);
+      margin-inline: auto;
+      margin-top: spx(25);
+      @include tablet-up {
+        width: 92vw;
+        margin-top: ppx(40) * 1.2;
+      }
+      @include desktop-up {
+        width: ppx(2370);
+        margin-top: ppx(40);
+      }
+    }
+
+    &__header {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__title {
+      width: spx(180);
+      height: spx(74);
+      border-radius: spx(50);
+      background-color: white;
+      display: grid;
+      place-items: center;
+      margin-inline: auto;
+      margin-top: spx(40);
+      @include tablet-up {
+        width: ppx(220) * 1.2;
+        height: ppx(92) * 1.2;
+        border-radius: ppx(50) * 1.2;
+        margin-top: 0;
+      }
+      @include desktop-up {
+        width: ppx(220);
+        height: ppx(92);
+        border-radius: ppx(50);
+      }
+      span {
+        color: var(--base_5, #102a4d);
+        font-size: spx(30);
+        font-weight: 700;
+        line-height: 180%;
+        @include tablet-up {
+          font-size: ppx(40) * 1.2;
+        }
+        @include desktop-up {
+          font-size: ppx(40);
+        }
+      }
+    }
+
+    &__details {
+      color: white;
+      font-size: spx(30);
+      font-weight: 700;
+      line-height: 180%;
+      @include tablet-up {
+        font-size: ppx(30) * 1.2;
+      }
+      @include desktop-up {
+        font-size: ppx(30);
+      }
+    }
+
+    &__item {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__term {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__description {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__date {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__schedule {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__time {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__address {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__postal-code {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__location {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__prefecture {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__venue {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+    &__bottom-image-wrapper {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+    &__bottom-image {
+      display: block;
+      width: 100%;
+      @include tablet-up {
+      }
+      @include desktop-up {
       }
     }
   }
