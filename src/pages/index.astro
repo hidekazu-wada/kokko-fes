@@ -611,7 +611,7 @@ const Slide05 = await getImage({
               swiper: thumbsSwiper,
             },
 
-            // デバッグ・UI更新
+            // デバッグ・UI更新・バブルアニメーション制御
             on: {
               slideChange: function (swiper) {
                 const activeIndex = swiper.activeIndex;
@@ -624,6 +624,20 @@ const Slide05 = await getImage({
                     item.classList.add("swiper-slide-thumb-active");
                   } else {
                     item.classList.remove("swiper-slide-thumb-active");
+                  }
+                });
+
+                // バブルアニメーション制御
+                const bubbles = document.querySelectorAll(".category__item-bubble");
+                bubbles.forEach((bubble, index) => {
+                  // まずすべてのバブルを非表示にする
+                  bubble.classList.remove("bubble-show");
+                  
+                  // アクティブなスライドのバブルをワンテンポ置いて表示
+                  if (index === activeIndex) {
+                    setTimeout(() => {
+                      bubble.classList.add("bubble-show");
+                    }, 800); // 0.8秒の遅延
                   }
                 });
               },
@@ -651,12 +665,34 @@ const Slide05 = await getImage({
                   navItem.classList.remove("swiper-slide-thumb-active");
                 }
               });
+
+              // クリック時のバブルアニメーション制御
+              const bubbles = document.querySelectorAll(".category__item-bubble");
+              bubbles.forEach((bubble, bubbleIndex) => {
+                // まずすべてのバブルを非表示にする
+                bubble.classList.remove("bubble-show");
+                
+                // クリックされたスライドのバブルをワンテンポ置いて表示
+                if (bubbleIndex === index) {
+                  setTimeout(() => {
+                    bubble.classList.add("bubble-show");
+                  }, 800); // 0.8秒の遅延
+                }
+              });
             });
           });
 
           // 初期状態で最初のサムネイルをアクティブに設定
           if (navItems.length > 0) {
             navItems[0].classList.add("swiper-slide-thumb-active");
+            
+            // 初期状態で最初のバブルもワンテンポ置いて表示
+            const firstBubble = document.querySelector(".category__item-bubble");
+            if (firstBubble) {
+              setTimeout(() => {
+                firstBubble.classList.add("bubble-show");
+              }, 1000); // 初期表示は1秒の遅延
+            }
           }
         } catch (error) {
           console.error("Error creating Category Swipers:", error);
@@ -1476,6 +1512,11 @@ const Slide05 = await getImage({
         position: absolute;
         top: spx(-69);
         right: spx(52);
+        // バブルアニメーション用設定
+        opacity: 0;
+        transform: scale(0.8);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        
         @include tablet-up {
           top: ppx(-138) * 1;
           right: ppx(104) * 1;
@@ -1483,6 +1524,26 @@ const Slide05 = await getImage({
         @include desktop-up {
           top: ppx(-69);
           right: ppx(52);
+        }
+        
+        // アクティブ時のスタイル
+        &.bubble-show {
+          opacity: 1;
+          transform: scale(1);
+          animation: gentle-swing 3s ease-in-out infinite;
+        }
+        
+        // ゆらゆら揺れるアニメーション
+        @keyframes gentle-swing {
+          0%, 100% {
+            transform: scale(1) translateY(0) rotate(0deg);
+          }
+          25% {
+            transform: scale(1) translateY(-3px) rotate(1deg);
+          }
+          75% {
+            transform: scale(1) translateY(3px) rotate(-1deg);
+          }
         }
 
         &-bg {
