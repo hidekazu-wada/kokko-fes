@@ -3,6 +3,14 @@
 import "../styles/main.scss";
 
 // 画像
+import { getImage } from "astro:assets";
+import demoImage from "../images/watch/demo.png";
+
+const Demo = await getImage({
+  src: demoImage,
+  format: "webp",
+  widths: [620],
+});
 
 // コンポーネント
 import MenuToggle from "../components/common/MenuToggle.astro";
@@ -36,6 +44,188 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
       <PageHeader />
       <!-- 404 error content -->
       <section class="page-wrapper watch">
+        <div>
+          <div>
+            <div class="">
+              <span>見</span>る
+            </div>
+            <div class="">− WATCH −</div>
+            <div class="">展示・パフォーマンス・伝統芸能など</div>
+          </div>
+
+          <ul>
+            <li>
+              <div>
+                <a href="#" class="">
+                  <div>
+                    <picture class="">
+                      <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+                      <source
+                        media="(min-width: 1024px)"
+                        srcset={Demo.srcSet.toString()}
+                      />
+                      <!-- タブレット（744px以上）→ 中解像度版 -->
+                      <source
+                        media="(min-width: 744px)"
+                        srcset={Demo.srcSet.toString()}
+                      />
+                      <!-- スマホ（744px未満）→ 最小解像度版 -->
+                      <img src={Demo.src} alt="和太鼓演奏" class="" />
+                    </picture>
+                    <div class="">
+                      <span>和太鼓演奏</span>
+                    </div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 84 85"
+                      fill="none"
+                    >
+                      <circle
+                        cx="42"
+                        cy="42.0547"
+                        r="39.5"
+                        fill="#C99E2D"
+                        stroke="#FFFCF2"
+                        stroke-width="5"></circle>
+                      <path
+                        d="M35.5688 29.1786L34.2059 31.1658L32.9732 33.1871L35.0255 34.523L37.1236 35.9031L39.1942 37.3167L41.2923 38.6969L43.4503 39.9806L45.5961 41.4428L43.3327 42.7278L41.2924 44.2257L39.1694 45.5763L37.0503 46.95L34.9561 48.3574L32.7448 49.6952L34.2082 51.6889L35.4387 53.8289L37.4981 52.3038L39.6065 50.9511L41.8062 49.7394L43.7942 48.1887L45.969 46.9433L48.0671 45.559L50.138 44.1557L52.2798 42.8304L54.3654 41.4293L52.2137 40.154L50.2262 38.6398L48.0445 37.4127L46.0655 35.8922L43.8647 34.6924L41.8281 33.2537L39.7745 31.8275L37.6504 30.5187L35.5688 29.1786Z"
+                        fill="#FFFCF2"></path>
+                    </svg>
+                  </div>
+                </a>
+                <ul>
+                  <li>
+                    <div>
+                      <div class="">場所：</div>
+                      <div class="">展示ホールA</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div>
+                      <div class="">時間：</div>
+                      <div class="">10:00-16:00</div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a href="#" class="">
+                  <div>
+                    <picture class="">
+                      <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+                      <source
+                        media="(min-width: 1024px)"
+                        srcset={Demo.srcSet.toString()}
+                      />
+                      <!-- タブレット（744px以上）→ 中解像度版 -->
+                      <source
+                        media="(min-width: 744px)"
+                        srcset={Demo.srcSet.toString()}
+                      />
+                      <!-- スマホ（744px未満）→ 最小解像度版 -->
+                      <img src={Demo.src} alt="和太鼓演奏" class="" />
+                    </picture>
+                    <div class="">
+                      <span>和太鼓演奏</span>
+                    </div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 84 85"
+                      fill="none"
+                    >
+                      <circle
+                        cx="42"
+                        cy="42.0547"
+                        r="39.5"
+                        fill="#C99E2D"
+                        stroke="#FFFCF2"
+                        stroke-width="5"></circle>
+                      <path
+                        d="M35.5688 29.1786L34.2059 31.1658L32.9732 33.1871L35.0255 34.523L37.1236 35.9031L39.1942 37.3167L41.2923 38.6969L43.4503 39.9806L45.5961 41.4428L43.3327 42.7278L41.2924 44.2257L39.1694 45.5763L37.0503 46.95L34.9561 48.3574L32.7448 49.6952L34.2082 51.6889L35.4387 53.8289L37.4981 52.3038L39.6065 50.9511L41.8062 49.7394L43.7942 48.1887L45.969 46.9433L48.0671 45.559L50.138 44.1557L52.2798 42.8304L54.3654 41.4293L52.2137 40.154L50.2262 38.6398L48.0445 37.4127L46.0655 35.8922L43.8647 34.6924L41.8281 33.2537L39.7745 31.8275L37.6504 30.5187L35.5688 29.1786Z"
+                        fill="#FFFCF2"></path>
+                    </svg>
+                  </div>
+                </a>
+                <ul>
+                  <li>
+                    <div>
+                      <div class="">場所：</div>
+                      <div class="">展示ホールA</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div>
+                      <div class="">時間：</div>
+                      <div class="">10:00-16:00</div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a href="#" class="">
+                  <div>
+                    <picture class="">
+                      <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+                      <source
+                        media="(min-width: 1024px)"
+                        srcset={Demo.srcSet.toString()}
+                      />
+                      <!-- タブレット（744px以上）→ 中解像度版 -->
+                      <source
+                        media="(min-width: 744px)"
+                        srcset={Demo.srcSet.toString()}
+                      />
+                      <!-- スマホ（744px未満）→ 最小解像度版 -->
+                      <img src={Demo.src} alt="和太鼓演奏" class="" />
+                    </picture>
+                    <div class="">
+                      <span>和太鼓演奏</span>
+                    </div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 84 85"
+                      fill="none"
+                    >
+                      <circle
+                        cx="42"
+                        cy="42.0547"
+                        r="39.5"
+                        fill="#C99E2D"
+                        stroke="#FFFCF2"
+                        stroke-width="5"></circle>
+                      <path
+                        d="M35.5688 29.1786L34.2059 31.1658L32.9732 33.1871L35.0255 34.523L37.1236 35.9031L39.1942 37.3167L41.2923 38.6969L43.4503 39.9806L45.5961 41.4428L43.3327 42.7278L41.2924 44.2257L39.1694 45.5763L37.0503 46.95L34.9561 48.3574L32.7448 49.6952L34.2082 51.6889L35.4387 53.8289L37.4981 52.3038L39.6065 50.9511L41.8062 49.7394L43.7942 48.1887L45.969 46.9433L48.0671 45.559L50.138 44.1557L52.2798 42.8304L54.3654 41.4293L52.2137 40.154L50.2262 38.6398L48.0445 37.4127L46.0655 35.8922L43.8647 34.6924L41.8281 33.2537L39.7745 31.8275L37.6504 30.5187L35.5688 29.1786Z"
+                        fill="#FFFCF2"></path>
+                    </svg>
+                  </div>
+                </a>
+                <ul>
+                  <li>
+                    <div>
+                      <div class="">場所：</div>
+                      <div class="">展示ホールA</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div>
+                      <div class="">時間：</div>
+                      <div class="">10:00-16:00</div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+
+          <div class="">
+            <a href="#">トップ </a>
+            ＞ 見る
+          </div>
+        </div>
         <PageBottomWave />
       </section>
       <!-- footer -->
@@ -62,7 +252,6 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
 
   .watch {
     position: relative;
-    height: 90svh;
     @include tablet-up {
     }
     @include desktop-up {
