@@ -1,0 +1,640 @@
+---
+import { getImage } from "astro:assets";
+import balloonImage from "../../images/menu/balloon.png";
+import cloudImage from "../../images/top/hero-cloud.svg";
+import menuCloseImage from "../../images/menu/menu-close.svg";
+import logoHorizontal from "../../images/menu/logo-horizontal.svg";
+
+// フォーマット
+const balloon = await getImage({
+  src: balloonImage,
+  format: "webp",
+  widths: [185, 278, 345],
+});
+---
+
+<section class="menu">
+  <img
+    class="menu__cloud menu__cloud--1"
+    src={cloudImage.src}
+    alt="雲のイメージ"
+  />
+  <img
+    class="menu__cloud menu__cloud--2"
+    src={cloudImage.src}
+    alt="雲のイメージ"
+  />
+  <img
+    class="menu__cloud menu__cloud--3"
+    src={cloudImage.src}
+    alt="雲のイメージ"
+  />
+  <picture class="menu__balloon">
+    <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+    <source media="(min-width: 1024px)" srcset={balloon.srcSet.toString()} />
+    <!-- タブレット（744px以上）→ 中解像度版 -->
+    <source media="(min-width: 744px)" srcset={balloon.srcSet.toString()} />
+    <!-- スマホ（744px未満）→ 最小解像度版 -->
+    <img src={balloon.src} alt="風船に乗った子どものイラスト" />
+  </picture>
+  <div class="modal" id="menu-modal">
+    <button type="button" class="modal__close">
+      <img
+        class="modal__close-icon"
+        src={menuCloseImage.src}
+        alt="menuを閉じる"
+      />
+    </button>
+    <div class="modal__content">
+      <header class="modal__header">
+        <a href="#" class="modal__logo">
+          <img
+            class="modal__logo-image"
+            src={logoHorizontal.src}
+            alt="コッコ祭りロゴ"
+          />
+        </a>
+        <div class="modal__event-info">
+          <time class="modal__date" datetime="2025-12-07">2025.12.7</time>
+          <div class="modal__time">（土）12:00〜23:00</div>
+          <div class="modal__separator">/ 8</div>
+          <div class="modal__time">（日）9:00〜15:00</div>
+        </div>
+      </header>
+      <nav class="modal__nav">
+        <ul class="navigation">
+          <li class="navigation__item">
+            <a href="#" class="navigation__link">
+              <div class="navigation__content">
+                <span class="navigation__text">トップ</span>
+                <svg
+                  class="navigation__icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 56 56"
+                  fill="none"
+                >
+                  <circle cx="28" cy="28" r="28" fill="#C99E2D"></circle>
+                  <path
+                    d="M23.1328 18.2559L22.1014 19.7598L21.1686 21.2894L22.7216 22.3003L24.3094 23.3447L25.8763 24.4145L27.4641 25.459L29.0972 26.4304L30.721 27.5369L29.0081 28.5094L27.4642 29.6429L25.8575 30.665L24.2539 31.7046L22.6692 32.7696L20.9957 33.782L22.1032 35.2908L23.0343 36.9102L24.5928 35.7561L26.1884 34.7324L27.853 33.8154L29.3575 32.642L31.0032 31.6995L32.591 30.6519L34.1582 29.59L35.779 28.587L37.3573 27.5267L35.7289 26.5617L34.2249 25.4157L32.5739 24.4872L31.0763 23.3365L29.4108 22.4286L27.8695 21.3398L26.3155 20.2605L24.7081 19.2701L23.1328 18.2559Z"
+                    fill="#FFFCF2"></path>
+                </svg>
+              </div>
+            </a>
+          </li>
+          <li class="navigation__item">
+            <a href="#" class="navigation__link">
+              <div class="navigation__content">
+                <span class="navigation__text">遊ぶ</span>
+                <svg
+                  class="navigation__icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 56 56"
+                  fill="none"
+                >
+                  <circle cx="28" cy="28" r="28" fill="#C99E2D"></circle>
+                  <path
+                    d="M23.1328 18.2559L22.1014 19.7598L21.1686 21.2894L22.7216 22.3003L24.3094 23.3447L25.8763 24.4145L27.4641 25.459L29.0972 26.4304L30.721 27.5369L29.0081 28.5094L27.4642 29.6429L25.8575 30.665L24.2539 31.7046L22.6692 32.7696L20.9957 33.782L22.1032 35.2908L23.0343 36.9102L24.5928 35.7561L26.1884 34.7324L27.853 33.8154L29.3575 32.642L31.0032 31.6995L32.591 30.6519L34.1582 29.59L35.779 28.587L37.3573 27.5267L35.7289 26.5617L34.2249 25.4157L32.5739 24.4872L31.0763 23.3365L29.4108 22.4286L27.8695 21.3398L26.3155 20.2605L24.7081 19.2701L23.1328 18.2559Z"
+                    fill="#FFFCF2"></path>
+                </svg>
+              </div>
+            </a>
+          </li>
+          <li class="navigation__item">
+            <a href="#" class="navigation__link">
+              <div class="navigation__content">
+                <span class="navigation__text">食べる</span>
+                <svg
+                  class="navigation__icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 56 56"
+                  fill="none"
+                >
+                  <circle cx="28" cy="28" r="28" fill="#C99E2D"></circle>
+                  <path
+                    d="M23.1328 18.2559L22.1014 19.7598L21.1686 21.2894L22.7216 22.3003L24.3094 23.3447L25.8763 24.4145L27.4641 25.459L29.0972 26.4304L30.721 27.5369L29.0081 28.5094L27.4642 29.6429L25.8575 30.665L24.2539 31.7046L22.6692 32.7696L20.9957 33.782L22.1032 35.2908L23.0343 36.9102L24.5928 35.7561L26.1884 34.7324L27.853 33.8154L29.3575 32.642L31.0032 31.6995L32.591 30.6519L34.1582 29.59L35.779 28.587L37.3573 27.5267L35.7289 26.5617L34.2249 25.4157L32.5739 24.4872L31.0763 23.3365L29.4108 22.4286L27.8695 21.3398L26.3155 20.2605L24.7081 19.2701L23.1328 18.2559Z"
+                    fill="#FFFCF2"></path>
+                </svg>
+              </div>
+            </a>
+          </li>
+          <li class="navigation__item">
+            <a href="#" class="navigation__link">
+              <div class="navigation__content">
+                <span class="navigation__text">作る</span>
+                <svg
+                  class="navigation__icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 56 56"
+                  fill="none"
+                >
+                  <circle cx="28" cy="28" r="28" fill="#C99E2D"></circle>
+                  <path
+                    d="M23.1328 18.2559L22.1014 19.7598L21.1686 21.2894L22.7216 22.3003L24.3094 23.3447L25.8763 24.4145L27.4641 25.459L29.0972 26.4304L30.721 27.5369L29.0081 28.5094L27.4642 29.6429L25.8575 30.665L24.2539 31.7046L22.6692 32.7696L20.9957 33.782L22.1032 35.2908L23.0343 36.9102L24.5928 35.7561L26.1884 34.7324L27.853 33.8154L29.3575 32.642L31.0032 31.6995L32.591 30.6519L34.1582 29.59L35.779 28.587L37.3573 27.5267L35.7289 26.5617L34.2249 25.4157L32.5739 24.4872L31.0763 23.3365L29.4108 22.4286L27.8695 21.3398L26.3155 20.2605L24.7081 19.2701L23.1328 18.2559Z"
+                    fill="#FFFCF2"></path>
+                </svg>
+              </div>
+            </a>
+          </li>
+          <li class="navigation__item">
+            <a href="#" class="navigation__link">
+              <div class="navigation__content">
+                <span class="navigation__text">見る</span>
+                <svg
+                  class="navigation__icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 56 56"
+                  fill="none"
+                >
+                  <circle cx="28" cy="28" r="28" fill="#C99E2D"></circle>
+                  <path
+                    d="M23.1328 18.2559L22.1014 19.7598L21.1686 21.2894L22.7216 22.3003L24.3094 23.3447L25.8763 24.4145L27.4641 25.459L29.0972 26.4304L30.721 27.5369L29.0081 28.5094L27.4642 29.6429L25.8575 30.665L24.2539 31.7046L22.6692 32.7696L20.9957 33.782L22.1032 35.2908L23.0343 36.9102L24.5928 35.7561L26.1884 34.7324L27.853 33.8154L29.3575 32.642L31.0032 31.6995L32.591 30.6519L34.1582 29.59L35.779 28.587L37.3573 27.5267L35.7289 26.5617L34.2249 25.4157L32.5739 24.4872L31.0763 23.3365L29.4108 22.4286L27.8695 21.3398L26.3155 20.2605L24.7081 19.2701L23.1328 18.2559Z"
+                    fill="#FFFCF2"></path>
+                </svg>
+              </div>
+            </a>
+          </li>
+          <li class="navigation__item">
+            <a href="#" class="navigation__link">
+              <div class="navigation__content">
+                <span class="navigation__text">泊まる</span>
+                <svg
+                  class="navigation__icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 56 56"
+                  fill="none"
+                >
+                  <circle cx="28" cy="28" r="28" fill="#C99E2D"></circle>
+                  <path
+                    d="M23.1328 18.2559L22.1014 19.7598L21.1686 21.2894L22.7216 22.3003L24.3094 23.3447L25.8763 24.4145L27.4641 25.459L29.0972 26.4304L30.721 27.5369L29.0081 28.5094L27.4642 29.6429L25.8575 30.665L24.2539 31.7046L22.6692 32.7696L20.9957 33.782L22.1032 35.2908L23.0343 36.9102L24.5928 35.7561L26.1884 34.7324L27.853 33.8154L29.3575 32.642L31.0032 31.6995L32.591 30.6519L34.1582 29.59L35.779 28.587L37.3573 27.5267L35.7289 26.5617L34.2249 25.4157L32.5739 24.4872L31.0763 23.3365L29.4108 22.4286L27.8695 21.3398L26.3155 20.2605L24.7081 19.2701L23.1328 18.2559Z"
+                    fill="#FFFCF2"></path>
+                </svg>
+              </div>
+            </a>
+          </li>
+          <li class="navigation__item">
+            <a href="#" class="navigation__link">
+              <div class="navigation__content">
+                <span class="navigation__text">イベント情報</span>
+                <svg
+                  class="navigation__icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 56 56"
+                  fill="none"
+                >
+                  <circle cx="28" cy="28" r="28" fill="#C99E2D"></circle>
+                  <path
+                    d="M23.1328 18.2559L22.1014 19.7598L21.1686 21.2894L22.7216 22.3003L24.3094 23.3447L25.8763 24.4145L27.4641 25.459L29.0972 26.4304L30.721 27.5369L29.0081 28.5094L27.4642 29.6429L25.8575 30.665L24.2539 31.7046L22.6692 32.7696L20.9957 33.782L22.1032 35.2908L23.0343 36.9102L24.5928 35.7561L26.1884 34.7324L27.853 33.8154L29.3575 32.642L31.0032 31.6995L32.591 30.6519L34.1582 29.59L35.779 28.587L37.3573 27.5267L35.7289 26.5617L34.2249 25.4157L32.5739 24.4872L31.0763 23.3365L29.4108 22.4286L27.8695 21.3398L26.3155 20.2605L24.7081 19.2701L23.1328 18.2559Z"
+                    fill="#FFFCF2"></path>
+                </svg>
+              </div>
+            </a>
+          </li>
+          <li class="navigation__item">
+            <a href="#" class="navigation__link">
+              <div class="navigation__content">
+                <span class="navigation__text">アクセス</span>
+                <svg
+                  class="navigation__icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 56 56"
+                  fill="none"
+                >
+                  <circle cx="28" cy="28" r="28" fill="#C99E2D"></circle>
+                  <path
+                    d="M23.1328 18.2559L22.1014 19.7598L21.1686 21.2894L22.7216 22.3003L24.3094 23.3447L25.8763 24.4145L27.4641 25.459L29.0972 26.4304L30.721 27.5369L29.0081 28.5094L27.4642 29.6429L25.8575 30.665L24.2539 31.7046L22.6692 32.7696L20.9957 33.782L22.1032 35.2908L23.0343 36.9102L24.5928 35.7561L26.1884 34.7324L27.853 33.8154L29.3575 32.642L31.0032 31.6995L32.591 30.6519L34.1582 29.59L35.779 28.587L37.3573 27.5267L35.7289 26.5617L34.2249 25.4157L32.5739 24.4872L31.0763 23.3365L29.4108 22.4286L27.8695 21.3398L26.3155 20.2605L24.7081 19.2701L23.1328 18.2559Z"
+                    fill="#FFFCF2"></path>
+                </svg>
+              </div>
+            </a>
+          </li>
+          <li class="navigation__item">
+            <a href="#" class="navigation__link">
+              <div class="navigation__content">
+                <span class="navigation__text">お問い合わせ</span>
+                <svg
+                  class="navigation__icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 56 56"
+                  fill="none"
+                >
+                  <circle cx="28" cy="28" r="28" fill="#C99E2D"></circle>
+                  <path
+                    d="M23.1328 18.2559L22.1014 19.7598L21.1686 21.2894L22.7216 22.3003L24.3094 23.3447L25.8763 24.4145L27.4641 25.459L29.0972 26.4304L30.721 27.5369L29.0081 28.5094L27.4642 29.6429L25.8575 30.665L24.2539 31.7046L22.6692 32.7696L20.9957 33.782L22.1032 35.2908L23.0343 36.9102L24.5928 35.7561L26.1884 34.7324L27.853 33.8154L29.3575 32.642L31.0032 31.6995L32.591 30.6519L34.1582 29.59L35.779 28.587L37.3573 27.5267L35.7289 26.5617L34.2249 25.4157L32.5739 24.4872L31.0763 23.3365L29.4108 22.4286L27.8695 21.3398L26.3155 20.2605L24.7081 19.2701L23.1328 18.2559Z"
+                    fill="#FFFCF2"></path>
+                </svg>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  /* 必要なmixin/functionをインポート */
+  @import "../../styles/variables";
+  @import "../../styles/functions";
+  @import "../../styles/mixins";
+
+  .menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: var(--base_2, #fcf2c9);
+    z-index: 1000;
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    padding-top: spx(450);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease;
+
+    &.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    @include tablet-up {
+      padding-top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    @include desktop-up {
+      padding-top: ppx(239);
+      display: block;
+    }
+
+    &__cloud {
+      display: block;
+      position: absolute;
+      animation: cloudMove 8s infinite;
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+
+      &--1 {
+        width: spx(401.981);
+        height: spx(98);
+        top: spx(111);
+        left: spx(-61);
+        @include tablet-up {
+          width: ppx(621 * 1.2);
+          height: ppx(152 * 1.2);
+          top: unset;
+          bottom: ppx(96) * 1.2;
+          left: ppx(161) * 1.2;
+        }
+        @include desktop-up {
+          width: ppx(621);
+          height: ppx(152);
+          bottom: ppx(96);
+          left: ppx(161);
+        }
+      }
+
+      &--2 {
+        width: spx(401.981);
+        height: spx(98);
+        top: spx(245);
+        right: spx(-145);
+        @include tablet-up {
+          width: ppx(621 * 1.2);
+          height: ppx(152 * 1.2);
+          top: unset;
+          bottom: ppx(221) * 1.2;
+          left: ppx(1180) * 1.2;
+        }
+        @include desktop-up {
+          width: ppx(621);
+          height: ppx(152);
+          right: ppx(1180);
+        }
+      }
+
+      &--3 {
+        display: none;
+        @include tablet-up {
+          display: block;
+          width: ppx(621) * 1.2;
+          height: ppx(152) * 1.2;
+          bottom: ppx(96) * 1.2;
+          right: ppx(-368) * 1.2;
+        }
+        @include desktop-up {
+          width: ppx(621);
+          height: ppx(152);
+          bottom: ppx(96);
+          right: ppx(-368);
+        }
+      }
+    }
+
+    &__balloon {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+      img {
+        display: block;
+        width: spx(185);
+        height: spx(372);
+        position: absolute;
+        left: spx(64);
+        top: spx(43);
+        @include tablet-up {
+          width: ppx(345 * 1.2);
+          height: ppx(694 * 1.2);
+          left: ppx(180 * 1.2);
+          top: ppx(109 * 1.2);
+        }
+        @include desktop-up {
+          width: ppx(345);
+          height: ppx(694);
+          left: ppx(180);
+          top: ppx(109);
+        }
+      }
+    }
+  }
+
+  .modal {
+    @include tablet-up {
+    }
+    @include desktop-up {
+    }
+
+    &__close {
+    }
+
+    &__close-icon {
+      display: block;
+      width: spx(130);
+      height: spx(130);
+      position: absolute;
+      right: spx(20);
+      top: spx(20);
+      @include tablet-up {
+        width: ppx(149 * 1.2);
+        height: ppx(149 * 1.2);
+        right: ppx(50 * 1.2);
+        top: ppx(30 * 1.2);
+      }
+      @include desktop-up {
+        width: ppx(149);
+        height: ppx(149);
+        right: ppx(50);
+        top: ppx(30);
+      }
+    }
+
+    &__content {
+      display: grid;
+      grid-template:
+        "nav"
+        "header";
+      gap: spx(70);
+      width: max-content;
+      margin-inline: auto;
+      @include tablet-up {
+        grid-template-areas:
+          "header"
+          "nav";
+        gap: ppx(98 * 1.2);
+        margin-inline: unset;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      @include desktop-up {
+        gap: ppx(98);
+        margin-right: ppx(425);
+      }
+    }
+
+    &__header {
+      grid-area: header;
+      display: flex;
+      flex-flow: column;
+      gap: spx(18);
+      width: max-content;
+      @include tablet-up {
+        gap: ppx(36 * 1.2);
+      }
+      @include desktop-up {
+        gap: ppx(36);
+      }
+    }
+
+    &__logo {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__logo-image {
+      width: spx(430);
+      height: spx(100.547);
+      display: block;
+      margin-inline: auto;
+      @include tablet-up {
+        width: ppx(851.2 * 1.2);
+        height: ppx(199.103 * 1.2);
+      }
+      @include desktop-up {
+        width: ppx(851.2);
+        height: ppx(199.103);
+      }
+    }
+
+    &__event-info {
+      display: flex;
+      align-items: baseline;
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__date {
+      color: var(--base_5, #102a4d);
+      font-family: "Zen Kaku Gothic Antique";
+      font-size: spx(37);
+      font-weight: 700;
+      line-height: normal;
+      @include tablet-up {
+        font-size: ppx(59 * 1.2);
+      }
+      @include desktop-up {
+        font-size: ppx(59);
+      }
+    }
+
+    &__time {
+      color: var(--base_5, #102a4d);
+      font-size: spx(25);
+      font-weight: 700;
+      line-height: normal;
+      @include tablet-up {
+        font-size: ppx(40 * 1.2);
+      }
+      @include desktop-up {
+        font-size: ppx(40);
+      }
+    }
+
+    &__separator {
+      color: var(--base_5, #102a4d);
+      font-family: "Zen Kaku Gothic Antique";
+      font-size: spx(37);
+      font-weight: 700;
+      line-height: normal;
+      @include tablet-up {
+        font-size: ppx(59 * 1.2);
+      }
+      @include desktop-up {
+        font-size: ppx(59);
+      }
+    }
+
+    &__nav {
+      grid-area: nav;
+      width: max-content;
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+  }
+
+  .navigation {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    gap: spx(15) spx(10);
+    @include tablet-up {
+      grid-template-columns: max-content max-content max-content;
+      gap: ppx(50 * 1.2);
+    }
+    @include desktop-up {
+      gap: ppx(50);
+    }
+
+    &__item {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__link {
+      display: grid;
+      place-items: center;
+      position: relative;
+      width: spx(330);
+      height: spx(73);
+      border-radius: spx(50);
+      background: var(--white, #fff);
+      transition: background-color 0.3s ease;
+      @include tablet-up {
+        width: ppx(420 * 1.2);
+        height: ppx(90 * 1.2);
+        border-radius: ppx(80 * 1.2);
+      }
+      @include desktop-up {
+        width: ppx(420);
+        height: ppx(90);
+        border-radius: ppx(80);
+      }
+
+      @include hover {
+        &:hover {
+          background: var(--logo_color_3, $logo_color_3);
+        }
+      }
+    }
+
+    &__content {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__text {
+      color: var(--base_5, #102a4d);
+      font-size: spx(28);
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      transition: color 0.3s ease;
+      @include tablet-up {
+        font-size: ppx(33 * 1.2);
+      }
+      @include desktop-up {
+        font-size: ppx(33);
+      }
+
+      @include hover {
+        .navigation__link:hover & {
+          color: white;
+        }
+      }
+    }
+
+    &__icon {
+      position: absolute;
+      width: spx(45.333);
+      height: spx(45.333);
+      aspect-ratio: 1/1;
+      top: 50%;
+      right: spx(13);
+      transform: translateY(-50%);
+      @include tablet-up {
+        width: ppx(56 * 1.2);
+        height: ppx(56 * 1.2);
+        right: ppx(16 * 1.2);
+      }
+      @include desktop-up {
+        width: ppx(56);
+        height: ppx(56);
+        right: ppx(16);
+      }
+
+      circle {
+        transition: fill 0.3s ease;
+      }
+
+      path {
+        transition: fill 0.3s ease;
+      }
+
+      @include hover {
+        .navigation__link:hover & {
+          circle {
+            fill: white;
+          }
+          path {
+            fill: var(--logo_color_2, $logo_color_2);
+          }
+        }
+      }
+    }
+  }
+
+  @keyframes cloudMove {
+    0% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(20%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+</style>

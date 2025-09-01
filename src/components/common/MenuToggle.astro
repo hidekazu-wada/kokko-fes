@@ -1,0 +1,44 @@
+---
+import menuOpenImage from "../../images/menu/menu-open.svg";
+---
+
+<button type="button" class="menu-toggle">
+  <img class="menu-toggle__icon" src={menuOpenImage.src} alt="menuを開く" />
+</button>
+<style lang="scss">
+  /* 必要なmixin/functionをインポート */
+  @import "../../styles/variables";
+  @import "../../styles/functions";
+  @import "../../styles/mixins";
+
+  .menu-toggle {
+    img {
+      position: fixed;
+      display: block;
+      width: spx(130);
+      height: spx(130);
+      top: spx(20);
+      right: spx(20);
+      z-index: 100;
+      @include tablet-up {
+        width: ppx(149) * 1.2;
+        height: ppx(149) * 1.2;
+        top: ppx(30) * 1.2;
+        right: ppx(49) * 1.2;
+      }
+      @include desktop-up {
+        width: ppx(149);
+        height: ppx(149);
+        top: ppx(30);
+        right: ppx(49);
+      }
+    }
+
+    &__icon {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+  }
+</style>
