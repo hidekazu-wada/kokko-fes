@@ -1,0 +1,261 @@
+---
+import logo from "../../images/common/logo.svg";
+import heroImage from "../../images/top/hero-img.svg";
+import cloudImage from "../../images/top/hero-cloud.svg";
+---
+
+<section class="hero">
+  <div class="hero__content">
+    <h1 class="hero__title">
+      <img class="hero__logo" src={logo.src} alt="コッコ祭り" />
+    </h1>
+    <div class="hero__date-wrapper">
+      <time class="hero__date" datetime="2025-12-07T12:00/2025-12-08T15:00">
+        <span class="hero__date-item">2025.12.7</span>
+        <span class="hero__date-item small">（土）12:00〜23:00 </span>
+        <span class="hero__date-item">/ 8</span>
+        <span class="hero__date-item small">（日）9:00〜15:00</span>
+      </time>
+    </div>
+    <address class="hero__venue">HAMAYOU リゾート</address>
+  </div>
+  <img class="hero__image" src={heroImage.src} alt="ヒーローイメージ" />
+  <img
+    class="hero__cloud-image cloud-1"
+    src={cloudImage.src}
+    alt="雲のイメージ"
+  />
+  <img
+    class="hero__cloud-image cloud-2"
+    src={cloudImage.src}
+    alt="雲のイメージ"
+  />
+  <img
+    class="hero__cloud-image cloud-3"
+    src={cloudImage.src}
+    alt="雲のイメージ"
+  />
+  <img
+    class="hero__cloud-image cloud-4"
+    src={cloudImage.src}
+    alt="雲のイメージ"
+  />
+  <img
+    class="hero__cloud-image cloud-5"
+    src={cloudImage.src}
+    alt="雲のイメージ"
+  />
+</section>
+
+<style lang="scss">
+  /* 必要なmixin/functionをインポート */
+  @import "../../styles/variables";
+  @import "../../styles/functions";
+  @import "../../styles/mixins";
+
+  .hero {
+    background: var(--base_1, #fffcf2);
+    padding-top: spx(301);
+    padding-bottom: spx(10);
+    @include tablet-up {
+      padding-top: ppx(120) * 1.2;
+      padding-bottom: ppx(70) * 1.2;
+    }
+    @include desktop-up {
+      padding-top: ppx(120);
+      padding-bottom: ppx(70);
+    }
+    &__content {
+      position: relative;
+      z-index: 2;
+    }
+
+    &__title {
+    }
+
+    &__logo {
+      display: block;
+      width: spx(354);
+      margin-inline: auto;
+      @include tablet-up {
+        width: ppx(567) * 1.2;
+      }
+      @include desktop-up {
+        width: ppx(567);
+      }
+    }
+    &__date-wrapper {
+      width: spx(667);
+      height: spx(60);
+      background-color: white;
+      border-radius: spx(50);
+      display: flex;
+      justify-content: center;
+      margin-inline: auto;
+      margin-top: spx(34);
+      @include tablet-up {
+        width: ppx(1066) * 1.2;
+        height: ppx(95) * 1.2;
+        border-radius: ppx(80) * 1.2;
+        margin-top: ppx(42) * 1.2;
+      }
+      @include desktop-up {
+        width: ppx(1066);
+        height: ppx(95);
+        border-radius: ppx(80);
+        margin-top: ppx(42);
+      }
+    }
+
+    &__date {
+      &-item {
+        color: var(--base_5, #102a4d);
+        font-size: spx(37);
+        font-weight: 700;
+        line-height: normal;
+        @include tablet-up {
+          font-size: ppx(59) * 1.2;
+        }
+        @include desktop-up {
+          font-size: ppx(59);
+        }
+        &.small {
+          font-size: spx(25);
+          @include tablet-up {
+            font-size: ppx(40) * 1.2;
+          }
+          @include desktop-up {
+            font-size: ppx(40);
+          }
+        }
+      }
+    }
+
+    &__venue {
+      color: var(--base_5, #102a4d);
+      font-size: spx(36);
+      font-weight: 700;
+      line-height: normal;
+      text-align: center;
+      margin-top: spx(15);
+      @include tablet-up {
+        font-size: ppx(45) * 1.2;
+        margin-top: ppx(37) * 1.2;
+      }
+      @include desktop-up {
+        font-size: ppx(45);
+        margin-top: ppx(37);
+      }
+    }
+
+    &__image {
+      display: block;
+      width: 100%;
+      margin-top: spx(62);
+      position: relative;
+      z-index: 2;
+      @include tablet-up {
+        margin-top: ppx(42) * 1.2;
+      }
+      @include desktop-up {
+        margin-top: ppx(42);
+      }
+    }
+
+    &__cloud-image {
+      position: absolute;
+      z-index: 1;
+      display: block;
+      animation: cloudMove 8s infinite;
+      &.cloud-1 {
+        width: spx(402);
+        top: spx(111);
+        left: spx(-61);
+        @include tablet-up {
+          width: ppx(621) * 1.2;
+          top: ppx(313) * 1.2;
+          left: unset;
+          right: ppx(323) * 1.2;
+        }
+        @include desktop-up {
+          width: ppx(621);
+          top: ppx(313);
+          right: ppx(323);
+        }
+      }
+      &.cloud-2 {
+        width: spx(402);
+        top: spx(275);
+        right: spx(-205);
+        @include tablet-up {
+          width: ppx(621) * 1.2;
+          right: unset;
+          top: ppx(540) * 1.2;
+          left: ppx(161) * 1.2;
+        }
+        @include desktop-up {
+          width: ppx(621);
+          top: ppx(540);
+          left: ppx(161);
+        }
+      }
+      &.cloud-3 {
+        width: spx(214);
+        top: spx(463);
+        left: spx(26);
+        @include tablet-up {
+          width: ppx(621) * 1.2;
+          top: ppx(567) * 1.2;
+          left: unset;
+          right: ppx(-368) * 1.2;
+        }
+        @include desktop-up {
+          width: ppx(621);
+          top: ppx(567);
+          right: ppx(-368);
+        }
+      }
+      &.cloud-4 {
+        width: spx(177);
+        top: spx(816);
+        right: spx(38);
+        @include tablet-up {
+          width: ppx(304) * 1.2;
+          top: ppx(921) * 1.2;
+          right: unset;
+          left: ppx(161) * 1.2;
+        }
+        @include desktop-up {
+          width: ppx(304);
+          top: ppx(921);
+          left: ppx(161);
+        }
+      }
+      &.cloud-5 {
+        display: none;
+        @include tablet-up {
+          display: block;
+          width: ppx(291) * 1.2;
+          top: ppx(934) * 1.2;
+          right: ppx(79) * 1.2;
+        }
+        @include desktop-up {
+          width: ppx(291);
+          top: ppx(934);
+          right: ppx(79);
+        }
+      }
+      @keyframes cloudMove {
+        0% {
+          transform: translateX(0);
+        }
+        50% {
+          transform: translateX(20%);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+    }
+  }
+</style>

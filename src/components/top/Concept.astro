@@ -1,0 +1,123 @@
+---
+import conceptTitle from "../../images/top/concept-title.svg";
+---
+
+<section class="concept">
+  <svg
+    class="concept__wave"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 2559 170"
+    fill="none"
+  >
+    <path
+      d="M2559 0H0.00146484V70C0.00146484 70 315.501 170 639.751 170C964.001 170 1481.5 20 1812 20C2142.5 20 2559 120 2559 120V0Z"
+      fill="#FFFCF2"></path>
+  </svg>
+  <div class="concept__container">
+    <header class="concept__header">
+      <figure class="concept__title-image">
+        <img src={conceptTitle.src} alt="concept" />
+      </figure>
+      <h2 class="concept__title">
+        ゆったり安らぐ<br />
+        のびのび遊ぶ
+      </h2>
+    </header>
+    <p class="concept__description">
+      急速に変化する世界、慌ただしい日常から離れて、大人も子供も心身をデトックス。西湖の豊かな自然に囲まれた環境で、ゆったりと過ごし、感性を解放する2日間。HAMAYOUリゾートが長年培ってきた自然体験のノウハウと、豊かな環境資源を活かした多様なコンテンツをお楽しみください。きっと、かけがえのない思い出と新たな発見が、皆様の日常生活へとつながる「ハレの日」となることでしょう。ぜひ、ご家族やお友達と一緒に、西湖の自然の中で心豊かな時間をお過ごしください。
+    </p>
+  </div>
+</section>
+
+<style lang="scss">
+  /* 必要なmixin/functionをインポート */
+  @import "../../styles/variables";
+  @import "../../styles/functions";
+  @import "../../styles/mixins";
+
+  .concept {
+    background-color: white;
+    &__wave {
+      display: block;
+      width: 100%;
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+    &__container {
+      display: flex;
+      flex-flow: column;
+      gap: spx(46);
+      margin-top: spx(90);
+      padding-bottom: spx(50);
+      @include tablet-up {
+        flex-flow: row;
+        gap: ppx(330) * 1.2;
+        justify-content: center;
+        margin-top: ppx(150) * 1.2;
+        padding-bottom: ppx(90) * 1.2;
+      }
+      @include desktop-up {
+        gap: ppx(330);
+        margin-top: ppx(150);
+        padding-bottom: ppx(90);
+      }
+    }
+    &__header {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+    &__title-image {
+      width: spx(405);
+      margin-inline: auto;
+      @include tablet-up {
+        margin-inline: unset;
+        width: ppx(405) * 1.2;
+      }
+      @include desktop-up {
+        width: ppx(405);
+      }
+      img {
+        display: block;
+        width: 100%;
+      }
+    }
+    &__title {
+      color: var(--base_5, #102a4d);
+      font-size: spx(60);
+      font-weight: 700;
+      line-height: 160%;
+      letter-spacing: spx(6);
+      text-align: center;
+      @include tablet-up {
+        text-align: left;
+        font-size: ppx(90) * 1.2;
+        letter-spacing: ppx(9) * 1.2;
+      }
+      @include desktop-up {
+        font-size: ppx(90);
+        letter-spacing: ppx(9);
+      }
+    }
+    &__description {
+      color: var(--base_5, #102a4d);
+      font-size: spx(28);
+      font-weight: 700;
+      line-height: 180%;
+      width: spx(560);
+      margin-inline: auto;
+      @include tablet-up {
+        margin-inline: unset;
+        font-size: ppx(30) * 1.2;
+        width: ppx(695) * 1.2;
+      }
+      @include desktop-up {
+        font-size: ppx(30);
+        width: ppx(695);
+      }
+    }
+  }
+</style>

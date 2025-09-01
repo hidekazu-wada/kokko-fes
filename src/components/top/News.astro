@@ -1,0 +1,285 @@
+---
+import newsHeadMobile from "../../images/top/news-head-mobile.svg";
+import newsHeadTabletUp from "../../images/top/news-head-tablet-up.svg";
+---
+
+<section class="news">
+  <picture class="news__head-image">
+    <source
+      media="(min-width: 1024px)"
+      srcset={newsHeadTabletUp.src.toString()}
+    />
+    <source
+      media="(min-width: 744px)"
+      srcset={newsHeadTabletUp.src.toString()}
+    />
+    <img src={newsHeadMobile.src} alt="kokko festival" class="news__head-img" />
+  </picture>
+  <div class="news__container">
+    <header>
+      <h2 class="news__title">
+        <span>お知らせ・最新情報</span>
+      </h2>
+    </header>
+    <ul class="news__list">
+      <li class="news__item">
+        <article class="news__article">
+          <header class="news__article-header">
+            <time class="news__date" datetime="2025-08-19">2025/08/19</time>
+            <div class="news__category-wrapper">
+              <span class="news__category">イベント情報</span>
+            </div>
+          </header>
+          <h3 class="news__article-title">
+            <a href="#" class="news__link">
+              今年の特別企画「伝統工芸体験コーナー」について
+            </a>
+          </h3>
+        </article>
+      </li>
+      <li class="news__item">
+        <article class="news__article">
+          <header class="news__article-header">
+            <time class="news__date" datetime="2025-08-19">2025/08/19</time>
+            <div class="news__category-wrapper">
+              <span class="news__category">イベント情報</span>
+            </div>
+          </header>
+          <h3 class="news__article-title">
+            <a href="#" class="news__link">
+              今年の特別企画「伝統工芸体験コーナー」について
+            </a>
+          </h3>
+        </article>
+      </li>
+      <li class="news__item">
+        <article class="news__article">
+          <header class="news__article-header">
+            <time class="news__date" datetime="2025-08-19">2025/08/19</time>
+            <div class="news__category-wrapper">
+              <span class="news__category">イベント情報</span>
+            </div>
+          </header>
+          <h3 class="news__article-title">
+            <a href="#" class="news__link">
+              今年の特別企画「伝統工芸体験コーナー」について
+            </a>
+          </h3>
+        </article>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style lang="scss">
+  /* 必要なmixin/functionをインポート */
+  @import "../../styles/variables";
+  @import "../../styles/functions";
+  @import "../../styles/mixins";
+
+  .news {
+    @include tablet-up {
+    }
+    @include desktop-up {
+    }
+    &__head-image {
+      width: 100%;
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+    &__head-img {
+      display: block;
+      width: 100%;
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+    &__container {
+      background: var(--base_2, #fcf2c9);
+      padding-top: spx(40);
+      padding-bottom: spx(60);
+      @include tablet-up {
+        padding-top: ppx(77) * 1.2;
+        padding-bottom: ppx(191) * 1.2;
+      }
+      @include desktop-up {
+        padding-top: ppx(77);
+        padding-bottom: ppx(191);
+      }
+    }
+    &__title {
+      width: spx(370);
+      height: spx(74);
+      display: grid;
+      place-items: center;
+      background-color: white;
+      border-radius: spx(50);
+      margin-inline: auto;
+      @include tablet-up {
+        width: ppx(460) * 1.2;
+        height: ppx(92) * 1.2;
+        border-radius: ppx(50) * 1.2;
+      }
+      @include desktop-up {
+        width: ppx(460);
+        height: ppx(92);
+        border-radius: ppx(50);
+      }
+      span {
+        color: var(--base_5, #102a4d);
+        font-size: spx(30);
+        font-weight: 700;
+        line-height: 180%;
+        @include tablet-up {
+          font-size: ppx(40) * 1.2;
+        }
+        @include desktop-up {
+          font-size: ppx(40);
+        }
+      }
+    }
+    &__list {
+      display: flex;
+      flex-flow: column;
+      gap: spx(20);
+      width: spx(560);
+      margin-inline: auto;
+      margin-top: spx(64);
+      @include tablet-up {
+        gap: ppx(30) * 1.2;
+        width: ppx(1350) * 1.2;
+        margin-top: ppx(134) * 1.2;
+      }
+      @include desktop-up {
+        gap: ppx(30);
+        width: ppx(1350);
+        margin-top: ppx(134);
+      }
+    }
+    &__item {
+      &:after {
+        content: "";
+        display: block;
+        background: linear-gradient(
+            to right,
+            var(--base_5, #102a4d),
+            var(--base_5, #102a4d) 25%,
+            rgba(0, 0, 0, 0) 25%,
+            rgba(0, 0, 0, 0) 100%
+          )
+          0% 0%;
+        background-size: 4px 1px;
+        width: 100%;
+        height: 1px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: spx(18);
+        @include tablet-up {
+          margin-top: ppx(30) * 1.2;
+        }
+        @include desktop-up {
+          margin-top: ppx(30);
+        }
+      }
+    }
+    &__link {
+      transition: color 0.3s ease;
+      @include hover {
+        &:hover {
+          color: var(--logo_color_1, #528ca2);
+        }
+      }
+    }
+    &__article {
+      display: flex;
+      flex-flow: column;
+      gap: spx(8);
+      @include tablet-up {
+        display: grid;
+        grid-template-columns: max-content auto;
+        align-items: baseline;
+        gap: ppx(30) * 1.2;
+        padding: 0 ppx(20) * 1.2;
+      }
+      @include desktop-up {
+        gap: ppx(30);
+        padding: 0 ppx(20);
+      }
+    }
+    &__article-header {
+      display: flex;
+      gap: spx(15);
+      align-items: center;
+      @include tablet-up {
+        gap: ppx(30) * 1.2;
+      }
+      @include desktop-up {
+        gap: ppx(30);
+      }
+    }
+    &__article:has(.news__link:hover) &__category-wrapper {
+      @include hover {
+        background: var(--logo_color_1, #528ca2);
+      }
+    }
+    &__date {
+      color: var(--base_5, #102a4d);
+      font-size: spx(30);
+      font-weight: 700;
+      line-height: 160%;
+      @include tablet-up {
+        font-size: ppx(30) * 1.2;
+        line-height: 180%;
+      }
+      @include desktop-up {
+        font-size: ppx(30);
+      }
+    }
+    &__category-wrapper {
+      width: spx(220);
+      height: spx(47);
+      border-radius: spx(15);
+      background: var(--logo_color_3, #c99e2d);
+      display: grid;
+      place-items: center;
+      transition: background-color 0.3s ease;
+      @include tablet-up {
+        width: ppx(220) * 1.2;
+        height: ppx(50) * 1.2;
+        border-radius: ppx(15) * 1.2;
+      }
+      @include desktop-up {
+        width: ppx(220);
+        height: ppx(50);
+        border-radius: ppx(15);
+      }
+    }
+    &__category {
+      color: var(--base_1, #fffcf2);
+      font-size: spx(26);
+      font-weight: 700;
+      line-height: 180%;
+      @include tablet-up {
+        font-size: ppx(28) * 1.2;
+      }
+      @include desktop-up {
+        font-size: ppx(28);
+      }
+    }
+    &__article-title {
+      color: var(--base_5, #102a4d);
+      font-size: spx(26);
+      font-weight: 700;
+      line-height: 160%;
+      @include tablet-up {
+        font-size: ppx(30) * 1.2;
+      }
+      @include desktop-up {
+        font-size: ppx(30);
+      }
+    }
+  }
+</style>

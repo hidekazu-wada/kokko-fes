@@ -1,0 +1,349 @@
+---
+import logo from "../../images/common/logo.svg";
+---
+
+<footer class="footer">
+  <div class="footer__container">
+    <div class="footer__top">
+      <a href="#"
+        ><img class="footer__logo" src={logo.src} alt="コッコ祭り" /></a
+      >
+      <div class="footer__archive">
+        <a href="#" class="footer__archive-link">過去のコッコ祭りを見る　＞</a>
+      </div>
+    </div>
+    <nav class="footer__nav">
+      <section class="footer__section">
+        <h3 class="footer__section-title">イベント情報</h3>
+        <ul class="footer__section-list">
+          <li class="footer__section-item">
+            <a href="#" class="footer__section-link">開催概要</a>
+          </li>
+          <li class="footer__section-item">
+            <a href="#" class="footer__section-link">会場マップ</a>
+          </li>
+          <li class="footer__section-item">
+            <a href="#" class="footer__section-link">タイムスケジュール</a>
+          </li>
+        </ul>
+      </section>
+      <section class="footer__section">
+        <h3 class="footer__section-title">参加・出展</h3>
+        <ul class="footer__section-list">
+          <li class="footer__section-item">
+            <a href="#" class="footer__section-link">出展者募集</a>
+          </li>
+          <li class="footer__section-item">
+            <a href="#" class="footer__section-link">ボランティア募集</a>
+          </li>
+        </ul>
+      </section>
+      <section class="footer__section">
+        <h3 class="footer__section-title">お問い合わせ</h3>
+        <ul class="footer__section-list">
+          <li class="footer__section-item">
+            <a href="#" class="footer__section-link">よくある質問</a>
+          </li>
+          <li class="footer__section-item">
+            <a href="#" class="footer__section-link">お問い合わせ</a>
+          </li>
+        </ul>
+      </section>
+    </nav>
+  </div>
+  <div class="footer__copyright">© 2025 kokko-fes実行委員会</div>
+</footer>
+<style lang="scss">
+  /* 必要なmixin/functionをインポート */
+  @import "../../styles/variables";
+  @import "../../styles/functions";
+  @import "../../styles/mixins";
+
+  .footer {
+    background: #56b877;
+    color: white;
+    padding-top: spx(70);
+    padding-bottom: spx(90);
+    @include tablet-up {
+      padding-top: 0;
+      padding-bottom: ppx(55) * 1.2;
+    }
+    @include desktop-up {
+      padding-bottom: ppx(55);
+    }
+
+    &__container {
+      @include tablet-up {
+        display: flex;
+        align-items: center;
+        gap: 9vw;
+        justify-content: center;
+      }
+      @include desktop-up {
+        justify-content: unset;
+        gap: ppx(376);
+        margin-left: ppx(200);
+      }
+    }
+
+    &__top {
+      @include tablet-up {
+        display: flex;
+        align-items: center;
+        gap: ppx(115) * 1.2;
+      }
+      @include desktop-up {
+        gap: ppx(115);
+      }
+    }
+
+    &__logo {
+      display: block;
+      width: spx(227);
+      margin-inline: auto;
+      @include tablet-up {
+        width: ppx(270) * 1.2;
+        margin-inline: unset;
+      }
+      @include desktop-up {
+        width: ppx(270);
+      }
+    }
+
+    &__archive {
+      position: relative;
+      width: max-content;
+      margin-inline: auto;
+      margin-top: spx(61);
+      @include tablet-up {
+        width: 17vw;
+        margin-inline: unset;
+        margin-top: 0;
+        padding-bottom: ppx(11) * 1.2;
+      }
+      @include desktop-up {
+        width: ppx(351);
+        padding-bottom: ppx(11);
+      }
+
+      &-link {
+        font-size: spx(28);
+        font-weight: 700;
+        line-height: 180%;
+        transition: color 0.3s ease;
+
+        @include tablet-up {
+          font-size: ppx(27) * 1.2;
+        }
+        @include desktop-up {
+          font-size: ppx(27);
+        }
+
+        @include hover {
+          &:hover {
+            color: $logo_color_2;
+          }
+        }
+      }
+
+      &:after {
+        @include tablet-up {
+          content: "";
+          bottom: 0;
+          display: block;
+          position: absolute;
+          background:
+            linear-gradient(
+              to right,
+              white,
+              white 25%,
+              rgba(0, 0, 0, 0) 25%,
+              rgba(0, 0, 0, 0) 100%
+            ),
+            0% 0%;
+          background-size: 4px 1px;
+          width: 100%;
+          height: 1px;
+          margin-left: auto;
+          margin-right: auto;
+          transition: background 0.3s ease;
+        }
+      }
+
+      @include hover {
+        &-link:hover {
+          ~ * {
+            pointer-events: none;
+          }
+        }
+
+        &-link:hover + * ~ &:after,
+        &:has(&-link:hover):after {
+          @include tablet-up {
+            background: linear-gradient(
+              to right,
+              $logo_color_2,
+              $logo_color_2 25%,
+              rgba(0, 0, 0, 0) 25%,
+              rgba(0, 0, 0, 0) 100%
+            );
+            background-size: 4px 1px;
+          }
+        }
+      }
+    }
+
+    &__nav {
+      margin-top: spx(80);
+      display: flex;
+      flex-flow: column;
+      gap: spx(50);
+      @include tablet-up {
+        margin-top: 0;
+        flex-flow: row;
+        gap: ppx(90) * 1.2;
+      }
+      @include desktop-up {
+        gap: ppx(90);
+      }
+    }
+
+    &__section {
+      width: spx(560);
+      margin-inline: auto;
+      text-align: center;
+      @include tablet-up {
+        width: ppx(293) * 1.2;
+        margin-inline: unset;
+        text-align: left;
+        display: flex;
+        flex-flow: column;
+        gap: ppx(14) * 1.2;
+      }
+      @include desktop-up {
+        width: ppx(293);
+        gap: ppx(14);
+      }
+
+      &-title {
+        font-size: spx(33);
+        font-weight: 700;
+        line-height: 180%;
+        position: relative;
+        padding-bottom: spx(14);
+        @include tablet-up {
+          font-size: ppx(33) * 1.2;
+          padding-bottom: 0;
+        }
+        @include desktop-up {
+          font-size: ppx(33);
+        }
+        &:after {
+          content: "";
+          bottom: 0;
+          display: block;
+          position: absolute;
+          background:
+            linear-gradient(
+              to right,
+              white,
+              white 25%,
+              rgba(0, 0, 0, 0) 25%,
+              rgba(0, 0, 0, 0) 100%
+            ),
+            0% 0%;
+          background-size: 4px 1px;
+          width: 100%;
+          height: 1px;
+          margin-left: auto;
+          margin-right: auto;
+          @include tablet-up {
+            display: none;
+          }
+        }
+      }
+
+      &-list {
+        margin-top: spx(14);
+        @include tablet-up {
+          position: relative;
+          padding-left: ppx(25);
+          margin-top: 0;
+          margin-left: ppx(16) * 1.2;
+          display: flex;
+          flex-flow: column;
+          gap: ppx(5) * 1.2;
+          @include desktop-up {
+            padding-left: ppx(25);
+            margin-left: ppx(16);
+            gap: ppx(5);
+          }
+
+          &::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 1px;
+            background: linear-gradient(
+              to bottom,
+              white,
+              white 25%,
+              rgba(0, 0, 0, 0) 25%,
+              rgba(0, 0, 0, 0) 100%
+            );
+            background-size: 2px 4px;
+          }
+        }
+      }
+
+      &-item {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &-link {
+        font-size: spx(30);
+        font-weight: 500;
+        line-height: 180%;
+        transition: color 0.3s ease;
+
+        @include tablet-up {
+          font-size: ppx(28) * 1.2;
+        }
+        @include desktop-up {
+          font-size: ppx(28);
+        }
+
+        @include hover {
+          &:hover {
+            color: $logo_color_2;
+          }
+        }
+      }
+    }
+
+    &__copyright {
+      margin-top: spx(110);
+      color: #fff;
+      text-align: center;
+      font-size: spx(27);
+      font-weight: 700;
+      line-height: 180%;
+      @include tablet-up {
+        text-align: right;
+        margin-top: ppx(62) * 1.2;
+        margin-right: ppx(300) * 1.2;
+        font-size: ppx(27) * 1.2;
+      }
+      @include desktop-up {
+        margin-top: ppx(62);
+        margin-right: ppx(300);
+        font-size: ppx(27);
+      }
+    }
+  }
+</style>
