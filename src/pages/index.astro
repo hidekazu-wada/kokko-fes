@@ -353,6 +353,7 @@ import Footer from "../components/common/Footer.astro";
     &__cloud {
       display: block;
       position: absolute;
+      animation: cloudMove 8s infinite;
       @include tablet-up {
       }
       @include desktop-up {
@@ -670,6 +671,18 @@ import Footer from "../components/common/Footer.astro";
         height: ppx(56);
         right: ppx(16);
       }
+    }
+  }
+
+  @keyframes cloudMove {
+    0% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(20%);
+    }
+    100% {
+      transform: translateX(0);
     }
   }
 </style>
