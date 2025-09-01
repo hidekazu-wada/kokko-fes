@@ -6,6 +6,8 @@
 
 // 4. その他のスタイル（必要に応じて追加）
 html {
+    width: 100vw;
+    overflow-x: hidden;
     // Flash Of Unstyled Text
     // visibility: hidden;
     // opacity: 0;
