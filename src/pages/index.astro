@@ -288,6 +288,57 @@ import Footer from "../components/common/Footer.astro";
       <!-- footer -->
       <Footer />
     </main>
+  
+  <script>
+    // メニューの開閉機能
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuToggle = document.querySelector('.menu-toggle');
+      const menuClose = document.querySelector('.modal__close');
+      const menu = document.querySelector('.menu');
+      const body = document.body;
+
+      // 必要な要素が存在しない場合は処理を中止
+      if (!menuToggle || !menuClose || !menu) return;
+
+      // メニューを開く
+      function openMenu() {
+        menu.classList.add('is-open');
+        body.classList.add('menu-open');
+      }
+
+      // メニューを閉じる
+      function closeMenu() {
+        menu.classList.remove('is-open');
+        body.classList.remove('menu-open');
+      }
+
+      // メニュー開くボタンのイベントリスナー
+      menuToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        openMenu();
+      });
+
+      // メニュー閉じるボタンのイベントリスナー
+      menuClose.addEventListener('click', function(e) {
+        e.preventDefault();
+        closeMenu();
+      });
+
+      // ESCキーでメニューを閉じる
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && menu.classList.contains('is-open')) {
+          closeMenu();
+        }
+      });
+
+      // メニューの背景をクリックしたときに閉じる
+      menu.addEventListener('click', function(e) {
+        if (e.target === menu) {
+          closeMenu();
+        }
+      });
+    });
+  </script>
   </body>
 </html>
 
@@ -296,6 +347,12 @@ import Footer from "../components/common/Footer.astro";
   @import "../styles/variables";
   @import "../styles/functions";
   @import "../styles/mixins";
+
+  body {
+    &.menu-open {
+      overflow: hidden;
+    }
+  }
 
   main {
     position: relative;
@@ -332,13 +389,24 @@ import Footer from "../components/common/Footer.astro";
   }
 
   .menu {
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
     background: var(--base_2, #fcf2c9);
-    z-index: 10;
+    z-index: 1000;
     width: 100vw;
     height: 100vh;
     overflow-x: hidden;
     padding-top: spx(450);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    
+    &.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+    
     @include tablet-up {
       padding-top: 0;
       display: flex;
