@@ -695,6 +695,7 @@ import Footer from "../components/common/Footer.astro";
       height: spx(73);
       border-radius: spx(50);
       background: var(--white, #fff);
+      transition: background-color 0.3s ease;
       @include tablet-up {
         width: ppx(420 * 1.2);
         height: ppx(90 * 1.2);
@@ -704,6 +705,12 @@ import Footer from "../components/common/Footer.astro";
         width: ppx(420);
         height: ppx(90);
         border-radius: ppx(80);
+      }
+
+      @include hover {
+        &:hover {
+          background: var(--logo_color_3, $logo_color_3);
+        }
       }
     }
 
@@ -720,11 +727,18 @@ import Footer from "../components/common/Footer.astro";
       font-style: normal;
       font-weight: 700;
       line-height: normal;
+      transition: color 0.3s ease;
       @include tablet-up {
         font-size: ppx(33 * 1.2);
       }
       @include desktop-up {
         font-size: ppx(33);
+      }
+
+      @include hover {
+        .navigation__link:hover & {
+          color: white;
+        }
       }
     }
 
@@ -745,6 +759,25 @@ import Footer from "../components/common/Footer.astro";
         width: ppx(56);
         height: ppx(56);
         right: ppx(16);
+      }
+
+      circle {
+        transition: fill 0.3s ease;
+      }
+
+      path {
+        transition: fill 0.3s ease;
+      }
+
+      @include hover {
+        .navigation__link:hover & {
+          circle {
+            fill: white;
+          }
+          path {
+            fill: var(--logo_color_2, $logo_color_2);
+          }
+        }
       }
     }
   }
