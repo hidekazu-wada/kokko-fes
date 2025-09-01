@@ -1,0 +1,309 @@
+---
+// メインSCSSファイルをインポート
+import "../styles/main.scss";
+
+// 画像
+import logoHorizontal from "../images/menu/logo-horizontal.svg";
+import HeaderTree from "../images/common/page-header-tree.svg";
+import PageHeadWaveMobile from "../images/common/page-header-wave-mobile.svg";
+import PageHeadWaveTablet from "../images/common/page-header-wave-tablet.svg";
+import PageHeadWaveDesktop from "../images/common/page-header-wave-desktop.svg";
+
+// コンポーネント
+import MenuToggle from "../components/common/MenuToggle.astro";
+import Menu from "../components/common/Menu.astro";
+import Footer from "../components/common/Footer.astro";
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;900&display=swap"
+      rel="stylesheet"
+    />
+    <title>ページが見つかりません - コッコ祭り</title>
+  </head>
+  <body>
+    <main>
+      <MenuToggle />
+      <Menu />
+      <div class="page-header">
+        <h1 class="page-header__title">
+          <a href="/" class="page-header__logo-link">
+            <img
+              class="page-header__logo-image"
+              src={logoHorizontal.src}
+              alt="コッコ祭りロゴ"
+            />
+          </a>
+        </h1>
+        <picture>
+          <source
+            media="(min-width: 1024px)"
+            srcset={PageHeadWaveDesktop.src}
+          />
+          <source media="(min-width: 744px)" srcset={PageHeadWaveTablet.src} />
+          <img src={PageHeadWaveMobile.src} alt="" class="page-header__wave" />
+        </picture>
+        <img
+          class="page-header__tree page-header__tree--1"
+          src={HeaderTree.src}
+          alt="装飾用の木のイラスト"
+        />
+        <img
+          class="page-header__tree page-header__tree--2"
+          src={HeaderTree.src}
+          alt="装飾用の木のイラスト"
+        />
+      </div>
+      <!-- 404 error content -->
+      <section class="error-404">
+        <div class="error-404__container">
+          <h2 class="error-404__title"><span>NOT</span> FOUND</h2>
+          <p class="error-404__message">
+            お探しのページが見つかりませんでした。<br />
+            トップページへご案内いたします。
+          </p>
+          <p class="error-404__timer">
+            ※このページは<time class="error-404__countdown">10</time
+            >秒後に自動的にジャンプします。
+          </p>
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 2560 210"
+          fill="none"
+          class="page-bottom__wave"
+          role="img"
+          aria-label="装飾的な波模様"
+        >
+          <path
+            d="M0 210H2560V100C2560 100 2244.38 0 1920 0C1595.62 0 1077.92 150 747.292 150C416.663 150 0 50 0 50V210Z"
+            fill="#55B877"></path>
+        </svg>
+      </section>
+      <!-- footer -->
+      <Footer />
+    </main>
+  </body>
+</html>
+
+<style lang="scss">
+  /* 必要なmixin/functionをインポート */
+  @import "../styles/variables";
+  @import "../styles/functions";
+  @import "../styles/mixins";
+
+  body {
+    &.menu-open {
+      overflow: hidden;
+    }
+  }
+
+  main {
+    position: relative;
+  }
+
+  .page-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    @include tablet-up {
+    }
+    @include desktop-up {
+    }
+
+    &__title {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__logo-link {
+      display: block;
+      width: max-content;
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__logo-image {
+      display: block;
+      width: spx(289);
+      height: spx(67.695);
+      flex-shrink: 0;
+      top: spx(51);
+      left: spx(28);
+      position: relative;
+      z-index: 3;
+      @include tablet-up {
+        width: tpx(267);
+        height: tpx(62);
+        top: tpx(51);
+        left: tpx(51);
+      }
+      @include desktop-up {
+        width: ppx(333.999);
+        height: ppx(78.001);
+        top: ppx(64);
+        left: ppx(64);
+      }
+    }
+
+    &__wave {
+      position: absolute;
+      display: block;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__tree {
+      position: absolute;
+      display: block;
+      z-index: 1;
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+
+      &--1 {
+        width: spx(205);
+        height: spx(135.333);
+        flex-shrink: 0;
+        top: spx(140);
+        left: 0;
+        @include tablet-up {
+          width: tpx(492);
+          height: tpx(324);
+          top: tpx(63);
+        }
+        @include desktop-up {
+          width: ppx(615);
+          height: ppx(406);
+          top: ppx(79);
+        }
+      }
+
+      &--2 {
+        width: spx(205);
+        height: spx(135.333);
+        flex-shrink: 0;
+        top: spx(116);
+        right: 0;
+        transform: scaleX(-1);
+        @include tablet-up {
+          width: tpx(492);
+          height: tpx(324);
+          top: tpx(23);
+        }
+        @include desktop-up {
+          width: ppx(615);
+          height: ppx(406);
+          top: ppx(29);
+        }
+      }
+    }
+  }
+
+  .error-404 {
+    position: relative;
+    height: 90svh;
+    display: grid;
+    place-items: center;
+    @include tablet-up {
+    }
+    @include desktop-up {
+    }
+
+    &__container {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__title {
+      color: var(--base_5, #102a4d);
+      font-size: spx(70);
+      font-weight: 700;
+      line-height: 130%;
+      text-align: center;
+      @include tablet-up {
+        font-size: tpx(110);
+      }
+      @include desktop-up {
+        font-size: ppx(110);
+      }
+      span {
+        color: var(--base_5, #c99e2d);
+      }
+    }
+
+    &__message {
+      color: var(--base_5, #102a4d);
+      text-align: center;
+      font-size: spx(28);
+      font-weight: 700;
+      line-height: 180%;
+      margin: spx(30) 0 spx(18);
+      @include tablet-up {
+        font-size: tpx(33);
+        margin: tpx(40) 0 tpx(40);
+      }
+      @include desktop-up {
+        font-size: ppx(33);
+        margin: ppx(44) 0 ppx(36);
+      }
+    }
+
+    &__timer {
+      color: var(--base_5, #102a4d);
+      text-align: center;
+      font-size: spx(26);
+      font-weight: 700;
+      line-height: 180%;
+      @include tablet-up {
+        font-size: tpx(33);
+      }
+      @include desktop-up {
+        font-size: ppx(33);
+      }
+    }
+
+    &__countdown {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+  }
+
+  .page-bottom__wave {
+    display: block;
+    width: 100%;
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    @include tablet-up {
+    }
+    @include desktop-up {
+    }
+  }
+</style>
