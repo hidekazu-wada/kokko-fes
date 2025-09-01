@@ -35,7 +35,7 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
       <Menu />
       <PageHeader />
       <!-- 404 error content -->
-      <section class="page-wrapper error-404">
+      <section class="page-wrapper watch">
         <PageBottomWave />
       </section>
       <!-- footer -->
@@ -60,76 +60,12 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
     position: relative;
   }
 
-  .error-404 {
+  .watch {
     position: relative;
     height: 90svh;
-    display: grid;
-    place-items: center;
     @include tablet-up {
     }
     @include desktop-up {
-    }
-
-    &__container {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__title {
-      color: var(--base_5, #102a4d);
-      font-size: spx(70);
-      font-weight: 700;
-      line-height: 130%;
-      text-align: center;
-      @include tablet-up {
-        font-size: tpx(110);
-      }
-      @include desktop-up {
-        font-size: ppx(110);
-      }
-      span {
-        color: var(--base_5, #c99e2d);
-      }
-    }
-
-    &__message {
-      color: var(--base_5, #102a4d);
-      text-align: center;
-      font-size: spx(28);
-      font-weight: 700;
-      line-height: 180%;
-      margin: spx(30) 0 spx(18);
-      @include tablet-up {
-        font-size: tpx(33);
-        margin: tpx(40) 0 tpx(40);
-      }
-      @include desktop-up {
-        font-size: ppx(33);
-        margin: ppx(44) 0 ppx(36);
-      }
-    }
-
-    &__timer {
-      color: var(--base_5, #102a4d);
-      text-align: center;
-      font-size: spx(26);
-      font-weight: 700;
-      line-height: 180%;
-      @include tablet-up {
-        font-size: tpx(33);
-      }
-      @include desktop-up {
-        font-size: ppx(33);
-      }
-    }
-
-    &__countdown {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
     }
   }
 </style>
