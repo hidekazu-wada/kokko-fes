@@ -170,68 +170,10 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
                 </dl>
               </article>
             </li>
-            <li class="watch__item">
-              <article class="watch__card">
-                <a href="#" class="watch__card-link">
-                  <div class="watch__card-image-wrapper">
-                    <picture class="watch__card-image">
-                      <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-                      <source
-                        media="(min-width: 1024px)"
-                        srcset={Demo.srcSet.toString()}
-                      />
-                      <!-- タブレット（744px以上）→ 中解像度版 -->
-                      <source
-                        media="(min-width: 744px)"
-                        srcset={Demo.srcSet.toString()}
-                      />
-                      <!-- スマホ（744px未満）→ 最小解像度版 -->
-                      <img
-                        src={Demo.src}
-                        alt="和太鼓演奏"
-                        class="watch__card-img"
-                      />
-                    </picture>
-                    <div class="watch__card-overlay">
-                      <span class="watch__card-title">和太鼓演奏</span>
-                    </div>
-                    <svg
-                      class="watch__card-play-icon"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 84 85"
-                      fill="none"
-                      role="img"
-                      aria-label="再生ボタン"
-                    >
-                      <circle
-                        cx="42"
-                        cy="42.0547"
-                        r="39.5"
-                        fill="#C99E2D"
-                        stroke="#FFFCF2"
-                        stroke-width="5"></circle>
-                      <path
-                        d="M35.5688 29.1786L34.2059 31.1658L32.9732 33.1871L35.0255 34.523L37.1236 35.9031L39.1942 37.3167L41.2923 38.6969L43.4503 39.9806L45.5961 41.4428L43.3327 42.7278L41.2924 44.2257L39.1694 45.5763L37.0503 46.95L34.9561 48.3574L32.7448 49.6952L34.2082 51.6889L35.4387 53.8289L37.4981 52.3038L39.6065 50.9511L41.8062 49.7394L43.7942 48.1887L45.969 46.9433L48.0671 45.559L50.138 44.1557L52.2798 42.8304L54.3654 41.4293L52.2137 40.154L50.2262 38.6398L48.0445 37.4127L46.0655 35.8922L43.8647 34.6924L41.8281 33.2537L39.7745 31.8275L37.6504 30.5187L35.5688 29.1786Z"
-                        fill="#FFFCF2"></path>
-                    </svg>
-                  </div>
-                </a>
-                <dl class="watch__card-details">
-                  <div class="watch__card-detail">
-                    <dt class="watch__card-detail-label">場所：</dt>
-                    <dd class="watch__card-detail-value">展示ホールA</dd>
-                  </div>
-                  <div class="watch__card-detail">
-                    <dt class="watch__card-detail-label">時間：</dt>
-                    <dd class="watch__card-detail-value">10:00-16:00</dd>
-                  </div>
-                </dl>
-              </article>
-            </li>
           </ul>
         </div>
         <nav class="breadcrumb" aria-label="パンくずリスト">
-          <a href="#" class="breadcrumb__link">トップ </a>
+          <a href="/" class="breadcrumb__link">トップ</a>
           <span class="breadcrumb__separator">＞</span>
           <span class="breadcrumb__current">見る</span>
         </nav>
@@ -262,17 +204,24 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
   .watch {
     padding-top: spx(296);
     position: relative;
+    min-height: 90vh;
+    padding-bottom: spx(99);
     @include tablet-up {
       padding-top: ppx(253) * 1.2;
+      padding-bottom: ppx(228) * 1.2;
     }
     @include desktop-up {
       padding-top: ppx(253);
+      padding-bottom: ppx(228);
     }
 
     &__container {
+      padding-bottom: spx(100);
       @include tablet-up {
+        padding-bottom: ppx(130) * 1.2;
       }
       @include desktop-up {
+        padding-bottom: ppx(130);
       }
     }
 
@@ -335,10 +284,25 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
       }
     }
 
+    $watch-card-width-mobile: spx(620);
+    $watch-card-width-tablet: ppx(620) * 1.2;
+    $watch-card-width-desktop: ppx(620);
+
     &__list {
+      display: grid;
+      grid-template-columns: $watch-card-width-mobile;
+      gap: spx(90);
+      justify-content: center;
+      margin-top: spx(60);
       @include tablet-up {
+        grid-template-columns: $watch-card-width-tablet $watch-card-width-tablet $watch-card-width-tablet;
+        gap: ppx(90) * 1.2 ppx(50) * 1.2;
+        margin-top: ppx(102) * 1.2;
       }
       @include desktop-up {
+        grid-template-columns: $watch-card-width-desktop $watch-card-width-desktop $watch-card-width-desktop;
+        gap: ppx(90) ppx(50);
+        margin-top: ppx(102);
       }
     }
 
@@ -351,9 +315,14 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
 
     &__card {
       width: max-content;
+      display: flex;
+      flex-flow: column;
+      gap: spx(20);
       @include tablet-up {
+        gap: ppx(20) * 1.2;
       }
       @include desktop-up {
+        gap: ppx(20);
       }
 
       &-link {
@@ -375,18 +344,18 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
 
       &-image {
         display: block;
-        width: spx(620);
+        width: $watch-card-width-mobile;
         height: spx(470);
         object-fit: cover;
         border-radius: spx(30);
         overflow: hidden;
         @include tablet-up {
-          width: ppx(620) * 1.2;
+          width: $watch-card-width-tablet;
           height: ppx(470) * 1.2;
           border-radius: ppx(30) * 1.2;
         }
         @include desktop-up {
-          width: ppx(620);
+          width: $watch-card-width-desktop;
           height: ppx(470);
           border-radius: ppx(30);
         }
@@ -460,11 +429,16 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
       &-details {
         width: spx(560);
         margin-inline: auto;
+        display: flex;
+        flex-flow: column;
+        gap: spx(10);
         @include tablet-up {
           width: ppx(560) * 1.2;
+          gap: ppx(10) * 1.2;
         }
         @include desktop-up {
           width: ppx(560);
+          gap: ppx(10);
         }
       }
 
@@ -529,9 +503,22 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
     }
   }
   .breadcrumb {
+    width: spx(560);
+    margin-inline: auto;
+    color: var(--logo_color_2, #816259);
+    font-size: spx(24);
+    font-weight: 700;
+    line-height: 140%;
+    letter-spacing: spx(2.4);
     @include tablet-up {
+      width: ppx(1960) * 1.2;
+      font-size: ppx(27) * 1.2;
+      letter-spacing: ppx(2.7) * 1.2;
     }
     @include desktop-up {
+      width: ppx(1960);
+      font-size: ppx(27);
+      letter-spacing: ppx(2.7);
     }
 
     &__link {
@@ -549,7 +536,6 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
     }
 
     &__current {
-      color: red;
       @include tablet-up {
       }
       @include desktop-up {
