@@ -27,7 +27,7 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
       href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;900&display=swap"
       rel="stylesheet"
     />
-    <title>ページが見つかりません - コッコ祭り</title>
+    <title>見る - コッコ祭り</title>
   </head>
   <body>
     <main>
@@ -36,17 +36,6 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
       <PageHeader />
       <!-- 404 error content -->
       <section class="page-wrapper error-404">
-        <div class="error-404__container">
-          <h2 class="error-404__title"><span>NOT</span> FOUND</h2>
-          <p class="error-404__message">
-            お探しのページが見つかりませんでした。<br />
-            トップページへご案内いたします。
-          </p>
-          <p class="error-404__timer">
-            ※このページは<time class="error-404__countdown">10</time
-            >秒後に自動的にジャンプします。
-          </p>
-        </div>
         <PageBottomWave />
       </section>
       <!-- footer -->
@@ -72,6 +61,7 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
   }
 
   .error-404 {
+    position: relative;
     height: 90svh;
     display: grid;
     place-items: center;
