@@ -1,0 +1,110 @@
+{
+  "eat": {
+    "id": "eat",
+    "title": "食べる",
+    "titleAccent": "食",
+    "subtitle": "− EAT −",
+    "description": "レストラン・キッチンカーでの美味しい食事",
+    "items": [
+      {
+        "name": "地元グルメ",
+        "image": "demo.png",
+        "location": "展示ホールA",
+        "time": "10:00-16:00"
+      },
+      {
+        "name": "キッチンカー",
+        "image": "demo.png", 
+        "location": "外部エリア",
+        "time": "11:00-15:00"
+      },
+      {
+        "name": "特産品販売",
+        "image": "demo.png",
+        "location": "展示ホールB",
+        "time": "09:00-17:00"
+      }
+    ]
+  },
+  "watch": {
+    "id": "watch",
+    "title": "見る",
+    "titleAccent": "見",
+    "subtitle": "− WATCH −",
+    "description": "展示・パフォーマンス・伝統芸能など",
+    "items": [
+      {
+        "name": "和太鼓演奏",
+        "image": "demo.png",
+        "location": "展示ホールA",
+        "time": "10:00-16:00"
+      },
+      {
+        "name": "伝統工芸展示",
+        "image": "demo.png",
+        "location": "展示ホールB", 
+        "time": "09:00-17:00"
+      },
+      {
+        "name": "郷土芸能ショー",
+        "image": "demo.png",
+        "location": "メインステージ",
+        "time": "13:00-14:00"
+      }
+    ]
+  },
+  "play": {
+    "id": "play",
+    "title": "遊ぶ",
+    "titleAccent": "遊",
+    "subtitle": "− PLAY −",
+    "description": "体験・ワークショップ・ゲームなど",
+    "items": [
+      {
+        "name": "工作体験",
+        "image": "demo.png",
+        "location": "体験エリア",
+        "time": "10:00-16:00"
+      },
+      {
+        "name": "ゲームコーナー",
+        "image": "demo.png",
+        "location": "子どもエリア",
+        "time": "09:00-17:00"
+      },
+      {
+        "name": "写真撮影スポット",
+        "image": "demo.png",
+        "location": "メインエントランス",
+        "time": "終日"
+      }
+    ]
+  },
+  "make": {
+    "id": "make",
+    "title": "作る",
+    "titleAccent": "作",
+    "subtitle": "− MAKE −",
+    "description": "手作り体験・クラフト・ワークショップなど",
+    "items": [
+      {
+        "name": "陶芸体験",
+        "image": "demo.png",
+        "location": "工芸エリア",
+        "time": "10:00-16:00"
+      },
+      {
+        "name": "木工体験",
+        "image": "demo.png",
+        "location": "工芸エリア",
+        "time": "10:00-15:00"
+      },
+      {
+        "name": "お菓子作り",
+        "image": "demo.png",
+        "location": "キッチンスタジオ",
+        "time": "11:00-14:00"
+      }
+    ]
+  }
+}

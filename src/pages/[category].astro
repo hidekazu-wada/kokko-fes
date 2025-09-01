@@ -1,0 +1,575 @@
+---
+// メインSCSSファイルをインポート
+import "../styles/main.scss";
+
+// データ
+import categoriesData from "../data/categories.json";
+
+// 型定義
+interface CategoryItem {
+  name: string;
+  image: string;
+  location: string;
+  time: string;
+}
+
+interface CategoryData {
+  id: string;
+  title: string;
+  titleAccent: string;
+  subtitle: string;
+  description: string;
+  items: CategoryItem[];
+}
+
+interface CategoriesData {
+  [key: string]: CategoryData;
+}
+
+// 画像処理
+import { getImage } from "astro:assets";
+
+// コンポーネント
+import MenuToggle from "../components/common/MenuToggle.astro";
+import Menu from "../components/common/Menu.astro";
+import Footer from "../components/common/Footer.astro";
+import PageHeader from "../components/common/PageHeader.astro";
+import PageBottomWave from "../components/common/PageBottomWave.astro";
+
+export async function getStaticPaths() {
+  const categories = Object.keys(categoriesData);
+  const typedCategoriesData = categoriesData as CategoriesData;
+  
+  const paths = await Promise.all(
+    categories.map(async (categoryId) => {
+      const categoryData = typedCategoriesData[categoryId];
+      
+      // 各カテゴリーの画像を処理
+      const processedItems = await Promise.all(
+        categoryData.items.map(async (item: CategoryItem) => {
+          try {
+            const imageModule = await import(`../images/${categoryId}/${item.image}`);
+            const Demo = await getImage({
+              src: imageModule.default,
+              format: "webp",
+              widths: [620],
+            });
+            
+            return {
+              ...item,
+              processedImage: Demo
+            };
+          } catch (error) {
+            console.warn(`Image not found for ${categoryId}/${item.image}`);
+            return {
+              ...item,
+              processedImage: null
+            };
+          }
+        })
+      );
+
+      return {
+        params: { category: categoryId },
+        props: {
+          categoryData: {
+            ...categoryData,
+            items: processedItems
+          }
+        }
+      };
+    })
+  );
+
+  return paths;
+}
+
+const { categoryData } = Astro.props;
+const { category } = Astro.params;
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <!-- noindex -->
+    <meta name="robots" content="noindex" />
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;900&display=swap"
+      rel="stylesheet"
+    />
+    <title>{categoryData.title} - コッコ祭り</title>
+  </head>
+  <body>
+    <main>
+      <MenuToggle />
+      <Menu />
+      <PageHeader />
+      
+      <section class={`page-wrapper ${category}`}>
+        <div class={`${category}__container`}>
+          <header class={`${category}__header`}>
+            <h1 class={`${category}__title`}>
+              <span class={`${category}__title-accent`}>{categoryData.titleAccent}</span>{categoryData.title.slice(1)}
+            </h1>
+            <p class={`${category}__subtitle`}>{categoryData.subtitle}</p>
+            <p class={`${category}__description`}>{categoryData.description}</p>
+          </header>
+
+          <ul class={`${category}__list`}>
+            {categoryData.items.map((item: CategoryItem & { processedImage?: any }) => (
+              <li class={`${category}__item`}>
+                <article class={`${category}__card`}>
+                  <a href="#" class={`${category}__card-link`}>
+                    <div class={`${category}__card-image-wrapper`}>
+                      {item.processedImage && (
+                        <picture class={`${category}__card-image`}>
+                          <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+                          <source
+                            media="(min-width: 1024px)"
+                            srcset={item.processedImage.srcSet.toString()}
+                          />
+                          <!-- タブレット（744px以上）→ 中解像度版 -->
+                          <source
+                            media="(min-width: 744px)"
+                            srcset={item.processedImage.srcSet.toString()}
+                          />
+                          <!-- スマホ（744px未満）→ 最小解像度版 -->
+                          <img
+                            src={item.processedImage.src}
+                            alt={item.name}
+                            class={`${category}__card-img`}
+                          />
+                        </picture>
+                      )}
+                      <div class={`${category}__card-overlay`}>
+                        <span class={`${category}__card-title`}>{item.name}</span>
+                      </div>
+                      <svg
+                        class={`${category}__card-play-icon`}
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 84 85"
+                        fill="none"
+                        role="img"
+                        aria-label="再生ボタン"
+                      >
+                        <circle
+                          cx="42"
+                          cy="42.0547"
+                          r="39.5"
+                          fill="#C99E2D"
+                          stroke="#FFFCF2"
+                          stroke-width="5"></circle>
+                        <path
+                          d="M35.5688 29.1786L34.2059 31.1658L32.9732 33.1871L35.0255 34.523L37.1236 35.9031L39.1942 37.3167L41.2923 38.6969L43.4503 39.9806L45.5961 41.4428L43.3327 42.7278L41.2924 44.2257L39.1694 45.5763L37.0503 46.95L34.9561 48.3574L32.7448 49.6952L34.2082 51.6889L35.4387 53.8289L37.4981 52.3038L39.6065 50.9511L41.8062 49.7394L43.7942 48.1887L45.969 46.9433L48.0671 45.559L50.138 44.1557L52.2798 42.8304L54.3654 41.4293L52.2137 40.154L50.2262 38.6398L48.0445 37.4127L46.0655 35.8922L43.8647 34.6924L41.8281 33.2537L39.7745 31.8275L37.6504 30.5187L35.5688 29.1786Z"
+                          fill="#FFFCF2"></path>
+                      </svg>
+                    </div>
+                  </a>
+                  <dl class={`${category}__card-details`}>
+                    <div class={`${category}__card-detail`}>
+                      <dt class={`${category}__card-detail-label`}>場所：</dt>
+                      <dd class={`${category}__card-detail-value`}>{item.location}</dd>
+                    </div>
+                    <div class={`${category}__card-detail`}>
+                      <dt class={`${category}__card-detail-label`}>時間：</dt>
+                      <dd class={`${category}__card-detail-value`}>{item.time}</dd>
+                    </div>
+                  </dl>
+                </article>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <nav class="breadcrumb" aria-label="パンくずリスト">
+          <a href="/" class="breadcrumb__link">トップ</a>
+          <span class="breadcrumb__separator">＞</span>
+          <span class="breadcrumb__current">{categoryData.title}</span>
+        </nav>
+        <PageBottomWave />
+      </section>
+      
+      <Footer />
+    </main>
+  </body>
+</html>
+
+<style lang="scss">
+  /* 必要なmixin/functionをインポート */
+  @import "../styles/variables";
+  @import "../styles/functions";
+  @import "../styles/mixins";
+
+  body {
+    &.menu-open {
+      overflow: hidden;
+    }
+  }
+
+  main {
+    position: relative;
+  }
+
+  // 各カテゴリー共通のスタイル（watch.astroのスタイルをベースに）
+  .watch, .eat, .play, .make {
+    padding-top: spx(296);
+    position: relative;
+    min-height: 90vh;
+    padding-bottom: spx(99);
+    @include tablet-up {
+      padding-top: ppx(253 * 1.2);
+      padding-bottom: ppx(228 * 1.2);
+    }
+    @include desktop-up {
+      padding-top: ppx(253);
+      padding-bottom: ppx(228);
+    }
+
+    &__container {
+      padding-bottom: spx(100);
+      @include tablet-up {
+        padding-bottom: ppx(130 * 1.2);
+      }
+      @include desktop-up {
+        padding-bottom: ppx(130);
+      }
+    }
+
+    &__header {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__title {
+      color: var(--base_5, #102a4d);
+      font-size: spx(70);
+      font-style: normal;
+      font-weight: 700;
+      line-height: 130%;
+      text-align: center;
+      @include tablet-up {
+        font-size: ppx(110 * 1.2);
+      }
+      @include desktop-up {
+        font-size: ppx(110);
+      }
+
+      &-accent {
+        color: var(--logo_color_3, #c99e2d);
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+    }
+
+    &__subtitle {
+      color: var(--base_5, #102a4d);
+      text-align: center;
+      font-family: "Zen Kaku Gothic Antique";
+      font-size: spx(26);
+      font-style: normal;
+      font-weight: 700;
+      line-height: 180%;
+      @include tablet-up {
+        font-size: ppx(37 * 1.2);
+      }
+      @include desktop-up {
+        font-size: ppx(37);
+      }
+    }
+
+    &__description {
+      color: var(--base_5, #102a4d);
+      text-align: center;
+      font-family: "Zen Kaku Gothic Antique";
+      font-size: spx(26);
+      font-style: normal;
+      font-weight: 700;
+      line-height: 180%;
+      @include tablet-up {
+        font-size: ppx(27 * 1.2);
+      }
+      @include desktop-up {
+        font-size: ppx(27);
+      }
+    }
+
+    // SCSS変数を使った共通幅設定
+    $card-width-mobile: spx(620);
+    $card-width-tablet: ppx(620 * 1.2);
+    $card-width-desktop: ppx(620);
+
+    &__list {
+      display: grid;
+      grid-template-columns: $card-width-mobile;
+      gap: spx(90);
+      justify-content: center;
+      margin-top: spx(60);
+      @include tablet-up {
+        grid-template-columns: $card-width-tablet $card-width-tablet $card-width-tablet;
+        gap: ppx(90 * 1.2) ppx(50 * 1.2);
+        margin-top: ppx(102 * 1.2);
+      }
+      @include desktop-up {
+        grid-template-columns: $card-width-desktop $card-width-desktop $card-width-desktop;
+        gap: ppx(90) ppx(50);
+        margin-top: ppx(102);
+      }
+    }
+
+    &__item {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__card {
+      width: max-content;
+      display: flex;
+      flex-flow: column;
+      gap: spx(20);
+      @include tablet-up {
+        gap: ppx(20 * 1.2);
+      }
+      @include desktop-up {
+        gap: ppx(20);
+      }
+
+      &-link {
+        display: block;
+        width: max-content;
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+
+        @include hover {
+          &:hover {
+            .watch__card-img, .eat__card-img, .play__card-img, .make__card-img {
+              transform: scale(1.1);
+            }
+            .watch__card-play-icon circle, .eat__card-play-icon circle, .play__card-play-icon circle, .make__card-play-icon circle {
+              fill: $logo_color_1;
+            }
+          }
+        }
+      }
+
+      &-image-wrapper {
+        position: relative;
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &-image {
+        display: block;
+        width: $card-width-mobile;
+        height: spx(470);
+        object-fit: cover;
+        border-radius: spx(30);
+        overflow: hidden;
+        @include tablet-up {
+          width: $card-width-tablet;
+          height: ppx(470 * 1.2);
+          border-radius: ppx(30 * 1.2);
+        }
+        @include desktop-up {
+          width: $card-width-desktop;
+          height: ppx(470);
+          border-radius: ppx(30);
+        }
+      }
+
+      &-img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      &-overlay {
+        width: max-content;
+        padding: spx(10) spx(20);
+        background-color: white;
+        border-radius: spx(10);
+        position: absolute;
+        left: spx(27);
+        bottom: spx(24);
+        @include tablet-up {
+          padding: ppx(10 * 1.2) ppx(20 * 1.2);
+          border-radius: ppx(10 * 1.2);
+          left: ppx(27 * 1.2);
+          bottom: ppx(24 * 1.2);
+        }
+        @include desktop-up {
+          padding: ppx(10) ppx(20);
+          border-radius: ppx(10);
+          left: ppx(27);
+          bottom: ppx(24);
+        }
+      }
+
+      &-title {
+        color: var(--logo_color_1, #528ca2);
+        font-family: "Zen Kaku Gothic Antique";
+        font-size: spx(33);
+        font-style: normal;
+        font-weight: 700;
+        line-height: 140%;
+        @include tablet-up {
+          font-size: ppx(33 * 1.2);
+        }
+        @include desktop-up {
+          font-size: ppx(33);
+        }
+      }
+
+      &-play-icon {
+        display: block;
+        width: spx(74);
+        height: spx(74);
+        position: absolute;
+        right: spx(20);
+        bottom: spx(20);
+        @include tablet-up {
+          width: ppx(74 * 1.2);
+          height: ppx(74 * 1.2);
+          right: ppx(20 * 1.2);
+          bottom: ppx(20 * 1.2);
+        }
+        @include desktop-up {
+          width: ppx(74);
+          height: ppx(74);
+          right: ppx(20);
+          bottom: ppx(20);
+        }
+
+        circle {
+          transition: fill 0.3s ease;
+        }
+      }
+
+      &-details {
+        width: spx(560);
+        margin-inline: auto;
+        display: flex;
+        flex-flow: column;
+        gap: spx(10);
+        @include tablet-up {
+          width: ppx(560 * 1.2);
+          gap: ppx(10 * 1.2);
+        }
+        @include desktop-up {
+          width: ppx(560);
+          gap: ppx(10);
+        }
+      }
+
+      &-detail {
+        color: var(--base_5, #102a4d);
+        font-size: spx(27);
+        font-weight: 700;
+        line-height: 140%;
+        display: flex;
+        position: relative;
+        padding-bottom: spx(10);
+        @include tablet-up {
+          font-size: ppx(27 * 1.2);
+          padding-bottom: ppx(10 * 1.2);
+        }
+        @include desktop-up {
+          font-size: ppx(27);
+          padding-bottom: ppx(10);
+        }
+
+        &::after {
+          content: "";
+          display: block;
+          background: linear-gradient(
+              to right,
+              rgba(67, 67, 67, 1),
+              rgba(67, 67, 67, 1) 25%,
+              rgba(0, 0, 0, 0) 25%,
+              rgba(0, 0, 0, 0) 100%
+            )
+            0% 0%;
+          background-size: 4px 1px;
+          width: 100%;
+          height: 1px;
+          margin-left: auto;
+          margin-right: auto;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+        }
+
+        &-label {
+          @include tablet-up {
+          }
+          @include desktop-up {
+          }
+        }
+
+        &-value {
+          @include tablet-up {
+          }
+          @include desktop-up {
+          }
+        }
+      }
+    }
+  }
+
+  .breadcrumb {
+    width: spx(560);
+    margin-inline: auto;
+    color: var(--logo_color_2, #816259);
+    font-size: spx(24);
+    font-weight: 700;
+    line-height: 140%;
+    letter-spacing: spx(2.4);
+    @include tablet-up {
+      width: ppx(1960 * 1.2);
+      font-size: ppx(27 * 1.2);
+      letter-spacing: ppx(2.7 * 1.2);
+    }
+    @include desktop-up {
+      width: ppx(1960);
+      font-size: ppx(27);
+      letter-spacing: ppx(2.7);
+    }
+
+    &__link {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__separator {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__current {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+  }
+</style>
