@@ -78,11 +78,19 @@ import newsHeadTabletUp from "../../images/top/news-head-tablet-up.svg";
   @import "../../styles/mixins";
 
   .news {
+    background-color: white;
+    position: relative;
+    padding-top: 37.8vw;
     @include tablet-up {
+      padding-top: 19.2vw;
     }
     @include desktop-up {
+      padding-top: 19.2vw;
     }
     &__head-image {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       @include tablet-up {
       }

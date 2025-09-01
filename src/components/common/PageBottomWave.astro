@@ -1,0 +1,33 @@
+---
+
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 2560 210"
+  fill="none"
+  class="page-bottom__wave"
+  role="img"
+  aria-label="装飾的な波模様"
+>
+  <path
+    d="M0 210H2560V100C2560 100 2244.38 0 1920 0C1595.62 0 1077.92 150 747.292 150C416.663 150 0 50 0 50V210Z"
+    fill="#55B877"></path>
+</svg>
+<style lang="scss">
+  /* 必要なmixin/functionをインポート */
+  @import "../../styles/variables";
+  @import "../../styles/functions";
+  @import "../../styles/mixins";
+  .page-bottom__wave {
+    display: block;
+    width: 100%;
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    @include tablet-up {
+    }
+    @include desktop-up {
+    }
+  }
+</style>

@@ -36,10 +36,22 @@ import conceptTitle from "../../images/top/concept-title.svg";
   @import "../../styles/mixins";
 
   .concept {
+    position: relative;
     background-color: white;
+    padding-top: spx(150);
+    @include tablet-up {
+      padding-top: ppx(319) * 1.2;
+    }
+    @include desktop-up {
+      padding-top: ppx(319);
+    }
     &__wave {
       display: block;
       width: 100%;
+      position: absolute;
+      top: -1px;
+      left: 0;
+      z-index: 1;
       @include tablet-up {
       }
       @include desktop-up {
@@ -49,18 +61,18 @@ import conceptTitle from "../../images/top/concept-title.svg";
       display: flex;
       flex-flow: column;
       gap: spx(46);
-      margin-top: spx(90);
       padding-bottom: spx(50);
+      position: relative;
+      z-index: 2;
+
       @include tablet-up {
         flex-flow: row;
         gap: ppx(330) * 1.2;
         justify-content: center;
-        margin-top: ppx(150) * 1.2;
         padding-bottom: ppx(90) * 1.2;
       }
       @include desktop-up {
         gap: ppx(330);
-        margin-top: ppx(150);
         padding-bottom: ppx(90);
       }
     }

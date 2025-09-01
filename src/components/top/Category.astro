@@ -362,15 +362,22 @@ const Slide05 = await getImage({
   @import "../../styles/mixins";
 
   .category {
+    position: relative;
     background: var(--base_1, #fffcf2);
     padding-bottom: spx(49);
+    padding-top: spx(118);
     @include tablet-up {
       padding-bottom: ppx(87) * 1.2;
+      padding-top: ppx(249) * 1.2;
     }
     @include desktop-up {
       padding-bottom: ppx(87);
+      padding-top: ppx(249);
     }
     &__wave {
+      position: absolute;
+      top: -1px;
+      left: 0;
       display: block;
       width: 100%;
       path {
@@ -378,13 +385,6 @@ const Slide05 = await getImage({
       }
     }
     &__header {
-      margin-top: spx(70);
-      @include tablet-up {
-        margin-top: ppx(80) * 1.2;
-      }
-      @include desktop-up {
-        margin-top: ppx(80);
-      }
     }
 
     &__title {

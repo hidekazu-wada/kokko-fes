@@ -79,12 +79,22 @@ import overviewBottomTabletUp from "../../images/top/overview-bottom-tablet-up.s
 
   .overview {
     background: var(--base_5, #102a4d);
+    position: relative;
+    padding-top: spx(74);
+    padding-bottom: spx(345);
     @include tablet-up {
+      padding-top: ppx(208) * 1.2;
+      padding-bottom: ppx(852) * 1.2;
     }
     @include desktop-up {
+      padding-top: ppx(208);
+      padding-bottom: ppx(852);
     }
 
     &__wave {
+      position: absolute;
+      top: -1px;
+      left: 0;
       display: block;
       width: 100%;
       @include tablet-up {
@@ -97,14 +107,11 @@ import overviewBottomTabletUp from "../../images/top/overview-bottom-tablet-up.s
       display: block;
       width: spx(667);
       margin-inline: auto;
-      margin-top: spx(25);
       @include tablet-up {
         width: 92vw;
-        margin-top: ppx(40) * 1.2;
       }
       @include desktop-up {
         width: ppx(2370);
-        margin-top: ppx(40);
       }
     }
 
@@ -296,14 +303,14 @@ import overviewBottomTabletUp from "../../images/top/overview-bottom-tablet-up.s
       }
     }
     &__bottom-image {
+      position: absolute;
+      bottom: -1px;
+      left: 0;
       display: block;
       width: 100%;
-      margin-top: spx(90);
       @include tablet-up {
-        margin-top: ppx(160) * 1.2;
       }
       @include desktop-up {
-        margin-top: ppx(160);
       }
     }
   }
