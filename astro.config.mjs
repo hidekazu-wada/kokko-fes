@@ -7,5 +7,11 @@ export default defineConfig({
   output: 'static',
   build: {
     assets: 'assets'
+  },
+  image: {
+    // Vercelでの画像最適化の問題を回避
+    service: {
+      entrypoint: 'astro/assets/services/noop'
+    }
   }
 });

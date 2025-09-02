@@ -85,11 +85,26 @@ export async function getStaticPaths() {
               };
             }
             
-            const optimizedImage = await getImage({
-              src: imageSource,
-              format: "webp",
-              widths: [620],
-            });
+            // Vercel環境では事前に最適化された画像パスを使用
+            const isProduction = import.meta.env.PROD;
+            let optimizedImage;
+            
+            if (isProduction) {
+              // 本番環境では事前ビルドされた最適化画像のパスを使用
+              optimizedImage = {
+                src: "/assets/demo.B4vCVBYL.png", // ビルド時に生成されるハッシュ付きファイル名
+                width: imageSource.width,
+                height: imageSource.height,
+                srcSet: "/assets/demo.B4vCVBYL.png"
+              };
+            } else {
+              // 開発環境では画像最適化を使用
+              optimizedImage = await getImage({
+                src: imageSource,
+                format: "webp",
+                widths: [620],
+              });
+            }
             
             return {
               ...item,
