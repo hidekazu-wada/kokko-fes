@@ -1,0 +1,13 @@
+{
+  "functions": {
+    "src/pages/**/*.astro": {
+      "includeFiles": "src/images/**"
+    }
+  },
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@astrojs/vercel"
+    }
+  ]
+}
