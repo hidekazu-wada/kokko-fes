@@ -40,10 +40,10 @@ const imageMap: Record<string, Record<string, any>> = {
   eat: { "demo.png": eatDemo },
   make: { "demo.png": makeDemo },
   play: { "demo.png": playDemo },
-  watch: { "demo.png": watchDemo }
+  watch: { "demo.png": watchDemo },
 };
 
-console.log('Image map created:', imageMap);
+console.log("Image map created:", imageMap);
 
 // コンポーネント
 import MenuToggle from "../components/common/MenuToggle.astro";
@@ -55,19 +55,19 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
 export async function getStaticPaths() {
   const categories = Object.keys(categoriesData);
   const typedCategoriesData = categoriesData as CategoriesData;
-  
+
   // 関数内で画像マッピングを再定義
   const localImageMap: Record<string, Record<string, any>> = {
     eat: { "demo.png": eatDemo },
     make: { "demo.png": makeDemo },
     play: { "demo.png": playDemo },
-    watch: { "demo.png": watchDemo }
+    watch: { "demo.png": watchDemo },
   };
-  
+
   const paths = await Promise.all(
     categories.map(async (categoryId) => {
       const categoryData = typedCategoriesData[categoryId];
-      
+
       // 各カテゴリーの画像を処理（関数内の静的マッピング使用）
       const processedItems = await Promise.all(
         categoryData.items.map(async (item: CategoryItem) => {
@@ -75,27 +75,32 @@ export async function getStaticPaths() {
             // 関数内マッピングから画像を取得
             const categoryImages = localImageMap[categoryId];
             const imageSource = categoryImages?.[item.image];
-            
+
             if (!imageSource) {
-              console.warn(`Image not found in mapping: ${categoryId}/${item.image}`);
-              console.warn('Available images in mapping:', Object.keys(categoryImages || {}));
+              console.warn(
+                `Image not found in mapping: ${categoryId}/${item.image}`,
+              );
+              console.warn(
+                "Available images in mapping:",
+                Object.keys(categoryImages || {}),
+              );
               return {
                 ...item,
-                processedImage: null
+                processedImage: null,
               };
             }
-            
+
             // Vercel環境では事前に最適化された画像パスを使用
             const isProduction = import.meta.env.PROD;
             let optimizedImage;
-            
+
             if (isProduction) {
               // 本番環境では事前ビルドされた最適化画像のパスを使用
               optimizedImage = {
                 src: "/assets/demo.B4vCVBYL.png", // ビルド時に生成されるハッシュ付きファイル名
                 width: imageSource.width,
                 height: imageSource.height,
-                srcSet: "/assets/demo.B4vCVBYL.png"
+                srcSet: "/assets/demo.B4vCVBYL.png",
               };
             } else {
               // 開発環境では画像最適化を使用
@@ -105,19 +110,22 @@ export async function getStaticPaths() {
                 widths: [620],
               });
             }
-            
+
             return {
               ...item,
-              processedImage: optimizedImage
+              processedImage: optimizedImage,
             };
           } catch (error) {
-            console.error(`Error processing image for ${categoryId}/${item.image}:`, error);
+            console.error(
+              `Error processing image for ${categoryId}/${item.image}:`,
+              error,
+            );
             return {
               ...item,
-              processedImage: null
+              processedImage: null,
             };
           }
-        })
+        }),
       );
 
       return {
@@ -125,11 +133,11 @@ export async function getStaticPaths() {
         props: {
           categoryData: {
             ...categoryData,
-            items: processedItems
-          }
-        }
+            items: processedItems,
+          },
+        },
       };
-    })
+    }),
   );
 
   return paths;
@@ -161,80 +169,95 @@ const { category } = Astro.params;
       <MenuToggle />
       <Menu />
       <PageHeader />
-      
+
       <section class={`page-wrapper ${category}`}>
         <div class={`${category}__container`}>
           <header class={`${category}__header`}>
             <h1 class={`${category}__title`}>
-              <span class={`${category}__title-accent`}>{categoryData.titleAccent}</span>{categoryData.title.slice(1)}
+              <span class={`${category}__title-accent`}
+                >{categoryData.titleAccent}</span
+              >{categoryData.title.slice(1)}
             </h1>
             <p class={`${category}__subtitle`}>{categoryData.subtitle}</p>
             <p class={`${category}__description`}>{categoryData.description}</p>
           </header>
 
           <ul class={`${category}__list`}>
-            {categoryData.items.map((item: CategoryItem & { processedImage?: any }) => (
-              <li class={`${category}__item`}>
-                <article class={`${category}__card`}>
-                  <a href="#" class={`${category}__card-link`}>
-                    <div class={`${category}__card-image-wrapper`}>
-                      {item.processedImage && (
-                        <picture class={`${category}__card-image`}>
-                          <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-                          <source
-                            media="(min-width: 1024px)"
-                            srcset={item.processedImage.srcSet.toString()}
-                          />
-                          <!-- タブレット（744px以上）→ 中解像度版 -->
-                          <source
-                            media="(min-width: 744px)"
-                            srcset={item.processedImage.srcSet.toString()}
-                          />
-                          <!-- スマホ（744px未満）→ 最小解像度版 -->
-                          <img
-                            src={item.processedImage.src}
-                            alt={item.name}
-                            class={`${category}__card-img`}
-                          />
-                        </picture>
-                      )}
-                      <div class={`${category}__card-overlay`}>
-                        <span class={`${category}__card-title`}>{item.name}</span>
-                      </div>
-                      <svg
-                        class={`${category}__card-play-icon`}
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 84 85"
-                        fill="none"
-                        role="img"
-                        aria-label="再生ボタン"
-                      >
-                        <circle
-                          cx="42"
-                          cy="42.0547"
-                          r="39.5"
-                          fill="#C99E2D"
-                          stroke="#FFFCF2"
-                          stroke-width="5"></circle>
-                        <path
-                          d="M35.5688 29.1786L34.2059 31.1658L32.9732 33.1871L35.0255 34.523L37.1236 35.9031L39.1942 37.3167L41.2923 38.6969L43.4503 39.9806L45.5961 41.4428L43.3327 42.7278L41.2924 44.2257L39.1694 45.5763L37.0503 46.95L34.9561 48.3574L32.7448 49.6952L34.2082 51.6889L35.4387 53.8289L37.4981 52.3038L39.6065 50.9511L41.8062 49.7394L43.7942 48.1887L45.969 46.9433L48.0671 45.559L50.138 44.1557L52.2798 42.8304L54.3654 41.4293L52.2137 40.154L50.2262 38.6398L48.0445 37.4127L46.0655 35.8922L43.8647 34.6924L41.8281 33.2537L39.7745 31.8275L37.6504 30.5187L35.5688 29.1786Z"
-                          fill="#FFFCF2"></path>
-                      </svg>
-                    </div>
-                  </a>
-                  <dl class={`${category}__card-details`}>
-                    <div class={`${category}__card-detail`}>
-                      <dt class={`${category}__card-detail-label`}>場所：</dt>
-                      <dd class={`${category}__card-detail-value`}>{item.location}</dd>
-                    </div>
-                    <div class={`${category}__card-detail`}>
-                      <dt class={`${category}__card-detail-label`}>時間：</dt>
-                      <dd class={`${category}__card-detail-value`}>{item.time}</dd>
-                    </div>
-                  </dl>
-                </article>
-              </li>
-            ))}
+            {
+              categoryData.items.map(
+                (item: CategoryItem & { processedImage?: any }) => (
+                  <li class={`${category}__item`}>
+                    <article class={`${category}__card`}>
+                      <a href="#" class={`${category}__card-link`}>
+                        <div class={`${category}__card-image-wrapper`}>
+                          {item.processedImage && (
+                            <picture class={`${category}__card-image`}>
+                              <source
+                                media="(min-width: 1024px)"
+                                srcset={item.processedImage.srcSet.toString()}
+                              />
+                              <source
+                                media="(min-width: 744px)"
+                                srcset={item.processedImage.srcSet.toString()}
+                              />
+                              <img
+                                src={item.processedImage.src}
+                                alt={item.name}
+                                class={`${category}__card-img`}
+                              />
+                            </picture>
+                          )}
+                          <div class={`${category}__card-overlay`}>
+                            <span class={`${category}__card-title`}>
+                              {item.name}
+                            </span>
+                          </div>
+                          <svg
+                            class={`${category}__card-play-icon`}
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 84 85"
+                            fill="none"
+                            role="img"
+                            aria-label="再生ボタン"
+                          >
+                            <circle
+                              cx="42"
+                              cy="42.0547"
+                              r="39.5"
+                              fill="#C99E2D"
+                              stroke="#FFFCF2"
+                              stroke-width="5"
+                            />
+                            <path
+                              d="M35.5688 29.1786L34.2059 31.1658L32.9732 33.1871L35.0255 34.523L37.1236 35.9031L39.1942 37.3167L41.2923 38.6969L43.4503 39.9806L45.5961 41.4428L43.3327 42.7278L41.2924 44.2257L39.1694 45.5763L37.0503 46.95L34.9561 48.3574L32.7448 49.6952L34.2082 51.6889L35.4387 53.8289L37.4981 52.3038L39.6065 50.9511L41.8062 49.7394L43.7942 48.1887L45.969 46.9433L48.0671 45.559L50.138 44.1557L52.2798 42.8304L54.3654 41.4293L52.2137 40.154L50.2262 38.6398L48.0445 37.4127L46.0655 35.8922L43.8647 34.6924L41.8281 33.2537L39.7745 31.8275L37.6504 30.5187L35.5688 29.1786Z"
+                              fill="#FFFCF2"
+                            />
+                          </svg>
+                        </div>
+                      </a>
+                      <dl class={`${category}__card-details`}>
+                        <div class={`${category}__card-detail`}>
+                          <dt class={`${category}__card-detail-label`}>
+                            場所：
+                          </dt>
+                          <dd class={`${category}__card-detail-value`}>
+                            {item.location}
+                          </dd>
+                        </div>
+                        <div class={`${category}__card-detail`}>
+                          <dt class={`${category}__card-detail-label`}>
+                            時間：
+                          </dt>
+                          <dd class={`${category}__card-detail-value`}>
+                            {item.time}
+                          </dd>
+                        </div>
+                      </dl>
+                    </article>
+                  </li>
+                ),
+              )
+            }
           </ul>
         </div>
         <nav class="breadcrumb" aria-label="パンくずリスト">
@@ -244,7 +267,7 @@ const { category } = Astro.params;
         </nav>
         <PageBottomWave />
       </section>
-      
+
       <Footer />
     </main>
   </body>
@@ -267,7 +290,10 @@ const { category } = Astro.params;
   }
 
   // 各カテゴリー共通のスタイル（watch.astroのスタイルをベースに）
-  .watch, .eat, .play, .make {
+  .watch,
+  .eat,
+  .play,
+  .make {
     padding-top: spx(296);
     position: relative;
     min-height: 90vh;
@@ -405,10 +431,16 @@ const { category } = Astro.params;
 
         @include hover {
           &:hover {
-            .watch__card-img, .eat__card-img, .play__card-img, .make__card-img {
+            .watch__card-img,
+            .eat__card-img,
+            .play__card-img,
+            .make__card-img {
               transform: scale(1.1);
             }
-            .watch__card-play-icon circle, .eat__card-play-icon circle, .play__card-play-icon circle, .make__card-play-icon circle {
+            .watch__card-play-icon circle,
+            .eat__card-play-icon circle,
+            .play__card-play-icon circle,
+            .make__card-play-icon circle {
               fill: $logo_color_1;
             }
           }
