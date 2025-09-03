@@ -77,9 +77,16 @@ import conceptTitle from "../../images/top/concept-title.svg";
       }
     }
     &__header {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      gap: spx(38);
       @include tablet-up {
+        align-items: flex-start;
+        gap: ppx(38) * 1.2;
       }
       @include desktop-up {
+        gap: ppx(38);
       }
     }
     &__title-image {
