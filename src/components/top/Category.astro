@@ -810,7 +810,7 @@ const Slide05 = await getImage({
 
 <script>
   import Swiper from "swiper";
-  import { EffectFade } from "swiper/modules";
+  import { EffectFade, Autoplay } from "swiper/modules";
 
   console.log("=== CATEGORY SWIPER INTEGRATION ===");
 
@@ -837,11 +837,16 @@ const Slide05 = await getImage({
       const mainSwiper = new Swiper("#categoryContentSwiper", {
         slidesPerView: 1,
         spaceBetween: 0,
-        speed: 500, // トランジション速度を500msに設定
-        modules: [EffectFade],
+        speed: 1000, // トランジション速度を1000msに設定
+        modules: [EffectFade, Autoplay],
         effect: "fade", // フェード効果を設定
         fadeEffect: {
           crossFade: true,
+        },
+        autoplay: {
+          delay: 5000, // 5秒間隔で自動再生
+          disableOnInteraction: false, // ユーザー操作後も自動再生継続
+          pauseOnMouseEnter: true, // マウスホバー時は停止
         },
 
         // サムネイル連動
