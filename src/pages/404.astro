@@ -1,75 +1,31 @@
 ---
-// メインSCSSファイルをインポート
-import "../styles/main.scss";
-
-// 画像
-
 // コンポーネント
-import MenuToggle from "../components/common/MenuToggle.astro";
-import Menu from "../components/common/Menu.astro";
-import Footer from "../components/common/Footer.astro";
-import PageHeader from "../components/common/PageHeader.astro";
+import PageLayout from "../layouts/PageLayout.astro";
 import PageBottomWave from "../components/common/PageBottomWave.astro";
 ---
 
-<html lang="ja">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <!-- noindex -->
-    <meta name="robots" content="noindex" />
-    <!-- Google fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;900&display=swap"
-      rel="stylesheet"
-    />
-    <title>ページが見つかりません - コッコ祭り</title>
-  </head>
-  <body>
-    <main>
-      <MenuToggle />
-      <Menu />
-      <PageHeader />
-      <!-- 404 error content -->
-      <section class="page-wrapper error-404">
-        <div class="error-404__container">
-          <h2 class="error-404__title"><span>NOT</span> FOUND</h2>
-          <p class="error-404__message">
-            お探しのページが見つかりませんでした。<br />
-            トップページへご案内いたします。
-          </p>
-          <p class="error-404__timer">
-            ※このページは<time class="error-404__countdown">10</time
-            >秒後に自動的にジャンプします。
-          </p>
-        </div>
-        <PageBottomWave />
-      </section>
-      <!-- footer -->
-      <Footer />
-    </main>
-  </body>
-</html>
+<PageLayout title="ページが見つかりません ｜コッコ祭り 2025｜KOKKO Festival">
+  <!-- 404 error content -->
+  <section class="page-wrapper error-404">
+    <div class="error-404__container">
+      <h2 class="error-404__title"><span>NOT</span> FOUND</h2>
+      <p class="error-404__message">
+        お探しのページが見つかりませんでした。<br />
+        トップページへご案内いたします。
+      </p>
+      <p class="error-404__timer">
+        ※このページは<time class="error-404__countdown">10</time
+        >秒後に自動的にジャンプします。
+      </p>
+    </div>
+    <PageBottomWave />
+  </section>
+</PageLayout>
 
 <style lang="scss">
-  /* 必要なmixin/functionをインポート */
   @import "../styles/variables";
   @import "../styles/functions";
   @import "../styles/mixins";
-
-  body {
-    &.menu-open {
-      overflow: hidden;
-    }
-  }
-
-  main {
-    position: relative;
-  }
 
   .error-404 {
     height: 90svh;

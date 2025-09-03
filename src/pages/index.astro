@@ -1,10 +1,6 @@
 ---
-// メインSCSSファイルをインポート
-import "../styles/main.scss";
-
-// 画像
-
 // コンポーネント
+import TopPageLayout from "../layouts/TopPageLayout.astro";
 import MenuToggle from "../components/common/MenuToggle.astro";
 import Menu from "../components/common/Menu.astro";
 import Hero from "../components/top/Hero.astro";
@@ -15,54 +11,29 @@ import Overview from "../components/top/Overview.astro";
 import Footer from "../components/common/Footer.astro";
 ---
 
-<html lang="ja">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <!-- noindex -->
-    <meta name="robots" content="noindex" />
-    <!-- Google fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;900&display=swap"
-      rel="stylesheet"
-    />
-    <title>Astro</title>
-  </head>
-  <body>
-    <main>
-      <MenuToggle />
-      <Menu />
-      <!-- hero -->
-      <Hero />
-      <!-- concept -->
-      <Concept />
-      <!-- news -->
-      <News />
-      <!-- category -->
-      <Category />
-      <!-- overview -->
-      <Overview />
-      <!-- footer -->
-      <Footer />
-    </main>
-  </body>
-</html>
+<TopPageLayout title="コッコ祭り 2025｜KOKKO Festival">
+  <main>
+    <MenuToggle />
+    <Menu />
+    <!-- hero -->
+    <Hero />
+    <!-- concept -->
+    <Concept />
+    <!-- news -->
+    <News />
+    <!-- category -->
+    <Category />
+    <!-- overview -->
+    <Overview />
+    <!-- footer -->
+    <Footer />
+  </main>
+</TopPageLayout>
 
 <style lang="scss">
-  /* 必要なmixin/functionをインポート */
   @import "../styles/variables";
   @import "../styles/functions";
   @import "../styles/mixins";
-
-  body {
-    &.menu-open {
-      overflow: hidden;
-    }
-  }
 
   main {
     position: relative;

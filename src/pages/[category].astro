@@ -46,10 +46,7 @@ const imageMap: Record<string, Record<string, any>> = {
 console.log("Image map created:", imageMap);
 
 // コンポーネント
-import MenuToggle from "../components/common/MenuToggle.astro";
-import Menu from "../components/common/Menu.astro";
-import Footer from "../components/common/Footer.astro";
-import PageHeader from "../components/common/PageHeader.astro";
+import PageLayout from "../layouts/PageLayout.astro";
 import PageBottomWave from "../components/common/PageBottomWave.astro";
 
 export async function getStaticPaths() {
@@ -147,147 +144,106 @@ const { categoryData } = Astro.props;
 const { category } = Astro.params;
 ---
 
-<html lang="ja">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <!-- noindex -->
-    <meta name="robots" content="noindex" />
-    <!-- Google fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;900&display=swap"
-      rel="stylesheet"
-    />
-    <title>{categoryData.title} - コッコ祭り</title>
-  </head>
-  <body>
-    <main>
-      <MenuToggle />
-      <Menu />
-      <PageHeader />
+<PageLayout title={`${categoryData.title} ｜コッコ祭り 2025｜KOKKO Festival`}>
+  <section class={`page-wrapper ${category}`}>
+    <div class={`${category}__container`}>
+      <header class={`${category}__header`}>
+        <h1 class={`${category}__title`}>
+          <span class={`${category}__title-accent`}
+            >{categoryData.titleAccent}</span
+          >{categoryData.title.slice(1)}
+        </h1>
+        <p class={`${category}__subtitle`}>{categoryData.subtitle}</p>
+        <p class={`${category}__description`}>{categoryData.description}</p>
+      </header>
 
-      <section class={`page-wrapper ${category}`}>
-        <div class={`${category}__container`}>
-          <header class={`${category}__header`}>
-            <h1 class={`${category}__title`}>
-              <span class={`${category}__title-accent`}
-                >{categoryData.titleAccent}</span
-              >{categoryData.title.slice(1)}
-            </h1>
-            <p class={`${category}__subtitle`}>{categoryData.subtitle}</p>
-            <p class={`${category}__description`}>{categoryData.description}</p>
-          </header>
-
-          <ul class={`${category}__list`}>
-            {
-              categoryData.items.map(
-                (item: CategoryItem & { processedImage?: any }) => (
-                  <li class={`${category}__item`}>
-                    <article class={`${category}__card`}>
-                      <a href="#" class={`${category}__card-link`}>
-                        <div class={`${category}__card-image-wrapper`}>
-                          {item.processedImage && (
-                            <picture class={`${category}__card-image`}>
-                              <source
-                                media="(min-width: 1024px)"
-                                srcset={item.processedImage.srcSet.toString()}
-                              />
-                              <source
-                                media="(min-width: 744px)"
-                                srcset={item.processedImage.srcSet.toString()}
-                              />
-                              <img
-                                src={item.processedImage.src}
-                                alt={item.name}
-                                class={`${category}__card-img`}
-                              />
-                            </picture>
-                          )}
-                          <div class={`${category}__card-overlay`}>
-                            <span class={`${category}__card-title`}>
-                              {item.name}
-                            </span>
-                          </div>
-                          <svg
-                            class={`${category}__card-play-icon`}
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 84 85"
-                            fill="none"
-                            role="img"
-                            aria-label="再生ボタン"
-                          >
-                            <circle
-                              cx="42"
-                              cy="42.0547"
-                              r="39.5"
-                              fill="#C99E2D"
-                              stroke="#FFFCF2"
-                              stroke-width="5"
-                            />
-                            <path
-                              d="M35.5688 29.1786L34.2059 31.1658L32.9732 33.1871L35.0255 34.523L37.1236 35.9031L39.1942 37.3167L41.2923 38.6969L43.4503 39.9806L45.5961 41.4428L43.3327 42.7278L41.2924 44.2257L39.1694 45.5763L37.0503 46.95L34.9561 48.3574L32.7448 49.6952L34.2082 51.6889L35.4387 53.8289L37.4981 52.3038L39.6065 50.9511L41.8062 49.7394L43.7942 48.1887L45.969 46.9433L48.0671 45.559L50.138 44.1557L52.2798 42.8304L54.3654 41.4293L52.2137 40.154L50.2262 38.6398L48.0445 37.4127L46.0655 35.8922L43.8647 34.6924L41.8281 33.2537L39.7745 31.8275L37.6504 30.5187L35.5688 29.1786Z"
-                              fill="#FFFCF2"
-                            />
-                          </svg>
-                        </div>
-                      </a>
-                      <dl class={`${category}__card-details`}>
-                        <div class={`${category}__card-detail`}>
-                          <dt class={`${category}__card-detail-label`}>
-                            場所：
-                          </dt>
-                          <dd class={`${category}__card-detail-value`}>
-                            {item.location}
-                          </dd>
-                        </div>
-                        <div class={`${category}__card-detail`}>
-                          <dt class={`${category}__card-detail-label`}>
-                            時間：
-                          </dt>
-                          <dd class={`${category}__card-detail-value`}>
-                            {item.time}
-                          </dd>
-                        </div>
-                      </dl>
-                    </article>
-                  </li>
-                ),
-              )
-            }
-          </ul>
-        </div>
-        <nav class="breadcrumb" aria-label="パンくずリスト">
-          <a href="/" class="breadcrumb__link">トップ</a>
-          <span class="breadcrumb__separator">＞</span>
-          <span class="breadcrumb__current">{categoryData.title}</span>
-        </nav>
-        <PageBottomWave />
-      </section>
-
-      <Footer />
-    </main>
-  </body>
-</html>
+      <ul class={`${category}__list`}>
+        {
+          categoryData.items.map(
+            (item: CategoryItem & { processedImage?: any }) => (
+              <li class={`${category}__item`}>
+                <article class={`${category}__card`}>
+                  <a href="#" class={`${category}__card-link`}>
+                    <div class={`${category}__card-image-wrapper`}>
+                      {item.processedImage && (
+                        <picture class={`${category}__card-image`}>
+                          <source
+                            media="(min-width: 1024px)"
+                            srcset={item.processedImage.srcSet.toString()}
+                          />
+                          <source
+                            media="(min-width: 744px)"
+                            srcset={item.processedImage.srcSet.toString()}
+                          />
+                          <img
+                            src={item.processedImage.src}
+                            alt={item.name}
+                            class={`${category}__card-img`}
+                          />
+                        </picture>
+                      )}
+                      <div class={`${category}__card-overlay`}>
+                        <span class={`${category}__card-title`}>
+                          {item.name}
+                        </span>
+                      </div>
+                      <svg
+                        class={`${category}__card-play-icon`}
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 84 85"
+                        fill="none"
+                        role="img"
+                        aria-label="再生ボタン"
+                      >
+                        <circle
+                          cx="42"
+                          cy="42.0547"
+                          r="39.5"
+                          fill="#C99E2D"
+                          stroke="#FFFCF2"
+                          stroke-width="5"
+                        />
+                        <path
+                          d="M35.5688 29.1786L34.2059 31.1658L32.9732 33.1871L35.0255 34.523L37.1236 35.9031L39.1942 37.3167L41.2923 38.6969L43.4503 39.9806L45.5961 41.4428L43.3327 42.7278L41.2924 44.2257L39.1694 45.5763L37.0503 46.95L34.9561 48.3574L32.7448 49.6952L34.2082 51.6889L35.4387 53.8289L37.4981 52.3038L39.6065 50.9511L41.8062 49.7394L43.7942 48.1887L45.969 46.9433L48.0671 45.559L50.138 44.1557L52.2798 42.8304L54.3654 41.4293L52.2137 40.154L50.2262 38.6398L48.0445 37.4127L46.0655 35.8922L43.8647 34.6924L41.8281 33.2537L39.7745 31.8275L37.6504 30.5187L35.5688 29.1786Z"
+                          fill="#FFFCF2"
+                        />
+                      </svg>
+                    </div>
+                  </a>
+                  <dl class={`${category}__card-details`}>
+                    <div class={`${category}__card-detail`}>
+                      <dt class={`${category}__card-detail-label`}>場所：</dt>
+                      <dd class={`${category}__card-detail-value`}>
+                        {item.location}
+                      </dd>
+                    </div>
+                    <div class={`${category}__card-detail`}>
+                      <dt class={`${category}__card-detail-label`}>時間：</dt>
+                      <dd class={`${category}__card-detail-value`}>
+                        {item.time}
+                      </dd>
+                    </div>
+                  </dl>
+                </article>
+              </li>
+            ),
+          )
+        }
+      </ul>
+    </div>
+    <nav class="breadcrumb" aria-label="パンくずリスト">
+      <a href="/" class="breadcrumb__link">トップ</a>
+      <span class="breadcrumb__separator">＞</span>
+      <span class="breadcrumb__current">{categoryData.title}</span>
+    </nav>
+    <PageBottomWave />
+  </section>
+</PageLayout>
 
 <style lang="scss">
-  /* 必要なmixin/functionをインポート */
   @import "../styles/variables";
   @import "../styles/functions";
   @import "../styles/mixins";
-
-  body {
-    &.menu-open {
-      overflow: hidden;
-    }
-  }
-
-  main {
-    position: relative;
-  }
 
   // 各カテゴリー共通のスタイル（watch.astroのスタイルをベースに）
   .watch,
