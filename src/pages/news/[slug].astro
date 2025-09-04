@@ -1,0 +1,521 @@
+---
+// コンポーネント
+import PageLayout from "../../layouts/PageLayout.astro";
+import PageBottomWave from "../../components/common/PageBottomWave.astro";
+import Breadcrumb from "../../components/common/Breadcrumb.astro";
+
+// 開発用の静的パス設定
+export async function getStaticPaths() {
+  return [{ params: { slug: "test" } }];
+}
+
+// 画像
+import { getImage } from "astro:assets";
+import DemoImage from "../../images/news-detail/demo.png";
+
+// フォーマット
+const Demo = await getImage({
+  src: DemoImage,
+  format: "webp", // WebP形式で最適化
+  widths: [560, 900, 1400],
+});
+// 現在は静的にslugを取得
+const { slug } = Astro.params;
+---
+
+<PageLayout title="お知らせ詳細 ｜コッコ祭り 2025｜KOKKO Festival">
+  <!-- news detail content -->
+  <section class="page-wrapper news-detail">
+    <div class="news-detail__container">
+      <header class="news-detail__header">
+        <h1 class="news-detail__title">
+          <span class="news-detail__title-accent">お</span>
+          知らせ
+        </h1>
+        <p class="news-detail__subtitle">− NEWS −</p>
+      </header>
+      <article class="news-article">
+        <header class="news-article__header">
+          <div class="news-article__category"><span>イベント情報</span></div>
+        </header>
+        <time class="news-article__date" datetime="2025-07-18">2025/07/18</time>
+        <section class="news-article__content">
+          <h2 class="news-article__title">
+            コッコ祭り2025 出展者募集を開始しました
+          </h2>
+          <span class="news-article__divider"></span>
+          <main class="news-article__body">
+            <p>
+              コッコ祭り2025の出展者募集を本日より開始いたします。今年も多くの皆様のご参加をお待ちしております。
+            </p>
+            <section>
+              <h3>募集要項</h3>
+              <div>
+                <p>募集内容の詳細</p>
+              </div>
+            </section>
+            <section>
+              <h3>応募方法</h3>
+              <div>
+                <p>応募方法の説明</p>
+              </div>
+            </section>
+            <section>
+              <h3>お問い合わせ</h3>
+              <div>
+                <p>
+                  ご不明な点がございましたら、実行委員会までお問い合わせください。<br
+                  />
+                  TEL: 000-000-0000 /Email: info@kokko-matsuri.jp
+                </p>
+              </div>
+            </section>
+          </main>
+        </section>
+
+        <nav class="news-navigation">
+          <a href="#" class="news-navigation__prev">
+            <div class="news-navigation__icon-wrapper">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="56"
+                height="56"
+                viewBox="0 0 56 56"
+                fill="none"
+                class="news-navigation__icon"
+              >
+                <circle
+                  cx="28"
+                  cy="28"
+                  r="28"
+                  transform="matrix(-1 0 0 1 56 0)"
+                  fill="#C99E2D"></circle>
+                <path
+                  d="M32.8662 18.2559L33.8976 19.7598L34.8304 21.2894L33.2774 22.3003L31.6896 23.3447L30.1227 24.4145L28.5349 25.459L26.9018 26.4304L25.278 27.5369L26.9909 28.5094L28.5348 29.6429L30.1415 30.665L31.7451 31.7046L33.3299 32.7696L35.0033 33.782L33.8958 35.2908L32.9647 36.9102L31.4062 35.7561L29.8106 34.7324L28.146 33.8154L26.6416 32.642L24.9958 31.6995L23.4081 30.6519L21.8409 29.59L20.2201 28.587L18.6417 27.5267L20.2701 26.5617L21.7741 25.4157L23.4251 24.4872L24.9228 23.3365L26.5883 22.4286L28.1295 21.3398L29.6835 20.2605L31.2909 19.2701L32.8662 18.2559Z"
+                  fill="#FFFCF2"></path>
+              </svg>
+              <span class="news-navigation__label">前の記事</span>
+            </div>
+            <p class="news-navigation__title">
+              ボランティアスタッフ募集のお知らせボランテ...
+            </p>
+          </a>
+
+          <a href="#" class="news-navigation__next">
+            <div class="news-navigation__icon-wrapper">
+              <span class="news-navigation__label">次の記事</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="56"
+                height="56"
+                viewBox="0 0 56 56"
+                fill="none"
+                class="news-navigation__icon"
+              >
+                <circle cx="28" cy="28" r="28" fill="#C99E2D"></circle>
+                <path
+                  d="M23.1338 18.2559L22.1024 19.7598L21.1696 21.2894L22.7226 22.3003L24.3104 23.3447L25.8773 24.4145L27.4651 25.459L29.0982 26.4304L30.722 27.5369L29.0091 28.5094L27.4652 29.6429L25.8585 30.665L24.2549 31.7046L22.6701 32.7696L20.9967 33.782L22.1042 35.2908L23.0353 36.9102L24.5938 35.7561L26.1894 34.7324L27.854 33.8154L29.3584 32.642L31.0042 31.6995L32.5919 30.6519L34.1591 29.59L35.7799 28.587L37.3583 27.5267L35.7299 26.5617L34.2259 25.4157L32.5749 24.4872L31.0772 23.3365L29.4117 22.4286L27.8705 21.3398L26.3165 20.2605L24.7091 19.2701L23.1338 18.2559Z"
+                  fill="#FFFCF2"></path>
+              </svg>
+            </div>
+            <p class="news-navigation__title">今年の特別企画について</p>
+          </a>
+        </nav>
+      </article>
+
+      <!-- ここにお知らせ詳細のマークアップを追加 -->
+    </div>
+    <Breadcrumb currentPageTitle="お知らせ詳細" />
+    <PageBottomWave />
+  </section>
+</PageLayout>
+
+<script>
+  // お知らせ詳細ページのJavaScript
+  document.addEventListener("DOMContentLoaded", () => {
+    // 必要に応じてJavaScript機能を追加
+  });
+</script>
+
+<style lang="scss">
+  @import "../../styles/variables";
+  @import "../../styles/functions";
+  @import "../../styles/mixins";
+
+  .news-detail {
+    padding-top: spx(296);
+    position: relative;
+    min-height: 90vh;
+    padding-bottom: spx(99);
+    @include tablet-up {
+      padding-top: ppx(253 * 1.2);
+      padding-bottom: ppx(228 * 1.2);
+    }
+    @include desktop-up {
+      padding-top: ppx(253);
+      padding-bottom: ppx(228);
+    }
+
+    &__container {
+      padding-bottom: spx(100);
+      @include tablet-up {
+        padding-bottom: ppx(130 * 1.2);
+      }
+      @include desktop-up {
+        padding-bottom: ppx(130);
+      }
+    }
+
+    &__header {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__title {
+      color: var(--base_5, #102a4d);
+      font-size: spx(60);
+      font-style: normal;
+      font-weight: 700;
+      line-height: 130%;
+      text-align: center;
+      @include tablet-up {
+        font-size: ppx(110 * 1.2);
+      }
+      @include desktop-up {
+        font-size: ppx(110);
+      }
+
+      &-accent {
+        color: var(--logo_color_3, #c99e2d);
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+    }
+    &__subtitle {
+      color: var(--base_5, #102a4d);
+      text-align: center;
+      font-size: spx(26);
+      font-style: normal;
+      font-weight: 700;
+      line-height: 180%;
+      @include tablet-up {
+        font-size: ppx(37 * 1.2);
+      }
+      @include desktop-up {
+        font-size: ppx(37);
+      }
+    }
+  }
+
+  .news-article {
+    margin-top: spx(80);
+    @include tablet-up {
+      margin-top: ppx(81 * 1.2);
+    }
+    @include desktop-up {
+      margin-top: ppx(81);
+    }
+
+    &__header {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__category {
+      display: flex;
+      padding-bottom: spx(4);
+      justify-content: center;
+      align-items: center;
+      gap: spx(10);
+      border-radius: spx(15);
+      background: var(--logo_color_3, #c99e2d);
+      width: spx(220);
+      margin-inline: auto;
+      @include tablet-up {
+        padding-bottom: ppx(4 * 1.2);
+        gap: ppx(10 * 1.2);
+        border-radius: ppx(15 * 1.2);
+        width: ppx(220 * 1.2);
+      }
+      @include desktop-up {
+        padding-bottom: ppx(4);
+        gap: ppx(10);
+        border-radius: ppx(15);
+        width: ppx(220);
+      }
+      span {
+        color: var(--base_1, #fffcf2);
+        text-align: center;
+        font-size: spx(26);
+        font-weight: 700;
+        line-height: 180%;
+        @include tablet-up {
+          font-size: ppx(28 * 1.2);
+        }
+        @include desktop-up {
+          font-size: ppx(28);
+        }
+      }
+    }
+
+    &__date {
+      display: block;
+      color: var(--base_5, #102a4d);
+      font-size: spx(30);
+      font-weight: 700;
+      line-height: 160%;
+      margin-top: spx(24);
+      text-align: center;
+      @include tablet-up {
+        font-size: ppx(30 * 1.2);
+        line-height: 180%;
+        margin-top: ppx(30 * 1.2);
+      }
+      @include desktop-up {
+        font-size: ppx(30);
+        line-height: 180%;
+        margin-top: ppx(24);
+      }
+    }
+
+    &__content {
+      display: block;
+      width: spx(640);
+      margin-inline: auto;
+      margin-top: spx(30);
+      padding: spx(40) spx(30) spx(80) spx(30);
+      border-radius: spx(30);
+      background: var(--white, #fff);
+
+      @include tablet-up {
+        width: ppx(1600 * 1.2);
+        padding: ppx(80 * 1.2) ppx(100 * 1.2) ppx(120 * 1.2) ppx(100 * 1.2);
+        gap: ppx(40 * 1.2);
+        border-radius: ppx(40 * 1.2);
+        margin-top: ppx(30 * 1.2);
+      }
+      @include desktop-up {
+        width: ppx(1600);
+        padding: ppx(80) ppx(100) ppx(120) ppx(100);
+        gap: ppx(40);
+        border-radius: ppx(40);
+        margin-top: ppx(30);
+      }
+    }
+
+    &__title {
+      color: var(--base_5, #102a4d);
+      font-size: spx(33);
+      font-weight: 700;
+      line-height: 160%;
+      letter-spacing: spx(-0.33);
+      @include tablet-up {
+        text-align: center;
+        font-size: ppx(40 * 1.2);
+      }
+      @include desktop-up {
+        font-size: ppx(40);
+      }
+    }
+
+    &__divider {
+      display: block;
+      background: linear-gradient(
+          to right,
+          #102a4d,
+          #102a4d 25%,
+          rgba(0, 0, 0, 0) 25%,
+          rgba(0, 0, 0, 0) 100%
+        )
+        0% 0%;
+      background-size: 4px 1px;
+      width: 100%;
+      height: 1px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: spx(20);
+      margin-bottom: spx(20);
+      @include tablet-up {
+        margin-top: ppx(40 * 1.2);
+        margin-bottom: ppx(40 * 1.2);
+      }
+      @include desktop-up {
+        margin-top: ppx(40);
+        margin-bottom: ppx(40);
+      }
+    }
+
+    &__body {
+      color: var(--base_5, #102a4d);
+      font-size: spx(28);
+      font-weight: 700;
+      line-height: 180%;
+      @include tablet-up {
+        font-size: ppx(30 * 1.2);
+      }
+      @include desktop-up {
+        font-size: ppx(30);
+      }
+      section {
+        margin-top: spx(20);
+        @include tablet-up {
+          margin-top: ppx(40 * 1.2);
+        }
+        @include desktop-up {
+          margin-top: ppx(40);
+        }
+      }
+      h3 {
+        font-weight: 900;
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+    }
+  }
+
+  .news-navigation {
+    display: flex;
+    gap: spx(30);
+    justify-content: center;
+    margin-top: spx(30);
+    @include tablet-up {
+      gap: ppx(60 * 1.2);
+      margin-top: ppx(50 * 1.2);
+    }
+    @include desktop-up {
+      gap: ppx(60);
+      margin-top: ppx(50);
+    }
+
+    &__prev {
+      display: flex;
+      padding: spx(20) spx(40);
+      align-items: center;
+      gap: spx(16);
+      border-radius: spx(20);
+      background: var(--base_2, #fcf2c9);
+      width: spx(258);
+      @include tablet-up {
+        width: ppx(770 * 1.2);
+        padding: ppx(40 * 1.2) ppx(50 * 1.2);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: ppx(15 * 1.2);
+        flex-shrink: 0;
+        border-radius: ppx(40 * 1.2);
+        width: ppx(770 * 1.2);
+      }
+      @include desktop-up {
+        width: ppx(770);
+        padding: ppx(40) ppx(50);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: ppx(15);
+        flex-shrink: 0;
+        border-radius: ppx(40);
+        width: ppx(770);
+      }
+    }
+
+    &__next {
+      display: flex;
+      padding: spx(20) spx(40);
+      align-items: center;
+      gap: spx(16);
+      border-radius: spx(20);
+      background: var(--base_2, #fcf2c9);
+      width: spx(258);
+      @include tablet-up {
+        width: ppx(770 * 1.2);
+        padding: ppx(40 * 1.2) ppx(50 * 1.2);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: ppx(15 * 1.2);
+        flex-shrink: 0;
+        border-radius: ppx(40 * 1.2);
+        width: ppx(770 * 1.2);
+      }
+      @include desktop-up {
+        width: ppx(770);
+        padding: ppx(40) ppx(50);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: ppx(15);
+        flex-shrink: 0;
+        border-radius: ppx(40);
+        width: ppx(770);
+      }
+      .news-navigation__icon-wrapper {
+        margin-left: auto;
+        margin-right: 0;
+        @include tablet-up {
+          // タブレット用スタイル
+        }
+        @include desktop-up {
+          // デスクトップ用スタイル
+        }
+      }
+    }
+
+    &__icon-wrapper {
+      display: flex;
+      align-items: center;
+      gap: spx(16);
+      @include tablet-up {
+        gap: ppx(16 * 1.2);
+      }
+      @include desktop-up {
+        gap: ppx(16);
+      }
+    }
+
+    &__icon {
+      display: block;
+      width: spx(50);
+      height: spx(50);
+      @include tablet-up {
+        width: ppx(56 * 1.2);
+        height: ppx(56 * 1.2);
+      }
+      @include desktop-up {
+        width: ppx(56);
+        height: ppx(56);
+      }
+    }
+
+    &__label {
+      color: var(--logo_color_3, #c99e2d);
+      font-size: spx(28);
+      font-weight: 500;
+      line-height: 100%;
+      @include tablet-up {
+        font-size: ppx(30 * 1.2);
+      }
+      @include desktop-up {
+        font-size: ppx(30);
+      }
+    }
+
+    &__title {
+      display: none;
+      @include tablet-up {
+        display: block;
+        color: var(--base_5, #102a4d);
+        font-size: ppx(30 * 1.2);
+        font-weight: 500;
+        line-height: 150%;
+      }
+      @include desktop-up {
+        font-size: ppx(30);
+      }
+    }
+  }
+</style>

@@ -1,0 +1,66 @@
+{
+  "categories": [
+    {
+      "id": "important",
+      "name": "重要",
+      "color": "#ff4757"
+    },
+    {
+      "id": "event",
+      "name": "イベント情報",
+      "color": "#3742fa"
+    },
+    {
+      "id": "recruitment",
+      "name": "募集",
+      "color": "#2ed573"
+    },
+    {
+      "id": "other",
+      "name": "その他",
+      "color": "#ffa502"
+    }
+  ],
+  "articles": [
+    {
+      "id": "news-001",
+      "slug": "important-announcement-2024",
+      "title": "コッコ祭り2025開催決定のお知らせ",
+      "category": "important",
+      "publishedAt": "2024-12-15",
+      "image": "/images/news/news-001.jpg",
+      "excerpt": "コッコ祭り2025の開催が正式に決定いたしました。詳細につきましては下記をご確認ください。",
+      "content": "<h2>コッコ祭り2025開催について</h2><p>皆様のご支援により、コッコ祭り2025の開催が正式に決定いたしました。</p><p>開催日程や会場、出展者募集などの詳細情報は随時更新してまいります。</p>"
+    },
+    {
+      "id": "news-002",
+      "slug": "event-schedule-update",
+      "title": "イベントスケジュール更新のご案内",
+      "category": "event",
+      "publishedAt": "2024-12-10",
+      "image": "/images/news/news-002.jpg",
+      "excerpt": "コッコ祭り2025のイベントスケジュールを更新いたしました。",
+      "content": "<h2>イベントスケジュール更新</h2><p>コッコ祭り2025のイベントスケジュールを更新いたしました。</p><p>新たに追加されたプログラムや時間変更等がございますので、ご確認ください。</p>"
+    },
+    {
+      "id": "news-003",
+      "slug": "vendor-recruitment",
+      "title": "出展者募集を開始いたします",
+      "category": "recruitment",
+      "publishedAt": "2024-12-05",
+      "image": "/images/news/news-003.jpg",
+      "excerpt": "コッコ祭り2025への出展者募集を開始いたします。",
+      "content": "<h2>出展者募集について</h2><p>コッコ祭り2025への出展者募集を開始いたします。</p><p>募集要項や申込方法につきましては、詳細ページをご確認ください。</p>"
+    },
+    {
+      "id": "news-004",
+      "slug": "general-information",
+      "title": "一般的なお知らせ",
+      "category": "other",
+      "publishedAt": "2024-12-01",
+      "image": "/images/news/news-004.jpg",
+      "excerpt": "コッコ祭りに関する一般的なお知らせです。",
+      "content": "<h2>一般的なお知らせ</h2><p>コッコ祭りに関する一般的なお知らせです。</p><p>その他の情報については随時更新してまいります。</p>"
+    }
+  ]
+}
