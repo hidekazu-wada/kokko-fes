@@ -39,6 +39,15 @@ const category = typedNewsData.categories.find(
 if (!article) {
   throw new Error(`Article not found for slug: ${slug}`);
 }
+
+// 前後の記事を取得
+const currentIndex = typedNewsData.articles.findIndex((a) => a.slug === slug);
+const prevArticle =
+  currentIndex > 0 ? typedNewsData.articles[currentIndex - 1] : null;
+const nextArticle =
+  currentIndex < typedNewsData.articles.length - 1
+    ? typedNewsData.articles[currentIndex + 1]
+    : null;
 ---
 
 <PageLayout title={`${article.title} ｜コッコ祭り 2025｜KOKKO Festival`}>
@@ -70,60 +79,75 @@ if (!article) {
         </section>
 
         <nav class="news-navigation">
-          <a href="#" class="news-navigation__prev">
-            <div class="news-navigation__icon-wrapper">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="56"
-                height="56"
-                viewBox="0 0 56 56"
-                fill="none"
-                class="news-navigation__icon"
+          {
+            prevArticle && (
+              <a
+                href={`/news/${prevArticle.slug}/`}
+                class="news-navigation__prev"
               >
-                <circle
-                  cx="28"
-                  cy="28"
-                  r="28"
-                  transform="matrix(-1 0 0 1 56 0)"
-                  fill="#C99E2D"></circle>
-                <path
-                  d="M32.8662 18.2559L33.8976 19.7598L34.8304 21.2894L33.2774 22.3003L31.6896 23.3447L30.1227 24.4145L28.5349 25.459L26.9018 26.4304L25.278 27.5369L26.9909 28.5094L28.5348 29.6429L30.1415 30.665L31.7451 31.7046L33.3299 32.7696L35.0033 33.782L33.8958 35.2908L32.9647 36.9102L31.4062 35.7561L29.8106 34.7324L28.146 33.8154L26.6416 32.642L24.9958 31.6995L23.4081 30.6519L21.8409 29.59L20.2201 28.587L18.6417 27.5267L20.2701 26.5617L21.7741 25.4157L23.4251 24.4872L24.9228 23.3365L26.5883 22.4286L28.1295 21.3398L29.6835 20.2605L31.2909 19.2701L32.8662 18.2559Z"
-                  fill="#FFFCF2"></path>
-              </svg>
-              <span class="news-navigation__label">前の記事</span>
-            </div>
-            <p class="news-navigation__title">
-              ボランティアスタッフ募集のお知らせボランテ...
-            </p>
-          </a>
+                <div class="news-navigation__icon-wrapper">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="56"
+                    height="56"
+                    viewBox="0 0 56 56"
+                    fill="none"
+                    class="news-navigation__icon"
+                  >
+                    <circle
+                      cx="28"
+                      cy="28"
+                      r="28"
+                      transform="matrix(-1 0 0 1 56 0)"
+                      fill="#C99E2D"
+                    />
+                    <path
+                      d="M32.8662 18.2559L33.8976 19.7598L34.8304 21.2894L33.2774 22.3003L31.6896 23.3447L30.1227 24.4145L28.5349 25.459L26.9018 26.4304L25.278 27.5369L26.9909 28.5094L28.5348 29.6429L30.1415 30.665L31.7451 31.7046L33.3299 32.7696L35.0033 33.782L33.8958 35.2908L32.9647 36.9102L31.4062 35.7561L29.8106 34.7324L28.146 33.8154L26.6416 32.642L24.9958 31.6995L23.4081 30.6519L21.8409 29.59L20.2201 28.587L18.6417 27.5267L20.2701 26.5617L21.7741 25.4157L23.4251 24.4872L24.9228 23.3365L26.5883 22.4286L28.1295 21.3398L29.6835 20.2605L31.2909 19.2701L32.8662 18.2559Z"
+                      fill="#FFFCF2"
+                    />
+                  </svg>
+                  <span class="news-navigation__label">前の記事</span>
+                </div>
+                <p class="news-navigation__title">{prevArticle.title}</p>
+              </a>
+            )
+          }
 
-          <a href="#" class="news-navigation__next">
-            <div class="news-navigation__icon-wrapper">
-              <span class="news-navigation__label">次の記事</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="56"
-                height="56"
-                viewBox="0 0 56 56"
-                fill="none"
-                class="news-navigation__icon"
+          {
+            nextArticle && (
+              <a
+                href={`/news/${nextArticle.slug}/`}
+                class="news-navigation__next"
               >
-                <circle cx="28" cy="28" r="28" fill="#C99E2D"></circle>
-                <path
-                  d="M23.1338 18.2559L22.1024 19.7598L21.1696 21.2894L22.7226 22.3003L24.3104 23.3447L25.8773 24.4145L27.4651 25.459L29.0982 26.4304L30.722 27.5369L29.0091 28.5094L27.4652 29.6429L25.8585 30.665L24.2549 31.7046L22.6701 32.7696L20.9967 33.782L22.1042 35.2908L23.0353 36.9102L24.5938 35.7561L26.1894 34.7324L27.854 33.8154L29.3584 32.642L31.0042 31.6995L32.5919 30.6519L34.1591 29.59L35.7799 28.587L37.3583 27.5267L35.7299 26.5617L34.2259 25.4157L32.5749 24.4872L31.0772 23.3365L29.4117 22.4286L27.8705 21.3398L26.3165 20.2605L24.7091 19.2701L23.1338 18.2559Z"
-                  fill="#FFFCF2"></path>
-              </svg>
-            </div>
-            <p class="news-navigation__title">今年の特別企画について</p>
-          </a>
+                <div class="news-navigation__icon-wrapper">
+                  <span class="news-navigation__label">次の記事</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="56"
+                    height="56"
+                    viewBox="0 0 56 56"
+                    fill="none"
+                    class="news-navigation__icon"
+                  >
+                    <circle cx="28" cy="28" r="28" fill="#C99E2D" />
+                    <path
+                      d="M23.1338 18.2559L22.1024 19.7598L21.1696 21.2894L22.7226 22.3003L24.3104 23.3447L25.8773 24.4145L27.4651 25.459L29.0982 26.4304L30.722 27.5369L29.0091 28.5094L27.4652 29.6429L25.8585 30.665L24.2549 31.7046L22.6701 32.7696L20.9967 33.782L22.1042 35.2908L23.0353 36.9102L24.5938 35.7561L26.1894 34.7324L27.854 33.8154L29.3584 32.642L31.0042 31.6995L32.5919 30.6519L34.1591 29.59L35.7799 28.587L37.3583 27.5267L35.7299 26.5617L34.2259 25.4157L32.5749 24.4872L31.0772 23.3365L29.4117 22.4286L27.8705 21.3398L26.3165 20.2605L24.7091 19.2701L23.1338 18.2559Z"
+                      fill="#FFFCF2"
+                    />
+                  </svg>
+                </div>
+                <p class="news-navigation__title">{nextArticle.title}</p>
+              </a>
+            )
+          }
         </nav>
       </article>
 
       <!-- ここにお知らせ詳細のマークアップを追加 -->
     </div>
-    <Breadcrumb 
-      currentPageTitle={article.title} 
-      parentPage={{title: "お知らせ", href: "/news/"}}
+    <Breadcrumb
+      currentPageTitle={article.title}
+      parentPage={{ title: "お知らせ", href: "/news/" }}
     />
     <PageBottomWave />
   </section>
@@ -132,7 +156,20 @@ if (!article) {
 <script>
   // お知らせ詳細ページのJavaScript
   document.addEventListener("DOMContentLoaded", () => {
-    // 必要に応じてJavaScript機能を追加
+    // ナビゲーションタイトルの文字数制限
+    const navigationTitles = document.querySelectorAll(
+      ".news-navigation__title",
+    );
+
+    navigationTitles.forEach((titleElement) => {
+      const originalText = titleElement.textContent || "";
+      const maxLength = 23; // 最大文字数
+
+      if (originalText.length > maxLength) {
+        const truncatedText = originalText.substring(0, maxLength) + "...";
+        titleElement.textContent = truncatedText;
+      }
+    });
   });
 </script>
 
@@ -386,20 +423,30 @@ if (!article) {
   }
 
   .news-navigation {
-    display: flex;
+    display: grid;
+    grid-template:
+      "prev next"
+      / spx(258) spx(258);
     gap: spx(30);
     justify-content: center;
     margin-top: spx(30);
     @include tablet-up {
       gap: ppx(60 * 1.2);
       margin-top: ppx(50 * 1.2);
+      grid-template:
+        "prev next"
+        / ppx(770 * 1.2) ppx(770 * 1.2);
     }
     @include desktop-up {
       gap: ppx(60);
       margin-top: ppx(50);
+      grid-template:
+        "prev next"
+        / ppx(770) ppx(770);
     }
 
     &__prev {
+      grid-area: prev;
       display: flex;
       padding: spx(20) spx(40);
       align-items: center;
@@ -430,6 +477,7 @@ if (!article) {
     }
 
     &__next {
+      grid-area: next;
       display: flex;
       padding: spx(20) spx(40);
       align-items: center;
