@@ -3,14 +3,14 @@
 import PageLayout from "../../layouts/PageLayout.astro";
 import PageBottomWave from "../../components/common/PageBottomWave.astro";
 import Breadcrumb from "../../components/common/Breadcrumb.astro";
+import NewsArticleList from "../../components/common/NewsArticleList.astro";
 
 // データとタイプ
 import newsData from "../../data/news.json";
-import type { NewsData, NewsArticle, NewsCategory } from "../../types/news.ts";
+import type { NewsData } from "../../types/news.ts";
 
-// データの型変換
+// データの型変換（カテゴリフィルター用）
 const typedNewsData = newsData as NewsData;
-const articles = typedNewsData.articles;
 const categories = typedNewsData.categories;
 ---
 
@@ -38,30 +38,7 @@ const categories = typedNewsData.categories;
         </div>
       </nav>
       <main class="news-articles">
-        <ul class="news-articles__list">
-          {articles.map((article) => {
-            const category = categories.find(c => c.id === article.category);
-            return (
-              <li class="news-articles__item">
-                <article class="news-article-card">
-                  <a href={`/news/${article.slug}/`} class="news-article-card__link">
-                    <header class="news-article-card__header">
-                      <time class="news-article-card__date" datetime={article.publishedAt}>
-                        {article.publishedAt}
-                      </time>
-                      <div class="news-article-card__category">
-                        <span>{category ? category.name : article.category}</span>
-                      </div>
-                    </header>
-                    <h3 class="news-article-card__title">
-                      {article.title}
-                    </h3>
-                  </a>
-                </article>
-              </li>
-            );
-          })}
-        </ul>
+        <NewsArticleList className="news-articles__list" />
       </main>
       <nav class="news-pagination" aria-label="ページネーション">
         <button class="news-pagination__item news-pagination__item--prev"
@@ -271,151 +248,6 @@ const categories = typedNewsData.categories;
     }
     @include desktop-up {
       margin-top: ppx(130);
-    }
-
-    &__list {
-      display: flex;
-      flex-direction: column;
-      gap: spx(20);
-      width: spx(560);
-      margin-inline: auto;
-      @include tablet-up {
-        gap: ppx(50 * 1.2);
-        width: ppx(1350 * 1.2);
-      }
-      @include desktop-up {
-        gap: ppx(50);
-        width: ppx(1350);
-      }
-    }
-
-    &__item {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-      &:after {
-        content: "";
-        display: block;
-        background: linear-gradient(
-            to right,
-            #102a4d,
-            #102a4d 25%,
-            rgba(0, 0, 0, 0) 25%,
-            rgba(0, 0, 0, 0) 100%
-          )
-          0% 0%;
-        background-size: 4px 1px;
-        width: 100%;
-        height: 1px;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: spx(18);
-        @include tablet-up {
-          margin-top: ppx(30 * 1.2);
-        }
-        @include desktop-up {
-          margin-top: ppx(30);
-        }
-      }
-    }
-  }
-
-  .news-article-card {
-    @include tablet-up {
-      padding-left: ppx(20 * 1.2);
-    }
-    @include desktop-up {
-      padding-left: ppx(20);
-    }
-
-    &__link {
-      display: flex;
-      flex-flow: column;
-      gap: spx(8);
-      @include tablet-up {
-        flex-flow: row;
-        gap: ppx(30 * 1.2);
-        align-items: baseline;
-      }
-      @include desktop-up {
-        gap: ppx(30);
-      }
-    }
-
-    &__header {
-      display: flex;
-      align-items: center;
-      gap: spx(15);
-      @include tablet-up {
-        gap: ppx(30 * 1.2);
-      }
-      @include desktop-up {
-        gap: ppx(30);
-      }
-    }
-
-    &__date {
-      color: var(--base_5, #102a4d);
-      font-size: spx(30);
-      font-weight: 700;
-      line-height: 180%;
-      @include tablet-up {
-        font-size: ppx(30 * 1.2);
-      }
-      @include desktop-up {
-        font-size: ppx(30);
-      }
-    }
-
-    &__category {
-      display: flex;
-      padding-bottom: spx(4);
-      justify-content: center;
-      align-items: center;
-      gap: spx(10);
-      border-radius: spx(15);
-      background: var(--logo_color_3, #c99e2d);
-      width: spx(220);
-      @include tablet-up {
-        padding-bottom: ppx(4 * 1.2);
-        gap: ppx(10 * 1.2);
-        border-radius: ppx(15 * 1.2);
-        width: ppx(220 * 1.2);
-      }
-      @include desktop-up {
-        padding-bottom: ppx(4);
-        gap: ppx(10);
-        border-radius: ppx(15);
-        width: ppx(220);
-      }
-      span {
-        color: var(--base_1, #fffcf2);
-        text-align: center;
-        font-size: spx(26);
-        font-weight: 700;
-        line-height: 180%;
-        @include tablet-up {
-          font-size: ppx(28 * 1.2);
-        }
-        @include desktop-up {
-          font-size: ppx(28);
-        }
-      }
-    }
-
-    &__title {
-      color: var(--base_5, #102a4d);
-      font-size: spx(26);
-      font-style: normal;
-      font-weight: 700;
-      line-height: 160%;
-      @include tablet-up {
-        font-size: ppx(30 * 1.2);
-      }
-      @include desktop-up {
-        font-size: ppx(30);
-      }
     }
   }
 

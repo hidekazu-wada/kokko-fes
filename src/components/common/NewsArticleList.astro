@@ -1,0 +1,245 @@
+---
+// プロパティの型定義
+interface Props {
+  limit?: number; // 表示件数制限
+  showExcerpt?: boolean; // 抜粋表示の有無
+  className?: string; // カスタムCSSクラス
+  showCategory?: boolean; // カテゴリ表示の有無
+  linkTarget?: string; // リンクのターゲット（詳細ページかトップページか）
+}
+
+const {
+  limit,
+  showExcerpt = false,
+  className = "news-articles__list",
+  showCategory = true,
+  linkTarget = "detail", // "detail" or "list"
+} = Astro.props;
+
+// データとタイプ
+import newsData from "../../data/news.json";
+import type { NewsData } from "../../types/news.ts";
+
+// データの型変換
+const typedNewsData = newsData as NewsData;
+const articles = limit
+  ? typedNewsData.articles.slice(0, limit)
+  : typedNewsData.articles;
+const categories = typedNewsData.categories;
+---
+
+<ul class={className}>
+  {
+    articles.map((article) => {
+      const category = categories.find((c) => c.id === article.category);
+      const linkUrl =
+        linkTarget === "list" ? "/news/" : `/news/${article.slug}/`;
+
+      return (
+        <li class="news-articles__item">
+          <article class="news-article-card">
+            <a href={linkUrl} class="news-article-card__link">
+              <header class="news-article-card__header">
+                <time
+                  class="news-article-card__date"
+                  datetime={article.publishedAt}
+                >
+                  {article.publishedAt}
+                </time>
+                {showCategory && (
+                  <div class="news-article-card__category">
+                    <span>{category ? category.name : article.category}</span>
+                  </div>
+                )}
+              </header>
+              <h3 class="news-article-card__title">{article.title}</h3>
+              {showExcerpt && (
+                <p class="news-article-card__excerpt">{article.excerpt}</p>
+              )}
+            </a>
+          </article>
+        </li>
+      );
+    })
+  }
+</ul>
+
+<style lang="scss">
+  @import "../../styles/variables";
+  @import "../../styles/functions";
+  @import "../../styles/mixins";
+
+  .news-articles__list {
+    display: flex;
+    flex-direction: column;
+    gap: spx(20);
+    width: spx(560);
+    margin-inline: auto;
+    @include tablet-up {
+      gap: ppx(50 * 1.2);
+      width: ppx(1350 * 1.2);
+    }
+    @include desktop-up {
+      gap: ppx(50);
+      width: ppx(1350);
+    }
+  }
+
+  .news-articles__item {
+    &:after {
+      content: "";
+      display: block;
+      background: linear-gradient(
+          to right,
+          var(--base_5, #102a4d),
+          var(--base_5, #102a4d) 25%,
+          rgba(0, 0, 0, 0) 25%,
+          rgba(0, 0, 0, 0) 100%
+        )
+        0% 0%;
+      background-size: 4px 1px;
+      width: 100%;
+      height: 1px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: spx(18);
+      @include tablet-up {
+        margin-top: ppx(30 * 1.2);
+      }
+      @include desktop-up {
+        margin-top: ppx(30);
+      }
+    }
+  }
+
+  .news-article-card {
+    @include tablet-up {
+      padding-left: ppx(20 * 1.2);
+    }
+    @include desktop-up {
+      padding-left: ppx(20);
+    }
+
+    &__link {
+      display: flex;
+      flex-flow: column;
+      gap: spx(8);
+      transition: color 0.3s ease;
+      @include tablet-up {
+        flex-flow: row;
+        gap: ppx(30 * 1.2);
+        align-items: baseline;
+      }
+      @include desktop-up {
+        gap: ppx(30);
+      }
+      @include hover {
+        &:hover {
+          .news-article-card__title {
+            color: var(--logo_color_1, #528ca2);
+          }
+        }
+      }
+    }
+
+    &__header {
+      display: flex;
+      align-items: center;
+      gap: spx(15);
+      @include tablet-up {
+        gap: ppx(30 * 1.2);
+      }
+      @include desktop-up {
+        gap: ppx(30);
+      }
+    }
+
+    &__date {
+      color: var(--base_5, #102a4d);
+      font-size: spx(30);
+      font-weight: 700;
+      line-height: 180%;
+      @include tablet-up {
+        font-size: ppx(30 * 1.2);
+      }
+      @include desktop-up {
+        font-size: ppx(30);
+      }
+    }
+
+    &__category {
+      display: flex;
+      padding-bottom: spx(4);
+      justify-content: center;
+      align-items: center;
+      gap: spx(10);
+      border-radius: spx(15);
+      background: var(--logo_color_3, #c99e2d);
+      width: spx(220);
+      transition: background-color 0.3s ease;
+      @include tablet-up {
+        padding-bottom: ppx(4 * 1.2);
+        gap: ppx(10 * 1.2);
+        border-radius: ppx(15 * 1.2);
+        width: ppx(220 * 1.2);
+      }
+      @include desktop-up {
+        padding-bottom: ppx(4);
+        gap: ppx(10);
+        border-radius: ppx(15);
+        width: ppx(220);
+      }
+      span {
+        color: var(--base_1, #fffcf2);
+        text-align: center;
+        font-size: spx(26);
+        font-weight: 700;
+        line-height: 180%;
+        @include tablet-up {
+          font-size: ppx(28 * 1.2);
+        }
+        @include desktop-up {
+          font-size: ppx(28);
+        }
+      }
+    }
+
+    &__title {
+      color: var(--base_5, #102a4d);
+      font-size: spx(26);
+      font-style: normal;
+      font-weight: 700;
+      line-height: 160%;
+      transition: color 0.3s ease;
+      @include tablet-up {
+        font-size: ppx(30 * 1.2);
+      }
+      @include desktop-up {
+        font-size: ppx(30);
+      }
+    }
+
+    &__excerpt {
+      color: var(--base_5, #102a4d);
+      font-size: spx(24);
+      line-height: 160%;
+      margin-top: spx(8);
+      @include tablet-up {
+        font-size: ppx(26 * 1.2);
+        margin-top: ppx(12 * 1.2);
+      }
+      @include desktop-up {
+        font-size: ppx(26);
+        margin-top: ppx(12);
+      }
+    }
+  }
+
+  // ホバー時のカテゴリ背景色変更
+  .news-article-card:has(.news-article-card__link:hover)
+    .news-article-card__category {
+    @include hover {
+      background: var(--logo_color_1, #528ca2);
+    }
+  }
+</style>
