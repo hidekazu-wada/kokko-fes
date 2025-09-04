@@ -3,6 +3,15 @@
 import PageLayout from "../../layouts/PageLayout.astro";
 import PageBottomWave from "../../components/common/PageBottomWave.astro";
 import Breadcrumb from "../../components/common/Breadcrumb.astro";
+
+// データとタイプ
+import newsData from "../../data/news.json";
+import type { NewsData, NewsArticle, NewsCategory } from "../../types/news.ts";
+
+// データの型変換
+const typedNewsData = newsData as NewsData;
+const articles = typedNewsData.articles;
+const categories = typedNewsData.categories;
 ---
 
 <PageLayout title="お知らせ一覧 ｜コッコ祭り 2025｜KOKKO Festival">
@@ -21,192 +30,37 @@ import Breadcrumb from "../../components/common/Breadcrumb.astro";
           <button class="news-filter__item news-filter__item--active">
             <span>すべて</span>
           </button>
-          <button class="news-filter__item">
-            <span>重要</span>
-          </button>
-          <button class="news-filter__item">
-            <span>イベント情報</span>
-          </button>
-          <button class="news-filter__item">
-            <span>募集</span>
-          </button>
-          <button class="news-filter__item">
-            <span>その他</span>
-          </button>
+          {categories.map((category) => (
+            <button class="news-filter__item">
+              <span>{category.name}</span>
+            </button>
+          ))}
         </div>
       </nav>
       <main class="news-articles">
         <ul class="news-articles__list">
-          <li class="news-articles__item">
-            <article class="news-article-card">
-              <a href="/news/sample-slug/" class="news-article-card__link">
-                <header class="news-article-card__header">
-                  <time class="news-article-card__date" datetime="2025-08-19"
-                    >2025/08/19</time
-                  >
-                  <div class="news-article-card__category">
-                    <span>イベント情報</span>
-                  </div>
-                </header>
-                <h3 class="news-article-card__title">
-                  今年の特別企画「伝統工芸体験コーナー」について
-                </h3>
-              </a>
-            </article>
-          </li>
-          <li class="news-articles__item">
-            <article class="news-article-card">
-              <a href="/news/sample-slug/" class="news-article-card__link">
-                <header class="news-article-card__header">
-                  <time class="news-article-card__date" datetime="2025-08-19"
-                    >2025/08/19</time
-                  >
-                  <div class="news-article-card__category">
-                    <span>イベント情報</span>
-                  </div>
-                </header>
-                <h3 class="news-article-card__title">
-                  今年の特別企画「伝統工芸体験コーナー」について
-                </h3>
-              </a>
-            </article>
-          </li>
-          <li class="news-articles__item">
-            <article class="news-article-card">
-              <a href="/news/sample-slug/" class="news-article-card__link">
-                <header class="news-article-card__header">
-                  <time class="news-article-card__date" datetime="2025-08-19"
-                    >2025/08/19</time
-                  >
-                  <div class="news-article-card__category">
-                    <span>イベント情報</span>
-                  </div>
-                </header>
-                <h3 class="news-article-card__title">
-                  今年の特別企画「伝統工芸体験コーナー」について
-                </h3>
-              </a>
-            </article>
-          </li>
-          <li class="news-articles__item">
-            <article class="news-article-card">
-              <a href="/news/sample-slug/" class="news-article-card__link">
-                <header class="news-article-card__header">
-                  <time class="news-article-card__date" datetime="2025-08-19"
-                    >2025/08/19</time
-                  >
-                  <div class="news-article-card__category">
-                    <span>イベント情報</span>
-                  </div>
-                </header>
-                <h3 class="news-article-card__title">
-                  今年の特別企画「伝統工芸体験コーナー」について
-                </h3>
-              </a>
-            </article>
-          </li>
-          <li class="news-articles__item">
-            <article class="news-article-card">
-              <a href="/news/sample-slug/" class="news-article-card__link">
-                <header class="news-article-card__header">
-                  <time class="news-article-card__date" datetime="2025-08-19"
-                    >2025/08/19</time
-                  >
-                  <div class="news-article-card__category">
-                    <span>イベント情報</span>
-                  </div>
-                </header>
-                <h3 class="news-article-card__title">
-                  今年の特別企画「伝統工芸体験コーナー」について
-                </h3>
-              </a>
-            </article>
-          </li>
-          <li class="news-articles__item">
-            <article class="news-article-card">
-              <a href="/news/sample-slug/" class="news-article-card__link">
-                <header class="news-article-card__header">
-                  <time class="news-article-card__date" datetime="2025-08-19"
-                    >2025/08/19</time
-                  >
-                  <div class="news-article-card__category">
-                    <span>イベント情報</span>
-                  </div>
-                </header>
-                <h3 class="news-article-card__title">
-                  今年の特別企画「伝統工芸体験コーナー」について
-                </h3>
-              </a>
-            </article>
-          </li>
-          <li class="news-articles__item">
-            <article class="news-article-card">
-              <a href="/news/sample-slug/" class="news-article-card__link">
-                <header class="news-article-card__header">
-                  <time class="news-article-card__date" datetime="2025-08-19"
-                    >2025/08/19</time
-                  >
-                  <div class="news-article-card__category">
-                    <span>イベント情報</span>
-                  </div>
-                </header>
-                <h3 class="news-article-card__title">
-                  今年の特別企画「伝統工芸体験コーナー」について
-                </h3>
-              </a>
-            </article>
-          </li>
-          <li class="news-articles__item">
-            <article class="news-article-card">
-              <a href="/news/sample-slug/" class="news-article-card__link">
-                <header class="news-article-card__header">
-                  <time class="news-article-card__date" datetime="2025-08-19"
-                    >2025/08/19</time
-                  >
-                  <div class="news-article-card__category">
-                    <span>イベント情報</span>
-                  </div>
-                </header>
-                <h3 class="news-article-card__title">
-                  今年の特別企画「伝統工芸体験コーナー」について
-                </h3>
-              </a>
-            </article>
-          </li>
-          <li class="news-articles__item">
-            <article class="news-article-card">
-              <a href="/news/sample-slug/" class="news-article-card__link">
-                <header class="news-article-card__header">
-                  <time class="news-article-card__date" datetime="2025-08-19"
-                    >2025/08/19</time
-                  >
-                  <div class="news-article-card__category">
-                    <span>イベント情報</span>
-                  </div>
-                </header>
-                <h3 class="news-article-card__title">
-                  今年の特別企画「伝統工芸体験コーナー」について
-                </h3>
-              </a>
-            </article>
-          </li>
-          <li class="news-articles__item">
-            <article class="news-article-card">
-              <a href="/news/sample-slug/" class="news-article-card__link">
-                <header class="news-article-card__header">
-                  <time class="news-article-card__date" datetime="2025-08-19"
-                    >2025/08/19</time
-                  >
-                  <div class="news-article-card__category">
-                    <span>イベント情報</span>
-                  </div>
-                </header>
-                <h3 class="news-article-card__title">
-                  今年の特別企画「伝統工芸体験コーナー」について
-                </h3>
-              </a>
-            </article>
-          </li>
+          {articles.map((article) => {
+            const category = categories.find(c => c.id === article.category);
+            return (
+              <li class="news-articles__item">
+                <article class="news-article-card">
+                  <a href={`/news/${article.slug}/`} class="news-article-card__link">
+                    <header class="news-article-card__header">
+                      <time class="news-article-card__date" datetime={article.publishedAt}>
+                        {article.publishedAt}
+                      </time>
+                      <div class="news-article-card__category">
+                        <span>{category ? category.name : article.category}</span>
+                      </div>
+                    </header>
+                    <h3 class="news-article-card__title">
+                      {article.title}
+                    </h3>
+                  </a>
+                </article>
+              </li>
+            );
+          })}
         </ul>
       </main>
       <nav class="news-pagination" aria-label="ページネーション">
