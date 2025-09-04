@@ -43,24 +43,38 @@ npm run astro -- --help
 ├── public/          # 静的アセット（画像、ファビコンなど）
 ├── src/
 │   ├── components/  # 再利用可能なコンポーネント
-│   │   └── common/  # 全ページ共通コンポーネント
-│   │       ├── Breadcrumb.astro    # パンくずリスト
-│   │       ├── Footer.astro        # フッター
-│   │       ├── Head.astro          # HTMLヘッド
-│   │       ├── Loading.astro       # ローディング画面
-│   │       ├── Menu.astro          # メニュー
-│   │       ├── MenuToggle.astro    # メニュートグル
-│   │       ├── PageBottomWave.astro # ページ下部の波形
-│   │       └── PageHeader.astro    # ページヘッダー
+│   │   ├── common/  # 全ページ共通コンポーネント
+│   │   │   ├── Breadcrumb.astro    # パンくずリスト（3階層対応）
+│   │   │   ├── Footer.astro        # フッター
+│   │   │   ├── Head.astro          # HTMLヘッド
+│   │   │   ├── Loading.astro       # ローディング画面
+│   │   │   ├── Menu.astro          # メニュー
+│   │   │   ├── MenuToggle.astro    # メニュートグル
+│   │   │   ├── PageBottomWave.astro # ページ下部の波形
+│   │   │   └── PageHeader.astro    # ページヘッダー
+│   │   └── top/     # トップページ専用コンポーネント
+│   │       ├── Concept.astro       # コンセプトセクション
+│   │       ├── Hero.astro         # ヒーローセクション
+│   │       ├── News.astro         # ニュースセクション
+│   │       ├── Category.astro     # カテゴリセクション
+│   │       └── Overview.astro     # 概要セクション
 │   ├── pages/       # ページコンポーネント（ファイルベースルーティング）
 │   │   ├── index.astro         # トップページ
 │   │   ├── inquiry.astro       # お問い合わせページ
 │   │   ├── [category].astro    # カテゴリページ（動的ルート）
-│   │   └── 404.astro          # 404エラーページ
+│   │   ├── 404.astro          # 404エラーページ
+│   │   └── news/              # ニュース関連ページ
+│   │       ├── index.astro    # ニュース一覧ページ
+│   │       └── [slug].astro   # ニュース詳細ページ（動的ルート）
 │   ├── data/        # 静的データファイル
-│   │   └── categories.json # カテゴリデータ
+│   │   ├── categories.json # カテゴリデータ
+│   │   └── news.json      # ニュース記事データ
 │   ├── layouts/     # レイアウトコンポーネント
-│   │   └── PageLayout.astro # 基本ページレイアウト
+│   │   ├── PageLayout.astro    # 基本ページレイアウト
+│   │   └── TopPageLayout.astro # トップページ専用レイアウト
+│   ├── types/       # TypeScript型定義ファイル
+│   │   ├── global.d.ts # グローバル型定義
+│   │   └── news.ts     # ニュース機能型定義
 │   └── styles/      # SCSSファイル
 │       ├── reset.scss      # リセットCSS
 │       ├── _variables.scss # 変数・定数
@@ -325,6 +339,8 @@ src/
 - ✅ **お問い合わせページ** (`inquiry.astro`): 完全実装済み
 - ✅ **カテゴリページ** (`[category].astro`): 動的ルート実装済み
 - ✅ **404エラーページ** (`404.astro`): 実装済み
+- ✅ **ニュース詳細ページ** (`news/[slug].astro`): 完全実装済み
+- 🔄 **ニュース一覧ページ** (`news/index.astro`): 構造実装済み（スタイリング待ち）
 
 ### お問い合わせページの実装詳細
 - **フォーム統合**: Formspree (https://formspree.io/f/mgvlpodg) 使用
@@ -352,8 +368,53 @@ src/
 - **エラーハンドリング**: HTML5バリデーション + カスタムJavaScript制御
 - **UX最適化**: 送信ボタンの視覚的フィードバック実装
 
+### ニュース機能の実装（NEW）
+- ✅ **ニュース機能の基礎設計**: 完了
+  - TypeScript型定義作成 (`src/types/news.ts`)
+  - 静的データファイル作成 (`src/data/news.json`)
+  - カテゴリ別記事管理、公開日・画像・抜粋文対応
+
+- ✅ **ニュース詳細ページ** (`src/pages/news/[slug].astro`): 完了
+  - 動的ルート実装（getStaticPaths使用）
+  - BEM記法に基づくセマンティックHTML
+  - 完全レスポンシブ対応（SP/タブレット/PC）
+  - 動的データ連携（タイトル・カテゴリ・日付・内容）
+  - 拡張されたBreadcrumbコンポーネント統合（3階層対応）
+  - 前後記事ナビゲーション機能
+  - JavaScript文字数制限機能（30文字制限+省略表示）
+
+- 🔄 **ニュース一覧ページ** (`src/pages/news/index.astro`): 構造実装完了（スタイリング待ち）
+  - セマンティックHTML構造完成
+  - BEM記法でクラス名体系化
+  - SCSSセレクター準備完了
+  - フィルター機能の基盤実装
+  - ページネーション機能の基盤実装
+  - 記事カードのリンク機能実装
+
+#### ニュース機能の技術詳細
+- **データ構造**: JSON形式の静的データ管理
+- **型安全性**: TypeScriptインターフェース定義済み
+- **パフォーマンス**: Astroの静的生成を活用
+- **ナビゲーション**: 前後記事の動的取得
+- **文字数制御**: JavaScript動的処理（日本語対応）
+- **アクセシビリティ**: semantic HTML + aria属性
+
+#### Breadcrumbコンポーネントの拡張
+- **機能拡張**: 2階層 → 3階層対応に改良
+- **再利用性**: `parentPage`プロパティで柔軟な階層設定
+- **実装例**:
+  ```astro
+  // 3階層: トップ > お知らせ > 記事タイトル
+  <Breadcrumb
+    currentPageTitle={article.title}
+    parentPage={{ title: "お知らせ", href: "/news/" }}
+  />
+  ```
+
 ### 今後の開発予定
-- その他ページの段階的実装
+- ニュース一覧ページのスタイリング実装
+- フィルター・ページネーション機能の完成
+- 動的データ連携（CMS統合検討）
 - SEO最適化（メタタグ、構造化データ等）
 - パフォーマンス最適化
 - 多言語対応検討
