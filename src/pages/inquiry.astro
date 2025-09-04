@@ -29,9 +29,11 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
             <legend class="inquiry__legend">お問い合わせフォーム</legend>
             <div class="inquiry__field">
               <label class="inquiry__label" for="name">
-                <div class="inquiry__label-text">お名前</div>
-                <div class="inquiry__label-required">
-                  <span class="inquiry__required-badge">必須</span>
+                <div class="inquiry__label-wrapper">
+                  <div class="inquiry__label-text">お名前</div>
+                  <div class="inquiry__label-required">
+                    <span class="inquiry__required-badge">必須</span>
+                  </div>
                 </div>
                 <input
                   class="inquiry__input"
@@ -46,9 +48,11 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
             </div>
             <div class="inquiry__field">
               <label class="inquiry__label" for="email">
-                <div class="inquiry__label-text">メールアドレス</div>
-                <div class="inquiry__label-required">
-                  <span class="inquiry__required-badge">必須</span>
+                <div class="inquiry__label-wrapper">
+                  <div class="inquiry__label-text">メールアドレス</div>
+                  <div class="inquiry__label-required">
+                    <span class="inquiry__required-badge">必須</span>
+                  </div>
                 </div>
                 <input
                   class="inquiry__input"
@@ -63,8 +67,10 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
             </div>
             <div class="inquiry__field">
               <label class="inquiry__label" for="inquiryType">
-                <div class="inquiry__label-text">お問い合わせ種別</div>
-                <div class="inquiry__label-optional"></div>
+                <div class="inquiry__label-wrapper">
+                  <div class="inquiry__label-text">お問い合わせ種別</div>
+                  <div class="inquiry__label-optional"></div>
+                </div>
                 <select
                   class="inquiry__select"
                   name="inquiryType"
@@ -80,9 +86,11 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
             </div>
             <div class="inquiry__field">
               <label class="inquiry__label" for="message">
-                <div class="inquiry__label-text">お問い合わせ内容</div>
-                <div class="inquiry__label-required">
-                  <span class="inquiry__required-badge">必須</span>
+                <div class="inquiry__label-wrapper">
+                  <div class="inquiry__label-text">お問い合わせ内容</div>
+                  <div class="inquiry__label-required">
+                    <span class="inquiry__required-badge">必須</span>
+                  </div>
                 </div>
                 <textarea
                   class="inquiry__textarea"
@@ -143,9 +151,43 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
         </form>
       </div>
     </div>
+    <nav class="breadcrumb" aria-label="パンくずリスト">
+      <a href="/" class="breadcrumb__link">トップ</a>
+      <span class="breadcrumb__separator">＞</span>
+      <span class="breadcrumb__current">お問い合わせ</span>
+    </nav>
     <PageBottomWave />
   </section>
 </PageLayout>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const checkbox = document.getElementById(
+      "privacyPolicy",
+    ) as HTMLInputElement;
+    const submitButton = document.querySelector(
+      ".inquiry__submit-button",
+    ) as HTMLButtonElement;
+
+    if (checkbox && submitButton) {
+      // 初期状態：チェックボックスがチェックされていない場合はボタンを無効化
+      updateSubmitButton();
+
+      // チェックボックスの状態が変わった時の処理
+      checkbox.addEventListener("change", updateSubmitButton);
+
+      function updateSubmitButton() {
+        if (checkbox.checked) {
+          submitButton.disabled = false;
+          submitButton.classList.add("inquiry__submit-button--enabled");
+        } else {
+          submitButton.disabled = true;
+          submitButton.classList.remove("inquiry__submit-button--enabled");
+        }
+      }
+    }
+  });
+</script>
 
 <style lang="scss">
   @import "../styles/variables";
@@ -238,9 +280,12 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
     }
 
     &__form-wrapper {
+      margin-top: spx(70);
       @include tablet-up {
+        margin-top: ppx(132 * 1.2);
       }
       @include desktop-up {
+        margin-top: ppx(132);
       }
     }
 
@@ -252,13 +297,21 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
     }
 
     &__fieldset {
+      display: flex;
+      flex-flow: column;
+      gap: spx(15);
+      align-items: center;
       @include tablet-up {
+        gap: ppx(40 * 1.2);
       }
       @include desktop-up {
+        gap: ppx(40);
       }
     }
 
     &__legend {
+      visibility: hidden;
+      height: 0;
       @include tablet-up {
       }
       @include desktop-up {
@@ -273,9 +326,29 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
     }
 
     &__label {
+      display: flex;
+      flex-flow: column;
+      gap: spx(15);
       @include tablet-up {
+        flex-flow: row;
+        gap: spx(20) * 1.2;
       }
       @include desktop-up {
+        gap: ppx(20);
+      }
+      &-wrapper {
+        display: flex;
+        align-items: center;
+        gap: spx(20);
+        @include tablet-up {
+          justify-content: space-between;
+          gap: ppx(20 * 1.2);
+          width: ppx(368 * 1.2);
+        }
+        @include desktop-up {
+          gap: ppx(20);
+          width: ppx(368);
+        }
       }
 
       &-text {
@@ -343,12 +416,12 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
       border: 2px solid var(--logo_color_3, #c99e2d);
       background: var(--white, #fff);
       @include tablet-up {
-        width: ppx(620 * 1.2);
+        width: ppx(950 * 1.2);
         padding: ppx(20 * 1.2) ppx(30 * 1.2);
         border-radius: ppx(10 * 1.2);
       }
       @include desktop-up {
-        width: ppx(620);
+        width: ppx(950);
         padding: ppx(20) ppx(30);
         border-radius: ppx(10);
       }
@@ -362,12 +435,12 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
       border: 2px solid var(--logo_color_3, #c99e2d);
       background: var(--white, #fff);
       @include tablet-up {
-        width: ppx(620 * 1.2);
+        width: ppx(950 * 1.2);
         padding: ppx(20 * 1.2) ppx(30 * 1.2);
         border-radius: ppx(10 * 1.2);
       }
       @include desktop-up {
-        width: ppx(620);
+        width: ppx(950);
         padding: ppx(20) ppx(30);
         border-radius: ppx(10);
       }
@@ -381,27 +454,33 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
       border: 2px solid var(--logo_color_3, #c99e2d);
       background: var(--white, #fff);
       @include tablet-up {
-        width: ppx(620 * 1.2);
+        width: ppx(950 * 1.2);
         padding: ppx(20 * 1.2) ppx(30 * 1.2);
         border-radius: ppx(10 * 1.2);
       }
       @include desktop-up {
-        width: ppx(620);
+        width: ppx(950);
         padding: ppx(20) ppx(30);
         border-radius: ppx(10);
       }
     }
 
     &__privacy-section {
+      margin-top: spx(65);
+      display: flex;
+      justify-content: center;
       @include tablet-up {
+        margin-top: ppx(80 * 1.2);
       }
       @include desktop-up {
+        margin-top: ppx(80);
       }
     }
 
     &__privacy-content {
       display: flex;
       flex-direction: column;
+      align-items: center;
       gap: 0.3em;
       padding: spx(30) spx(50);
       width: spx(620);
@@ -450,6 +529,13 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
     }
 
     &__consent-section {
+      margin-top: spx(67);
+      @include tablet-up {
+        margin-top: ppx(80 * 1.2);
+      }
+      @include desktop-up {
+        margin-top: ppx(80);
+      }
     }
 
     &__consent-field {
@@ -459,6 +545,7 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
         / max-content max-content;
       gap: spx(20);
       align-items: center;
+      justify-content: center;
       @include tablet-up {
         gap: ppx(20 * 1.2);
       }
@@ -469,12 +556,16 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
 
     &__checkbox {
       grid-area: box;
-      display: block;
+      appearance: none;
       width: spx(49);
       height: spx(49);
       border-radius: spx(10);
       border: 2px solid var(--logo_color_3, #c99e2d);
       background: var(--white, #fff);
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s ease;
+
       @include tablet-up {
         width: ppx(49 * 1.2);
         height: ppx(49 * 1.2);
@@ -484,6 +575,43 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
         width: ppx(49);
         height: ppx(49);
         border-radius: ppx(10);
+      }
+
+      &:checked {
+        background: var(--logo_color_3, #c99e2d);
+        border-color: var(--logo_color_3, #c99e2d);
+      }
+
+      &:checked::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: spx(20);
+        height: spx(15);
+        border: 3px solid white;
+        border-top: none;
+        border-right: none;
+        transform: translate(-50%, -60%) rotate(-45deg);
+
+        @include tablet-up {
+          width: ppx(24 * 1.2);
+          height: ppx(18 * 1.2);
+        }
+        @include desktop-up {
+          width: ppx(24);
+          height: ppx(18);
+        }
+      }
+
+      &:hover {
+        border-color: var(--logo_color_2, #816259);
+      }
+
+      &:focus {
+        outline: 2px solid var(--logo_color_3, #c99e2d);
+        outline-offset: 2px;
       }
     }
 
@@ -495,6 +623,9 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
       font-style: normal;
       font-weight: 500;
       line-height: 180%;
+      cursor: pointer;
+      user-select: none;
+
       @include tablet-up {
         font-size: ppx(30 * 1.2);
       }
@@ -513,12 +644,16 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
       border-radius: spx(50);
       background: var(--base_2, #fcf2c9);
       position: relative;
+      transition: background-color 0.3s ease;
+      margin-inline: auto;
+      margin-top: spx(65);
       @include tablet-up {
         width: ppx(420) * 1.2;
         height: ppx(90) * 1.2;
         padding: 0 ppx(60) * 1.2;
         gap: ppx(10) * 1.2;
         border-radius: ppx(50) * 1.2;
+        margin-top: ppx(80 * 1.2);
       }
       @include desktop-up {
         width: ppx(420);
@@ -526,6 +661,11 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
         padding: 0 ppx(60);
         gap: ppx(10);
         border-radius: ppx(50);
+        margin-top: ppx(80);
+      }
+
+      &--enabled {
+        background: var(--logo_color_3, #c99e2d);
       }
     }
 
@@ -544,11 +684,16 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
       font-style: normal;
       font-weight: 700;
       line-height: normal;
+      transition: color 0.3s ease;
       @include tablet-up {
         font-size: ppx(33) * 1.2;
       }
       @include desktop-up {
         font-size: ppx(33);
+      }
+
+      .inquiry__submit-button--enabled & {
+        color: white;
       }
     }
 
@@ -569,6 +714,46 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
       @include desktop-up {
         width: ppx(56);
         height: ppx(56);
+      }
+    }
+  }
+  .breadcrumb {
+    width: spx(560);
+    margin-inline: auto;
+    color: var(--logo_color_2, #816259);
+    font-size: spx(24);
+    font-weight: 700;
+    line-height: 140%;
+    letter-spacing: spx(2.4);
+    @include tablet-up {
+      width: ppx(1960 * 1.2);
+      font-size: ppx(27 * 1.2);
+      letter-spacing: ppx(2.7 * 1.2);
+    }
+    @include desktop-up {
+      width: ppx(1960);
+      font-size: ppx(27);
+      letter-spacing: ppx(2.7);
+    }
+
+    &__link {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__separator {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__current {
+      @include tablet-up {
+      }
+      @include desktop-up {
       }
     }
   }
