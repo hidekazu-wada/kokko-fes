@@ -36,7 +36,7 @@ const categories = typedNewsData.categories;
         linkTarget === "list" ? "/news/" : `/news/${article.slug}/`;
 
       return (
-        <li class="news-articles__item">
+        <li class="news-articles__item" data-category={article.category}>
           <article class="news-article-card">
             <a href={linkUrl} class="news-article-card__link">
               <header class="news-article-card__header">

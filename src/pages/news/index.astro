@@ -27,11 +27,11 @@ const categories = typedNewsData.categories;
       </header>
       <nav class="news-filter">
         <div class="news-filter__wrapper">
-          <button class="news-filter__item news-filter__item--active">
+          <button class="news-filter__item news-filter__item--active" data-category="all">
             <span>すべて</span>
           </button>
           {categories.map((category) => (
-            <button class="news-filter__item">
+            <button class="news-filter__item" data-category={category.id}>
               <span>{category.name}</span>
             </button>
           ))}
@@ -73,7 +73,48 @@ const categories = typedNewsData.categories;
 <script>
   // お知らせ一覧ページのJavaScript
   document.addEventListener("DOMContentLoaded", () => {
-    // フィルター機能やページネーション機能をここに追加
+    // フィルター機能の実装
+    const filterButtons = document.querySelectorAll('.news-filter__item');
+    const newsItems = document.querySelectorAll('.news-articles__item');
+
+    // フィルターボタンのクリックイベント
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const targetCategory = button.getAttribute('data-category');
+        
+        // アクティブボタンの切り替え
+        filterButtons.forEach(btn => btn.classList.remove('news-filter__item--active'));
+        button.classList.add('news-filter__item--active');
+        
+        // 記事のフィルタリング
+        newsItems.forEach(item => {
+          const itemCategory = item.getAttribute('data-category');
+          
+          if (targetCategory === 'all' || itemCategory === targetCategory) {
+            item.style.display = 'block';
+            item.style.opacity = '0';
+            // フェードインアニメーション
+            setTimeout(() => {
+              item.style.transition = 'opacity 0.3s ease';
+              item.style.opacity = '1';
+            }, 10);
+          } else {
+            // フェードアウトアニメーション
+            item.style.transition = 'opacity 0.3s ease';
+            item.style.opacity = '0';
+            setTimeout(() => {
+              item.style.display = 'none';
+            }, 300);
+          }
+        });
+      });
+    });
+
+    // 初期状態で全記事を表示
+    newsItems.forEach(item => {
+      item.style.opacity = '1';
+      item.style.transition = 'opacity 0.3s ease';
+    });
   });
 </script>
 
