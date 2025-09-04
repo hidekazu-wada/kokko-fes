@@ -121,7 +121,10 @@ if (!article) {
 
       <!-- ここにお知らせ詳細のマークアップを追加 -->
     </div>
-    <Breadcrumb currentPageTitle={article.title} />
+    <Breadcrumb 
+      currentPageTitle={article.title} 
+      parentPage={{title: "お知らせ", href: "/news/"}}
+    />
     <PageBottomWave />
   </section>
 </PageLayout>

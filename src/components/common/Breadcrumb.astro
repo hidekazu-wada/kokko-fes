@@ -1,14 +1,26 @@
 ---
-interface Props {
-  currentPageTitle: string;
+interface BreadcrumbItem {
+  title: string;
+  href?: string;
 }
 
-const { currentPageTitle } = Astro.props;
+interface Props {
+  currentPageTitle: string;
+  parentPage?: BreadcrumbItem;
+}
+
+const { currentPageTitle, parentPage } = Astro.props;
 ---
 
 <nav class="breadcrumb" aria-label="パンくずリスト">
   <a href="/" class="breadcrumb__link">トップ</a>
   <span class="breadcrumb__separator">＞</span>
+  {parentPage && (
+    <>
+      <a href={parentPage.href} class="breadcrumb__link">{parentPage.title}</a>
+      <span class="breadcrumb__separator">＞</span>
+    </>
+  )}
   <span class="breadcrumb__current">{currentPageTitle}</span>
 </nav>
 
