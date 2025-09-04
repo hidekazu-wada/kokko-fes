@@ -1,0 +1,575 @@
+---
+// コンポーネント
+import PageLayout from "../layouts/PageLayout.astro";
+import PageBottomWave from "../components/common/PageBottomWave.astro";
+---
+
+<PageLayout title="お問い合わせ ｜コッコ祭り 2025｜KOKKO Festival">
+  <!-- inquiry content -->
+  <section class="page-wrapper inquiry">
+    <div class="inquiry__container">
+      <header class="inquiry__header">
+        <h1 class="inquiry__title">
+          <span class="inquiry__title-accent">お</span>
+          問い合わせ
+        </h1>
+        <p class="inquiry__subtitle">− CONTACT −</p>
+        <p class="inquiry__description">
+          以下のフォームに入力し、送信してください。
+        </p>
+      </header>
+      <div class="inquiry__form-wrapper">
+        <form
+          class="inquiry__form"
+          action="https://formspree.io/f/mgvlpodg"
+          method="POST"
+          novalidate
+        >
+          <fieldset class="inquiry__fieldset">
+            <legend class="inquiry__legend">お問い合わせフォーム</legend>
+            <div class="inquiry__field">
+              <label class="inquiry__label" for="name">
+                <div class="inquiry__label-text">お名前</div>
+                <div class="inquiry__label-required">
+                  <span class="inquiry__required-badge">必須</span>
+                </div>
+                <input
+                  class="inquiry__input"
+                  type="text"
+                  name="name"
+                  id="name"
+                  required
+                  aria-required="true"
+                  placeholder="山田太郎"
+                />
+              </label>
+            </div>
+            <div class="inquiry__field">
+              <label class="inquiry__label" for="email">
+                <div class="inquiry__label-text">メールアドレス</div>
+                <div class="inquiry__label-required">
+                  <span class="inquiry__required-badge">必須</span>
+                </div>
+                <input
+                  class="inquiry__input"
+                  type="email"
+                  name="email"
+                  id="email"
+                  required
+                  aria-required="true"
+                  placeholder="example@email.com"
+                />
+              </label>
+            </div>
+            <div class="inquiry__field">
+              <label class="inquiry__label" for="inquiryType">
+                <div class="inquiry__label-text">お問い合わせ種別</div>
+                <div class="inquiry__label-optional"></div>
+                <select
+                  class="inquiry__select"
+                  name="inquiryType"
+                  id="inquiryType"
+                >
+                  <option value="">選択してください</option>
+                  <option value="general">一般的なお問い合わせ</option>
+                  <option value="event">イベントについて</option>
+                  <option value="participation">参加・出展について</option>
+                  <option value="other">その他</option>
+                </select>
+              </label>
+            </div>
+            <div class="inquiry__field">
+              <label class="inquiry__label" for="message">
+                <div class="inquiry__label-text">お問い合わせ内容</div>
+                <div class="inquiry__label-required">
+                  <span class="inquiry__required-badge">必須</span>
+                </div>
+                <textarea
+                  class="inquiry__textarea"
+                  name="message"
+                  id="message"
+                  required
+                  aria-required="true"
+                  placeholder="お問い合わせ内容を入力してください"
+                  rows="6"></textarea>
+              </label>
+            </div>
+          </fieldset>
+          <div class="inquiry__privacy-section">
+            <div class="inquiry__privacy-content">
+              <div class="inquiry__privacy-title">個人情報の取り扱い</div>
+              <div class="inquiry__privacy-text" id="privacy-description">
+                ここに説明文が入ります。ここに説明文が入ります。ここに説明文が入ります。ここに説明文が入ります。ここに説明文が入ります。ここに説明文が入ります。ここに説明文が入ります。
+              </div>
+            </div>
+          </div>
+          <div class="inquiry__consent-section">
+            <div class="inquiry__consent-field">
+              <input
+                class="inquiry__checkbox"
+                type="checkbox"
+                name="privacyPolicy"
+                id="privacyPolicy"
+                required
+                aria-required="true"
+                aria-describedby="privacy-description"
+              />
+              <label class="inquiry__checkbox-label" for="privacyPolicy"
+                >個人情報の取り扱いに同意する</label
+              >
+            </div>
+          </div>
+
+          <button class="inquiry__submit-button" type="submit">
+            <div class="inquiry__submit-content">
+              <div class="inquiry__submit-text">送　信</div>
+              <svg
+                class="inquiry__submit-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                width="47"
+                height="47"
+                viewBox="0 0 47 47"
+                fill="none"
+                aria-hidden="true"
+              >
+                <circle cx="23.3815" cy="23.4831" r="22.6667" fill="white"
+                ></circle>
+                <path
+                  d="M19.4418 15.5937L18.6069 16.8111L17.8517 18.0494L19.109 18.8677L20.3943 19.7132L21.6628 20.5792L22.9481 21.4247L24.2701 22.2111L25.5847 23.1069L24.1981 23.8941L22.9482 24.8118L21.6476 25.6392L20.3494 26.4807L19.0665 27.3429L17.7118 28.1624L18.6083 29.3838L19.3621 30.6948L20.6237 29.7605L21.9154 28.9318L23.2629 28.1895L24.4808 27.2396L25.8131 26.4766L27.0984 25.6286L28.3671 24.7689L29.6792 23.957L30.9569 23.0986L29.6387 22.3174L28.4211 21.3898L27.0846 20.6381L25.8722 19.7066L24.524 18.9716L23.2763 18.0902L22.0183 17.2165L20.7171 16.4147L19.4418 15.5937Z"
+                  fill="#816259"></path>
+              </svg>
+            </div>
+          </button>
+        </form>
+      </div>
+    </div>
+    <PageBottomWave />
+  </section>
+</PageLayout>
+
+<style lang="scss">
+  @import "../styles/variables";
+  @import "../styles/functions";
+  @import "../styles/mixins";
+  .inquiry {
+    padding-top: spx(296);
+    position: relative;
+    min-height: 90vh;
+    padding-bottom: spx(99);
+    @include tablet-up {
+      padding-top: ppx(253 * 1.2);
+      padding-bottom: ppx(228 * 1.2);
+    }
+    @include desktop-up {
+      padding-top: ppx(253);
+      padding-bottom: ppx(228);
+    }
+
+    &__container {
+      padding-bottom: spx(100);
+      @include tablet-up {
+        padding-bottom: ppx(130 * 1.2);
+      }
+      @include desktop-up {
+        padding-bottom: ppx(130);
+      }
+    }
+
+    &__header {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__title {
+      color: var(--base_5, #102a4d);
+      font-size: spx(60);
+      font-style: normal;
+      font-weight: 700;
+      line-height: 130%;
+      text-align: center;
+      @include tablet-up {
+        font-size: ppx(110 * 1.2);
+      }
+      @include desktop-up {
+        font-size: ppx(110);
+      }
+
+      &-accent {
+        color: var(--logo_color_3, #c99e2d);
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+    }
+
+    &__subtitle {
+      color: var(--base_5, #102a4d);
+      text-align: center;
+      font-size: spx(26);
+      font-style: normal;
+      font-weight: 700;
+      line-height: 180%;
+      @include tablet-up {
+        font-size: ppx(37 * 1.2);
+      }
+      @include desktop-up {
+        font-size: ppx(37);
+      }
+    }
+
+    &__description {
+      color: var(--base_5, #102a4d);
+      text-align: center;
+      font-size: spx(26);
+      font-weight: 700;
+      line-height: 180%;
+      margin-top: spx(18);
+      @include tablet-up {
+        font-size: ppx(27 * 1.2);
+        margin-top: ppx(30 * 1.2);
+      }
+      @include desktop-up {
+        font-size: ppx(27);
+        margin-top: ppx(30);
+      }
+    }
+
+    &__form-wrapper {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__form {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__fieldset {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__legend {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__field {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__label {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+
+      &-text {
+        color: var(--base_5, #102a4d);
+        font-size: spx(30);
+        font-weight: 700;
+        line-height: 180%;
+        @include tablet-up {
+          font-size: ppx(30 * 1.2);
+        }
+        @include desktop-up {
+          font-size: ppx(30);
+        }
+      }
+
+      &-required {
+        display: flex;
+        padding: spx(3) 0 spx(5);
+        justify-content: center;
+        align-items: center;
+        border-radius: spx(14);
+        width: spx(68);
+        height: spx(51);
+        background: var(--logo_color_3, #c99e2d);
+        @include tablet-up {
+          padding: ppx(3) * 1.2 0 ppx(5) * 1.2;
+          border-radius: ppx(14) * 1.2;
+          width: ppx(68) * 1.2;
+          height: ppx(51) * 1.2;
+        }
+        @include desktop-up {
+          padding: ppx(3) 0 ppx(5);
+          border-radius: ppx(14);
+          width: ppx(68);
+          height: ppx(51);
+        }
+      }
+
+      &-optional {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+    }
+
+    &__required-badge {
+      color: var(--base_1, #fffcf2);
+      font-size: spx(24);
+      font-weight: 700;
+      line-height: 180%;
+      @include tablet-up {
+        font-size: ppx(24 * 1.2);
+      }
+      @include desktop-up {
+        font-size: ppx(24);
+      }
+    }
+
+    &__input {
+      display: block;
+      width: spx(620);
+      padding: spx(20) spx(30);
+      border-radius: spx(10);
+      border: 2px solid var(--logo_color_3, #c99e2d);
+      background: var(--white, #fff);
+      @include tablet-up {
+        width: ppx(620 * 1.2);
+        padding: ppx(20 * 1.2) ppx(30 * 1.2);
+        border-radius: ppx(10 * 1.2);
+      }
+      @include desktop-up {
+        width: ppx(620);
+        padding: ppx(20) ppx(30);
+        border-radius: ppx(10);
+      }
+    }
+
+    &__select {
+      display: block;
+      width: spx(620);
+      padding: spx(20) spx(30);
+      border-radius: spx(10);
+      border: 2px solid var(--logo_color_3, #c99e2d);
+      background: var(--white, #fff);
+      @include tablet-up {
+        width: ppx(620 * 1.2);
+        padding: ppx(20 * 1.2) ppx(30 * 1.2);
+        border-radius: ppx(10 * 1.2);
+      }
+      @include desktop-up {
+        width: ppx(620);
+        padding: ppx(20) ppx(30);
+        border-radius: ppx(10);
+      }
+    }
+
+    &__textarea {
+      display: block;
+      width: spx(620);
+      padding: spx(20) spx(30);
+      border-radius: spx(10);
+      border: 2px solid var(--logo_color_3, #c99e2d);
+      background: var(--white, #fff);
+      @include tablet-up {
+        width: ppx(620 * 1.2);
+        padding: ppx(20 * 1.2) ppx(30 * 1.2);
+        border-radius: ppx(10 * 1.2);
+      }
+      @include desktop-up {
+        width: ppx(620);
+        padding: ppx(20) ppx(30);
+        border-radius: ppx(10);
+      }
+    }
+
+    &__privacy-section {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__privacy-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3em;
+      padding: spx(30) spx(50);
+      width: spx(620);
+      align-items: flex-start;
+      border-radius: spx(10);
+      border: 2px solid var(--logo_color_3, #c99e2d);
+      background: var(--white, #fff);
+      @include tablet-up {
+        padding: ppx(30 * 1.2) ppx(50 * 1.2);
+        gap: ppx(10 * 1.2);
+        border-radius: ppx(10 * 1.2);
+        width: ppx(1338) * 1.2;
+      }
+      @include desktop-up {
+        padding: ppx(30) ppx(50);
+        gap: ppx(10);
+        border-radius: ppx(10);
+        width: ppx(1338);
+      }
+    }
+
+    &__privacy-title {
+      color: var(--logo_color_3, #c99e2d);
+      font-size: spx(33);
+      font-weight: 700;
+      line-height: 180%;
+      @include tablet-up {
+        font-size: ppx(33 * 1.2);
+      }
+      @include desktop-up {
+        font-size: ppx(33);
+      }
+    }
+
+    &__privacy-text {
+      color: var(--base_5, #102a4d);
+      font-size: spx(28);
+      font-weight: 500;
+      line-height: 180%;
+      @include tablet-up {
+        font-size: ppx(28 * 1.2);
+      }
+      @include desktop-up {
+        font-size: ppx(28);
+      }
+    }
+
+    &__consent-section {
+    }
+
+    &__consent-field {
+      display: grid;
+      grid-template:
+        "text box"
+        / max-content max-content;
+      gap: spx(20);
+      align-items: center;
+      @include tablet-up {
+        gap: ppx(20 * 1.2);
+      }
+      @include desktop-up {
+        gap: ppx(20);
+      }
+    }
+
+    &__checkbox {
+      grid-area: box;
+      display: block;
+      width: spx(49);
+      height: spx(49);
+      border-radius: spx(10);
+      border: 2px solid var(--logo_color_3, #c99e2d);
+      background: var(--white, #fff);
+      @include tablet-up {
+        width: ppx(49 * 1.2);
+        height: ppx(49 * 1.2);
+        border-radius: ppx(10 * 1.2);
+      }
+      @include desktop-up {
+        width: ppx(49);
+        height: ppx(49);
+        border-radius: ppx(10);
+      }
+    }
+
+    &__checkbox-label {
+      grid-area: text;
+      color: var(--base_5, #102a4d);
+      font-family: "Zen Kaku Gothic Antique";
+      font-size: spx(28);
+      font-style: normal;
+      font-weight: 500;
+      line-height: 180%;
+      @include tablet-up {
+        font-size: ppx(30 * 1.2);
+      }
+      @include desktop-up {
+        font-size: ppx(30);
+      }
+    }
+
+    &__submit-button {
+      display: flex;
+      width: spx(330);
+      height: spx(73);
+      padding: 0 spx(40) 0 spx(23);
+      justify-content: center;
+      align-items: center;
+      border-radius: spx(50);
+      background: var(--base_2, #fcf2c9);
+      position: relative;
+      @include tablet-up {
+        width: ppx(420) * 1.2;
+        height: ppx(90) * 1.2;
+        padding: 0 ppx(60) * 1.2;
+        gap: ppx(10) * 1.2;
+        border-radius: ppx(50) * 1.2;
+      }
+      @include desktop-up {
+        width: ppx(420);
+        height: ppx(90);
+        padding: 0 ppx(60);
+        gap: ppx(10);
+        border-radius: ppx(50);
+      }
+    }
+
+    &__submit-content {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__submit-text {
+      color: var(--logo_color_2, #816259);
+      text-align: center;
+      font-family: "Zen Kaku Gothic Antique";
+      font-size: spx(28);
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      @include tablet-up {
+        font-size: ppx(33) * 1.2;
+      }
+      @include desktop-up {
+        font-size: ppx(33);
+      }
+    }
+
+    &__submit-icon {
+      display: block;
+      width: spx(45.333);
+      height: spx(45.333);
+      flex-shrink: 0;
+      position: absolute;
+      top: 50%;
+      right: spx(10);
+      transform: translateY(-50%);
+      @include tablet-up {
+        width: ppx(56) * 1.2;
+        height: ppx(56) * 1.2;
+      }
+
+      @include desktop-up {
+        width: ppx(56);
+        height: ppx(56);
+      }
+    }
+  }
+</style>

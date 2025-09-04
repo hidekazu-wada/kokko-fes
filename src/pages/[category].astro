@@ -325,11 +325,14 @@ const { category } = Astro.params;
       font-style: normal;
       font-weight: 700;
       line-height: 180%;
+      margin-top: spx(18);
       @include tablet-up {
         font-size: ppx(27 * 1.2);
+        margin-top: ppx(30 * 1.2);
       }
       @include desktop-up {
         font-size: ppx(27);
+        margin-top: ppx(30);
       }
     }
 
