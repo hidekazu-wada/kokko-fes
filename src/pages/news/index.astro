@@ -95,30 +95,33 @@ const categories = typedNewsData.categories;
 
         // 記事のフィルタリング
         newsItems.forEach((item, index) => {
-          const itemCategory = item.getAttribute("data-category");
+          const htmlItem = item as HTMLElement;
+          const itemCategory = htmlItem.getAttribute("data-category");
 
           if (targetCategory === "all" || itemCategory === targetCategory) {
             // 表示する要素：段階的にフェードイン
-            item.style.display = "block";
-            item.style.opacity = "0";
-            item.style.transform = "translateY(20px)";
-            item.style.transition = "opacity 0.3s ease, transform 0.3s ease";
+            htmlItem.style.display = "block";
+            htmlItem.style.opacity = "0";
+            htmlItem.style.transform = "translateY(20px)";
+            htmlItem.style.transition =
+              "opacity 0.3s ease, transform 0.3s ease";
 
             // 少しずつ遅延させて順番にフェードイン
             setTimeout(
               () => {
-                item.style.opacity = "1";
-                item.style.transform = "translateY(0)";
+                htmlItem.style.opacity = "1";
+                htmlItem.style.transform = "translateY(0)";
               },
               150 + index * 50,
             ); // 150ms基本遅延 + 各要素50ms間隔
           } else {
             // 非表示にする要素：フェードアウト
-            item.style.transition = "opacity 0.3s ease, transform 0.3s ease";
-            item.style.opacity = "0";
-            item.style.transform = "translateY(-10px)";
+            htmlItem.style.transition =
+              "opacity 0.3s ease, transform 0.3s ease";
+            htmlItem.style.opacity = "0";
+            htmlItem.style.transform = "translateY(-10px)";
             setTimeout(() => {
-              item.style.display = "none";
+              htmlItem.style.display = "none";
             }, 300);
           }
         });
@@ -127,9 +130,10 @@ const categories = typedNewsData.categories;
 
     // 初期状態で全記事を表示
     newsItems.forEach((item) => {
-      item.style.opacity = "1";
-      item.style.transform = "translateY(0)";
-      item.style.transition = "opacity 0.4s ease, transform 0.4s ease";
+      const htmlItem = item as HTMLElement;
+      htmlItem.style.opacity = "1";
+      htmlItem.style.transform = "translateY(0)";
+      htmlItem.style.transition = "opacity 0.3s ease, transform 0.3s ease";
     });
   });
 </script>
