@@ -1,0 +1,60 @@
+---
+interface Props {
+  currentPageTitle: string;
+}
+
+const { currentPageTitle } = Astro.props;
+---
+
+<nav class="breadcrumb" aria-label="パンくずリスト">
+  <a href="/" class="breadcrumb__link">トップ</a>
+  <span class="breadcrumb__separator">＞</span>
+  <span class="breadcrumb__current">{currentPageTitle}</span>
+</nav>
+
+<style lang="scss">
+  @import "../../styles/variables";
+  @import "../../styles/functions";
+  @import "../../styles/mixins";
+
+  .breadcrumb {
+    width: spx(560);
+    margin-inline: auto;
+    color: var(--logo_color_2, #816259);
+    font-size: spx(24);
+    font-weight: 700;
+    line-height: 140%;
+    letter-spacing: spx(2.4);
+    @include tablet-up {
+      width: ppx(1960 * 1.2);
+      font-size: ppx(27 * 1.2);
+      letter-spacing: ppx(2.7 * 1.2);
+    }
+    @include desktop-up {
+      width: ppx(1960);
+      font-size: ppx(27);
+      letter-spacing: ppx(2.7);
+    }
+
+    &__link {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__separator {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__current {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+  }
+</style>

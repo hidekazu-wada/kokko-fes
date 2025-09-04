@@ -48,6 +48,7 @@ console.log("Image map created:", imageMap);
 // コンポーネント
 import PageLayout from "../layouts/PageLayout.astro";
 import PageBottomWave from "../components/common/PageBottomWave.astro";
+import Breadcrumb from "../components/common/Breadcrumb.astro";
 
 export async function getStaticPaths() {
   const categories = Object.keys(categoriesData);
@@ -231,11 +232,7 @@ const { category } = Astro.params;
         }
       </ul>
     </div>
-    <nav class="breadcrumb" aria-label="パンくずリスト">
-      <a href="/" class="breadcrumb__link">トップ</a>
-      <span class="breadcrumb__separator">＞</span>
-      <span class="breadcrumb__current">{categoryData.title}</span>
-    </nav>
+    <Breadcrumb currentPageTitle={categoryData.title} />
     <PageBottomWave />
   </section>
 </PageLayout>
