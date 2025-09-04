@@ -265,6 +265,8 @@ const categories = typedNewsData.categories;
       width: spx(200);
       border: 2px solid var(--logo_color_3, #c99e2d);
       background: var(--base_1, #fffcf2);
+      cursor: pointer;
+      transition: background-color 0.3s ease;
       @include tablet-up {
         gap: ppx(10 * 1.2);
         border-radius: ppx(15 * 1.2);
@@ -275,17 +277,28 @@ const categories = typedNewsData.categories;
         border-radius: ppx(15);
         width: ppx(220);
       }
+
       span {
         color: var(--logo_color_3, #c99e2d);
         text-align: center;
         font-size: spx(24);
         font-weight: 700;
         line-height: 180%;
+        transition: color 0.3s ease;
         @include tablet-up {
           font-size: ppx(28 * 1.2);
         }
         @include desktop-up {
           font-size: ppx(28);
+        }
+      }
+
+      @include hover {
+        &:hover:not(&--active) {
+          background: var(--base_2, #fcf2c9);
+          span {
+            color: var(--logo_color_3, #c99e2d);
+          }
         }
       }
 
