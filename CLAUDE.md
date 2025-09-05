@@ -50,6 +50,7 @@ npm run astro -- --help
 │   │   │   ├── Loading.astro       # ローディング画面
 │   │   │   ├── Menu.astro          # メニュー
 │   │   │   ├── MenuToggle.astro    # メニュートグル
+│   │   │   ├── NewsArticleList.astro # ニュース記事リスト（再利用可能）
 │   │   │   ├── PageBottomWave.astro # ページ下部の波形
 │   │   │   └── PageHeader.astro    # ページヘッダー
 │   │   └── top/     # トップページ専用コンポーネント
@@ -254,12 +255,14 @@ src/
 │   │   ├── Loading.astro       # ローディング画面
 │   │   ├── Menu.astro          # メニュー
 │   │   ├── MenuToggle.astro    # メニュートグル
+│   │   ├── NewsArticleList.astro # ニュース記事リスト（再利用可能）
 │   │   ├── PageBottomWave.astro # ページ下部の波形
 │   │   └── PageHeader.astro    # ページヘッダー
 │   ├── top/        # トップページ専用コンポーネント
 │   └── [page]/     # 各ページ専用コンポーネント（将来の拡張用）
 ├── data/           # 静的データ・設定ファイル（実装済み）
-│   └── categories.json # カテゴリページ用データ
+│   ├── categories.json # カテゴリページ用データ
+│   └── news.json      # ニュース記事データ
 ├── layouts/        # レイアウトコンポーネント（実装済み）
 │   └── PageLayout.astro # 基本ページレイアウト
 ├── pages/          # Astroページファイル（実装済み）
@@ -361,6 +364,25 @@ src/
   - inquiry.astro と [category].astro で再利用
   - 完全なレスポンシブ対応とアクセシビリティ対応
 
+- ✅ **NewsArticleListコンポーネント**: ニュース記事リスト機能をコンポーネント化
+  - **ファイル場所**: `src/components/common/NewsArticleList.astro`
+  - **設定可能プロパティ**:
+    ```typescript
+    interface Props {
+      limit?: number;        // 表示件数制限
+      showExcerpt?: boolean; // 抜粋表示の有無
+      className?: string;    // カスタムCSSクラス
+      showCategory?: boolean; // カテゴリ表示の有無
+      linkTarget?: string;   // リンクのターゲット（"detail" or "list"）
+    }
+    ```
+  - **使用実績**:
+    - トップページ（News.astro）: `<NewsArticleList limit={3} className="news-articles__list" />`
+    - 一覧ページ（news/index.astro）: `<NewsArticleList className="news-articles__list" />`
+  - TypeScript型安全性確保
+  - 完全なレスポンシブ対応とBEM記法
+  - 記事データとカテゴリデータの動的連携
+
 ### フォーム機能の技術仕様
 - **外部サービス**: Formspree無料プランを使用
 - **セキュリティ**: サーバーサイドバリデーション（Formspree）+ クライアントサイドバリデーション
@@ -374,23 +396,38 @@ src/
   - 静的データファイル作成 (`src/data/news.json`)
   - カテゴリ別記事管理、公開日・画像・抜粋文対応
 
-- ✅ **ニュース詳細ページ** (`src/pages/news/[slug].astro`): 完了
+- ✅ **ニュース詳細ページ** (`src/pages/news/[slug].astro`): 完全実装完了
   - 動的ルート実装（getStaticPaths使用）
   - BEM記法に基づくセマンティックHTML
   - 完全レスポンシブ対応（SP/タブレット/PC）
   - 動的データ連携（タイトル・カテゴリ・日付・内容）
   - 拡張されたBreadcrumbコンポーネント統合（3階層対応）
-  - 前後記事ナビゲーション機能
+  - ✅ **前後記事ナビゲーション機能**: 完全実装済み
+    - 前の記事・次の記事への動的リンク生成
+    - 記事タイトルの動的表示（30文字制限+省略表示）
+    - ホバー効果実装（背景色base_2→白へのトランジション + translateY(-2px)）
   - JavaScript文字数制限機能（30文字制限+省略表示）
 
 - ✅ **ニュース一覧ページ** (`src/pages/news/index.astro`): 完全実装完了
   - セマンティックHTML構造完成（nav/main/article/time要素の適切な使用）
   - BEM記法でクラス名体系完成（.news-filter, .news-articles, .news-pagination）
   - 完全レスポンシブ対応（SP/タブレット/PC）
-  - フィルター機能の基盤実装（カテゴリ別フィルタリング対応）
-  - ページネーション機能の基盤実装（prev/current/next状態管理）
+  - ✅ **カテゴリ別フィルター機能**: 完全実装済み
+    - 動的フィルタリング（JavaScript）：すべて/重要/イベント情報/募集/その他
+    - 滑らかなアニメーション効果（フェードイン/アウト + translateY）
+    - アクティブ状態の視覚的フィードバック
+    - フィルターボタンのホバー効果（translateY(-2px) + 背景色変化）
+  - ✅ **再利用可能NewsArticleListコンポーネント**: 完全実装済み
+    - 設定可能プロパティ（limit, showExcerpt, className, showCategory, linkTarget）
+    - トップページのニュースセクションとの統合完了
+    - 型安全なTypeScriptインターフェース
   - 記事カードのリンク機能実装（カード全体クリック可能）
   - SCSS最適化完了（モバイルファースト + DRY原則適用）
+  - ❌ **ページネーション機能**: 実装見送り（コメントアウト済み）
+    - 理由：フィルタリング機能との兼ね合いで技術的課題が発生
+    - 詳細：状態管理の複雑化、表示ロジックの不整合
+    - 代替案：現在はフィルタリングのみで十分な使いやすさを確保
+    - 将来対応：リソース確保時に技術課題解決後実装予定
 
 #### ニュース機能の技術詳細
 - **データ構造**: JSON形式の静的データ管理
@@ -420,11 +457,25 @@ src/
 - **ブレークポイント最適化**: tablet-up/desktop-up ミックスインの効率的活用
 
 ### 今後の開発予定
-- ニュース機能のJavaScript動的機能実装（フィルター・ページネーション）
-- 動的データ連携（CMS統合検討）
+
+#### 緊急度：高
 - SEO最適化（メタタグ、構造化データ等）
 - パフォーマンス最適化
+
+#### 緊急度：中
+- 動的データ連携（CMS統合検討）
 - 多言語対応検討
+
+#### 緊急度：低（技術課題解決後）
+- **ニュース一覧ページネーション機能**:
+  - 実装課題：フィルタリング機能との状態管理統合
+  - 技術的問題：「もっと読む」ボタンとカテゴリフィルターの連携で表示ロジック不整合発生
+  - 詳細課題：
+    1. フィルター適用後の「もっと読む」ボタン消失問題
+    2. 表示件数とフィルター状態の同期問題
+    3. 初期表示時の全記事表示問題
+  - 解決方針：状態管理の設計見直し（Redux/Zustand導入検討）
+  - 代替案：現在はカテゴリフィルターで十分な UX を提供
 
 ## 重要な注意事項
 - 観光・リゾート業界向けサイトとしてアクセシビリティに配慮
