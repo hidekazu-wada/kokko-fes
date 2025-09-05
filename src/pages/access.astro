@@ -36,7 +36,7 @@ const Car = await getImage({
     <section class="venue">
       <article class="venue__info">
         <header class="venue__header">
-          <h2 class="venue__title">会　場</h2>
+          <h2 class="venue__title"><span>会　場</span></h2>
         </header>
         <address class="venue__address">
           <span class="venue__postal">〒401-0332</span>
@@ -47,8 +47,6 @@ const Car = await getImage({
           <iframe
             class="venue__iframe"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3248.006808595734!2d138.68091747644192!3d35.50410987264499!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601be1abf278b1dd%3A0x8bbcffa1146e4d31!2sHamayou%20Resort!5e0!3m2!1sja!2sjp!4v1757043217318!5m2!1sja!2sjp"
-            width="600"
-            height="450"
             style="border:0;"
             allowfullscreen=""
             loading="lazy"
@@ -80,6 +78,16 @@ const Car = await getImage({
     </section>
 
     <section class="transportation">
+      <svg
+        class="transportation__wave"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 2559 170"
+        fill="none"
+      >
+        <path
+          d="M2559 0H0.00146484V70C0.00146484 70 315.501 170 639.751 170C964.001 170 1481.5 20 1812 20C2142.5 20 2559 120 2559 120V0Z"
+          fill="#FFFCF2"></path>
+      </svg>
       <article class="transportation__method transportation__method--bus-train">
         <header class="transportation__header">
           <picture class="transportation__image">
@@ -148,7 +156,7 @@ const Car = await getImage({
         </main>
       </article>
 
-      <hr class="transportation__divider" />
+      <span class="transportation__divider"></span>
 
       <article class="transportation__method transportation__method--car">
         <header class="transportation__header">
@@ -214,11 +222,21 @@ const Car = await getImage({
           </section>
         </main>
       </article>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 2559 170"
+        fill="none"
+        class="transportation__bottom-wave"
+      >
+        <path
+          d="M2559 170H0V100C0 100 315.5 0 639.75 0C964 0 1481.5 150 1812 150C2142.5 150 2559 50 2559 50V170Z"
+          fill="#FFFCF2"></path>
+      </svg>
     </section>
     <section class="parking">
       <article class="parking__info">
         <header class="parking__header">
-          <h2 class="parking__title">駐車場</h2>
+          <h2 class="parking__title"><span>駐車場</span></h2>
         </header>
         <div class="parking__pdf"></div>
       </article>
@@ -226,346 +244,681 @@ const Car = await getImage({
     <Breadcrumb currentPageTitle="アクセス" />
     <PageBottomWave />
   </section>
-</PageLayout>
 
-<style lang="scss">
-  @import "../styles/variables";
-  @import "../styles/functions";
-  @import "../styles/mixins";
+  <style lang="scss">
+    @import "../styles/variables";
+    @import "../styles/functions";
+    @import "../styles/mixins";
 
-  .access-page {
-    padding-top: spx(296);
-    position: relative;
-    min-height: 90vh;
-    padding-bottom: spx(99);
-    @include tablet-up {
-      padding-top: ppx(253 * 1.2);
-      padding-bottom: ppx(228 * 1.2);
-    }
-    @include desktop-up {
-      padding-top: ppx(253);
-      padding-bottom: ppx(228);
-    }
-
-    &__container {
-      padding-bottom: spx(100);
+    .access-page {
+      padding-top: spx(296);
+      position: relative;
+      min-height: 90vh;
+      padding-bottom: spx(99);
       @include tablet-up {
-        padding-bottom: ppx(130 * 1.2);
+        padding-top: ppx(253 * 1.2);
+        padding-bottom: ppx(228 * 1.2);
       }
       @include desktop-up {
-        padding-bottom: ppx(130);
+        padding-top: ppx(253);
+        padding-bottom: ppx(228);
+      }
+
+      &__container {
+        padding-bottom: spx(100);
+        @include tablet-up {
+          padding-bottom: ppx(130 * 1.2);
+        }
+        @include desktop-up {
+          padding-bottom: ppx(130);
+        }
+      }
+
+      &__header {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__title {
+        color: var(--base_5, #102a4d);
+        font-size: spx(60);
+        font-style: normal;
+        font-weight: 700;
+        line-height: 130%;
+        text-align: center;
+        @include tablet-up {
+          font-size: ppx(110 * 1.2);
+        }
+        @include desktop-up {
+          font-size: ppx(110);
+        }
+
+        &-accent {
+          color: var(--logo_color_3, #c99e2d);
+          @include tablet-up {
+          }
+          @include desktop-up {
+          }
+        }
+      }
+
+      &__subtitle {
+        color: var(--base_5, #102a4d);
+        text-align: center;
+        font-size: spx(26);
+        font-style: normal;
+        font-weight: 700;
+        line-height: 180%;
+        @include tablet-up {
+          font-size: ppx(37 * 1.2);
+        }
+        @include desktop-up {
+          font-size: ppx(37);
+        }
       }
     }
 
-    &__header {
+    .venue {
+      padding-bottom: spx(50);
       @include tablet-up {
+        padding-bottom: ppx(80 * 1.2);
       }
       @include desktop-up {
+        padding-bottom: ppx(80);
+      }
+
+      &__info {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__header {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__title {
+        display: flex;
+        padding: spx(10) spx(50);
+        justify-content: center;
+        align-items: center;
+        gap: spx(10);
+        border-radius: spx(50);
+        border: 2px solid var(--logo_color_3, #c99e2d);
+        background: var(--white, #fff);
+        width: spx(220);
+        margin-inline: auto;
+        @include tablet-up {
+          padding: ppx(10 * 1.2) ppx(50 * 1.2);
+          gap: ppx(10 * 1.2);
+          border-radius: ppx(50 * 1.2);
+          width: ppx(240 * 1.2);
+        }
+        @include desktop-up {
+          padding: ppx(10) ppx(50);
+          gap: ppx(10);
+          border-radius: ppx(50);
+          width: ppx(240);
+        }
+        span {
+          color: var(--logo_color_3, #c99e2d);
+          text-align: center;
+          font-size: spx(30);
+          font-weight: 700;
+          line-height: 180%;
+          @include tablet-up {
+            font-size: ppx(40 * 1.2);
+          }
+          @include desktop-up {
+            font-size: ppx(40);
+          }
+        }
+      }
+
+      &__address {
+        color: var(--base_5, #102a4d);
+        text-align: center;
+        font-family: "Zen Kaku Gothic Antique";
+        font-size: spx(30);
+        font-style: normal;
+        font-weight: 700;
+        line-height: 160%; /* 48px */
+        margin-top: spx(30);
+        @include tablet-up {
+          font-size: ppx(33 * 1.2);
+          line-height: 180%; /* 59.4px */
+          margin-top: ppx(30 * 1.2);
+        }
+        @include desktop-up {
+          font-size: ppx(33);
+          line-height: 180%; /* 59.4px */
+          margin-top: ppx(30);
+        }
+      }
+
+      &__postal {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__prefecture {
+        display: block;
+        @include tablet-up {
+          display: inline;
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__name {
+        display: block;
+        @include tablet-up {
+          display: inline;
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__map {
+        width: max-content;
+        margin-inline: auto;
+        margin-top: spx(45);
+        border: solid spx(15) white;
+        @include tablet-up {
+          margin-top: ppx(45 * 1.2);
+          border: solid ppx(15 * 1.2) white;
+        }
+        @include desktop-up {
+          margin-top: ppx(45);
+          border: solid ppx(15) white;
+        }
+      }
+
+      &__iframe {
+        width: spx(620);
+        height: spx(560);
+        @include tablet-up {
+          width: ppx(1700 * 1.2);
+          height: ppx(750 * 1.2);
+        }
+        @include desktop-up {
+          width: ppx(1700);
+          height: ppx(750);
+        }
+      }
+
+      &__map-link {
+        display: flex;
+        width: spx(330);
+        height: spx(73);
+        padding: 0 spx(40) 0 spx(23);
+        justify-content: center;
+        align-items: center;
+        border-radius: spx(50);
+        background: var(--logo_color_2, #816259);
+        position: relative;
+        margin-inline: auto;
+        margin-top: spx(30);
+        @include tablet-up {
+          width: ppx(420 * 1.2);
+          height: ppx(90 * 1.2);
+          padding: 0 ppx(60 * 1.2);
+          gap: ppx(10 * 1.2);
+          border-radius: ppx(80 * 1.2);
+          margin-top: ppx(45 * 1.2);
+        }
+        @include desktop-up {
+          width: ppx(420);
+          height: ppx(90);
+          padding: 0 ppx(60);
+          gap: ppx(10);
+          border-radius: ppx(80);
+          margin-top: ppx(45);
+        }
+      }
+
+      &__link-content {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__link-text {
+        color: var(--white, #fff);
+        text-align: center;
+        font-size: spx(28);
+        font-weight: 700;
+        line-height: normal;
+
+        @include tablet-up {
+          font-size: ppx(33 * 1.2);
+        }
+        @include desktop-up {
+          font-size: ppx(33);
+        }
+      }
+
+      &__link-icon {
+        display: block;
+        width: spx(45.333);
+        height: spx(45.333);
+        aspect-ratio: 1/1;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: spx(12);
+        @include tablet-up {
+          width: ppx(56 * 1.2);
+          height: ppx(56 * 1.2);
+          flex-shrink: 0;
+          right: ppx(16 * 1.2);
+        }
+        @include desktop-up {
+          width: ppx(56);
+          height: ppx(56);
+          flex-shrink: 0;
+          right: ppx(16);
+        }
       }
     }
 
-    &__title {
-      color: var(--base_5, #102a4d);
-      font-size: spx(60);
-      font-style: normal;
-      font-weight: 700;
-      line-height: 130%;
-      text-align: center;
+    .transportation {
+      position: relative;
+      background-color: white;
+      padding-top: spx(127);
+      padding-bottom: spx(118);
       @include tablet-up {
-        font-size: ppx(110 * 1.2);
+        padding-top: ppx(340 * 1.2);
+        padding-bottom: ppx(356 * 1.2);
       }
       @include desktop-up {
-        font-size: ppx(110);
+        padding-top: ppx(340);
+        padding-bottom: ppx(356);
       }
 
-      &-accent {
+      &__wave {
+        position: absolute;
+        display: block;
+        width: 100%;
+        top: -1px;
+        left: 0;
+      }
+
+      &__method {
+        display: flex;
+        flex-flow: column;
+        gap: spx(50);
+        @include tablet-up {
+          flex-flow: row;
+          gap: ppx(70 * 1.2);
+          justify-content: center;
+        }
+        @include desktop-up {
+          gap: ppx(70);
+        }
+
+        &--bus-train {
+          @include tablet-up {
+          }
+          @include desktop-up {
+          }
+          .transportation__img {
+            display: block;
+            width: spx(410);
+            @include tablet-up {
+              width: ppx(470 * 1.2);
+            }
+            @include desktop-up {
+              width: ppx(470);
+            }
+          }
+        }
+
+        &--car {
+          @include tablet-up {
+          }
+          @include desktop-up {
+          }
+          .transportation__img {
+            display: block;
+            width: spx(349);
+            @include tablet-up {
+              width: ppx(410 * 1.2);
+            }
+            @include desktop-up {
+              width: ppx(410);
+            }
+          }
+        }
+      }
+
+      &__header {
+        display: flex;
+        flex-flow: column;
+        gap: spx(40);
+        align-items: center;
+        width: max-content;
+        margin-inline: auto;
+        @include tablet-up {
+          gap: ppx(40 * 1.2);
+          margin-inline: unset;
+          width: ppx(470 * 1.2);
+        }
+        @include desktop-up {
+          gap: ppx(40);
+          width: ppx(470);
+        }
+      }
+
+      &__image {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__img {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__title {
+        color: var(--base_5, #102a4d);
+        font-size: spx(40);
+        font-weight: 700;
+        line-height: 160%; /* 64px */
+
+        @include tablet-up {
+          font-size: ppx(40 * 1.2);
+        }
+        @include desktop-up {
+          font-size: ppx(40);
+        }
+      }
+
+      &__routes {
+        display: grid;
+        grid-template-columns: max-content max-content max-content;
+        gap: spx(10);
+        justify-content: center;
+        @include tablet-up {
+          justify-content: flex-start;
+          gap: ppx(50 * 1.2);
+        }
+        @include desktop-up {
+          gap: ppx(50);
+        }
+      }
+
+      &__route {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__route-info {
+        display: flex;
+        width: spx(220);
+        padding: spx(30) 0;
+        flex-direction: column;
+        align-items: center;
+        flex-shrink: 0;
+        border-radius: spx(20.964);
+        background: var(--base_2, #fcf2c9);
+        @include tablet-up {
+          width: ppx(420 * 1.2);
+          padding: ppx(40 * 1.2) 0;
+          border-radius: ppx(30 * 1.2);
+        }
+        @include desktop-up {
+          width: ppx(420);
+          padding: ppx(40) 0;
+          border-radius: ppx(30);
+        }
+      }
+
+      &__from {
+        color: var(--base_5, #102a4d);
+        text-align: center;
+        font-size: spx(24);
+        font-weight: 700;
+        line-height: 160%; /* 38.4px */
+        letter-spacing: spx(-1.2);
+        @include tablet-up {
+          font-size: ppx(36 * 1.2);
+        }
+        @include desktop-up {
+          font-size: ppx(36);
+        }
+      }
+
+      &__duration {
+        display: block;
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__duration-prefix {
+        color: var(--base_5, #102a4d);
+        text-align: center;
+        font-size: spx(24);
+        font-weight: 700;
+        line-height: 90%; /* 21.6px */
+        letter-spacing: spx(2.4);
+        @include tablet-up {
+          font-size: ppx(45 * 1.2);
+          letter-spacing: ppx(4.5 * 1.2);
+        }
+        @include desktop-up {
+          font-size: ppx(45);
+          letter-spacing: ppx(4.5);
+        }
+      }
+
+      &__duration-number {
         color: var(--logo_color_3, #c99e2d);
+        font-size: spx(76);
+        font-weight: 700;
+        line-height: 90%;
+        letter-spacing: spx(3.8);
         @include tablet-up {
+          font-size: ppx(120 * 1.2);
+          letter-spacing: ppx(6 * 1.2);
         }
         @include desktop-up {
+          font-size: ppx(120);
+          letter-spacing: ppx(6);
         }
       }
+
+      &__duration-suffix {
+        color: var(--base_5, #102a4d);
+        text-align: center;
+        font-size: spx(24);
+        font-weight: 700;
+        line-height: 90%; /* 21.6px */
+        letter-spacing: spx(2.4);
+        @include tablet-up {
+          font-size: ppx(45 * 1.2);
+          letter-spacing: ppx(4.5 * 1.2);
+        }
+        @include desktop-up {
+          font-size: ppx(45);
+          letter-spacing: ppx(4.5);
+        }
+      }
+
+      &__detail-link {
+        display: flex;
+        padding: spx(3.494) spx(15.374) spx(6.988) spx(22.362);
+        justify-content: center;
+        align-items: center;
+        gap: spx(6.988);
+        border-radius: spx(27.952);
+        background: var(--logo_color_2, #816259);
+        width: spx(113);
+        margin-top: spx(24);
+        @include tablet-up {
+          padding: ppx(5 * 1.2) ppx(22 * 1.2) ppx(10 * 1.2) ppx(32 * 1.2);
+          gap: ppx(10 * 1.2);
+          border-radius: ppx(40 * 1.2);
+          width: ppx(161 * 1.2);
+          margin-top: ppx(35 * 1.2);
+        }
+        @include desktop-up {
+          padding: ppx(5) ppx(22) ppx(10) ppx(32);
+          gap: ppx(10);
+          border-radius: ppx(40);
+          width: ppx(161);
+          margin-top: ppx(35);
+        }
+      }
+
+      &__detail-text {
+        color: var(--base_1, #fffcf2);
+        font-size: spx(21);
+        font-weight: 700;
+        line-height: 180%; /* 37.8px */
+
+        @include tablet-up {
+          font-size: ppx(30 * 1.2);
+        }
+        @include desktop-up {
+          font-size: ppx(30);
+        }
+      }
+
+      &__divider {
+        display: block;
+        background: linear-gradient(
+            to right,
+            rgba(67, 67, 67, 1),
+            rgba(67, 67, 67, 1) 25%,
+            rgba(0, 0, 0, 0) 25%,
+            rgba(0, 0, 0, 0) 100%
+          )
+          0% 0%;
+        background-size: 4px 1px;
+        width: 100%;
+        height: 1px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: spx(12);
+        margin-bottom: spx(12);
+        width: spx(620);
+        @include tablet-up {
+          margin-top: ppx(140 * 1.2);
+          margin-bottom: ppx(140 * 1.2);
+          width: ppx(1960 * 1.2);
+        }
+        @include desktop-up {
+          margin-top: ppx(140);
+          margin-bottom: ppx(140);
+          width: ppx(1960);
+        }
+      }
+      &__bottom-wave {
+        position: absolute;
+        display: block;
+        width: 100%;
+        bottom: -1px;
+        left: 0;
+      }
     }
 
-    &__subtitle {
-      color: var(--base_5, #102a4d);
-      text-align: center;
-      font-size: spx(26);
-      font-style: normal;
-      font-weight: 700;
-      line-height: 180%;
+    .parking {
+      padding-top: spx(80);
+      padding-bottom: spx(50);
       @include tablet-up {
-        font-size: ppx(37 * 1.2);
+        padding-top: ppx(160 * 1.2);
+        padding-bottom: ppx(80 * 1.2);
       }
       @include desktop-up {
-        font-size: ppx(37);
-      }
-    }
-  }
-
-  .venue {
-    @include tablet-up {
-    }
-    @include desktop-up {
-    }
-
-    &__info {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__header {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__title {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__address {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__postal {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__prefecture {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__name {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__map {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__iframe {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__map-link {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__link-content {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__link-text {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__link-icon {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-  }
-
-  .transportation {
-    @include tablet-up {
-    }
-    @include desktop-up {
-    }
-
-    &__method {
-      @include tablet-up {
-      }
-      @include desktop-up {
+        padding-top: ppx(160);
+        padding-bottom: ppx(80);
       }
 
-      &--bus-train {
+      &__info {
         @include tablet-up {
         }
         @include desktop-up {
         }
       }
 
-      &--car {
+      &__header {
         @include tablet-up {
         }
         @include desktop-up {
         }
       }
-    }
 
-    &__header {
-      @include tablet-up {
+      &__title {
+        display: flex;
+        padding: spx(10) spx(50);
+        justify-content: center;
+        align-items: center;
+        gap: spx(10);
+        border-radius: spx(50);
+        border: 2px solid var(--logo_color_3, #c99e2d);
+        background: var(--white, #fff);
+        width: spx(220);
+        margin-inline: auto;
+        @include tablet-up {
+          width: ppx(240 * 1.2);
+          padding: ppx(10 * 1.2) ppx(50 * 1.2);
+          border-radius: ppx(50 * 1.2);
+        }
+        @include desktop-up {
+          width: ppx(240);
+          padding: ppx(10) ppx(50);
+          border-radius: ppx(50);
+        }
+        span {
+          color: var(--logo_color_3, #c99e2d);
+          text-align: center;
+          font-size: spx(30);
+          font-weight: 700;
+          line-height: 180%; /* 54px */
+          @include tablet-up {
+            font-size: ppx(40 * 1.2);
+          }
+          @include desktop-up {
+            font-size: ppx(40);
+          }
+        }
       }
-      @include desktop-up {
-      }
-    }
 
-    &__image {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__img {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__title {
-      @include tablet-up {
-      }
-      @include desktop-up {
+      &__pdf {
+        margin-top: spx(60);
+        width: spx(620);
+        height: spx(434);
+        background-color: white;
+        margin-inline: auto;
+        @include tablet-up {
+          margin-top: ppx(80 * 1.2);
+          width: ppx(1800 * 1.2);
+          height: ppx(600 * 1.2);
+        }
+        @include desktop-up {
+          margin-top: ppx(80);
+          width: ppx(1800);
+          height: ppx(600);
+        }
       }
     }
-
-    &__routes {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__route {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__route-info {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__from {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__duration {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__duration-prefix {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__duration-number {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__duration-suffix {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__detail-link {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__detail-text {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__divider {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-  }
-
-  .parking {
-    @include tablet-up {
-    }
-    @include desktop-up {
-    }
-
-    &__info {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__header {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__title {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__pdf {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-  }
-</style>
+  </style>
+</PageLayout>
