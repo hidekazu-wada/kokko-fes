@@ -454,6 +454,8 @@ const nextArticle =
       border-radius: spx(20);
       background: var(--base_2, #fcf2c9);
       width: spx(258);
+      transition: background-color 0.3s ease;
+      text-decoration: none;
       @include tablet-up {
         width: ppx(770 * 1.2);
         padding: ppx(40 * 1.2) ppx(50 * 1.2);
@@ -474,6 +476,12 @@ const nextArticle =
         border-radius: ppx(40);
         width: ppx(770);
       }
+
+      @include hover {
+        &:hover {
+          background: var(--white, #fff);
+        }
+      }
     }
 
     &__next {
@@ -485,6 +493,8 @@ const nextArticle =
       border-radius: spx(20);
       background: var(--base_2, #fcf2c9);
       width: spx(258);
+      transition: background-color 0.3s ease;
+      text-decoration: none;
       @include tablet-up {
         width: ppx(770 * 1.2);
         padding: ppx(40 * 1.2) ppx(50 * 1.2);
@@ -513,6 +523,12 @@ const nextArticle =
         }
         @include desktop-up {
           // デスクトップ用スタイル
+        }
+      }
+
+      @include hover {
+        &:hover {
+          background: var(--white, #fff);
         }
       }
     }
