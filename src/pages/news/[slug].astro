@@ -454,7 +454,9 @@ const nextArticle =
       border-radius: spx(20);
       background: var(--base_2, #fcf2c9);
       width: spx(258);
-      transition: background-color 0.3s ease;
+      transition:
+        background-color 0.3s ease,
+        transform 0.2s ease;
       text-decoration: none;
       @include tablet-up {
         width: ppx(770 * 1.2);
@@ -480,6 +482,7 @@ const nextArticle =
       @include hover {
         &:hover {
           background: var(--white, #fff);
+          transform: translateY(-2px);
         }
       }
     }
@@ -493,7 +496,9 @@ const nextArticle =
       border-radius: spx(20);
       background: var(--base_2, #fcf2c9);
       width: spx(258);
-      transition: background-color 0.3s ease;
+      transition:
+        background-color 0.3s ease,
+        transform 0.2s ease;
       text-decoration: none;
       @include tablet-up {
         width: ppx(770 * 1.2);
@@ -529,6 +534,7 @@ const nextArticle =
       @include hover {
         &:hover {
           background: var(--white, #fff);
+          transform: translateY(-2px);
         }
       }
     }
