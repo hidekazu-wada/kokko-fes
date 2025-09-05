@@ -585,6 +585,18 @@ const Car = await getImage({
         position: relative;
         margin-inline: auto;
         margin-top: spx(30);
+        transition: background-color 0.3s ease-in-out;
+        
+        @include hover {
+          &:hover {
+            background: var(--logo_color_3, #c99e2d);
+            
+            .venue__link-content .venue__link-icon path {
+              fill: var(--logo_color_3, #c99e2d);
+            }
+          }
+        }
+        
         @include tablet-up {
           width: ppx(420 * 1.2);
           height: ppx(90 * 1.2);
@@ -634,6 +646,11 @@ const Car = await getImage({
         top: 50%;
         transform: translateY(-50%);
         right: spx(12);
+        
+        path {
+          transition: fill 0.3s ease-in-out;
+        }
+        
         @include tablet-up {
           width: ppx(56 * 1.2);
           height: ppx(56 * 1.2);
@@ -890,6 +907,16 @@ const Car = await getImage({
         background: var(--logo_color_2, #816259);
         width: spx(113);
         margin-top: spx(24);
+        transition: background-color 0.3s ease-in-out;
+        border: none;
+        cursor: pointer;
+        
+        @include hover {
+          &:hover {
+            background: var(--logo_color_3, #c99e2d);
+          }
+        }
+        
         @include tablet-up {
           padding: ppx(5 * 1.2) ppx(22 * 1.2) ppx(10 * 1.2) ppx(32 * 1.2);
           gap: ppx(10 * 1.2);
