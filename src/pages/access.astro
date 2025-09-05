@@ -125,9 +125,14 @@ const Car = await getImage({
                 <span class="transportation__duration-number">140</span>
                 <span class="transportation__duration-suffix">分</span>
               </time>
-              <a class="transportation__detail-link" href="#">
+              <button
+                class="transportation__detail-link"
+                type="button"
+                data-modal="modal-shinjuku"
+                aria-label="新宿からの詳細な路線図を表示"
+              >
                 <span class="transportation__detail-text">詳 細 ＞</span>
-              </a>
+              </button>
             </article>
           </section>
 
@@ -139,9 +144,14 @@ const Car = await getImage({
                 <span class="transportation__duration-number">30</span>
                 <span class="transportation__duration-suffix">分</span>
               </time>
-              <a class="transportation__detail-link" href="#">
+              <button
+                class="transportation__detail-link"
+                type="button"
+                data-modal="modal-fujisan"
+                aria-label="富士山駅からの詳細な路線図を表示"
+              >
                 <span class="transportation__detail-text">詳 細 ＞</span>
-              </a>
+              </button>
             </article>
           </section>
 
@@ -153,9 +163,14 @@ const Car = await getImage({
                 <span class="transportation__duration-number">20</span>
                 <span class="transportation__duration-suffix">分</span>
               </time>
-              <a class="transportation__detail-link" href="#">
+              <button
+                class="transportation__detail-link"
+                type="button"
+                data-modal="modal-kawaguchiko"
+                aria-label="河口湖駅からの詳細な路線図を表示"
+              >
                 <span class="transportation__detail-text">詳 細 ＞</span>
-              </a>
+              </button>
             </article>
           </section>
         </main>
@@ -1025,10 +1040,24 @@ const Car = await getImage({
     }
 
     .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100vw;
       height: 100vh;
       background-color: var(--logo_color_3, #c99e2d);
-      position: relative;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition:
+        opacity 0.3s ease-in-out,
+        visibility 0.3s ease-in-out;
+
+      &.is-active {
+        opacity: 1;
+        visibility: visible;
+      }
+
       @include tablet-up {
       }
       @include desktop-up {
@@ -1106,4 +1135,74 @@ const Car = await getImage({
       }
     }
   </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // モーダルを開くボタン
+      const modalTriggers = document.querySelectorAll("[data-modal]");
+      // モーダルを閉じるボタン
+      const modalCloseButtons = document.querySelectorAll(
+        ".modal__close-button",
+      );
+      // モーダル要素
+      const modals = document.querySelectorAll(".modal");
+
+      // モーダルを開く関数
+      function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+          modal.classList.add("is-active");
+          // アクセシビリティ: フォーカスをモーダルに移動
+          modal.focus();
+          // ボディのスクロールを無効にする
+          document.body.style.overflow = "hidden";
+        }
+      }
+
+      // モーダルを閉じる関数
+      function closeModal(modal) {
+        modal.classList.remove("is-active");
+        // ボディのスクロールを有効にする
+        document.body.style.overflow = "";
+      }
+
+      // モーダルを開くボタンにイベントリスナーを追加
+      modalTriggers.forEach((trigger) => {
+        trigger.addEventListener("click", (e) => {
+          e.preventDefault();
+          const modalId = trigger.getAttribute("data-modal");
+          openModal(modalId);
+        });
+      });
+
+      // モーダルを閉じるボタンにイベントリスナーを追加
+      modalCloseButtons.forEach((closeButton) => {
+        closeButton.addEventListener("click", () => {
+          const modal = closeButton.closest(".modal");
+          closeModal(modal);
+        });
+      });
+
+      // オーバーレイクリックでモーダルを閉じる
+      modals.forEach((modal) => {
+        const overlay = modal.querySelector(".modal__overlay");
+        overlay.addEventListener("click", (e) => {
+          // モーダルコンテンツ以外の部分（オーバーレイ）をクリックした場合のみ閉じる
+          if (e.target === overlay) {
+            closeModal(modal);
+          }
+        });
+      });
+
+      // Escapeキーでモーダルを閉じる
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          const activeModal = document.querySelector(".modal.is-active");
+          if (activeModal) {
+            closeModal(activeModal);
+          }
+        }
+      });
+    });
+  </script>
 </PageLayout>
