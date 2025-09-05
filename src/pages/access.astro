@@ -8,6 +8,10 @@ import Breadcrumb from "../components/common/Breadcrumb.astro";
 import { getImage } from "astro:assets";
 import ByBusTrain from "../images/access/by_bus-train.png";
 import ByCar from "../images/access/by_car.png";
+import Shinjyuku from "../images/access/from-shinjyuku.svg";
+import FujisanSt from "../images/access/from-fujisan-st.svg";
+import KawaguchikoSt from "../images/access/from-kawaguchiko-st.svg";
+import MenuClose from "../images/menu/menu-close.svg";
 
 // フォーマット
 const BusTrain = await getImage({
@@ -257,6 +261,92 @@ const Car = await getImage({
     <Breadcrumb currentPageTitle="アクセス" />
     <PageBottomWave />
   </section>
+
+  <!-- モーダル -->
+  <aside
+    class="modal"
+    id="modal-fujisan"
+    role="dialog"
+    aria-labelledby="modal-fujisan-title"
+    aria-modal="true"
+  >
+    <div class="modal__overlay">
+      <div class="modal__content">
+        <header class="modal__header">
+          <button
+            class="modal__close-button"
+            type="button"
+            aria-label="モーダルを閉じる"
+          >
+            <img src={MenuClose.src} alt="閉じる" />
+          </button>
+        </header>
+        <main class="modal__body">
+          <img
+            class="modal__image"
+            src={FujisanSt.src}
+            alt="富士山駅からの路線図"
+          />
+        </main>
+      </div>
+    </div>
+  </aside>
+
+  <aside
+    class="modal"
+    id="modal-kawaguchiko"
+    role="dialog"
+    aria-labelledby="modal-kawaguchiko-title"
+    aria-modal="true"
+  >
+    <div class="modal__overlay">
+      <div class="modal__content">
+        <header class="modal__header">
+          <button
+            class="modal__close-button"
+            type="button"
+            aria-label="モーダルを閉じる"
+            ><img src={MenuClose.src} alt="閉じる" /></button
+          >
+        </header>
+        <main class="modal__body">
+          <img
+            class="modal__image"
+            src={KawaguchikoSt.src}
+            alt="河口湖駅からの路線図"
+          />
+        </main>
+      </div>
+    </div>
+  </aside>
+
+  <aside
+    class="modal"
+    id="modal-shinjuku"
+    role="dialog"
+    aria-labelledby="modal-shinjuku-title"
+    aria-modal="true"
+  >
+    <div class="modal__overlay">
+      <div class="modal__content">
+        <header class="modal__header">
+          <button
+            class="modal__close-button"
+            type="button"
+            aria-label="モーダルを閉じる"
+            ><img src={MenuClose.src} alt="閉じる" /></button
+          >
+        </header>
+        <main class="modal__body">
+          <img
+            class="modal__image"
+            src={Shinjyuku.src}
+            alt="新宿からの路線図"
+          />
+        </main>
+      </div>
+    </div>
+  </aside>
 
   <style lang="scss">
     @import "../styles/variables";
@@ -930,6 +1020,88 @@ const Car = await getImage({
           margin-top: ppx(80);
           width: ppx(1800);
           height: ppx(600);
+        }
+      }
+    }
+
+    .modal {
+      width: 100vw;
+      height: 100vh;
+      background-color: var(--logo_color_3, #c99e2d);
+      position: relative;
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+
+      &__overlay {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        place-items: center;
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__content {
+        width: max-content;
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__header {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__close-button {
+        display: block;
+        width: spx(130);
+        height: spx(130);
+        position: absolute;
+        top: spx(20);
+        right: spx(20);
+        @include tablet-up {
+          width: ppx(150 * 1.2);
+          height: ppx(150 * 1.2);
+          top: ppx(30 * 1.2);
+          right: ppx(50 * 1.2);
+        }
+        @include desktop-up {
+          width: ppx(150);
+          height: ppx(150);
+          top: ppx(30);
+          right: ppx(50);
+        }
+        img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      &__body {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__image {
+        display: block;
+        width: spx(620);
+        @include tablet-up {
+          width: 50vw;
+        }
+        @include desktop-up {
+          width: ppx(620);
         }
       }
     }
