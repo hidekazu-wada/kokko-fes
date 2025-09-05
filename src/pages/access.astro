@@ -3,6 +3,23 @@
 import PageLayout from "../layouts/PageLayout.astro";
 import PageBottomWave from "../components/common/PageBottomWave.astro";
 import Breadcrumb from "../components/common/Breadcrumb.astro";
+
+// 画像
+import { getImage } from "astro:assets";
+import ByBusTrain from "../images/access/by_bus-train.png";
+import ByCar from "../images/access/by_car.png";
+
+// フォーマット
+const BusTrain = await getImage({
+  src: ByBusTrain,
+  format: "webp",
+  widths: [410, 470],
+});
+const Car = await getImage({
+  src: ByCar,
+  format: "webp",
+  widths: [349, 410],
+});
 ---
 
 <PageLayout title="アクセス｜コッコ祭り 2025｜KOKKO Festival">
@@ -16,7 +33,196 @@ import Breadcrumb from "../components/common/Breadcrumb.astro";
         <p class="access-page__subtitle">− ACCESS −</p>
       </header>
     </div>
+    <section class="venue">
+      <article class="venue__info">
+        <header class="venue__header">
+          <h2 class="venue__title">会　場</h2>
+        </header>
+        <address class="venue__address">
+          <span class="venue__postal">〒401-0332</span>
+          <span class="venue__prefecture">山梨県南都留郡 富士河口湖町</span>
+          <span class="venue__name">西湖・HAMAYOUリゾート</span>
+        </address>
+        <figure class="venue__map">
+          <iframe
+            class="venue__iframe"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3248.006808595734!2d138.68091747644192!3d35.50410987264499!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601be1abf278b1dd%3A0x8bbcffa1146e4d31!2sHamayou%20Resort!5e0!3m2!1sja!2sjp!4v1757043217318!5m2!1sja!2sjp"
+            width="600"
+            height="450"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </figure>
+        <a
+          class="venue__map-link"
+          href="https://www.google.com/maps/dir/35.5048992,138.6849608/%E3%80%92401-0332+%E5%B1%B1%E6%A2%A8%E7%9C%8C%E5%8D%97%E9%83%BD%E7%95%99%E9%83%A1%E5%AF%8C%E5%A3%AB%E6%B2%B3%E5%8F%A3%E6%B9%96%E7%94%BA%E8%A5%BF%E6%B9%96%EF%BC%91%EF%BC%90%EF%BC%92%EF%BC%93/@35.5043136,138.6817906,907m/data=!3m2!1e3!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x601be1abf0768b47:0x1ce8817cc05e5f40!2m2!1d138.6834924!2d35.5041099?entry=ttu&g_ep=EgoyMDI1MDkwMi4wIKXMDSoASAFQAw%3D%3D"
+        >
+          <div class="venue__link-content">
+            <span class="venue__link-text">Google MAP</span>
+            <svg
+              class="venue__link-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="47"
+              height="47"
+              viewBox="0 0 47 47"
+              fill="none"
+            >
+              <circle cx="23.3815" cy="23.5934" r="22.6667" fill="white"
+              ></circle>
+              <path
+                d="M19.4418 15.704L18.6069 16.9215L17.8517 18.1597L19.109 18.9781L20.3943 19.8236L21.6628 20.6896L22.9481 21.5351L24.2701 22.3215L25.5847 23.2172L24.1981 24.0045L22.9482 24.9221L21.6476 25.7495L20.3494 26.5911L19.0665 27.4533L17.7118 28.2728L18.6083 29.4942L19.3621 30.8052L20.6237 29.8708L21.9154 29.0422L23.2629 28.2999L24.4808 27.3499L25.8131 26.5869L27.0984 25.7389L28.3671 24.8793L29.6792 24.0673L30.9569 23.209L29.6387 22.4277L28.4211 21.5001L27.0846 20.7484L25.8722 19.8169L24.524 19.0819L23.2763 18.2005L22.0183 17.3268L20.7171 16.525L19.4418 15.704Z"
+                fill="#816259"></path>
+            </svg>
+          </div>
+        </a>
+      </article>
+    </section>
 
+    <section class="transportation">
+      <article class="transportation__method transportation__method--bus-train">
+        <header class="transportation__header">
+          <picture class="transportation__image">
+            <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+            <source
+              media="(min-width: 1024px)"
+              srcset={BusTrain.srcSet.toString()}
+            />
+            <!-- タブレット（744px以上）→ 中解像度版 -->
+            <source
+              media="(min-width: 744px)"
+              srcset={BusTrain.srcSet.toString()}
+            />
+            <!-- スマホ（744px未満）→ 最小解像度版 -->
+            <img
+              class="transportation__img"
+              src={BusTrain.src}
+              alt="バス・電車でのアクセス"
+            />
+          </picture>
+          <h3 class="transportation__title">バス・電車でお越しの方</h3>
+        </header>
+
+        <main class="transportation__routes">
+          <section class="transportation__route">
+            <article class="transportation__route-info">
+              <h4 class="transportation__from">東京 (新宿) から</h4>
+              <time class="transportation__duration">
+                <span class="transportation__duration-prefix">約</span>
+                <span class="transportation__duration-number">140</span>
+                <span class="transportation__duration-suffix">分</span>
+              </time>
+              <a class="transportation__detail-link" href="#">
+                <span class="transportation__detail-text">詳 細 ＞</span>
+              </a>
+            </article>
+          </section>
+
+          <section class="transportation__route">
+            <article class="transportation__route-info">
+              <h4 class="transportation__from">富士山駅 から</h4>
+              <time class="transportation__duration">
+                <span class="transportation__duration-prefix">約</span>
+                <span class="transportation__duration-number">30</span>
+                <span class="transportation__duration-suffix">分</span>
+              </time>
+              <a class="transportation__detail-link" href="#">
+                <span class="transportation__detail-text">詳 細 ＞</span>
+              </a>
+            </article>
+          </section>
+
+          <section class="transportation__route">
+            <article class="transportation__route-info">
+              <h4 class="transportation__from">河口湖駅から</h4>
+              <time class="transportation__duration">
+                <span class="transportation__duration-prefix">約</span>
+                <span class="transportation__duration-number">20</span>
+                <span class="transportation__duration-suffix">分</span>
+              </time>
+              <a class="transportation__detail-link" href="#">
+                <span class="transportation__detail-text">詳 細 ＞</span>
+              </a>
+            </article>
+          </section>
+        </main>
+      </article>
+
+      <hr class="transportation__divider" />
+
+      <article class="transportation__method transportation__method--car">
+        <header class="transportation__header">
+          <picture class="transportation__image">
+            <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+            <source
+              media="(min-width: 1024px)"
+              srcset={Car.srcSet.toString()}
+            />
+            <!-- タブレット（744px以上）→ 中解像度版 -->
+            <source media="(min-width: 744px)" srcset={Car.srcSet.toString()} />
+            <!-- スマホ（744px未満）→ 最小解像度版 -->
+            <img
+              class="transportation__img"
+              src={Car.src}
+              alt="お車でのアクセス"
+            />
+          </picture>
+          <h3 class="transportation__title">お車でお越しの方</h3>
+        </header>
+
+        <main class="transportation__routes">
+          <section class="transportation__route">
+            <article class="transportation__route-info">
+              <h4 class="transportation__from">東京 (新宿) から</h4>
+              <time class="transportation__duration">
+                <span class="transportation__duration-prefix">約</span>
+                <span class="transportation__duration-number">120</span>
+                <span class="transportation__duration-suffix">分</span>
+              </time>
+              <a class="transportation__detail-link" href="#">
+                <span class="transportation__detail-text">詳 細 ＞</span>
+              </a>
+            </article>
+          </section>
+
+          <section class="transportation__route">
+            <article class="transportation__route-info">
+              <h4 class="transportation__from">神奈川 (横浜) から</h4>
+              <time class="transportation__duration">
+                <span class="transportation__duration-prefix">約</span>
+                <span class="transportation__duration-number">120</span>
+                <span class="transportation__duration-suffix">分</span>
+              </time>
+              <a class="transportation__detail-link" href="#">
+                <span class="transportation__detail-text">詳 細 ＞</span>
+              </a>
+            </article>
+          </section>
+
+          <section class="transportation__route">
+            <article class="transportation__route-info">
+              <h4 class="transportation__from">河口湖駅から</h4>
+              <time class="transportation__duration">
+                <span class="transportation__duration-prefix">約</span>
+                <span class="transportation__duration-number">17</span>
+                <span class="transportation__duration-suffix">分</span>
+              </time>
+              <a class="transportation__detail-link" href="#">
+                <span class="transportation__detail-text">詳 細 ＞</span>
+              </a>
+            </article>
+          </section>
+        </main>
+      </article>
+    </section>
+    <section class="parking">
+      <article class="parking__info">
+        <header class="parking__header">
+          <h2 class="parking__title">駐車場</h2>
+        </header>
+        <div class="parking__pdf"></div>
+      </article>
+    </section>
     <Breadcrumb currentPageTitle="アクセス" />
     <PageBottomWave />
   </section>
@@ -93,6 +299,272 @@ import Breadcrumb from "../components/common/Breadcrumb.astro";
       }
       @include desktop-up {
         font-size: ppx(37);
+      }
+    }
+  }
+
+  .venue {
+    @include tablet-up {
+    }
+    @include desktop-up {
+    }
+
+    &__info {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__header {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__title {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__address {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__postal {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__prefecture {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__name {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__map {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__iframe {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__map-link {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__link-content {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__link-text {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__link-icon {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+  }
+
+  .transportation {
+    @include tablet-up {
+    }
+    @include desktop-up {
+    }
+
+    &__method {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+
+      &--bus-train {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &--car {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+    }
+
+    &__header {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__image {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__img {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__title {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__routes {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__route {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__route-info {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__from {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__duration {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__duration-prefix {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__duration-number {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__duration-suffix {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__detail-link {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__detail-text {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__divider {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+  }
+
+  .parking {
+    @include tablet-up {
+    }
+    @include desktop-up {
+    }
+
+    &__info {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__header {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__title {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__pdf {
+      @include tablet-up {
+      }
+      @include desktop-up {
       }
     }
   }
