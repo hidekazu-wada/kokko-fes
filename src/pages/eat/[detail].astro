@@ -90,150 +90,251 @@ const { detail } = Astro.params;
         </header>
 
         <section class="detail-content__media">
-          <figure class="detail-content__main-image">
-            <picture>
-              <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-              <source
-                media="(min-width: 1024px)"
-                srcset={DemoImage.srcSet.toString()}
-              />
-              <!-- タブレット（744px以上）→ 中解像度版 -->
-              <source
-                media="(min-width: 744px)"
-                srcset={DemoImage.srcSet.toString()}
-              />
-              <!-- スマホ（744px未満）→ 最小解像度版 -->
-              <img
-                src={DemoImage.src}
-                alt="メインビジュアル"
-                class="detail-content__main-img"
-              />
-            </picture>
-          </figure>
+          <div class="detail-content__main-image swiper" id="main-swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <figure class="detail-content__main-figure">
+                  <picture>
+                    <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+                    <source
+                      media="(min-width: 1024px)"
+                      srcset={DemoImage.srcSet.toString()}
+                    />
+                    <!-- タブレット（744px以上）→ 中解像度版 -->
+                    <source
+                      media="(min-width: 744px)"
+                      srcset={DemoImage.srcSet.toString()}
+                    />
+                    <!-- スマホ（744px未満）→ 最小解像度版 -->
+                    <img
+                      src={DemoImage.src}
+                      alt="メインビジュアル"
+                      class="detail-content__main-img"
+                    />
+                  </picture>
+                </figure>
+              </div>
+              <div class="swiper-slide">
+                <figure class="detail-content__main-figure">
+                  <picture>
+                    <source
+                      media="(min-width: 1024px)"
+                      srcset={DemoImage.srcSet.toString()}
+                    />
+                    <source
+                      media="(min-width: 744px)"
+                      srcset={DemoImage.srcSet.toString()}
+                    />
+                    <img
+                      src={DemoImage.src}
+                      alt="メインビジュアル"
+                      class="detail-content__main-img"
+                    />
+                  </picture>
+                </figure>
+              </div>
+              <div class="swiper-slide">
+                <figure class="detail-content__main-figure">
+                  <picture>
+                    <source
+                      media="(min-width: 1024px)"
+                      srcset={DemoImage.srcSet.toString()}
+                    />
+                    <source
+                      media="(min-width: 744px)"
+                      srcset={DemoImage.srcSet.toString()}
+                    />
+                    <img
+                      src={DemoImage.src}
+                      alt="メインビジュアル"
+                      class="detail-content__main-img"
+                    />
+                  </picture>
+                </figure>
+              </div>
+              <div class="swiper-slide">
+                <figure class="detail-content__main-figure">
+                  <picture>
+                    <source
+                      media="(min-width: 1024px)"
+                      srcset={DemoImage.srcSet.toString()}
+                    />
+                    <source
+                      media="(min-width: 744px)"
+                      srcset={DemoImage.srcSet.toString()}
+                    />
+                    <img
+                      src={DemoImage.src}
+                      alt="メインビジュアル"
+                      class="detail-content__main-img"
+                    />
+                  </picture>
+                </figure>
+              </div>
+              <div class="swiper-slide">
+                <figure class="detail-content__main-figure">
+                  <picture>
+                    <source
+                      media="(min-width: 1024px)"
+                      srcset={DemoImage.srcSet.toString()}
+                    />
+                    <source
+                      media="(min-width: 744px)"
+                      srcset={DemoImage.srcSet.toString()}
+                    />
+                    <img
+                      src={DemoImage.src}
+                      alt="メインビジュアル"
+                      class="detail-content__main-img"
+                    />
+                  </picture>
+                </figure>
+              </div>
+              <div class="swiper-slide">
+                <figure class="detail-content__main-figure">
+                  <picture>
+                    <source
+                      media="(min-width: 1024px)"
+                      srcset={DemoImage.srcSet.toString()}
+                    />
+                    <source
+                      media="(min-width: 744px)"
+                      srcset={DemoImage.srcSet.toString()}
+                    />
+                    <img
+                      src={DemoImage.src}
+                      alt="メインビジュアル"
+                      class="detail-content__main-img"
+                    />
+                  </picture>
+                </figure>
+              </div>
+            </div>
+          </div>
 
-          <nav class="detail-content__thumbnails">
-            <figure class="detail-content__thumbnail">
-              <picture>
-                <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-                <source
-                  media="(min-width: 1024px)"
-                  srcset={DemoImage.srcSet.toString()}
-                />
-                <!-- タブレット（744px以上）→ 中解像度版 -->
-                <source
-                  media="(min-width: 744px)"
-                  srcset={DemoImage.srcSet.toString()}
-                />
-                <!-- スマホ（744px未満）→ 最小解像度版 -->
-                <img
-                  src={DemoImage.src}
-                  alt="サムネ"
-                  class="detail-content__thumbnail-img"
-                />
-              </picture>
-            </figure>
-            <figure class="detail-content__thumbnail">
-              <picture>
-                <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-                <source
-                  media="(min-width: 1024px)"
-                  srcset={DemoImage.srcSet.toString()}
-                />
-                <!-- タブレット（744px以上）→ 中解像度版 -->
-                <source
-                  media="(min-width: 744px)"
-                  srcset={DemoImage.srcSet.toString()}
-                />
-                <!-- スマホ（744px未満）→ 最小解像度版 -->
-                <img
-                  src={DemoImage.src}
-                  alt="サムネ"
-                  class="detail-content__thumbnail-img"
-                />
-              </picture>
-            </figure>
-            <figure class="detail-content__thumbnail">
-              <picture>
-                <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-                <source
-                  media="(min-width: 1024px)"
-                  srcset={DemoImage.srcSet.toString()}
-                />
-                <!-- タブレット（744px以上）→ 中解像度版 -->
-                <source
-                  media="(min-width: 744px)"
-                  srcset={DemoImage.srcSet.toString()}
-                />
-                <!-- スマホ（744px未満）→ 最小解像度版 -->
-                <img
-                  src={DemoImage.src}
-                  alt="サムネ"
-                  class="detail-content__thumbnail-img"
-                />
-              </picture>
-            </figure>
-            <figure class="detail-content__thumbnail">
-              <picture>
-                <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-                <source
-                  media="(min-width: 1024px)"
-                  srcset={DemoImage.srcSet.toString()}
-                />
-                <!-- タブレット（744px以上）→ 中解像度版 -->
-                <source
-                  media="(min-width: 744px)"
-                  srcset={DemoImage.srcSet.toString()}
-                />
-                <!-- スマホ（744px未満）→ 最小解像度版 -->
-                <img
-                  src={DemoImage.src}
-                  alt="サムネ"
-                  class="detail-content__thumbnail-img"
-                />
-              </picture>
-            </figure>
-            <figure class="detail-content__thumbnail">
-              <picture>
-                <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-                <source
-                  media="(min-width: 1024px)"
-                  srcset={DemoImage.srcSet.toString()}
-                />
-                <!-- タブレット（744px以上）→ 中解像度版 -->
-                <source
-                  media="(min-width: 744px)"
-                  srcset={DemoImage.srcSet.toString()}
-                />
-                <!-- スマホ（744px未満）→ 最小解像度版 -->
-                <img
-                  src={DemoImage.src}
-                  alt="サムネ"
-                  class="detail-content__thumbnail-img"
-                />
-              </picture>
-            </figure>
-            <figure class="detail-content__thumbnail">
-              <picture>
-                <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-                <source
-                  media="(min-width: 1024px)"
-                  srcset={DemoImage.srcSet.toString()}
-                />
-                <!-- タブレット（744px以上）→ 中解像度版 -->
-                <source
-                  media="(min-width: 744px)"
-                  srcset={DemoImage.srcSet.toString()}
-                />
-                <!-- スマホ（744px未満）→ 最小解像度版 -->
-                <img
-                  src={DemoImage.src}
-                  alt="サムネ"
-                  class="detail-content__thumbnail-img"
-                />
-              </picture>
-            </figure>
+          <nav class="detail-content__thumbnails swiper" id="thumb-swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <figure class="detail-content__thumbnail">
+                  <picture>
+                    <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+                    <source
+                      media="(min-width: 1024px)"
+                      srcset={DemoImage.srcSet.toString()}
+                    />
+                    <!-- タブレット（744px以上）→ 中解像度版 -->
+                    <source
+                      media="(min-width: 744px)"
+                      srcset={DemoImage.srcSet.toString()}
+                    />
+                    <!-- スマホ（744px未満）→ 最小解像度版 -->
+                    <img
+                      src={DemoImage.src}
+                      alt="サムネ"
+                      class="detail-content__thumbnail-img"
+                    />
+                  </picture>
+                </figure>
+              </div>
+              <div class="swiper-slide">
+                <figure class="detail-content__thumbnail">
+                  <picture>
+                    <source
+                      media="(min-width: 1024px)"
+                      srcset={DemoImage.srcSet.toString()}
+                    />
+                    <source
+                      media="(min-width: 744px)"
+                      srcset={DemoImage.srcSet.toString()}
+                    />
+                    <img
+                      src={DemoImage.src}
+                      alt="サムネ"
+                      class="detail-content__thumbnail-img"
+                    />
+                  </picture>
+                </figure>
+              </div>
+              <div class="swiper-slide">
+                <figure class="detail-content__thumbnail">
+                  <picture>
+                    <source
+                      media="(min-width: 1024px)"
+                      srcset={DemoImage.srcSet.toString()}
+                    />
+                    <source
+                      media="(min-width: 744px)"
+                      srcset={DemoImage.srcSet.toString()}
+                    />
+                    <img
+                      src={DemoImage.src}
+                      alt="サムネ"
+                      class="detail-content__thumbnail-img"
+                    />
+                  </picture>
+                </figure>
+              </div>
+              <div class="swiper-slide">
+                <figure class="detail-content__thumbnail">
+                  <picture>
+                    <source
+                      media="(min-width: 1024px)"
+                      srcset={DemoImage.srcSet.toString()}
+                    />
+                    <source
+                      media="(min-width: 744px)"
+                      srcset={DemoImage.srcSet.toString()}
+                    />
+                    <img
+                      src={DemoImage.src}
+                      alt="サムネ"
+                      class="detail-content__thumbnail-img"
+                    />
+                  </picture>
+                </figure>
+              </div>
+              <div class="swiper-slide">
+                <figure class="detail-content__thumbnail">
+                  <picture>
+                    <source
+                      media="(min-width: 1024px)"
+                      srcset={DemoImage.srcSet.toString()}
+                    />
+                    <source
+                      media="(min-width: 744px)"
+                      srcset={DemoImage.srcSet.toString()}
+                    />
+                    <img
+                      src={DemoImage.src}
+                      alt="サムネ"
+                      class="detail-content__thumbnail-img"
+                    />
+                  </picture>
+                </figure>
+              </div>
+              <div class="swiper-slide">
+                <figure class="detail-content__thumbnail">
+                  <picture>
+                    <source
+                      media="(min-width: 1024px)"
+                      srcset={DemoImage.srcSet.toString()}
+                    />
+                    <source
+                      media="(min-width: 744px)"
+                      srcset={DemoImage.srcSet.toString()}
+                    />
+                    <img
+                      src={DemoImage.src}
+                      alt="サムネ"
+                      class="detail-content__thumbnail-img"
+                    />
+                  </picture>
+                </figure>
+              </div>
+            </div>
           </nav>
         </section>
+        <section></section>
       </main>
     </div>
 
@@ -360,18 +461,32 @@ const { detail } = Astro.params;
       font-style: normal;
       font-weight: 700;
       line-height: 160%;
+      margin-top: spx(30);
+      width: spx(620);
+      margin-inline: auto;
       @include tablet-up {
         font-size: ppx(33 * 1.2);
+        margin-top: ppx(40 * 1.2);
+        width: ppx(1400 * 1.2);
       }
       @include desktop-up {
         font-size: ppx(33);
+        margin-top: ppx(40);
+        width: ppx(1400);
       }
     }
 
     &__media {
+      margin-top: spx(30);
+      position: relative;
+      padding-bottom: spx(150);
       @include tablet-up {
+        margin-top: ppx(40 * 1.2);
+        padding-bottom: ppx(190 * 1.2);
       }
       @include desktop-up {
+        margin-top: ppx(40);
+        padding-bottom: ppx(190);
       }
     }
 
@@ -410,17 +525,50 @@ const { detail } = Astro.params;
       flex-wrap: wrap;
       border-radius: spx(17.714);
       background: var(--base_2, #fcf2c9);
+      margin-top: spx(20);
       @include tablet-up {
         width: ppx(1400 * 1.2);
         height: ppx(210 * 1.2);
         gap: ppx(15 * 1.2);
         border-radius: ppx(40 * 1.2);
+        margin-top: ppx(20 * 1.2);
       }
       @include desktop-up {
         width: ppx(1400);
         height: ppx(210);
         gap: ppx(15);
         border-radius: ppx(40);
+        margin-top: ppx(20);
+      }
+      .swiper-wrapper {
+        justify-content: center;
+        align-items: center;
+        gap: spx(10);
+        @include tablet-up {
+          gap: ppx(15 * 1.2);
+        }
+        @include desktop-up {
+          gap: ppx(15);
+        }
+      }
+
+      // Swiperのアクティブサムネイル用スタイル
+      .swiper-slide {
+        height: max-content;
+        &.swiper-slide-thumb-active {
+          .detail-content__thumbnail-img {
+            opacity: 1;
+            transform: scale(1.05);
+            transition: all 0.3s ease;
+            border: spx(3.1) solid var(--white, #fff);
+            @include tablet-up {
+              border: ppx(7) * 1.2 solid var(--white, #fff);
+            }
+            @include desktop-up {
+              border: ppx(7) solid var(--white, #fff);
+            }
+          }
+        }
       }
     }
 
@@ -437,6 +585,9 @@ const { detail } = Astro.params;
       height: spx(87);
       border-radius: spx(5);
       object-fit: cover;
+      opacity: 0.7;
+      transition: all 0.3s ease;
+      cursor: pointer;
 
       @include tablet-up {
         width: ppx(170 * 1.2);
@@ -448,6 +599,168 @@ const { detail } = Astro.params;
         height: ppx(170);
         border-radius: ppx(10);
       }
+
+      // ホバー時のスタイル
+      @include hover {
+        &:hover {
+          opacity: 0.9;
+          transform: scale(1.02);
+        }
+      }
+    }
+
+    // Swiper アクティブスライド用スタイル
+    .swiper-slide-active {
+      .detail-content__thumbnail {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      .detail-content__thumbnail-img {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+    }
+
+    // カスタムカレントクラス用スタイル
+    &__thumbnail--current {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+
+      .detail-content__thumbnail-img {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+    }
+
+    // メインスライダー用Swiper最小限スタイル
+    &__main-image.swiper {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__main-figure {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    // サムネイルスライダー用Swiper最小限スタイル
+    &__thumbnails.swiper {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+
+      // Swiper-slide の幅を制限して横並び表示を実現
+      .swiper-slide {
+        width: spx(87);
+        @include tablet-up {
+          width: ppx(170 * 1.2);
+        }
+        @include desktop-up {
+          width: ppx(170);
+        }
+      }
+    }
+    .swiper-wrapper {
+      width: spx(620);
+      margin-inline: auto;
+      @include tablet-up {
+        width: ppx(1400 * 1.2);
+      }
+      @include desktop-up {
+        width: ppx(1400);
+      }
     }
   }
 </style>
+
+<script>
+  import { Swiper } from "swiper";
+  import { EffectFade, Autoplay } from "swiper/modules";
+  import "swiper/css";
+  import "swiper/css/effect-fade";
+
+  document.addEventListener("DOMContentLoaded", function () {
+    // サムネイルスライダーを初期化
+    const thumbSwiper = new Swiper("#thumb-swiper", {
+      slidesPerView: "auto",
+      freeMode: true,
+      watchSlidesProgress: true,
+    });
+
+    // メインスライダーを初期化
+    const mainSwiper = new Swiper("#main-swiper", {
+      modules: [EffectFade, Autoplay],
+      effect: "fade",
+      fadeEffect: {
+        crossFade: true,
+      },
+      autoplay: {
+        delay: 5000, // 5秒間隔で自動再生
+        disableOnInteraction: false, // ユーザー操作後も自動再生継続
+        pauseOnMouseEnter: true, // マウスホバー時は停止
+      },
+      thumbs: {
+        swiper: thumbSwiper,
+      },
+      on: {
+        slideChange: function (swiper) {
+          const activeIndex = swiper.activeIndex;
+          console.log("Main slide changed to:", activeIndex);
+          // 手動でサムネイルのアクティブクラスを管理
+          const thumbItems = document.querySelectorAll(
+            "#thumb-swiper .swiper-slide",
+          );
+          thumbItems.forEach((item, index) => {
+            if (index === activeIndex) {
+              item.classList.add("swiper-slide-thumb-active");
+            } else {
+              item.classList.remove("swiper-slide-thumb-active");
+            }
+          });
+        },
+      },
+    });
+
+    // サムネイルクリック時の連動機能を追加
+    const thumbnailSlides = document.querySelectorAll(
+      "#thumb-swiper .swiper-slide",
+    );
+    thumbnailSlides.forEach((slide, index) => {
+      slide.addEventListener("click", function () {
+        // メインスライダーを対応するスライドに移動
+        mainSwiper.slideTo(index);
+
+        // サムネイルスライダーも対応するスライドをアクティブに
+        thumbSwiper.slideTo(index);
+
+        // クリック時にもアクティブクラス管理
+        thumbnailSlides.forEach((thumbItem, thumbIndex) => {
+          if (thumbIndex === index) {
+            thumbItem.classList.add("swiper-slide-thumb-active");
+          } else {
+            thumbItem.classList.remove("swiper-slide-thumb-active");
+          }
+        });
+      });
+    });
+
+    // 初期状態で最初のサムネイルをアクティブに設定
+    if (thumbnailSlides.length > 0) {
+      thumbnailSlides[0].classList.add("swiper-slide-thumb-active");
+    }
+  });
+</script>
