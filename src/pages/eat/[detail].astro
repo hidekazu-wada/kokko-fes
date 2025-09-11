@@ -33,6 +33,7 @@ const treesImage = await getImage({
 // 型定義
 interface CategoryItem {
   name: string;
+  description: string;
   image: string;
   location: string;
   time: string;
@@ -87,17 +88,17 @@ const { detail } = Astro.params;
     <div class="detail-page__container">
       <header class="detail-page__header">
         <h1 class="detail-page__title">
-          <span class="detail-page__title-accent">見</span>
-          る
+          <span class="detail-page__title-accent">{categoryData.titleAccent}</span>
+          {categoryData.title.replace(categoryData.titleAccent, '')}
         </h1>
-        <p class="detail-page__subtitle">− WATCH −</p>
+        <p class="detail-page__subtitle">{categoryData.subtitle}</p>
       </header>
 
       <main class="detail-content">
         <header class="detail-content__header">
-          <h2 class="detail-content__title">和太鼓演奏</h2>
+          <h2 class="detail-content__title">{itemData.name}</h2>
           <p class="detail-content__description">
-            地域の伝統工芸品を一堂に集めた特別展示。職人による実演も行われます。
+            {itemData.description}
           </p>
         </header>
 
