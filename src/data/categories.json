@@ -11,21 +11,27 @@
         "description": "地元の新鮮な食材を使った郷土料理や創作料理をお楽しみいただけます。",
         "image": "demo.png",
         "location": "展示ホールA",
-        "time": "10:00-16:00"
+        "time": "10:00-16:00",
+        "snsUrl": "https://twitter.com/kokko_festival",
+        "price": "無料"
       },
       {
         "name": "キッチンカー",
         "description": "バラエティ豊かなキッチンカーが集結。世界各国の料理をお手軽に楽しめます。",
         "image": "demo.png", 
         "location": "外部エリア",
-        "time": "11:00-15:00"
+        "time": "11:00-15:00",
+        "snsUrl": "https://instagram.com/kokko_kitchen",
+        "price": "各店舗による"
       },
       {
         "name": "特産品販売",
         "description": "地域の特産品や手作りの加工品など、お土産にぴったりの商品が並びます。",
         "image": "demo.png",
         "location": "展示ホールB",
-        "time": "09:00-17:00"
+        "time": "09:00-17:00",
+        "snsUrl": "https://facebook.com/kokko_market",
+        "price": "入場無料"
       }
     ]
   },
@@ -41,21 +47,27 @@
         "description": "迫力満点の和太鼓パフォーマンス。伝統と革新が融合した圧巻のステージです。",
         "image": "demo.png",
         "location": "展示ホールA",
-        "time": "10:00-16:00"
+        "time": "10:00-16:00",
+        "snsUrl": "https://twitter.com/wadaiko_kokko",
+        "price": "無料"
       },
       {
         "name": "伝統工芸展示",
         "description": "地域の伝統工芸品を一堂に集めた特別展示。職人による実演も行われます。",
         "image": "demo.png",
         "location": "展示ホールB", 
-        "time": "09:00-17:00"
+        "time": "09:00-17:00",
+        "snsUrl": "https://instagram.com/craft_kokko",
+        "price": "入場無料"
       },
       {
         "name": "郷土芸能ショー",
         "description": "地域に伝わる伝統芸能の数々。歴史と文化を感じる特別な時間をお楽しみください。",
         "image": "demo.png",
         "location": "メインステージ",
-        "time": "13:00-14:00"
+        "time": "13:00-14:00",
+        "snsUrl": "https://facebook.com/geinou_kokko",
+        "price": "無料観覧"
       }
     ]
   },
@@ -71,21 +83,27 @@
         "description": "親子で楽しめる工作体験。オリジナル作品を作って思い出に残しましょう。",
         "image": "demo.png",
         "location": "体験エリア",
-        "time": "10:00-16:00"
+        "time": "10:00-16:00",
+        "snsUrl": "https://twitter.com/play_kokko",
+        "price": "材料費500円"
       },
       {
         "name": "ゲームコーナー",
         "description": "昔懐かしい縁日ゲームから最新のアトラクションまで、幅広い年齢層が楽しめます。",
         "image": "demo.png",
         "location": "子どもエリア",
-        "time": "09:00-17:00"
+        "time": "09:00-17:00",
+        "snsUrl": "https://instagram.com/game_kokko",
+        "price": "1回100円〜"
       },
       {
         "name": "写真撮影スポット",
         "description": "フォトジェニックな撮影スポットで素敵な思い出を残しましょう。",
         "image": "demo.png",
         "location": "メインエントランス",
-        "time": "終日"
+        "time": "終日",
+        "snsUrl": "https://facebook.com/photo_kokko",
+        "price": "無料"
       }
     ]
   },
@@ -101,21 +119,27 @@
         "description": "プロの陶芸家による指導で、オリジナルの器を作ることができます。",
         "image": "demo.png",
         "location": "工芸エリア",
-        "time": "10:00-16:00"
+        "time": "10:00-16:00",
+        "snsUrl": "https://twitter.com/craft_pottery",
+        "price": "体験料 2,000円"
       },
       {
         "name": "木工体験",
         "description": "自然の木材を使って、世界に一つだけの作品を作りましょう。",
         "image": "demo.png",
         "location": "工芸エリア",
-        "time": "10:00-15:00"
+        "time": "10:00-15:00",
+        "snsUrl": "https://instagram.com/wood_craft",
+        "price": "材料費 1,500円"
       },
       {
         "name": "お菓子作り",
         "description": "パティシエと一緒に、本格的なお菓子作りを体験できます。",
         "image": "demo.png",
         "location": "キッチンスタジオ",
-        "time": "11:00-14:00"
+        "time": "11:00-14:00",
+        "snsUrl": "https://facebook.com/sweets_kokko",
+        "price": "参加費 1,000円"
       }
     ]
   }

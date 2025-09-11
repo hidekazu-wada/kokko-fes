@@ -37,6 +37,8 @@ interface CategoryItem {
   image: string;
   location: string;
   time: string;
+  snsUrl: string;
+  price: string;
 }
 
 interface CategoryData {
@@ -426,21 +428,23 @@ const { detail } = Astro.params;
           <aside class="detail-info__details">
             <dl class="detail-info__detail">
               <dt class="detail-info__detail-label">場所</dt>
-              <dd class="detail-info__detail-value">展示ホールA</dd>
+              <dd class="detail-info__detail-value">{itemData.location}</dd>
             </dl>
             <dl class="detail-info__detail">
               <dt class="detail-info__detail-label">日程</dt>
-              <dd class="detail-info__detail-value">10:00〜16:00</dd>
+              <dd class="detail-info__detail-value">{itemData.time}</dd>
             </dl>
             <dl class="detail-info__detail">
               <dt class="detail-info__detail-label">SNS</dt>
               <dd class="detail-info__detail-value">
-                https://hogehogehogehogehoge
+                <a href={itemData.snsUrl} target="_blank" rel="noopener noreferrer">
+                  {itemData.snsUrl}
+                </a>
               </dd>
             </dl>
             <dl class="detail-info__detail">
               <dt class="detail-info__detail-label">料金</dt>
-              <dd class="detail-info__detail-value">無料</dd>
+              <dd class="detail-info__detail-value">{itemData.price}</dd>
             </dl>
           </aside>
           <svg
