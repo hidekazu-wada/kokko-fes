@@ -95,7 +95,8 @@
         "location": "体験エリア",
         "time": "10:00-16:00",
         "snsUrl": "https://twitter.com/play_kokko",
-        "price": "材料費500円"
+        "price": "材料費500円",
+        "images": ["craft-01.png", "craft-02.png", "craft-03.png", "craft-04.png", "craft-05.png"]
       },
       {
         "name": "ゲームコーナー",
@@ -105,7 +106,8 @@
         "location": "子どもエリア",
         "time": "09:00-17:00",
         "snsUrl": "https://instagram.com/game_kokko",
-        "price": "1回100円〜"
+        "price": "1回100円〜",
+        "images": ["demo.png"]
       },
       {
         "name": "写真撮影スポット",
@@ -115,7 +117,8 @@
         "location": "メインエントランス",
         "time": "終日",
         "snsUrl": "https://facebook.com/photo_kokko",
-        "price": "無料"
+        "price": "無料",
+        "images": ["demo.png"]
       }
     ]
   },
