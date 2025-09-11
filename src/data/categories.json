@@ -137,7 +137,8 @@
         "location": "工芸エリア",
         "time": "10:00-16:00",
         "snsUrl": "https://twitter.com/craft_pottery",
-        "price": "体験料 2,000円"
+        "price": "体験料 2,000円",
+        "images": ["demo.png"]
       },
       {
         "name": "木工体験",
@@ -147,7 +148,8 @@
         "location": "工芸エリア",
         "time": "10:00-15:00",
         "snsUrl": "https://instagram.com/wood_craft",
-        "price": "材料費 1,500円"
+        "price": "材料費 1,500円",
+        "images": ["demo.png"]
       },
       {
         "name": "お菓子作り",
@@ -157,7 +159,8 @@
         "location": "キッチンスタジオ",
         "time": "11:00-14:00",
         "snsUrl": "https://facebook.com/sweets_kokko",
-        "price": "参加費 1,000円"
+        "price": "参加費 1,000円",
+        "images": ["demo.png"]
       }
     ]
   }
