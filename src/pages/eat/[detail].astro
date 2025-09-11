@@ -87,43 +87,49 @@ const imageList = itemData.images || [];
 
 try {
   // 画像モジュールを動的にインポート
-  const imagePromises = imageList.slice(0, maxImages).map(async (imageName: string) => {
-    try {
-      const imageModule = await import(`../../images/eat/${imageName}`);
-      return await getImage({
-        src: imageModule.default,
-        format: "webp",
-        widths: [87, 170, 620, 900, 1400],
-      });
-    } catch (error) {
-      console.warn(`Image not found: ${imageName}, using default`);
-      // デフォルト画像を使用
-      return await getImage({
-        src: DefaultImage,
-        format: "webp",
-        widths: [87, 170, 620, 900, 1400],
-      });
-    }
-  });
-  
+  const imagePromises = imageList
+    .slice(0, maxImages)
+    .map(async (imageName: string) => {
+      try {
+        const imageModule = await import(`../../images/eat/${imageName}`);
+        return await getImage({
+          src: imageModule.default,
+          format: "webp",
+          widths: [87, 170, 620, 900, 1400],
+        });
+      } catch (error) {
+        console.warn(`Image not found: ${imageName}, using default`);
+        // デフォルト画像を使用
+        return await getImage({
+          src: DefaultImage,
+          format: "webp",
+          widths: [87, 170, 620, 900, 1400],
+        });
+      }
+    });
+
   formattedImages = await Promise.all(imagePromises);
 } catch (error) {
-  console.error('Error loading images:', error);
+  console.error("Error loading images:", error);
   // エラー時はデフォルト画像を1枚表示
-  formattedImages = [await getImage({
-    src: DefaultImage,
-    format: "webp",
-    widths: [87, 170, 620, 900, 1400],
-  })];
+  formattedImages = [
+    await getImage({
+      src: DefaultImage,
+      format: "webp",
+      widths: [87, 170, 620, 900, 1400],
+    }),
+  ];
 }
 
 // 画像が0枚の場合はデフォルト画像を1枚表示
 if (formattedImages.length === 0) {
-  formattedImages = [await getImage({
-    src: DefaultImage,
-    format: "webp",
-    widths: [87, 170, 620, 900, 1400],
-  })];
+  formattedImages = [
+    await getImage({
+      src: DefaultImage,
+      format: "webp",
+      widths: [87, 170, 620, 900, 1400],
+    }),
+  ];
 }
 ---
 
@@ -153,59 +159,57 @@ if (formattedImages.length === 0) {
         <section class="detail-content__media">
           <div class="detail-content__main-image swiper" id="main-swiper">
             <div class="swiper-wrapper">
-              {formattedImages.map((image, index) => (
-                <div class="swiper-slide">
-                  <figure class="detail-content__main-figure">
-                    <picture>
-                      <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-                      <source
-                        media="(min-width: 1024px)"
-                        srcset={image.srcSet.toString()}
-                      />
-                      <!-- タブレット（744px以上）→ 中解像度版 -->
-                      <source
-                        media="(min-width: 744px)"
-                        srcset={image.srcSet.toString()}
-                      />
-                      <!-- スマホ（744px未満）→ 最小解像度版 -->
-                      <img
-                        src={image.src}
-                        alt={`${itemData.name} - 画像${index + 1}`}
-                        class="detail-content__main-img"
-                      />
-                    </picture>
-                  </figure>
-                </div>
-              ))}
+              {
+                formattedImages.map((image, index) => (
+                  <div class="swiper-slide">
+                    <figure class="detail-content__main-figure">
+                      <picture>
+                        <source
+                          media="(min-width: 1024px)"
+                          srcset={image.srcSet.toString()}
+                        />
+                        <source
+                          media="(min-width: 744px)"
+                          srcset={image.srcSet.toString()}
+                        />
+                        <img
+                          src={image.src}
+                          alt={`${itemData.name} - 画像${index + 1}`}
+                          class="detail-content__main-img"
+                        />
+                      </picture>
+                    </figure>
+                  </div>
+                ))
+              }
             </div>
           </div>
 
           <nav class="detail-content__thumbnails swiper" id="thumb-swiper">
             <div class="swiper-wrapper">
-              {formattedImages.map((image, index) => (
-                <div class="swiper-slide">
-                  <figure class="detail-content__thumbnail">
-                    <picture>
-                      <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-                      <source
-                        media="(min-width: 1024px)"
-                        srcset={image.srcSet.toString()}
-                      />
-                      <!-- タブレット（744px以上）→ 中解像度版 -->
-                      <source
-                        media="(min-width: 744px)"
-                        srcset={image.srcSet.toString()}
-                      />
-                      <!-- スマホ（744px未満）→ 最小解像度版 -->
-                      <img
-                        src={image.src}
-                        alt={`${itemData.name} - サムネイル${index + 1}`}
-                        class="detail-content__thumbnail-img"
-                      />
-                    </picture>
-                  </figure>
-                </div>
-              ))}
+              {
+                formattedImages.map((image, index) => (
+                  <div class="swiper-slide">
+                    <figure class="detail-content__thumbnail">
+                      <picture>
+                        <source
+                          media="(min-width: 1024px)"
+                          srcset={image.srcSet.toString()}
+                        />
+                        <source
+                          media="(min-width: 744px)"
+                          srcset={image.srcSet.toString()}
+                        />
+                        <img
+                          src={image.src}
+                          alt={`${itemData.name} - サムネイル${index + 1}`}
+                          class="detail-content__thumbnail-img"
+                        />
+                      </picture>
+                    </figure>
+                  </div>
+                ))
+              }
             </div>
           </nav>
         </section>
