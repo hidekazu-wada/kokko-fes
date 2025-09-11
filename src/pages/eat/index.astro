@@ -1,9 +1,9 @@
 ---
 // メインSCSSファイルをインポート
-import "../styles/main.scss";
+import "../../styles/main.scss";
 
 // データ
-import categoriesData from "../data/categories.json";
+import categoriesData from "../../data/categories.json";
 
 // 型定義
 interface CategoryItem {
@@ -30,144 +30,80 @@ interface CategoriesData {
 import { getImage } from "astro:assets";
 
 // 画像を明示的にインポート
-import eatDemo from "../images/eat/demo.png";
-import makeDemo from "../images/make/demo.png";
-import playDemo from "../images/play/demo.png";
-import watchDemo from "../images/watch/demo.png";
-
-// 画像マッピング - デバッグ用ログ付き
-const imageMap: Record<string, Record<string, any>> = {
-  eat: { "demo.png": eatDemo },
-  make: { "demo.png": makeDemo },
-  play: { "demo.png": playDemo },
-  watch: { "demo.png": watchDemo },
-};
-
-console.log("Image map created:", imageMap);
+import eatDemo from "../../images/eat/demo.png";
 
 // コンポーネント
-import PageLayout from "../layouts/PageLayout.astro";
-import PageBottomWave from "../components/common/PageBottomWave.astro";
-import Breadcrumb from "../components/common/Breadcrumb.astro";
+import PageLayout from "../../layouts/PageLayout.astro";
+import PageBottomWave from "../../components/common/PageBottomWave.astro";
+import Breadcrumb from "../../components/common/Breadcrumb.astro";
 
-export async function getStaticPaths() {
-  const categories = Object.keys(categoriesData);
-  const typedCategoriesData = categoriesData as CategoriesData;
+const typedCategoriesData = categoriesData as CategoriesData;
+const categoryData = typedCategoriesData.eat;
 
-  // 関数内で画像マッピングを再定義
-  const localImageMap: Record<string, Record<string, any>> = {
-    eat: { "demo.png": eatDemo },
-    make: { "demo.png": makeDemo },
-    play: { "demo.png": playDemo },
-    watch: { "demo.png": watchDemo },
-  };
+// 画像処理
+const processedItems = await Promise.all(
+  categoryData.items.map(async (item: CategoryItem) => {
+    try {
+      const isProduction = import.meta.env.PROD;
+      let optimizedImage;
 
-  const paths = await Promise.all(
-    categories.map(async (categoryId) => {
-      const categoryData = typedCategoriesData[categoryId];
-
-      // 各カテゴリーの画像を処理（関数内の静的マッピング使用）
-      const processedItems = await Promise.all(
-        categoryData.items.map(async (item: CategoryItem) => {
-          try {
-            // 関数内マッピングから画像を取得
-            const categoryImages = localImageMap[categoryId];
-            const imageSource = categoryImages?.[item.image];
-
-            if (!imageSource) {
-              console.warn(
-                `Image not found in mapping: ${categoryId}/${item.image}`,
-              );
-              console.warn(
-                "Available images in mapping:",
-                Object.keys(categoryImages || {}),
-              );
-              return {
-                ...item,
-                processedImage: null,
-              };
-            }
-
-            // Vercel環境では事前に最適化された画像パスを使用
-            const isProduction = import.meta.env.PROD;
-            let optimizedImage;
-
-            if (isProduction) {
-              // 本番環境では事前ビルドされた最適化画像のパスを使用
-              optimizedImage = {
-                src: "/assets/demo.B4vCVBYL.png", // ビルド時に生成されるハッシュ付きファイル名
-                width: imageSource.width,
-                height: imageSource.height,
-                srcSet: "/assets/demo.B4vCVBYL.png",
-              };
-            } else {
-              // 開発環境では画像最適化を使用
-              optimizedImage = await getImage({
-                src: imageSource,
-                format: "webp",
-                widths: [620],
-              });
-            }
-
-            return {
-              ...item,
-              processedImage: optimizedImage,
-            };
-          } catch (error) {
-            console.error(
-              `Error processing image for ${categoryId}/${item.image}:`,
-              error,
-            );
-            return {
-              ...item,
-              processedImage: null,
-            };
-          }
-        }),
-      );
+      if (isProduction) {
+        optimizedImage = {
+          src: "/assets/demo.B4vCVBYL.png",
+          width: eatDemo.width,
+          height: eatDemo.height,
+          srcSet: "/assets/demo.B4vCVBYL.png",
+        };
+      } else {
+        optimizedImage = await getImage({
+          src: eatDemo,
+          format: "webp",
+          widths: [620],
+        });
+      }
 
       return {
-        params: { category: categoryId },
-        props: {
-          categoryData: {
-            ...categoryData,
-            items: processedItems,
-          },
-        },
+        ...item,
+        processedImage: optimizedImage,
       };
-    }),
-  );
+    } catch (error) {
+      console.error(`Error processing image for eat/${item.image}:`, error);
+      return {
+        ...item,
+        processedImage: null,
+      };
+    }
+  }),
+);
 
-  return paths;
-}
-
-const { categoryData } = Astro.props;
-const { category } = Astro.params;
+const categoryDataWithImages = {
+  ...categoryData,
+  items: processedItems,
+};
 ---
 
 <PageLayout title={`${categoryData.title} ｜コッコ祭り 2025｜KOKKO Festival`}>
-  <section class={`page-wrapper ${category}`}>
-    <div class={`${category}__container`}>
-      <header class={`${category}__header`}>
-        <h1 class={`${category}__title`}>
-          <span class={`${category}__title-accent`}
-            >{categoryData.titleAccent}</span
-          >{categoryData.title.slice(1)}
+  <section class="page-wrapper eat">
+    <div class="eat__container">
+      <header class="eat__header">
+        <h1 class="eat__title">
+          <span class="eat__title-accent">{categoryData.titleAccent}</span>
+          {categoryData.title.slice(1)}
         </h1>
-        <p class={`${category}__subtitle`}>{categoryData.subtitle}</p>
-        <p class={`${category}__description`}>{categoryData.description}</p>
+        <p class="eat__subtitle">{categoryData.subtitle}</p>
+        <p class="eat__description">{categoryData.description}</p>
       </header>
 
-      <ul class={`${category}__list`}>
+      <ul class="eat__list">
         {
-          categoryData.items.map(
+          categoryDataWithImages.items.map(
             (item: CategoryItem & { processedImage?: any }) => (
-              <li class={`${category}__item`}>
-                <article class={`${category}__card`}>
-                  <a href="#" class={`${category}__card-link`}>
-                    <div class={`${category}__card-image-wrapper`}>
+              <li class="eat__item">
+                <article class="eat__card">
+                  <a href={`/eat/${item.name.toLowerCase().replace(/\s+/g, '-')}`} class="eat__card-link">
+                    <div class="eat__card-image-wrapper">
                       {item.processedImage && (
-                        <picture class={`${category}__card-image`}>
+                        <picture class="eat__card-image">
                           <source
                             media="(min-width: 1024px)"
                             srcset={item.processedImage.srcSet.toString()}
@@ -179,17 +115,17 @@ const { category } = Astro.params;
                           <img
                             src={item.processedImage.src}
                             alt={item.name}
-                            class={`${category}__card-img`}
+                            class="eat__card-img"
                           />
                         </picture>
                       )}
-                      <div class={`${category}__card-overlay`}>
-                        <span class={`${category}__card-title`}>
+                      <div class="eat__card-overlay">
+                        <span class="eat__card-title">
                           {item.name}
                         </span>
                       </div>
                       <svg
-                        class={`${category}__card-play-icon`}
+                        class="eat__card-play-icon"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 84 85"
                         fill="none"
@@ -211,16 +147,16 @@ const { category } = Astro.params;
                       </svg>
                     </div>
                   </a>
-                  <dl class={`${category}__card-details`}>
-                    <div class={`${category}__card-detail`}>
-                      <dt class={`${category}__card-detail-label`}>場所：</dt>
-                      <dd class={`${category}__card-detail-value`}>
+                  <dl class="eat__card-details">
+                    <div class="eat__card-detail">
+                      <dt class="eat__card-detail-label">場所：</dt>
+                      <dd class="eat__card-detail-value">
                         {item.location}
                       </dd>
                     </div>
-                    <div class={`${category}__card-detail`}>
-                      <dt class={`${category}__card-detail-label`}>時間：</dt>
-                      <dd class={`${category}__card-detail-value`}>
+                    <div class="eat__card-detail">
+                      <dt class="eat__card-detail-label">時間：</dt>
+                      <dd class="eat__card-detail-value">
                         {item.time}
                       </dd>
                     </div>
@@ -238,15 +174,11 @@ const { category } = Astro.params;
 </PageLayout>
 
 <style lang="scss">
-  @import "../styles/variables";
-  @import "../styles/functions";
-  @import "../styles/mixins";
+  @import "../../styles/variables";
+  @import "../../styles/functions";
+  @import "../../styles/mixins";
 
-  // 各カテゴリー共通のスタイル（watch.astroのスタイルをベースに）
-  .watch,
-  .eat,
-  .play,
-  .make {
+  .eat {
     padding-top: spx(296);
     position: relative;
     min-height: 90vh;
@@ -270,13 +202,6 @@ const { category } = Astro.params;
       }
     }
 
-    &__header {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
     &__title {
       color: var(--base_5, #102a4d);
       font-size: spx(70);
@@ -293,10 +218,6 @@ const { category } = Astro.params;
 
       &-accent {
         color: var(--logo_color_3, #c99e2d);
-        @include tablet-up {
-        }
-        @include desktop-up {
-        }
       }
     }
 
@@ -333,7 +254,6 @@ const { category } = Astro.params;
       }
     }
 
-    // SCSS変数を使った共通幅設定
     $card-width-mobile: spx(620);
     $card-width-tablet: ppx(620 * 1.2);
     $card-width-desktop: ppx(620);
@@ -356,13 +276,6 @@ const { category } = Astro.params;
       }
     }
 
-    &__item {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
     &__card {
       width: max-content;
       display: flex;
@@ -378,23 +291,13 @@ const { category } = Astro.params;
       &-link {
         display: block;
         width: max-content;
-        @include tablet-up {
-        }
-        @include desktop-up {
-        }
 
         @include hover {
           &:hover {
-            .watch__card-img,
-            .eat__card-img,
-            .play__card-img,
-            .make__card-img {
+            .eat__card-img {
               transform: scale(1.1);
             }
-            .watch__card-play-icon circle,
-            .eat__card-play-icon circle,
-            .play__card-play-icon circle,
-            .make__card-play-icon circle {
+            .eat__card-play-icon circle {
               fill: $logo_color_1;
             }
           }
@@ -403,10 +306,6 @@ const { category } = Astro.params;
 
       &-image-wrapper {
         position: relative;
-        @include tablet-up {
-        }
-        @include desktop-up {
-        }
       }
 
       &-image {
@@ -550,61 +449,6 @@ const { category } = Astro.params;
           bottom: 0;
           left: 0;
         }
-
-        &-label {
-          @include tablet-up {
-          }
-          @include desktop-up {
-          }
-        }
-
-        &-value {
-          @include tablet-up {
-          }
-          @include desktop-up {
-          }
-        }
-      }
-    }
-  }
-
-  .breadcrumb {
-    width: spx(560);
-    margin-inline: auto;
-    color: var(--logo_color_2, #816259);
-    font-size: spx(24);
-    font-weight: 700;
-    line-height: 140%;
-    letter-spacing: spx(2.4);
-    @include tablet-up {
-      width: ppx(1960 * 1.2);
-      font-size: ppx(27 * 1.2);
-      letter-spacing: ppx(2.7 * 1.2);
-    }
-    @include desktop-up {
-      width: ppx(1960);
-      font-size: ppx(27);
-      letter-spacing: ppx(2.7);
-    }
-
-    &__link {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__separator {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__current {
-      @include tablet-up {
-      }
-      @include desktop-up {
       }
     }
   }
