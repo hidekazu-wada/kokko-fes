@@ -31,6 +31,7 @@ declare module "../data/categories.json" {
     description: string;
     detailInfo: string;
     image: string;
+    images?: string[];
     location: string;
     time: string;
     snsUrl: string;
