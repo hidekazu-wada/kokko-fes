@@ -64,7 +64,7 @@
         "description": "地域の伝統工芸品を一堂に集めた特別展示。職人による実演も行われます。",
         "detailInfo": "<p>地域に伝わる<strong>伝統工芸品</strong>を一堂に集めた特別展示会です。</p><p>匠の技を目の前でご覧いただけます：</p><ul><li>陶芸品の展示・販売</li><li>木工品の実演</li><li>染物ワークショップ</li><li>竹細工展示</li></ul><p><strong>職人さんとの交流コーナー</strong>もあり、作品にまつわるストーリーを直接聞くことができます。</p>",
         "image": "demo.png",
-        "location": "展示ホールB", 
+        "location": "展示ホールB",
         "time": "09:00-17:00",
         "snsUrl": "https://instagram.com/craft_kokko",
         "price": "入場無料",
@@ -99,7 +99,13 @@
         "time": "10:00-16:00",
         "snsUrl": "https://twitter.com/play_kokko",
         "price": "材料費500円",
-        "images": ["craft-01.png", "craft-02.png", "craft-03.png", "craft-04.png", "craft-05.png"]
+        "images": [
+          "craft-01.png",
+          "craft-02.png",
+          "craft-03.png",
+          "craft-04.png",
+          "craft-05.png"
+        ]
       },
       {
         "name": "ゲームコーナー",

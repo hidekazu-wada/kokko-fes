@@ -37,10 +37,10 @@ import Breadcrumb from "../../components/common/Breadcrumb.astro";
 // 動的ルーティング設定
 export async function getStaticPaths() {
   const typedCategoriesData = categoriesData as CategoriesData;
-  
+
   return Object.keys(typedCategoriesData).map((categoryId) => ({
     params: { category: categoryId },
-    props: { categoryData: typedCategoriesData[categoryId] }
+    props: { categoryData: typedCategoriesData[categoryId] },
   }));
 }
 
@@ -86,7 +86,10 @@ const processedItems = await Promise.all(
         processedImage: optimizedImage,
       };
     } catch (error) {
-      console.error(`Error processing image for ${category}/${item.image}:`, error);
+      console.error(
+        `Error processing image for ${category}/${item.image}:`,
+        error,
+      );
       return {
         ...item,
         processedImage: null,
@@ -119,7 +122,10 @@ const categoryDataWithImages = {
             (item: CategoryItem & { processedImage?: any }) => (
               <li class="category__item">
                 <article class="category__card">
-                  <a href={`/${category}/${item.name.toLowerCase().replace(/\s+/g, '-')}`} class="category__card-link">
+                  <a
+                    href={`/${category}/${item.name.toLowerCase().replace(/\s+/g, "-")}`}
+                    class="category__card-link"
+                  >
                     <div class="category__card-image-wrapper">
                       {item.processedImage && (
                         <picture class="category__card-image">
@@ -139,9 +145,7 @@ const categoryDataWithImages = {
                         </picture>
                       )}
                       <div class="category__card-overlay">
-                        <span class="category__card-title">
-                          {item.name}
-                        </span>
+                        <span class="category__card-title">{item.name}</span>
                       </div>
                       <svg
                         class="category__card-play-icon"
@@ -175,9 +179,7 @@ const categoryDataWithImages = {
                     </div>
                     <div class="category__card-detail">
                       <dt class="category__card-detail-label">時間：</dt>
-                      <dd class="category__card-detail-value">
-                        {item.time}
-                      </dd>
+                      <dd class="category__card-detail-value">{item.time}</dd>
                     </div>
                   </dl>
                 </article>
@@ -236,7 +238,7 @@ const categoryDataWithImages = {
       }
 
       &-accent {
-        color: var(--logo_color_1, #528ca2);
+        color: var(--base_5, #c99e2d);
       }
     }
 
