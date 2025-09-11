@@ -34,6 +34,7 @@ const treesImage = await getImage({
 interface CategoryItem {
   name: string;
   description: string;
+  detailInfo: string;
   image: string;
   location: string;
   time: string;
@@ -90,8 +91,10 @@ const { detail } = Astro.params;
     <div class="detail-page__container">
       <header class="detail-page__header">
         <h1 class="detail-page__title">
-          <span class="detail-page__title-accent">{categoryData.titleAccent}</span>
-          {categoryData.title.replace(categoryData.titleAccent, '')}
+          <span class="detail-page__title-accent"
+            >{categoryData.titleAccent}</span
+          >
+          {categoryData.title.replace(categoryData.titleAccent, "")}
         </h1>
         <p class="detail-page__subtitle">{categoryData.subtitle}</p>
       </header>
@@ -437,7 +440,11 @@ const { detail } = Astro.params;
             <dl class="detail-info__detail">
               <dt class="detail-info__detail-label">SNS</dt>
               <dd class="detail-info__detail-value">
-                <a href={itemData.snsUrl} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={itemData.snsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   {itemData.snsUrl}
                 </a>
               </dd>
@@ -492,9 +499,10 @@ const { detail } = Astro.params;
           <header class="detail-bottom-info__header">
             <h2 class="detail-bottom-info__header-title">詳細情報</h2>
           </header>
-          <article class="detail-bottom-info__body">
-            <div class="detail-bottom-info__content">ここに説明文</div>
-          </article>
+          <article
+            class="detail-bottom-info__body"
+            set:html={itemData.detailInfo}
+          />
         </section>
       </main>
 
@@ -1179,11 +1187,138 @@ const { detail } = Astro.params;
 
       &__body {
         margin-top: spx(74);
+        margin-inline: auto;
+        width: spx(620);
+        position: relative;
+        z-index: 2;
+        border-radius: spx(50);
+        background: var(--white, #fff);
+        padding: spx(50);
         @include tablet-up {
           margin-top: ppx(101 * 1.2);
+          width: ppx(1800 * 1.2);
+          border-radius: ppx(50 * 1.2);
+          padding: ppx(50 * 1.2);
         }
         @include desktop-up {
           margin-top: ppx(101);
+          width: ppx(1800);
+          border-radius: ppx(50);
+          padding: ppx(50);
+        }
+
+        // HTMLコンテンツのスタイリング
+        color: var(--base_5, #102a4d);
+        font-family: "Zen Kaku Gothic Antique";
+        font-size: spx(24);
+        font-style: normal;
+        font-weight: 400;
+        line-height: 180%;
+        @include tablet-up {
+          font-size: ppx(28 * 1.2);
+        }
+        @include desktop-up {
+          font-size: ppx(28);
+        }
+
+        // 段落
+        p {
+          margin-bottom: spx(20);
+          @include tablet-up {
+            margin-bottom: ppx(30 * 1.2);
+          }
+          @include desktop-up {
+            margin-bottom: ppx(30);
+          }
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+
+        // 強調テキスト
+        strong {
+          font-weight: 700;
+          color: var(--logo_color_3, #c99e2d);
+        }
+
+        // イタリック
+        em {
+          font-style: italic;
+          color: var(--logo_color_2, #816259);
+        }
+
+        // リスト
+        ul,
+        ol {
+          margin: spx(20) 0;
+          padding-left: spx(30);
+          @include tablet-up {
+            margin: ppx(30 * 1.2) 0;
+            padding-left: ppx(40 * 1.2);
+          }
+          @include desktop-up {
+            margin: ppx(30) 0;
+            padding-left: ppx(40);
+          }
+        }
+
+        ul {
+          list-style-type: disc;
+        }
+
+        ol {
+          list-style-type: decimal;
+        }
+
+        li {
+          margin-bottom: spx(10);
+          @include tablet-up {
+            margin-bottom: ppx(15 * 1.2);
+          }
+          @include desktop-up {
+            margin-bottom: ppx(15);
+          }
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+
+        // 見出し（もし必要な場合）
+        h3 {
+          font-size: spx(28);
+          font-weight: 700;
+          margin-top: spx(30);
+          margin-bottom: spx(15);
+          color: var(--logo_color_2, #816259);
+          @include tablet-up {
+            font-size: ppx(32 * 1.2);
+            margin-top: ppx(40 * 1.2);
+            margin-bottom: ppx(20 * 1.2);
+          }
+          @include desktop-up {
+            font-size: ppx(32);
+            margin-top: ppx(40);
+            margin-bottom: ppx(20);
+          }
+        }
+
+        h4 {
+          font-size: spx(26);
+          font-weight: 700;
+          margin-top: spx(25);
+          margin-bottom: spx(12);
+          @include tablet-up {
+            font-size: ppx(30 * 1.2);
+            margin-top: ppx(35 * 1.2);
+            margin-bottom: ppx(18 * 1.2);
+          }
+          @include desktop-up {
+            font-size: ppx(30);
+            margin-top: ppx(35);
+            margin-bottom: ppx(18);
+          }
         }
       }
       &__content {

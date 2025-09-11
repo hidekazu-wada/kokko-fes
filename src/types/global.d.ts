@@ -28,9 +28,13 @@ declare module "../components/common/PageBottomWave.astro" {
 declare module "../data/categories.json" {
   interface CategoryItem {
     name: string;
+    description: string;
+    detailInfo: string;
     image: string;
     location: string;
     time: string;
+    snsUrl: string;
+    price: string;
   }
 
   interface CategoryData {
