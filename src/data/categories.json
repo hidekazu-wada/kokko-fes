@@ -56,7 +56,8 @@
         "location": "展示ホールA",
         "time": "10:00-16:00",
         "snsUrl": "https://twitter.com/wadaiko_kokko",
-        "price": "無料"
+        "price": "無料",
+        "images": ["demo.png"]
       },
       {
         "name": "伝統工芸展示",
@@ -66,7 +67,8 @@
         "location": "展示ホールB", 
         "time": "09:00-17:00",
         "snsUrl": "https://instagram.com/craft_kokko",
-        "price": "入場無料"
+        "price": "入場無料",
+        "images": ["demo.png"]
       },
       {
         "name": "郷土芸能ショー",
@@ -76,7 +78,8 @@
         "location": "メインステージ",
         "time": "13:00-14:00",
         "snsUrl": "https://facebook.com/geinou_kokko",
-        "price": "無料観覧"
+        "price": "無料観覧",
+        "images": ["demo.png"]
       }
     ]
   },
