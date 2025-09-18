@@ -3,6 +3,16 @@
 import PageLayout from "../layouts/PageLayout.astro";
 import PageBottomWave from "../components/common/PageBottomWave.astro";
 import Breadcrumb from "../components/common/Breadcrumb.astro";
+
+// 画像
+import { getImage } from "astro:assets";
+import TitleTreeImage from "..//images/event/tree.png";
+
+const Tree = await getImage({
+  src: TitleTreeImage,
+  format: "webp",
+  widths: [140, 155, 170],
+});
 ---
 
 <PageLayout title="イベント情報｜コッコ祭り 2025｜KOKKO Festival">
@@ -15,6 +25,153 @@ import Breadcrumb from "../components/common/Breadcrumb.astro";
         </h1>
         <p class="event-page__subtitle">− EVENT −</p>
       </header>
+      <div class="">
+        <div>
+          <div class="">
+            <picture class="クラス名 モディファイア名">
+              <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+              <source
+                media="(min-width: 1024px)"
+                srcset={Tree.srcSet.toString()}
+              />
+              <!-- タブレット（744px以上）→ 中解像度版 -->
+              <source
+                media="(min-width: 744px)"
+                srcset={Tree.srcSet.toString()}
+              />
+              <!-- スマホ（744px未満）→ 最小解像度版 -->
+              <img
+                src={Tree.src}
+                alt="画像の内容を説明するテキスト"
+                class="追加のクラス名（必要に応じて）"
+              />
+            </picture>
+          </div>
+          <div class="">開催概要</div>
+          <div class="">
+            <picture class="クラス名 モディファイア名">
+              <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+              <source
+                media="(min-width: 1024px)"
+                srcset={Tree.srcSet.toString()}
+              />
+              <!-- タブレット（744px以上）→ 中解像度版 -->
+              <source
+                media="(min-width: 744px)"
+                srcset={Tree.srcSet.toString()}
+              />
+              <!-- スマホ（744px未満）→ 最小解像度版 -->
+              <img
+                src={Tree.src}
+                alt="画像の内容を説明するテキスト"
+                class="追加のクラス名（必要に応じて）"
+              />
+            </picture>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div class="">開催日時</div>
+            <div>
+              <div class="">2025年12月</div>
+              <div>
+                <div class="">7日（土）12:00〜23:00／</div>
+                <div class="">8日（日）9:00〜15:00</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="">開催場所</div>
+            <div>
+              <div class="">〒401-0332</div>
+              <div class="">山梨県南都留郡 富士河口湖町</div>
+              <div class="">西湖・HAMAYOUリゾート</div>
+            </div>
+          </div>
+          <div>
+            <div class="">お問い合わせ</div>
+            <div>
+              お問い合わせフォームは
+              <a href="#">こちら</a>
+            </div>
+          </div>
+          <div>
+            <div class="">アクセス</div>
+            <div>
+              <a href="#">アクセスページ</a>をご覧ください
+            </div>
+          </div>
+          <div>
+            <div class="">主催</div>
+            <div>株式会社HAMAYOUリゾート</div>
+          </div>
+          <div>
+            <div class="">協賛（順不同）</div>
+            <div>
+              <div class="">旭造園</div>
+              <div class="">株式会社東屋ミートセンター</div>
+              <div class="">有限会社アップル</div>
+              <div class="">株式会社アミューズ</div>
+              <div class="">株式会社エスケイ</div>
+              <div class="">株式会社小笠</div>
+              <div class="">株式会社オギノ食糧</div>
+              <div class="">株式会社萱沼商事</div>
+              <div class="">キーコーヒー株式会社</div>
+              <div class="">クオリティーメンテナンス</div>
+              <div class="">有限会社後藤工務店</div>
+              <div class="">株式会社小林リース</div>
+              <div class="">株式会社コバヤシ工業</div>
+              <div class="">株式会社米福</div>
+              <div class="">株式会社サンエイ</div>
+              <div class="">株式会社セントラルクルー</div>
+              <div class="">高瀬物産株式会社</div>
+              <div class="">都留信用組合</div>
+              <div class="">日本食研株式会社</div>
+              <div class="">登り坂石油株式会社</div>
+              <div class="">株式会社ハギ・ボー</div>
+              <div class="">株式会社ハンエアーシステム</div>
+              <div class="">富士冷熱株式会社</div>
+              <div class="">宮下自動車修理工場</div>
+              <div class="">リゾートメンテナンス株式会社</div>
+              <div class="">ibee Studio</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="">
+            <a href="#">
+              <div class="">タイムスケジュール</div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="51"
+                height="51"
+                viewBox="0 0 51 51"
+                fill="none"
+              >
+                <circle cx="25.5703" cy="25.9766" r="25" fill="white"></circle>
+                <path
+                  d="M21.2257 17.2775L20.3049 18.6202L19.472 19.9859L20.8586 20.8885L22.2763 21.8211L23.6753 22.7762L25.093 23.7087L26.5511 24.5761L28.001 25.5641L26.4716 26.4324L25.0931 27.4444L23.6586 28.357L22.2267 29.2852L20.8118 30.2362L19.3177 31.14L20.3064 32.4872L21.1378 33.9331L22.5293 32.9026L23.9539 31.9886L25.4402 31.1699L26.7835 30.1222L28.2529 29.2807L29.6705 28.3453L31.0698 27.3972L32.517 26.5017L33.9262 25.555L32.4723 24.6933L31.1294 23.6702L29.6553 22.8411L28.3181 21.8137L26.8311 21.0031L25.455 20.0309L24.0675 19.0673L22.6323 18.1829L21.2257 17.2775Z"
+                  fill="#816259"></path>
+              </svg>
+            </a>
+            <a href="#">
+              <div class="">会場マップ</div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="51"
+                height="51"
+                viewBox="0 0 51 51"
+                fill="none"
+              >
+                <circle cx="25.5703" cy="25.9766" r="25" fill="white"></circle>
+                <path
+                  d="M21.2257 17.2775L20.3049 18.6202L19.472 19.9859L20.8586 20.8885L22.2763 21.8211L23.6753 22.7762L25.093 23.7087L26.5511 24.5761L28.001 25.5641L26.4716 26.4324L25.0931 27.4444L23.6586 28.357L22.2267 29.2852L20.8118 30.2362L19.3177 31.14L20.3064 32.4872L21.1378 33.9331L22.5293 32.9026L23.9539 31.9886L25.4402 31.1699L26.7835 30.1222L28.2529 29.2807L29.6705 28.3453L31.0698 27.3972L32.517 26.5017L33.9262 25.555L32.4723 24.6933L31.1294 23.6702L29.6553 22.8411L28.3181 21.8137L26.8311 21.0031L25.455 20.0309L24.0675 19.0673L22.6323 18.1829L21.2257 17.2775Z"
+                  fill="#816259"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
 
     <Breadcrumb currentPageTitle="イベント情報" />
