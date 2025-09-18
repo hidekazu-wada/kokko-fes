@@ -25,10 +25,10 @@ const Tree = await getImage({
         </h1>
         <p class="event-page__subtitle">− EVENT −</p>
       </header>
-      <div class="">
-        <div>
-          <div class="">
-            <picture class="クラス名 モディファイア名">
+      <main class="event-content">
+        <header class="event-overview">
+          <figure class="event-overview__tree event-overview__tree--left">
+            <picture class="event-overview__tree-picture">
               <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
               <source
                 media="(min-width: 1024px)"
@@ -42,14 +42,14 @@ const Tree = await getImage({
               <!-- スマホ（744px未満）→ 最小解像度版 -->
               <img
                 src={Tree.src}
-                alt="画像の内容を説明するテキスト"
-                class="追加のクラス名（必要に応じて）"
+                alt="クリスマスツリーのイラスト"
+                class="event-overview__tree-img"
               />
             </picture>
-          </div>
-          <div class="">開催概要</div>
-          <div class="">
-            <picture class="クラス名 モディファイア名">
+          </figure>
+          <h2 class="event-overview__title">開催概要</h2>
+          <figure class="event-overview__tree event-overview__tree--right">
+            <picture class="event-overview__tree-picture">
               <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
               <source
                 media="(min-width: 1024px)"
@@ -63,85 +63,135 @@ const Tree = await getImage({
               <!-- スマホ（744px未満）→ 最小解像度版 -->
               <img
                 src={Tree.src}
-                alt="画像の内容を説明するテキスト"
-                class="追加のクラス名（必要に応じて）"
+                alt="クリスマスツリーのイラスト"
+                class="event-overview__tree-img"
               />
             </picture>
-          </div>
-        </div>
-        <div>
-          <div>
-            <div class="">開催日時</div>
-            <div>
-              <div class="">2025年12月</div>
-              <div>
-                <div class="">7日（土）12:00〜23:00／</div>
-                <div class="">8日（日）9:00〜15:00</div>
-              </div>
+          </figure>
+        </header>
+        <section class="event-details">
+          <dl class="event-details__list">
+            <div class="event-details__item">
+              <dt class="event-details__term">開催日時</dt>
+              <dd
+                class="event-details__description event-details__description--date"
+              >
+                <div class="event-details__date-year">2025年12月</div>
+                <div
+                  class="event-details__date-detail event-details__date-wrapper"
+                >
+                  <div class="event-details__date-day">
+                    7日（土）12:00〜23:00／
+                  </div>
+                  <div class="event-details__date-day">
+                    8日（日）9:00〜15:00
+                  </div>
+                </div>
+              </dd>
             </div>
-          </div>
-          <div>
-            <div class="">開催場所</div>
-            <div>
-              <div class="">〒401-0332</div>
-              <div class="">山梨県南都留郡 富士河口湖町</div>
-              <div class="">西湖・HAMAYOUリゾート</div>
+            <div class="event-details__item">
+              <dt class="event-details__term">開催場所</dt>
+              <dd class="event-details__description">
+                <address class="event-details__address">
+                  <div class="event-details__address-zip">〒401-0332</div>
+                  <div class="event-details__address-prefecture">
+                    山梨県南都留郡 富士河口湖町
+                  </div>
+                  <div class="event-details__address-venue">
+                    西湖・HAMAYOUリゾート
+                  </div>
+                </address>
+              </dd>
             </div>
-          </div>
-          <div>
-            <div class="">お問い合わせ</div>
-            <div>
-              お問い合わせフォームは
-              <a href="#">こちら</a>
+            <div class="event-details__item">
+              <dt class="event-details__term">お問い合わせ</dt>
+              <dd class="event-details__description">
+                お問い合わせフォームは
+                <a href="/inquiry" class="event-details__link">こちら</a>
+              </dd>
             </div>
-          </div>
-          <div>
-            <div class="">アクセス</div>
-            <div>
-              <a href="#">アクセスページ</a>をご覧ください
+            <div class="event-details__item">
+              <dt class="event-details__term">アクセス</dt>
+              <dd class="event-details__description">
+                <a href="/access" class="event-details__link">アクセスページ</a
+                >をご覧ください
+              </dd>
             </div>
-          </div>
-          <div>
-            <div class="">主催</div>
-            <div>株式会社HAMAYOUリゾート</div>
-          </div>
-          <div>
-            <div class="">協賛（順不同）</div>
-            <div>
-              <div class="">旭造園</div>
-              <div class="">株式会社東屋ミートセンター</div>
-              <div class="">有限会社アップル</div>
-              <div class="">株式会社アミューズ</div>
-              <div class="">株式会社エスケイ</div>
-              <div class="">株式会社小笠</div>
-              <div class="">株式会社オギノ食糧</div>
-              <div class="">株式会社萱沼商事</div>
-              <div class="">キーコーヒー株式会社</div>
-              <div class="">クオリティーメンテナンス</div>
-              <div class="">有限会社後藤工務店</div>
-              <div class="">株式会社小林リース</div>
-              <div class="">株式会社コバヤシ工業</div>
-              <div class="">株式会社米福</div>
-              <div class="">株式会社サンエイ</div>
-              <div class="">株式会社セントラルクルー</div>
-              <div class="">高瀬物産株式会社</div>
-              <div class="">都留信用組合</div>
-              <div class="">日本食研株式会社</div>
-              <div class="">登り坂石油株式会社</div>
-              <div class="">株式会社ハギ・ボー</div>
-              <div class="">株式会社ハンエアーシステム</div>
-              <div class="">富士冷熱株式会社</div>
-              <div class="">宮下自動車修理工場</div>
-              <div class="">リゾートメンテナンス株式会社</div>
-              <div class="">ibee Studio</div>
+            <div class="event-details__item">
+              <dt class="event-details__term">主催</dt>
+              <dd class="event-details__description">
+                株式会社HAMAYOUリゾート
+              </dd>
             </div>
-          </div>
-        </div>
-        <div>
-          <div class="">
-            <a href="#">
-              <div class="">タイムスケジュール</div>
+            <div class="event-details__item event-details__item--sponsor">
+              <dt class="event-details__term">協賛（順不同）</dt>
+              <dd class="event-details__description">
+                <ul class="event-details__sponsor-list">
+                  <li class="event-details__sponsor-item">旭造園</li>
+                  <li class="event-details__sponsor-item">
+                    株式会社東屋ミートセンター
+                  </li>
+                  <li class="event-details__sponsor-item">有限会社アップル</li>
+                  <li class="event-details__sponsor-item">
+                    株式会社アミューズ
+                  </li>
+                  <li class="event-details__sponsor-item">株式会社エスケイ</li>
+                  <li class="event-details__sponsor-item">株式会社小笠</li>
+                  <li class="event-details__sponsor-item">
+                    株式会社オギノ食糧
+                  </li>
+                  <li class="event-details__sponsor-item">株式会社萱沼商事</li>
+                  <li class="event-details__sponsor-item">
+                    キーコーヒー株式会社
+                  </li>
+                  <li class="event-details__sponsor-item">
+                    クオリティーメンテナンス
+                  </li>
+                  <li class="event-details__sponsor-item">
+                    有限会社後藤工務店
+                  </li>
+                  <li class="event-details__sponsor-item">
+                    株式会社小林リース
+                  </li>
+                  <li class="event-details__sponsor-item">
+                    株式会社コバヤシ工業
+                  </li>
+                  <li class="event-details__sponsor-item">株式会社米福</li>
+                  <li class="event-details__sponsor-item">株式会社サンエイ</li>
+                  <li class="event-details__sponsor-item">
+                    株式会社セントラルクルー
+                  </li>
+                  <li class="event-details__sponsor-item">高瀬物産株式会社</li>
+                  <li class="event-details__sponsor-item">都留信用組合</li>
+                  <li class="event-details__sponsor-item">日本食研株式会社</li>
+                  <li class="event-details__sponsor-item">
+                    登り坂石油株式会社
+                  </li>
+                  <li class="event-details__sponsor-item">
+                    株式会社ハギ・ボー
+                  </li>
+                  <li class="event-details__sponsor-item">
+                    株式会社ハンエアーシステム
+                  </li>
+                  <li class="event-details__sponsor-item">富士冷熱株式会社</li>
+                  <li class="event-details__sponsor-item">
+                    宮下自動車修理工場
+                  </li>
+                  <li class="event-details__sponsor-item">
+                    リゾートメンテナンス株式会社
+                  </li>
+                  <li class="event-details__sponsor-item">ibee Studio</li>
+                </ul>
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <nav class="event-links">
+          <div class="event-links__container">
+            <a href="#" class="event-links__item">
+              <span class="event-links__text">タイムスケジュール</span>
               <svg
+                class="event-links__icon"
                 xmlns="http://www.w3.org/2000/svg"
                 width="51"
                 height="51"
@@ -154,9 +204,10 @@ const Tree = await getImage({
                   fill="#816259"></path>
               </svg>
             </a>
-            <a href="#">
-              <div class="">会場マップ</div>
+            <a href="#" class="event-links__item">
+              <span class="event-links__text">会場マップ</span>
               <svg
+                class="event-links__icon"
                 xmlns="http://www.w3.org/2000/svg"
                 width="51"
                 height="51"
@@ -170,8 +221,8 @@ const Tree = await getImage({
               </svg>
             </a>
           </div>
-        </div>
-      </div>
+        </nav>
+      </main>
     </div>
 
     <Breadcrumb currentPageTitle="イベント情報" />
@@ -249,6 +300,362 @@ const Tree = await getImage({
         }
         @include desktop-up {
           font-size: ppx(37);
+        }
+      }
+    }
+
+    .event-content {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    .event-overview {
+      display: flex;
+      gap: spx(40);
+      align-items: center;
+      justify-content: center;
+      margin-top: spx(60);
+      @include tablet-up {
+        gap: ppx(60 * 1.2);
+        margin-top: ppx(107 * 1.2);
+      }
+      @include desktop-up {
+        gap: ppx(60);
+        margin-top: ppx(107);
+      }
+
+      &__tree {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+
+        &--left {
+          @include tablet-up {
+          }
+          @include desktop-up {
+          }
+        }
+
+        &--right {
+          transform: scale(-1, 1);
+          @include tablet-up {
+          }
+          @include desktop-up {
+          }
+        }
+      }
+
+      &__tree-picture {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__tree-img {
+        display: block;
+        width: spx(140);
+        @include tablet-up {
+          width: ppx(170 * 1.2);
+        }
+        @include desktop-up {
+          width: ppx(170);
+        }
+      }
+
+      &__title {
+        color: var(--logo_color_2, #816259);
+        text-align: center;
+        font-family: "Zen Kaku Gothic Antique";
+        font-size: spx(35);
+        font-style: normal;
+        font-weight: 700;
+        line-height: 130%;
+        letter-spacing: spx(10.5);
+        @include tablet-up {
+          font-size: ppx(45 * 1.2);
+          letter-spacing: ppx(13.5 * 1.2);
+        }
+        @include desktop-up {
+          font-size: ppx(45);
+          letter-spacing: ppx(13.5);
+        }
+      }
+    }
+
+    .event-details {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+
+      &__list {
+        display: flex;
+        flex-direction: column;
+        gap: spx(15);
+        width: 94vw;
+        margin-inline: auto;
+        margin-top: spx(64);
+        @include tablet-up {
+          gap: ppx(20 * 1.2);
+          width: ppx(1300 * 1.2);
+          margin-top: ppx(40 * 1.2);
+        }
+        @include desktop-up {
+          gap: ppx(20);
+          width: ppx(1300);
+          margin-top: ppx(40);
+        }
+      }
+
+      &__item {
+        display: grid;
+        grid-template-columns: spx(195) auto;
+        gap: spx(10);
+        border-radius: spx(20);
+        background: var(--base_2, #fcf2c9);
+        padding: spx(15) spx(30) spx(20);
+        @include tablet-up {
+          grid-template-columns: ppx(230 * 1.2) auto;
+          gap: ppx(40 * 1.2);
+          border-radius: ppx(20 * 1.2);
+          padding: ppx(20 * 1.2) ppx(50 * 1.2);
+        }
+        @include desktop-up {
+          grid-template-columns: ppx(230) auto;
+          gap: ppx(40);
+          border-radius: ppx(20);
+          padding: ppx(20) ppx(50);
+        }
+
+        &--sponsor {
+          @include tablet-up {
+          }
+          @include desktop-up {
+          }
+        }
+      }
+
+      &__term {
+        color: var(--logo_color_3, #c99e2d);
+        font-family: "Zen Kaku Gothic Antique";
+        font-size: spx(28);
+        font-style: normal;
+        font-weight: 700;
+        line-height: 150%;
+        letter-spacing: spx(-0.84);
+        @include tablet-up {
+          font-size: ppx(30 * 1.2);
+          line-height: 180%;
+          letter-spacing: 0;
+        }
+        @include desktop-up {
+          font-size: ppx(30);
+        }
+      }
+
+      &__description {
+        color: var(--base_5, #102a4d);
+        font-family: "Zen Kaku Gothic Antique";
+        font-size: spx(28);
+        font-style: normal;
+        font-weight: 700;
+        line-height: 150%;
+        letter-spacing: spx(-0.84);
+        @include tablet-up {
+          font-size: ppx(30 * 1.2);
+          line-height: 180%;
+        }
+        @include desktop-up {
+          font-size: ppx(30);
+        }
+      }
+
+      &__description--date {
+        display: flex;
+      }
+      &__date-year {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__date-detail {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__date-wrapper {
+        @include tablet-up {
+          display: flex;
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__date-day {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__address {
+        @include tablet-up {
+          display: flex;
+          gap: 1em;
+        }
+        @include desktop-up {
+        }
+
+        &-zip {
+          @include tablet-up {
+          }
+          @include desktop-up {
+          }
+        }
+
+        &-prefecture {
+          @include tablet-up {
+          }
+          @include desktop-up {
+          }
+        }
+
+        &-venue {
+          @include tablet-up {
+          }
+          @include desktop-up {
+          }
+        }
+      }
+
+      &__link {
+        color: var(--logo_color_2, #816259);
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__sponsor-list {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__sponsor-item {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+    }
+
+    .event-links {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+
+      &__container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: spx(30);
+        margin-top: spx(64);
+        @include tablet-up {
+          flex-direction: row;
+          justify-content: center;
+          gap: ppx(140 * 1.2);
+          margin-top: ppx(80 * 1.2);
+        }
+        @include desktop-up {
+          gap: ppx(140);
+          margin-top: ppx(80);
+        }
+      }
+
+      &__item {
+        display: flex;
+        width: spx(420);
+        height: spx(80);
+        align-items: center;
+        flex-shrink: 0;
+        border-radius: spx(70);
+        background: var(--logo_color_2, #816259);
+        position: relative;
+        transition: background 0.3s ease;
+        @include tablet-up {
+          width: ppx(470 * 1.2);
+          height: ppx(90 * 1.2);
+          border-radius: ppx(80 * 1.2);
+        }
+        @include desktop-up {
+          width: ppx(470);
+          height: ppx(90);
+          border-radius: ppx(80);
+        }
+        @include hover {
+          &:hover {
+            background: var(--logo_color_3, #c99e2d);
+
+            .event-links__icon path {
+              fill: var(--logo_color_3, #c99e2d);
+            }
+          }
+        }
+      }
+
+      &__text {
+        color: var(--white, #fff);
+        text-align: center;
+        font-family: "Zen Kaku Gothic Antique";
+        font-size: spx(30);
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        text-align: center;
+        width: spx(270);
+        margin-left: spx(61);
+        @include tablet-up {
+          font-size: ppx(33 * 1.2);
+          width: ppx(297 * 1.2);
+          margin-left: ppx(71 * 1.2);
+        }
+        @include desktop-up {
+          font-size: ppx(33);
+          width: ppx(297);
+          margin-left: ppx(61);
+        }
+      }
+
+      &__icon {
+        display: block;
+        width: spx(50);
+        height: spx(50);
+        position: absolute;
+        right: spx(13);
+        path {
+          transition: fill 0.3s ease;
+        }
+
+        @include tablet-up {
+          width: ppx(56 * 1.2);
+          height: ppx(56 * 1.2);
+          right: ppx(16 * 1.2);
+        }
+        @include desktop-up {
+          width: ppx(56);
+          height: ppx(56);
+          right: ppx(16);
         }
       }
     }
