@@ -1175,7 +1175,7 @@ const Car = await getImage({
       const modals = document.querySelectorAll(".modal");
 
       // モーダルを開く関数
-      function openModal(modalId) {
+      function openModal(modalId: string) {
         const modal = document.getElementById(modalId);
         if (modal) {
           modal.classList.add("is-active");
@@ -1187,7 +1187,7 @@ const Car = await getImage({
       }
 
       // モーダルを閉じる関数
-      function closeModal(modal) {
+      function closeModal(modal: Element) {
         modal.classList.remove("is-active");
         // ボディのスクロールを有効にする
         document.body.style.overflow = "";
@@ -1198,7 +1198,9 @@ const Car = await getImage({
         trigger.addEventListener("click", (e) => {
           e.preventDefault();
           const modalId = trigger.getAttribute("data-modal");
-          openModal(modalId);
+          if (modalId) {
+            openModal(modalId);
+          }
         });
       });
 
@@ -1206,19 +1208,23 @@ const Car = await getImage({
       modalCloseButtons.forEach((closeButton) => {
         closeButton.addEventListener("click", () => {
           const modal = closeButton.closest(".modal");
-          closeModal(modal);
+          if (modal) {
+            closeModal(modal);
+          }
         });
       });
 
       // オーバーレイクリックでモーダルを閉じる
       modals.forEach((modal) => {
         const overlay = modal.querySelector(".modal__overlay");
-        overlay.addEventListener("click", (e) => {
-          // モーダルコンテンツ以外の部分（オーバーレイ）をクリックした場合のみ閉じる
-          if (e.target === overlay) {
-            closeModal(modal);
-          }
-        });
+        if (overlay) {
+          overlay.addEventListener("click", (e) => {
+            // モーダルコンテンツ以外の部分（オーバーレイ）をクリックした場合のみ閉じる
+            if (e.target === overlay) {
+              closeModal(modal);
+            }
+          });
+        }
       });
 
       // Escapeキーでモーダルを閉じる

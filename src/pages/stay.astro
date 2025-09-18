@@ -1,0 +1,222 @@
+---
+// コンポーネント
+import PageLayout from "../layouts/PageLayout.astro";
+import PageBottomWave from "../components/common/PageBottomWave.astro";
+import Breadcrumb from "../components/common/Breadcrumb.astro";
+
+// 画像
+import { getImage } from "astro:assets";
+import logoJaranImg from "../images/stay/jaran.png";
+import logoRakutenImg from "../images/stay/rakuten.png";
+
+const Jaran = await getImage({
+  src: logoJaranImg,
+  format: "webp",
+  widths: [342],
+});
+const Rakuten = await getImage({
+  src: logoRakutenImg,
+  format: "webp",
+  widths: [342],
+});
+---
+
+<PageLayout title="泊まる｜コッコ祭り 2025｜KOKKO Festival">
+  <section class="page-wrapper stay-page">
+    <div class="stay-page__container">
+      <header class="stay-page__header">
+        <h1 class="stay-page__title">
+          <span class="stay-page__title-accent">泊</span>
+          まる
+        </h1>
+        <p class="stay-page__subtitle">− STAY −</p>
+      </header>
+      <div class="">
+        <div>
+          コッコ祭りにお越しの際の宿泊施設をお探しの方へ<br />
+          下記の予約サイトから、<br
+            class="only-sp"
+          />会場周辺の宿泊施設をご予約いただけます。<br />
+          お早めのご予約をおすすめします。
+        </div>
+        <div>
+          <div>
+            <div>
+              <picture class="クラス名 モディファイア名">
+                <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+                <source
+                  media="(min-width: 1024px)"
+                  srcset={Jaran.srcSet.toString()}
+                />
+                <!-- タブレット（744px以上）→ 中解像度版 -->
+                <source
+                  media="(min-width: 744px)"
+                  srcset={Jaran.srcSet.toString()}
+                />
+                <!-- スマホ（744px未満）→ 最小解像度版 -->
+                <img
+                  src={Jaran.src}
+                  alt="画像の内容を説明するテキスト"
+                  class="追加のクラス名（必要に応じて）"
+                />
+              </picture>
+            </div>
+            <div class="">
+              豊富な宿泊プランから<br />
+              お好みの宿をお選びいただけます
+            </div>
+            <a href="" target="_blank">
+              <div>
+                <div class="">じゃらんで検索</div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="51"
+                  height="51"
+                  viewBox="0 0 51 51"
+                  fill="none"
+                >
+                  <circle cx="25.5703" cy="25.9756" r="25" fill="white"
+                  ></circle>
+                  <path
+                    d="M21.2257 17.2765L20.3049 18.6192L19.472 19.985L20.8586 20.8876L22.2763 21.8201L23.6753 22.7752L25.093 23.7078L26.5511 24.5751L28.001 25.5631L26.4716 26.4314L25.0931 27.4435L23.6586 28.356L22.2267 29.2842L20.8118 30.2352L19.3177 31.1391L20.3064 32.4862L21.1378 33.9321L22.5293 32.9016L23.9539 31.9877L25.4402 31.1689L26.7835 30.1212L28.2529 29.2797L29.6705 28.3444L31.0698 27.3962L32.517 26.5007L33.9262 25.554L32.4723 24.6923L31.1294 23.6692L29.6553 22.8401L28.3181 21.8127L26.8311 21.0021L25.455 20.0299L24.0675 19.0663L22.6323 18.182L21.2257 17.2765Z"
+                    fill="#FF5800"></path>
+                </svg>
+              </div>
+            </a>
+          </div>
+          <div>
+            <div>
+              <picture class="クラス名 モディファイア名">
+                <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+                <source
+                  media="(min-width: 1024px)"
+                  srcset={Rakuten.srcSet.toString()}
+                />
+                <!-- タブレット（744px以上）→ 中解像度版 -->
+                <source
+                  media="(min-width: 744px)"
+                  srcset={Rakuten.srcSet.toString()}
+                />
+                <!-- スマホ（744px未満）→ 最小解像度版 -->
+                <img
+                  src={Rakuten.src}
+                  alt="画像の内容を説明するテキスト"
+                  class="追加のクラス名（必要に応じて）"
+                />
+              </picture>
+            </div>
+            <div class="">
+              楽天ポイントも貯まる<br />
+              お得な宿泊プランが満載
+            </div>
+            <a href="" target="_blank">
+              <div>
+                <div class="">楽天で検索</div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="51"
+                  height="51"
+                  viewBox="0 0 51 51"
+                  fill="none"
+                >
+                  <circle cx="25.5703" cy="25.9756" r="25" fill="white"
+                  ></circle>
+                  <path
+                    d="M21.2257 17.2765L20.3049 18.6192L19.472 19.985L20.8586 20.8876L22.2763 21.8201L23.6753 22.7752L25.093 23.7078L26.5511 24.5751L28.001 25.5631L26.4716 26.4314L25.0931 27.4435L23.6586 28.356L22.2267 29.2842L20.8118 30.2352L19.3177 31.1391L20.3064 32.4862L21.1378 33.9321L22.5293 32.9016L23.9539 31.9877L25.4402 31.1689L26.7835 30.1212L28.2529 29.2797L29.6705 28.3444L31.0698 27.3962L32.517 26.5007L33.9262 25.554L32.4723 24.6923L31.1294 23.6692L29.6553 22.8401L28.3181 21.8127L26.8311 21.0021L25.455 20.0299L24.0675 19.0663L22.6323 18.182L21.2257 17.2765Z"
+                    fill="#00BA00"></path>
+                </svg>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div>
+          <div class="">ご注意事項</div>
+          <div class="">
+            ※ 宿泊施設の予約は各予約サイトで直接行っていただきます。<br />
+            ※ kokko-fes実行委員会では宿泊予約の受付は行っておりません。<br />
+            ※ リンク先は外部サイトとなります。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <Breadcrumb currentPageTitle="泊まる" />
+    <PageBottomWave />
+  </section>
+
+  <style lang="scss">
+    @import "../styles/variables";
+    @import "../styles/functions";
+    @import "../styles/mixins";
+
+    .stay-page {
+      padding-top: spx(296);
+      position: relative;
+      min-height: 90vh;
+      padding-bottom: spx(99);
+      @include tablet-up {
+        padding-top: ppx(253 * 1.2);
+        padding-bottom: ppx(228 * 1.2);
+      }
+      @include desktop-up {
+        padding-top: ppx(253);
+        padding-bottom: ppx(228);
+      }
+
+      &__container {
+        padding-bottom: spx(100);
+        @include tablet-up {
+          padding-bottom: ppx(130 * 1.2);
+        }
+        @include desktop-up {
+          padding-bottom: ppx(130);
+        }
+      }
+
+      &__header {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__title {
+        color: var(--base_5, #102a4d);
+        font-size: spx(60);
+        font-style: normal;
+        font-weight: 700;
+        line-height: 130%;
+        text-align: center;
+        @include tablet-up {
+          font-size: ppx(110 * 1.2);
+        }
+        @include desktop-up {
+          font-size: ppx(110);
+        }
+
+        &-accent {
+          color: var(--logo_color_3, #c99e2d);
+          @include tablet-up {
+          }
+          @include desktop-up {
+          }
+        }
+      }
+
+      &__subtitle {
+        color: var(--base_5, #102a4d);
+        text-align: center;
+        font-size: spx(26);
+        font-style: normal;
+        font-weight: 700;
+        line-height: 180%;
+        @include tablet-up {
+          font-size: ppx(37 * 1.2);
+        }
+        @include desktop-up {
+          font-size: ppx(37);
+        }
+      }
+    }
+  </style>
+</PageLayout>
