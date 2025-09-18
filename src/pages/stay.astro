@@ -31,18 +31,20 @@ const Rakuten = await getImage({
         </h1>
         <p class="stay-page__subtitle">− STAY −</p>
       </header>
-      <div class="">
-        <div>
-          コッコ祭りにお越しの際の宿泊施設をお探しの方へ<br />
-          下記の予約サイトから、<br
-            class="only-sp"
-          />会場周辺の宿泊施設をご予約いただけます。<br />
-          お早めのご予約をおすすめします。
-        </div>
-        <div>
-          <div>
-            <div>
-              <picture class="クラス名 モディファイア名">
+      <main class="stay-content">
+        <section class="stay-intro">
+          <p class="stay-intro__text">
+            コッコ祭りにお越しの際の宿泊施設をお探しの方へ<br />
+            下記の予約サイトから、<br
+              class="stay-intro__break--sp"
+            />会場周辺の宿泊施設をご予約いただけます。<br />
+            お早めのご予約をおすすめします。
+          </p>
+        </section>
+        <section class="stay-booking">
+          <article class="stay-booking__item stay-booking__item--jalan">
+            <figure class="stay-booking__logo">
+              <picture class="stay-booking__logo-picture">
                 <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
                 <source
                   media="(min-width: 1024px)"
@@ -56,19 +58,25 @@ const Rakuten = await getImage({
                 <!-- スマホ（744px未満）→ 最小解像度版 -->
                 <img
                   src={Jaran.src}
-                  alt="画像の内容を説明するテキスト"
-                  class="追加のクラス名（必要に応じて）"
+                  alt="じゃらんロゴ"
+                  class="stay-booking__logo-img"
                 />
               </picture>
-            </div>
-            <div class="">
+            </figure>
+            <p class="stay-booking__description">
               豊富な宿泊プランから<br />
               お好みの宿をお選びいただけます
-            </div>
-            <a href="" target="_blank">
-              <div>
-                <div class="">じゃらんで検索</div>
+            </p>
+            <a
+              href=""
+              target="_blank"
+              rel="noopener noreferrer"
+              class="stay-booking__link"
+            >
+              <span class="stay-booking__button">
+                <span class="stay-booking__button-text">じゃらんで検索</span>
                 <svg
+                  class="stay-booking__button-icon"
                   xmlns="http://www.w3.org/2000/svg"
                   width="51"
                   height="51"
@@ -81,12 +89,12 @@ const Rakuten = await getImage({
                     d="M21.2257 17.2765L20.3049 18.6192L19.472 19.985L20.8586 20.8876L22.2763 21.8201L23.6753 22.7752L25.093 23.7078L26.5511 24.5751L28.001 25.5631L26.4716 26.4314L25.0931 27.4435L23.6586 28.356L22.2267 29.2842L20.8118 30.2352L19.3177 31.1391L20.3064 32.4862L21.1378 33.9321L22.5293 32.9016L23.9539 31.9877L25.4402 31.1689L26.7835 30.1212L28.2529 29.2797L29.6705 28.3444L31.0698 27.3962L32.517 26.5007L33.9262 25.554L32.4723 24.6923L31.1294 23.6692L29.6553 22.8401L28.3181 21.8127L26.8311 21.0021L25.455 20.0299L24.0675 19.0663L22.6323 18.182L21.2257 17.2765Z"
                     fill="#FF5800"></path>
                 </svg>
-              </div>
+              </span>
             </a>
-          </div>
-          <div>
-            <div>
-              <picture class="クラス名 モディファイア名">
+          </article>
+          <article class="stay-booking__item stay-booking__item--rakuten">
+            <figure class="stay-booking__logo">
+              <picture class="stay-booking__logo-picture">
                 <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
                 <source
                   media="(min-width: 1024px)"
@@ -100,19 +108,26 @@ const Rakuten = await getImage({
                 <!-- スマホ（744px未満）→ 最小解像度版 -->
                 <img
                   src={Rakuten.src}
-                  alt="画像の内容を説明するテキスト"
-                  class="追加のクラス名（必要に応じて）"
+                  alt="楽天トラベルロゴ"
+                  class="stay-booking__logo-img"
                 />
               </picture>
-            </div>
-            <div class="">
+            </figure>
+            <p class="stay-booking__description">
               楽天ポイントも貯まる<br />
               お得な宿泊プランが満載
-            </div>
-            <a href="" target="_blank">
-              <div>
-                <div class="">楽天で検索</div>
+            </p>
+            <a
+              href=""
+              target="_blank"
+              rel="noopener noreferrer"
+              class="stay-booking__link"
+            >
+              <span class="stay-booking__button">
+                <span class="stay-booking__button-text">楽天トラベルで検索</span
+                >
                 <svg
+                  class="stay-booking__button-icon"
                   xmlns="http://www.w3.org/2000/svg"
                   width="51"
                   height="51"
@@ -125,19 +140,25 @@ const Rakuten = await getImage({
                     d="M21.2257 17.2765L20.3049 18.6192L19.472 19.985L20.8586 20.8876L22.2763 21.8201L23.6753 22.7752L25.093 23.7078L26.5511 24.5751L28.001 25.5631L26.4716 26.4314L25.0931 27.4435L23.6586 28.356L22.2267 29.2842L20.8118 30.2352L19.3177 31.1391L20.3064 32.4862L21.1378 33.9321L22.5293 32.9016L23.9539 31.9877L25.4402 31.1689L26.7835 30.1212L28.2529 29.2797L29.6705 28.3444L31.0698 27.3962L32.517 26.5007L33.9262 25.554L32.4723 24.6923L31.1294 23.6692L29.6553 22.8401L28.3181 21.8127L26.8311 21.0021L25.455 20.0299L24.0675 19.0663L22.6323 18.182L21.2257 17.2765Z"
                     fill="#00BA00"></path>
                 </svg>
-              </div>
+              </span>
             </a>
-          </div>
-        </div>
-        <div>
-          <div class="">ご注意事項</div>
-          <div class="">
-            ※ 宿泊施設の予約は各予約サイトで直接行っていただきます。<br />
-            ※ kokko-fes実行委員会では宿泊予約の受付は行っておりません。<br />
-            ※ リンク先は外部サイトとなります。
-          </div>
-        </div>
-      </div>
+          </article>
+        </section>
+        <aside class="stay-notice">
+          <h2 class="stay-notice__title">ご注意事項</h2>
+          <ul class="stay-notice__list">
+            <li class="stay-notice__item">
+              ※ 宿泊施設の予約は各予約サイトで直接行っていただきます。
+            </li>
+            <li class="stay-notice__item">
+              ※ kokko-fes実行委員会では宿泊予約の受付は行っておりません。
+            </li>
+            <li class="stay-notice__item">
+              ※ リンク先は外部サイトとなります。
+            </li>
+          </ul>
+        </aside>
+      </main>
     </div>
 
     <Breadcrumb currentPageTitle="泊まる" />
@@ -215,6 +236,350 @@ const Rakuten = await getImage({
         }
         @include desktop-up {
           font-size: ppx(37);
+        }
+      }
+    }
+
+    .stay-content {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    .stay-intro {
+      margin-top: spx(60);
+      @include tablet-up {
+        margin-top: ppx(52 * 1.2);
+      }
+      @include desktop-up {
+        margin-top: ppx(52);
+      }
+
+      &__text {
+        color: var(--base_5, #102a4d);
+        text-align: center;
+        font-family: "Zen Kaku Gothic Antique";
+        font-size: spx(27);
+        font-style: normal;
+        font-weight: 700;
+        line-height: 160%;
+        @include tablet-up {
+          font-size: ppx(33 * 1.2);
+        }
+        @include desktop-up {
+          font-size: ppx(33);
+        }
+      }
+
+      &__break {
+        &--sp {
+          display: block;
+          @include tablet-up {
+            display: none;
+          }
+          @include desktop-up {
+          }
+        }
+      }
+    }
+
+    .stay-booking {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: spx(50);
+      margin-top: spx(60);
+      @include tablet-up {
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        gap: ppx(50 * 1.2);
+        margin-top: ppx(90 * 1.2);
+      }
+      @include desktop-up {
+        gap: ppx(50);
+        margin-top: ppx(90);
+      }
+
+      &__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: spx(530);
+        border-radius: spx(30);
+        background: var(--white, #fff);
+
+        @include tablet-up {
+          width: ppx(650 * 1.2);
+          border-radius: ppx(30 * 1.2);
+        }
+        @include desktop-up {
+          width: ppx(650);
+          border-radius: ppx(30);
+        }
+
+        &--jalan {
+          padding-top: spx(70);
+          padding-bottom: spx(70);
+          @include tablet-up {
+            padding-top: ppx(90 * 1.2);
+            padding-bottom: ppx(90 * 1.2);
+          }
+          @include desktop-up {
+            padding-top: ppx(90);
+            padding-bottom: ppx(90);
+          }
+          .stay-booking__description {
+            margin: spx(26) 0 spx(35);
+            @include tablet-up {
+              margin: ppx(26 * 1.2) 0 ppx(35 * 1.2);
+            }
+            @include desktop-up {
+              margin: ppx(26) 0 ppx(35);
+            }
+          }
+          .stay-booking__button {
+            background: #ff5800;
+            padding-left: spx(73);
+            @include tablet-up {
+              padding-left: ppx(79 * 1.2);
+            }
+            @include desktop-up {
+              padding-left: ppx(79);
+            }
+          }
+          img {
+            display: block;
+            width: spx(342);
+            @include tablet-up {
+              width: ppx(342 * 1.2);
+            }
+            @include desktop-up {
+              width: ppx(342);
+            }
+          }
+        }
+
+        &--rakuten {
+          padding-top: spx(59);
+          padding-bottom: spx(70);
+          @include tablet-up {
+            padding-top: ppx(79 * 1.2);
+            padding-bottom: ppx(90 * 1.2);
+          }
+          @include desktop-up {
+            padding-top: ppx(79);
+            padding-bottom: ppx(90);
+          }
+          .stay-booking__description {
+            margin: spx(19) 0 spx(35);
+            @include tablet-up {
+              margin: ppx(19 * 1.2) 0 ppx(35 * 1.2);
+            }
+            @include desktop-up {
+              margin: ppx(19) 0 ppx(35);
+            }
+          }
+          .stay-booking__button {
+            background: #00ba00;
+            padding-left: spx(36);
+            @include tablet-up {
+              padding-left: ppx(36 * 1.2);
+            }
+            @include desktop-up {
+              padding-left: ppx(36);
+            }
+          }
+          img {
+            display: block;
+            width: spx(257);
+            @include tablet-up {
+              width: ppx(257 * 1.2);
+            }
+            @include desktop-up {
+              width: ppx(257);
+            }
+          }
+        }
+      }
+
+      &__logo {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+
+        &-picture {
+          @include tablet-up {
+          }
+          @include desktop-up {
+          }
+        }
+
+        &-img {
+          @include tablet-up {
+          }
+          @include desktop-up {
+          }
+        }
+      }
+
+      &__description {
+        color: var(--base_5, #102a4d);
+        text-align: center;
+        font-family: "Zen Kaku Gothic Antique";
+        font-size: spx(28);
+        font-style: normal;
+        font-weight: 700;
+        line-height: 160%;
+        @include tablet-up {
+          font-size: ppx(28 * 1.2);
+        }
+        @include desktop-up {
+          font-size: ppx(28);
+        }
+      }
+
+      &__link {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+
+        @include hover {
+          &:hover {
+            .stay-booking__button {
+              background: var(--logo_color_3, #c99e2d);
+            }
+
+            .stay-booking__button-icon path {
+              fill: var(--logo_color_3, #c99e2d);
+            }
+          }
+        }
+      }
+
+      &__button {
+        display: flex;
+        width: spx(370);
+        height: spx(80);
+        align-items: center;
+        gap: spx(10);
+        flex-shrink: 0;
+        border-radius: spx(70);
+        position: relative;
+        transition: background 0.3s ease;
+        @include tablet-up {
+          width: ppx(420 * 1.2);
+          height: ppx(90 * 1.2);
+          gap: ppx(10 * 1.2);
+          border-radius: ppx(80 * 1.2);
+        }
+        @include desktop-up {
+          width: ppx(420);
+          height: ppx(90);
+          gap: ppx(10);
+          border-radius: ppx(80);
+        }
+
+        &-text {
+          color: var(--white, #fff);
+          text-align: center;
+          font-family: "Zen Kaku Gothic Antique";
+          font-size: spx(28);
+          font-style: normal;
+          font-weight: 700;
+          line-height: normal;
+          @include tablet-up {
+            font-size: ppx(33 * 1.2);
+          }
+          @include desktop-up {
+            font-size: ppx(33);
+          }
+        }
+
+        &-icon {
+          display: block;
+          width: spx(50);
+          height: spx(50);
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          right: spx(13);
+          @include tablet-up {
+            width: ppx(50 * 1.2);
+            height: ppx(50 * 1.2);
+            right: ppx(16 * 1.2);
+          }
+          @include desktop-up {
+            width: ppx(50);
+            height: ppx(50);
+            right: ppx(16);
+          }
+
+          path {
+            transition: fill 0.3s ease;
+          }
+        }
+      }
+    }
+
+    .stay-notice {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: spx(64);
+      gap: spx(10);
+      @include tablet-up {
+        margin-top: ppx(90 * 1.2);
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        gap: ppx(70 * 1.2);
+      }
+      @include desktop-up {
+        margin-top: ppx(90);
+        gap: ppx(70);
+      }
+
+      &__title {
+        color: var(--logo_color_3, #c99e2d);
+        text-align: center;
+        font-family: "Zen Kaku Gothic Antique";
+        font-size: spx(33);
+        font-style: normal;
+        font-weight: 700;
+        line-height: 180%;
+        @include tablet-up {
+          font-size: ppx(33 * 1.2);
+        }
+        @include desktop-up {
+          font-size: ppx(33);
+        }
+      }
+
+      &__list {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__item {
+        color: var(--base_5, #102a4d);
+        font-family: "Zen Kaku Gothic Antique";
+        font-size: spx(23);
+        font-style: normal;
+        font-weight: 700;
+        line-height: 180%;
+        letter-spacing: spx(-0.69);
+        @include tablet-up {
+          font-size: ppx(24 * 1.2);
+          letter-spacing: 0;
+        }
+        @include desktop-up {
+          font-size: ppx(24);
         }
       }
     }
