@@ -24,43 +24,43 @@ const archiveItems: ArchiveItem[] = [
     theme: "「ゆったり安らぐ のびのび遊ぶ」",
     date: "2023.12.2-3",
     image: archiveImage2024,
-    link: "#"
+    link: "#",
   },
   {
     year: "2024",
     theme: "「ゆったり安らぐ のびのび遊ぶ」",
     date: "2024.12.7-8",
     image: archiveImage2025,
-    link: "#"
+    link: "#",
   },
   {
     year: "2025",
     theme: "「ゆったり安らぐ のびのび遊ぶ」",
     date: "2025.12.6-7",
     image: archiveImage2025,
-    link: "#"
+    link: "#",
   },
   {
     year: "2026",
     theme: "「ゆったり安らぐ のびのび遊ぶ」",
     date: "2026.12.5-6",
     image: archiveImage2025,
-    link: "#"
+    link: "#",
   },
   {
     year: "2027",
     theme: "「ゆったり安らぐ のびのび遊ぶ」",
     date: "2027.12.4-5",
     image: archiveImage2025,
-    link: "#"
+    link: "#",
   },
   {
     year: "2028",
     theme: "「ゆったり安らぐ のびのび遊ぶ」",
     date: "2028.12.2-3",
     image: archiveImage2025,
-    link: "#"
-  }
+    link: "#",
+  },
 ];
 
 // 3つずつのグループに分割
@@ -83,7 +83,7 @@ const optimizedImages = await Promise.all(
       widths: [500, 600],
     });
     return { ...item, optimizedImage: img };
-  })
+  }),
 );
 
 const optimizedRows = chunkArray(optimizedImages, 3);
@@ -104,40 +104,39 @@ const optimizedRows = chunkArray(optimizedImages, 3);
     <main class="archive-content">
       <p class="archive-content__lead">これまでの開催記録をご覧いただけます</p>
       <div class="archive-content__grid">
-        {optimizedRows.map((row) => (
-          <div class="archive-content__row">
-            {row.map((item) => (
-              <a href={item.link || "#"} class="archive-item__link">
-                <article class="archive-item">
-                  <figure class="archive-item__image">
-                    <picture class="archive-item__picture">
-                      <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-                      <source
-                        media="(min-width: 1024px)"
-                        srcset={item.optimizedImage.srcSet.toString()}
-                      />
-                      <!-- タブレット（744px以上）→ 中解像度版 -->
-                      <source
-                        media="(min-width: 744px)"
-                        srcset={item.optimizedImage.srcSet.toString()}
-                      />
-                      <!-- スマホ（744px未満）→ 最小解像度版 -->
-                      <img
-                        src={item.optimizedImage.src}
-                        alt={`${item.year}年コッコ祭りの様子`}
-                        class="archive-item__img"
-                      />
-                    </picture>
-                  </figure>
-                  <h2 class="archive-item__year">{item.year}</h2>
-                  <div class="archive-item__theme-label">テーマ</div>
-                  <p class="archive-item__theme">{item.theme}</p>
-                  <time class="archive-item__date">開催日：{item.date}</time>
-                </article>
-              </a>
-            ))}
-          </div>
-        ))}
+        {
+          optimizedRows.map((row) => (
+            <div class="archive-content__row">
+              {row.map((item) => (
+                <a href={item.link || "#"} class="archive-item__link">
+                  <article class="archive-item">
+                    <figure class="archive-item__image">
+                      <picture class="archive-item__picture">
+                        <source
+                          media="(min-width: 1024px)"
+                          srcset={item.optimizedImage.srcSet.toString()}
+                        />
+                        <source
+                          media="(min-width: 744px)"
+                          srcset={item.optimizedImage.srcSet.toString()}
+                        />
+                        <img
+                          src={item.optimizedImage.src}
+                          alt={`${item.year}年コッコ祭りの様子`}
+                          class="archive-item__img"
+                        />
+                      </picture>
+                    </figure>
+                    <h2 class="archive-item__year">{item.year}</h2>
+                    <div class="archive-item__theme-label">テーマ</div>
+                    <p class="archive-item__theme">{item.theme}</p>
+                    <time class="archive-item__date">開催日：{item.date}</time>
+                  </article>
+                </a>
+              ))}
+            </div>
+          ))
+        }
       </div>
     </main>
 
