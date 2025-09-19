@@ -1,6 +1,6 @@
 ---
+import ThanksBanner from "../common/ThanksBanner.astro";
 import logo from "../../images/common/footer-logo.svg";
-import thanksSvg from "../../images/common/thanks.svg";
 ---
 
 <footer class="footer">
@@ -57,32 +57,7 @@ import thanksSvg from "../../images/common/thanks.svg";
   <div class="footer__copyright">© 2025 kokko-fes実行委員会</div>
 </footer>
 
-<!-- イベント終了後に表示 -->
-<div class="">
-  <div>
-    <img src={thanksSvg.src} alt="THANKS" />
-    <div class="">たくさんのご来場ありがとうございました!!</div>
-  </div>
-  <div>
-    <div class="">来場者数：5,000人</div>
-    <div class="">出展数：30ブース</div>
-    <div class="">
-      <div class="">当日の様子を見る</div>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="35"
-        height="36"
-        viewBox="0 0 35 36"
-        fill="none"
-      >
-        <circle cx="17.5" cy="18.0732" r="17.5" fill="#816259"></circle>
-        <path
-          d="M14.4596 11.9827L13.815 12.9226L13.232 13.8786L14.2026 14.5104L15.195 15.1632L16.1743 15.8318L17.1667 16.4846L18.1873 17.0917L19.2022 17.7833L18.1317 18.3911L17.1667 19.0996L16.1626 19.7384L15.1603 20.3881L14.1698 21.0538L13.1239 21.6865L13.8161 22.6295L14.398 23.6416L15.3721 22.9203L16.3693 22.2805L17.4097 21.7074L18.35 20.974L19.3786 20.3849L20.3709 19.7302L21.3504 19.0665L22.3634 18.4396L23.3499 17.777L22.3322 17.1738L21.3921 16.4576L20.3603 15.8772L19.4242 15.1581L18.3833 14.5906L17.4201 13.9101L16.4488 13.2356L15.4441 12.6165L14.4596 11.9827Z"
-          fill="#FCF2C9"></path>
-      </svg>
-    </div>
-  </div>
-</div>
+<ThanksBanner />
 
 <style lang="scss">
   /* 必要なmixin/functionをインポート */
