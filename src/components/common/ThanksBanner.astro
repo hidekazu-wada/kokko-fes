@@ -1,5 +1,16 @@
 ---
 import thanksSvg from "../../images/common/thanks.svg";
+
+// Props定義
+interface Props {
+  visitors?: string;  // 来場者数
+  booths?: string;    // 出展数
+}
+
+const {
+  visitors = "5,000",  // デフォルト値
+  booths = "30"        // デフォルト値
+} = Astro.props;
 ---
 
 <section class="event-thanks">
@@ -12,11 +23,11 @@ import thanksSvg from "../../images/common/thanks.svg";
   <aside class="event-thanks__stats">
     <dl class="event-thanks__data-list first">
       <dt class="event-thanks__data-label">来場者数：</dt>
-      <dd class="event-thanks__data-value">5,000人</dd>
+      <dd class="event-thanks__data-value">{visitors}人</dd>
     </dl>
     <dl class="event-thanks__data-list second">
       <dt class="event-thanks__data-label">出展数：</dt>
-      <dd class="event-thanks__data-value">30ブース</dd>
+      <dd class="event-thanks__data-value">{booths}ブース</dd>
     </dl>
     <a href="#" class="event-thanks__data-list third event-thanks__link">
       <span class="event-thanks__link-text">当日の様子を見る</span>
