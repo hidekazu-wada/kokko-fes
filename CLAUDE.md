@@ -494,6 +494,25 @@ src/
   - データ駆動型実装により、新規年度の追加が容易
 
 ### 共通コンポーネントの実装
+- ✅ **ThanksBannerコンポーネント**: イベント終了後の感謝バナー（NEW - 2025年9月19日）
+  - **ファイル場所**: `src/components/common/ThanksBanner.astro`
+  - **使用方法**: Footer.astroで`<ThanksBanner />`をインポート
+  - **表示制御**: デフォルトはコメントアウト。イベント終了後に有効化
+  - **表示内容**:
+    - 「THANKS」ロゴ画像
+    - お礼メッセージ「たくさんのご来場ありがとうございました!!」
+    - 来場者数と出展数の統計情報表示
+    - 「当日の様子を見る」リンクボタン
+  - **デザイン特徴**:
+    - 背景色：`var(--logo_color_3)`（ゴールド）
+    - 統計情報：角丸背景（`var(--base_2)`）に表示
+    - レスポンシブ対応（SP:縦並び、タブレット以上:横並び）
+  - **ホバー演出**:
+    - リンクボタンの背景色が`var(--logo_color_2)`に変化
+    - テキスト色が`var(--base_2)`に変化
+    - SVGアイコンの色も連動して変化（0.3秒のトランジション）
+  - **BEM記法実装**: event-thanks、event-thanks__header、event-thanks__stats等
+
 - ✅ **Breadcrumbコンポーネント**: パンくずリスト機能をコンポーネント化
   - `currentPageTitle` プロパティで現在ページ名を設定
   - inquiry.astro、[category].astro、access.astro で再利用
