@@ -3,17 +3,17 @@ import thanksSvg from "../../images/common/thanks.svg";
 
 // Props定義
 interface Props {
-  visitors?: string;  // 来場者数
-  booths?: string;    // 出展数
+  visitors?: string; // 来場者数
+  booths?: string; // 出展数
 }
 
 const {
-  visitors = "5,000",  // デフォルト値
-  booths = "30"        // デフォルト値
+  visitors = "5,000", // デフォルト値
+  booths = "30", // デフォルト値
 } = Astro.props;
 ---
 
-<section class="event-thanks">
+<section class="event-thanks" data-thanks-banner>
   <header class="event-thanks__header">
     <img src={thanksSvg.src} alt="THANKS" class="event-thanks__logo" />
     <h2 class="event-thanks__message">
@@ -48,6 +48,57 @@ const {
   </aside>
 </section>
 
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const thanksBanner = document.querySelector(
+      "[data-thanks-banner]",
+    ) as HTMLElement;
+    const footer = document.querySelector(".footer") as HTMLElement;
+
+    if (!thanksBanner || !footer) return;
+
+    // 初期状態を設定
+    let isHidden = false;
+
+    // スクロールイベントの処理
+    const handleScroll = () => {
+      const footerTop = footer.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+
+      // Footerの上部がビューポートの下端に到達したかチェック
+      if (footerTop <= windowHeight && !isHidden) {
+        // バナーを非表示
+        thanksBanner.style.transform = "translateY(100%)";
+        thanksBanner.style.opacity = "0";
+        isHidden = true;
+      } else if (footerTop > windowHeight && isHidden) {
+        // バナーを表示
+        thanksBanner.style.transform = "translateY(0)";
+        thanksBanner.style.opacity = "1";
+        isHidden = false;
+      }
+    };
+
+    // スクロールイベントの最適化（throttle）
+    let ticking = false;
+    const scrollHandler = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    // イベントリスナーを追加
+    window.addEventListener("scroll", scrollHandler);
+
+    // 初回実行
+    handleScroll();
+  });
+</script>
+
 <style lang="scss">
   /* 必要なmixin/functionをインポート */
   @import "../../styles/variables";
@@ -66,6 +117,10 @@ const {
     flex-flow: column;
     align-items: center;
     gap: spx(12);
+    z-index: 10;
+    transition:
+      transform 0.3s ease,
+      opacity 0.3s ease;
     @include tablet-up {
       padding: ppx(28 * 1.2) 0;
       flex-direction: row;
