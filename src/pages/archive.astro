@@ -1,0 +1,517 @@
+---
+// コンポーネント
+import PageLayout from "../layouts/PageLayout.astro";
+import PageBottomWave from "../components/common/PageBottomWave.astro";
+import Breadcrumb from "../components/common/Breadcrumb.astro";
+
+// 画像
+import { getImage } from "astro:assets";
+import archiveImage2024 from "../images/archive/img-2024.png";
+import archiveImage2025 from "../images/archive/img-2025.png";
+
+// フォーマット
+const Img2024 = await getImage({
+  src: archiveImage2024,
+  format: "webp",
+  widths: [500, 600],
+});
+const Img2025 = await getImage({
+  src: archiveImage2025,
+  format: "webp",
+  widths: [500, 600],
+});
+---
+
+<PageLayout title="過去のコッコ祭り｜コッコ祭り 2025｜KOKKO Festival">
+  <section class="page-wrapper archive">
+    <div class="archive__container">
+      <header class="archive__header">
+        <h1 class="archive__title">
+          <span class="archive__title-accent">過</span>
+          去のコッコ祭り
+        </h1>
+        <p class="archive__subtitle">− ARCHIVE −</p>
+      </header>
+    </div>
+
+    <main class="archive-content">
+      <p class="archive-content__lead">これまでの開催記録をご覧いただけます</p>
+      <div class="archive-content__grid">
+        <div class="archive-content__row">
+          <article class="archive-item">
+            <figure class="archive-item__image">
+              <picture class="archive-item__picture">
+                <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+                <source
+                  media="(min-width: 1024px)"
+                  srcset={Img2024.srcSet.toString()}
+                />
+                <!-- タブレット（744px以上）→ 中解像度版 -->
+                <source
+                  media="(min-width: 744px)"
+                  srcset={Img2024.srcSet.toString()}
+                />
+                <!-- スマホ（744px未満）→ 最小解像度版 -->
+                <img
+                  src={Img2024.src}
+                  alt="2023年コッコ祭りの様子"
+                  class="archive-item__img"
+                />
+              </picture>
+            </figure>
+            <h2 class="archive-item__year">2023</h2>
+            <div class="archive-item__theme-label">テーマ</div>
+            <p class="archive-item__theme">「ゆったり安らぐ のびのび遊ぶ」</p>
+            <time class="archive-item__date">開催日：2023.12.2-3</time>
+          </article>
+          <article class="archive-item">
+            <figure class="archive-item__image">
+              <picture class="archive-item__picture">
+                <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+                <source
+                  media="(min-width: 1024px)"
+                  srcset={Img2025.srcSet.toString()}
+                />
+                <!-- タブレット（744px以上）→ 中解像度版 -->
+                <source
+                  media="(min-width: 744px)"
+                  srcset={Img2025.srcSet.toString()}
+                />
+                <!-- スマホ（744px未満）→ 最小解像度版 -->
+                <img
+                  src={Img2025.src}
+                  alt="2025年コッコ祭りの様子"
+                  class="archive-item__img"
+                />
+              </picture>
+            </figure>
+            <h2 class="archive-item__year">2025</h2>
+            <div class="archive-item__theme-label">テーマ</div>
+            <p class="archive-item__theme">「ゆったり安らぐ のびのび遊ぶ」</p>
+            <time class="archive-item__date">開催日：2025.12.2-3</time>
+          </article>
+          <article class="archive-item">
+            <figure class="archive-item__image">
+              <picture class="archive-item__picture">
+                <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+                <source
+                  media="(min-width: 1024px)"
+                  srcset={Img2025.srcSet.toString()}
+                />
+                <!-- タブレット（744px以上）→ 中解像度版 -->
+                <source
+                  media="(min-width: 744px)"
+                  srcset={Img2025.srcSet.toString()}
+                />
+                <!-- スマホ（744px未満）→ 最小解像度版 -->
+                <img
+                  src={Img2025.src}
+                  alt="2025年コッコ祭りの様子"
+                  class="archive-item__img"
+                />
+              </picture>
+            </figure>
+            <h2 class="archive-item__year">2025</h2>
+            <div class="archive-item__theme-label">テーマ</div>
+            <p class="archive-item__theme">「ゆったり安らぐ のびのび遊ぶ」</p>
+            <time class="archive-item__date">開催日：2025.12.2-3</time>
+          </article>
+        </div>
+        <div class="archive-content__row">
+          <article class="archive-item">
+            <figure class="archive-item__image">
+              <picture class="archive-item__picture">
+                <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+                <source
+                  media="(min-width: 1024px)"
+                  srcset={Img2025.srcSet.toString()}
+                />
+                <!-- タブレット（744px以上）→ 中解像度版 -->
+                <source
+                  media="(min-width: 744px)"
+                  srcset={Img2025.srcSet.toString()}
+                />
+                <!-- スマホ（744px未満）→ 最小解像度版 -->
+                <img
+                  src={Img2025.src}
+                  alt="2025年コッコ祭りの様子"
+                  class="archive-item__img"
+                />
+              </picture>
+            </figure>
+            <h2 class="archive-item__year">2025</h2>
+            <div class="archive-item__theme-label">テーマ</div>
+            <p class="archive-item__theme">「ゆったり安らぐ のびのび遊ぶ」</p>
+            <time class="archive-item__date">開催日：2025.12.2-3</time>
+          </article>
+          <article class="archive-item">
+            <figure class="archive-item__image">
+              <picture class="archive-item__picture">
+                <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+                <source
+                  media="(min-width: 1024px)"
+                  srcset={Img2025.srcSet.toString()}
+                />
+                <!-- タブレット（744px以上）→ 中解像度版 -->
+                <source
+                  media="(min-width: 744px)"
+                  srcset={Img2025.srcSet.toString()}
+                />
+                <!-- スマホ（744px未満）→ 最小解像度版 -->
+                <img
+                  src={Img2025.src}
+                  alt="2025年コッコ祭りの様子"
+                  class="archive-item__img"
+                />
+              </picture>
+            </figure>
+            <h2 class="archive-item__year">2025</h2>
+            <div class="archive-item__theme-label">テーマ</div>
+            <p class="archive-item__theme">「ゆったり安らぐ のびのび遊ぶ」</p>
+            <time class="archive-item__date">開催日：2025.12.2-3</time>
+          </article>
+          <article class="archive-item">
+            <figure class="archive-item__image">
+              <picture class="archive-item__picture">
+                <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+                <source
+                  media="(min-width: 1024px)"
+                  srcset={Img2025.srcSet.toString()}
+                />
+                <!-- タブレット（744px以上）→ 中解像度版 -->
+                <source
+                  media="(min-width: 744px)"
+                  srcset={Img2025.srcSet.toString()}
+                />
+                <!-- スマホ（744px未満）→ 最小解像度版 -->
+                <img
+                  src={Img2025.src}
+                  alt="2025年コッコ祭りの様子"
+                  class="archive-item__img"
+                />
+              </picture>
+            </figure>
+            <h2 class="archive-item__year">2025</h2>
+            <div class="archive-item__theme-label">テーマ</div>
+            <p class="archive-item__theme">「ゆったり安らぐ のびのび遊ぶ」</p>
+            <time class="archive-item__date">開催日：2025.12.2-3</time>
+          </article>
+        </div>
+      </div>
+    </main>
+
+    <Breadcrumb currentPageTitle="過去のコッコ祭り" />
+    <PageBottomWave />
+  </section>
+
+  <style lang="scss">
+    @import "../styles/variables";
+    @import "../styles/functions";
+    @import "../styles/mixins";
+
+    .archive {
+      padding-top: spx(296);
+      position: relative;
+      min-height: 90vh;
+      padding-bottom: spx(99);
+      @include tablet-up {
+        padding-top: ppx(253 * 1.2);
+        padding-bottom: ppx(228 * 1.2);
+      }
+      @include desktop-up {
+        padding-top: ppx(253);
+        padding-bottom: ppx(228);
+      }
+
+      &__container {
+        padding-bottom: spx(100);
+        @include tablet-up {
+          padding-bottom: ppx(130 * 1.2);
+        }
+        @include desktop-up {
+          padding-bottom: ppx(130);
+        }
+      }
+
+      &__header {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__title {
+        color: var(--base_5, #102a4d);
+        font-size: spx(60);
+        font-style: normal;
+        font-weight: 700;
+        line-height: 130%;
+        text-align: center;
+        @include tablet-up {
+          font-size: ppx(110 * 1.2);
+        }
+        @include desktop-up {
+          font-size: ppx(110);
+        }
+
+        &-accent {
+          color: var(--logo_color_3, #c99e2d);
+          @include tablet-up {
+          }
+          @include desktop-up {
+          }
+        }
+      }
+
+      &__subtitle {
+        color: var(--base_5, #102a4d);
+        text-align: center;
+        font-size: spx(26);
+        font-style: normal;
+        font-weight: 700;
+        line-height: 180%;
+        @include tablet-up {
+          font-size: ppx(37 * 1.2);
+        }
+        @include desktop-up {
+          font-size: ppx(37);
+        }
+      }
+    }
+
+    // Archive Content Block
+    .archive-content {
+      padding-bottom: spx(100);
+      @include tablet-up {
+        padding-bottom: ppx(130 * 1.2);
+      }
+      @include desktop-up {
+        padding-bottom: ppx(130);
+      }
+      &__lead {
+        color: var(--base_5, #102a4d);
+        text-align: center;
+        font-family: "Zen Kaku Gothic Antique";
+        font-size: spx(26);
+        font-style: normal;
+        font-weight: 700;
+        line-height: 180%; /* 46.8px */
+        @include tablet-up {
+          font-size: ppx(27 * 1.2);
+        }
+        @include desktop-up {
+          font-size: ppx(27);
+        }
+      }
+
+      &__grid {
+        width: spx(600);
+        margin-inline: auto;
+        display: flex;
+        flex-direction: column;
+        gap: spx(40);
+        margin-top: spx(60);
+        @include tablet-up {
+          width: auto;
+          gap: ppx(90 * 1.2);
+          margin-top: ppx(113 * 1.2);
+        }
+        @include desktop-up {
+          gap: ppx(90);
+          margin-top: ppx(113);
+        }
+      }
+
+      &__row {
+        display: flex;
+        flex-direction: column;
+        gap: spx(40);
+        position: relative;
+        @include tablet-up {
+          display: grid;
+          grid-template-columns: ppx(600 * 1.2) ppx(600 * 1.2) ppx(600 * 1.2);
+          gap: ppx(80 * 1.2);
+          justify-content: center;
+          padding-bottom: ppx(90 * 1.2);
+          width: max-content;
+          margin-inline: auto;
+        }
+        @include desktop-up {
+          grid-template-columns: ppx(600) ppx(600) ppx(600);
+          gap: ppx(80);
+          padding-bottom: ppx(90);
+        }
+        &:after {
+          content: "";
+          display: block;
+          background: linear-gradient(
+              to right,
+              #102a4d,
+              #102a4d 25%,
+              rgba(0, 0, 0, 0) 25%,
+              rgba(0, 0, 0, 0) 100%
+            )
+            0% 0%;
+          background-size: 4px 1px;
+          width: 100%;
+          height: 1px;
+          margin-left: auto;
+          margin-right: auto;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+        }
+      }
+    }
+
+    // Archive Item Block
+    .archive-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: spx(10) 0 spx(40);
+      position: relative;
+      @include tablet-up {
+        padding: 0;
+      }
+      @include desktop-up {
+      }
+      &::after {
+        content: "";
+        display: block;
+        background: linear-gradient(
+            to right,
+            #102a4d,
+            #102a4d 25%,
+            rgba(0, 0, 0, 0) 25%,
+            rgba(0, 0, 0, 0) 100%
+          )
+          0% 0%;
+        background-size: 4px 1px;
+        width: 100%;
+        height: 1px;
+        margin-left: auto;
+        margin-right: auto;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        @include tablet-up {
+          display: none;
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__image {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__picture {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__img {
+        display: block;
+        width: spx(500);
+        height: spx(500);
+        object-fit: cover;
+        border-radius: 50%;
+        box-shadow: spx(2) spx(4) spx(15) 0 rgba(0, 0, 0, 0.25);
+
+        @include tablet-up {
+          width: ppx(600 * 1.2);
+          height: ppx(600 * 1.2);
+          box-shadow: ppx(2 * 1.2) ppx(4 * 1.2) ppx(15 * 1.2) 0
+            rgba(0, 0, 0, 0.25);
+        }
+        @include desktop-up {
+          width: ppx(600);
+          height: ppx(600);
+          box-shadow: ppx(2) ppx(4) ppx(15) 0 rgba(0, 0, 0, 0.25);
+        }
+      }
+
+      &__year {
+        color: var(--logo_color_3, #c99e2d);
+        text-align: center;
+        font-family: "Zen Kaku Gothic Antique";
+        font-size: spx(64);
+        font-style: normal;
+        font-weight: 700;
+        line-height: 100%; /* 64px */
+        margin-top: spx(20);
+        @include tablet-up {
+          font-size: ppx(64 * 1.2);
+          margin-top: ppx(25 * 1.2);
+        }
+        @include desktop-up {
+          font-size: ppx(64);
+          margin-top: ppx(25);
+        }
+      }
+
+      &__theme-label {
+        color: var(--base_5, #102a4d);
+        text-align: center;
+        font-family: "Zen Kaku Gothic Antique";
+        font-size: spx(27);
+        font-style: normal;
+        font-weight: 700;
+        line-height: 140%; /* 37.8px */
+        margin-top: spx(20);
+        @include tablet-up {
+          font-size: ppx(27 * 1.2);
+          margin-top: ppx(25 * 1.2);
+        }
+        @include desktop-up {
+          font-size: ppx(27);
+          margin-top: ppx(25);
+        }
+      }
+
+      &__theme {
+        color: var(--base_5, #102a4d);
+        text-align: center;
+        font-family: "Zen Kaku Gothic Antique";
+        font-size: spx(33);
+        font-style: normal;
+        font-weight: 700;
+        line-height: 140%; /* 46.2px */
+        margin-top: spx(5);
+        @include tablet-up {
+          font-size: ppx(33 * 1.2);
+          margin-top: ppx(5 * 1.2);
+        }
+        @include desktop-up {
+          font-size: ppx(33);
+          margin-top: ppx(5);
+        }
+      }
+
+      &__date {
+        color: var(--base_5, #102a4d);
+        text-align: center;
+        font-family: "Zen Kaku Gothic Antique";
+        font-size: spx(27);
+        font-style: normal;
+        font-weight: 500;
+        line-height: 200%; /* 54px */
+        margin-top: spx(5);
+        @include tablet-up {
+          font-size: ppx(27 * 1.2);
+          margin-top: ppx(5 * 1.2);
+        }
+        @include desktop-up {
+          font-size: ppx(27);
+          margin-top: ppx(5);
+        }
+      }
+    }
+  </style>
+</PageLayout>
