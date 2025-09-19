@@ -3,6 +3,29 @@
 import PageLayout from "../layouts/PageLayout.astro";
 import PageBottomWave from "../components/common/PageBottomWave.astro";
 import Breadcrumb from "../components/common/Breadcrumb.astro";
+
+// 画像
+import { getImage } from "astro:assets";
+import memory2025Image001 from "../images/memory/2025/img-01.png";
+import memory2025Image002 from "../images/memory/2025/img-02.png";
+import memory2025Image003 from "../images/memory/2025/img-03.png";
+
+// フォーマット
+const Img2025_001 = await getImage({
+  src: memory2025Image001,
+  format: "webp",
+  widths: [210, 460],
+});
+const Img2025_002 = await getImage({
+  src: memory2025Image002,
+  format: "webp",
+  widths: [210, 460],
+});
+const Img2025_003 = await getImage({
+  src: memory2025Image003,
+  format: "webp",
+  widths: [210, 460],
+});
 ---
 
 <PageLayout title="思い出｜コッコ祭り 2025｜KOKKO Festival">
@@ -16,6 +39,77 @@ import Breadcrumb from "../components/common/Breadcrumb.astro";
         <p class="memory__subtitle">− MEMORY −</p>
       </header>
     </div>
+    <section class="memory-content">
+      <nav class="memory-content__years" aria-label="年度選択">
+        <button class="memory-content__year-button memory-content__year-button--active" type="button" aria-pressed="true">２０２５</button>
+        <button class="memory-content__year-button" type="button" aria-pressed="false">２０２４</button>
+        <button class="memory-content__year-button" type="button" aria-pressed="false">２０２３</button>
+        <button class="memory-content__year-button" type="button" aria-pressed="false">２０２２</button>
+        <button class="memory-content__year-button" type="button" aria-pressed="false">２０２１</button>
+      </nav>
+      <section class="memory-gallery" aria-label="思い出の写真ギャラリー">
+        <article class="memory-gallery__item">
+          <picture class="memory-gallery__picture">
+            <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+            <source
+              media="(min-width: 1024px)"
+              srcset={Img2025_001.srcSet.toString()}
+            />
+            <!-- タブレット（744px以上）→ 中解像度版 -->
+            <source
+              media="(min-width: 744px)"
+              srcset={Img2025_001.srcSet.toString()}
+            />
+            <!-- スマホ（744px未満）→ 最小解像度版 -->
+            <img
+              src={Img2025_001.src}
+              alt="2025年コッコ祭りの様子1"
+              class="memory-gallery__image"
+            />
+          </picture>
+        </article>
+        <article class="memory-gallery__item">
+          <picture class="memory-gallery__picture">
+            <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+            <source
+              media="(min-width: 1024px)"
+              srcset={Img2025_002.srcSet.toString()}
+            />
+            <!-- タブレット（744px以上）→ 中解像度版 -->
+            <source
+              media="(min-width: 744px)"
+              srcset={Img2025_002.srcSet.toString()}
+            />
+            <!-- スマホ（744px未満）→ 最小解像度版 -->
+            <img
+              src={Img2025_002.src}
+              alt="2025年コッコ祭りの様子2"
+              class="memory-gallery__image"
+            />
+          </picture>
+        </article>
+        <article class="memory-gallery__item">
+          <picture class="memory-gallery__picture">
+            <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+            <source
+              media="(min-width: 1024px)"
+              srcset={Img2025_003.srcSet.toString()}
+            />
+            <!-- タブレット（744px以上）→ 中解像度版 -->
+            <source
+              media="(min-width: 744px)"
+              srcset={Img2025_003.srcSet.toString()}
+            />
+            <!-- スマホ（744px未満）→ 最小解像度版 -->
+            <img
+              src={Img2025_003.src}
+              alt="2025年コッコ祭りの様子3"
+              class="memory-gallery__image"
+            />
+          </picture>
+        </article>
+      </section>
+    </section>
 
     <Breadcrumb currentPageTitle="思い出" />
     <PageBottomWave />
@@ -92,6 +186,64 @@ import Breadcrumb from "../components/common/Breadcrumb.astro";
         }
         @include desktop-up {
           font-size: ppx(37);
+        }
+      }
+    }
+
+    // Memory Content Section
+    .memory-content {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+
+      &__years {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__year-button {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+
+        &--active {
+          @include tablet-up {
+          }
+          @include desktop-up {
+          }
+        }
+      }
+    }
+
+    // Memory Gallery Section
+    .memory-gallery {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+
+      &__item {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__picture {
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__image {
+        @include tablet-up {
+        }
+        @include desktop-up {
         }
       }
     }
