@@ -9,17 +9,84 @@ import { getImage } from "astro:assets";
 import archiveImage2024 from "../images/archive/img-2024.png";
 import archiveImage2025 from "../images/archive/img-2025.png";
 
-// フォーマット
-const Img2024 = await getImage({
-  src: archiveImage2024,
-  format: "webp",
-  widths: [500, 600],
-});
-const Img2025 = await getImage({
-  src: archiveImage2025,
-  format: "webp",
-  widths: [500, 600],
-});
+// アーカイブデータの定義
+interface ArchiveItem {
+  year: string;
+  theme: string;
+  date: string;
+  image: ImageMetadata;
+  link?: string;
+}
+
+const archiveItems: ArchiveItem[] = [
+  {
+    year: "2023",
+    theme: "「ゆったり安らぐ のびのび遊ぶ」",
+    date: "2023.12.2-3",
+    image: archiveImage2024,
+    link: "#"
+  },
+  {
+    year: "2024",
+    theme: "「ゆったり安らぐ のびのび遊ぶ」",
+    date: "2024.12.7-8",
+    image: archiveImage2025,
+    link: "#"
+  },
+  {
+    year: "2025",
+    theme: "「ゆったり安らぐ のびのび遊ぶ」",
+    date: "2025.12.6-7",
+    image: archiveImage2025,
+    link: "#"
+  },
+  {
+    year: "2026",
+    theme: "「ゆったり安らぐ のびのび遊ぶ」",
+    date: "2026.12.5-6",
+    image: archiveImage2025,
+    link: "#"
+  },
+  {
+    year: "2027",
+    theme: "「ゆったり安らぐ のびのび遊ぶ」",
+    date: "2027.12.4-5",
+    image: archiveImage2025,
+    link: "#"
+  },
+  {
+    year: "2028",
+    theme: "「ゆったり安らぐ のびのび遊ぶ」",
+    date: "2028.12.2-3",
+    image: archiveImage2025,
+    link: "#"
+  }
+];
+
+// 3つずつのグループに分割
+function chunkArray<T>(array: T[], chunkSize: number): T[][] {
+  const chunks: T[][] = [];
+  for (let i = 0; i < array.length; i += chunkSize) {
+    chunks.push(array.slice(i, i + chunkSize));
+  }
+  return chunks;
+}
+
+const archiveRows = chunkArray(archiveItems, 3);
+
+// 画像の最適化処理
+const optimizedImages = await Promise.all(
+  archiveItems.map(async (item) => {
+    const img = await getImage({
+      src: item.image,
+      format: "webp",
+      widths: [500, 600],
+    });
+    return { ...item, optimizedImage: img };
+  })
+);
+
+const optimizedRows = chunkArray(optimizedImages, 3);
 ---
 
 <PageLayout title="過去のコッコ祭り｜コッコ祭り 2025｜KOKKO Festival">
@@ -37,178 +104,40 @@ const Img2025 = await getImage({
     <main class="archive-content">
       <p class="archive-content__lead">これまでの開催記録をご覧いただけます</p>
       <div class="archive-content__grid">
-        <div class="archive-content__row">
-          <a href="#" class="archive-item__link">
-            <article class="archive-item">
-              <figure class="archive-item__image">
-                <picture class="archive-item__picture">
-                  <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-                  <source
-                    media="(min-width: 1024px)"
-                    srcset={Img2024.srcSet.toString()}
-                  />
-                  <!-- タブレット（744px以上）→ 中解像度版 -->
-                  <source
-                    media="(min-width: 744px)"
-                    srcset={Img2024.srcSet.toString()}
-                  />
-                  <!-- スマホ（744px未満）→ 最小解像度版 -->
-                  <img
-                    src={Img2024.src}
-                    alt="2023年コッコ祭りの様子"
-                    class="archive-item__img"
-                  />
-                </picture>
-              </figure>
-              <h2 class="archive-item__year">2023</h2>
-              <div class="archive-item__theme-label">テーマ</div>
-              <p class="archive-item__theme">「ゆったり安らぐ のびのび遊ぶ」</p>
-              <time class="archive-item__date">開催日：2023.12.2-3</time>
-            </article>
-          </a>
-          <a href="#" class="archive-item__link">
-            <article class="archive-item">
-              <figure class="archive-item__image">
-                <picture class="archive-item__picture">
-                  <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-                  <source
-                    media="(min-width: 1024px)"
-                    srcset={Img2025.srcSet.toString()}
-                  />
-                  <!-- タブレット（744px以上）→ 中解像度版 -->
-                  <source
-                    media="(min-width: 744px)"
-                    srcset={Img2025.srcSet.toString()}
-                  />
-                  <!-- スマホ（744px未満）→ 最小解像度版 -->
-                  <img
-                    src={Img2025.src}
-                    alt="2025年コッコ祭りの様子"
-                    class="archive-item__img"
-                  />
-                </picture>
-              </figure>
-              <h2 class="archive-item__year">2025</h2>
-              <div class="archive-item__theme-label">テーマ</div>
-              <p class="archive-item__theme">「ゆったり安らぐ のびのび遊ぶ」</p>
-              <time class="archive-item__date">開催日：2025.12.2-3</time>
-            </article>
-          </a>
-          <a href="#" class="archive-item__link">
-            <article class="archive-item">
-              <figure class="archive-item__image">
-                <picture class="archive-item__picture">
-                  <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-                  <source
-                    media="(min-width: 1024px)"
-                    srcset={Img2025.srcSet.toString()}
-                  />
-                  <!-- タブレット（744px以上）→ 中解像度版 -->
-                  <source
-                    media="(min-width: 744px)"
-                    srcset={Img2025.srcSet.toString()}
-                  />
-                  <!-- スマホ（744px未満）→ 最小解像度版 -->
-                  <img
-                    src={Img2025.src}
-                    alt="2025年コッコ祭りの様子"
-                    class="archive-item__img"
-                  />
-                </picture>
-              </figure>
-              <h2 class="archive-item__year">2025</h2>
-              <div class="archive-item__theme-label">テーマ</div>
-              <p class="archive-item__theme">「ゆったり安らぐ のびのび遊ぶ」</p>
-              <time class="archive-item__date">開催日：2025.12.2-3</time>
-            </article>
-          </a>
-        </div>
-        <div class="archive-content__row">
-          <a href="#" class="archive-item__link">
-            <article class="archive-item">
-              <figure class="archive-item__image">
-                <picture class="archive-item__picture">
-                  <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-                  <source
-                    media="(min-width: 1024px)"
-                    srcset={Img2025.srcSet.toString()}
-                  />
-                  <!-- タブレット（744px以上）→ 中解像度版 -->
-                  <source
-                    media="(min-width: 744px)"
-                    srcset={Img2025.srcSet.toString()}
-                  />
-                  <!-- スマホ（744px未満）→ 最小解像度版 -->
-                  <img
-                    src={Img2025.src}
-                    alt="2025年コッコ祭りの様子"
-                    class="archive-item__img"
-                  />
-                </picture>
-              </figure>
-              <h2 class="archive-item__year">2025</h2>
-              <div class="archive-item__theme-label">テーマ</div>
-              <p class="archive-item__theme">「ゆったり安らぐ のびのび遊ぶ」</p>
-              <time class="archive-item__date">開催日：2025.12.2-3</time>
-            </article>
-          </a>
-          <a href="#" class="archive-item__link">
-            <article class="archive-item">
-              <figure class="archive-item__image">
-                <picture class="archive-item__picture">
-                  <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-                  <source
-                    media="(min-width: 1024px)"
-                    srcset={Img2025.srcSet.toString()}
-                  />
-                  <!-- タブレット（744px以上）→ 中解像度版 -->
-                  <source
-                    media="(min-width: 744px)"
-                    srcset={Img2025.srcSet.toString()}
-                  />
-                  <!-- スマホ（744px未満）→ 最小解像度版 -->
-                  <img
-                    src={Img2025.src}
-                    alt="2025年コッコ祭りの様子"
-                    class="archive-item__img"
-                  />
-                </picture>
-              </figure>
-              <h2 class="archive-item__year">2025</h2>
-              <div class="archive-item__theme-label">テーマ</div>
-              <p class="archive-item__theme">「ゆったり安らぐ のびのび遊ぶ」</p>
-              <time class="archive-item__date">開催日：2025.12.2-3</time>
-            </article>
-          </a>
-          <a href="#" class="archive-item__link">
-            <article class="archive-item">
-              <figure class="archive-item__image">
-                <picture class="archive-item__picture">
-                  <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-                  <source
-                    media="(min-width: 1024px)"
-                    srcset={Img2025.srcSet.toString()}
-                  />
-                  <!-- タブレット（744px以上）→ 中解像度版 -->
-                  <source
-                    media="(min-width: 744px)"
-                    srcset={Img2025.srcSet.toString()}
-                  />
-                  <!-- スマホ（744px未満）→ 最小解像度版 -->
-                  <img
-                    src={Img2025.src}
-                    alt="2025年コッコ祭りの様子"
-                    class="archive-item__img"
-                  />
-                </picture>
-              </figure>
-              <h2 class="archive-item__year">2025</h2>
-              <div class="archive-item__theme-label">テーマ</div>
-              <p class="archive-item__theme">「ゆったり安らぐ のびのび遊ぶ」</p>
-              <time class="archive-item__date">開催日：2025.12.2-3</time>
-            </article>
-          </a>
-        </div>
+        {optimizedRows.map((row) => (
+          <div class="archive-content__row">
+            {row.map((item) => (
+              <a href={item.link || "#"} class="archive-item__link">
+                <article class="archive-item">
+                  <figure class="archive-item__image">
+                    <picture class="archive-item__picture">
+                      <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+                      <source
+                        media="(min-width: 1024px)"
+                        srcset={item.optimizedImage.srcSet.toString()}
+                      />
+                      <!-- タブレット（744px以上）→ 中解像度版 -->
+                      <source
+                        media="(min-width: 744px)"
+                        srcset={item.optimizedImage.srcSet.toString()}
+                      />
+                      <!-- スマホ（744px未満）→ 最小解像度版 -->
+                      <img
+                        src={item.optimizedImage.src}
+                        alt={`${item.year}年コッコ祭りの様子`}
+                        class="archive-item__img"
+                      />
+                    </picture>
+                  </figure>
+                  <h2 class="archive-item__year">{item.year}</h2>
+                  <div class="archive-item__theme-label">テーマ</div>
+                  <p class="archive-item__theme">{item.theme}</p>
+                  <time class="archive-item__date">開催日：{item.date}</time>
+                </article>
+              </a>
+            ))}
+          </div>
+        ))}
       </div>
     </main>
 
