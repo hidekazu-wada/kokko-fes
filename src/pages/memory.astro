@@ -9,13 +9,9 @@ import { getImage } from "astro:assets";
 import memoryData from "../data/memory.json";
 
 // 動的に画像をインポート
-const imageModules = import.meta.glob('../images/memory/**/*.{jpg,jpeg,png,webp}');
-
-// 現在選択されている年（将来的にフィルタリング用）
-const selectedYear = 2025;
-
-// 選択された年のデータを取得
-const currentYearData = memoryData.years.find(y => y.year === selectedYear);
+const imageModules = import.meta.glob(
+  "../images/memory/**/*.{jpg,jpeg,png,webp}",
+);
 
 // 型定義
 interface ProcessedImage {
@@ -24,28 +20,55 @@ interface ProcessedImage {
   processed: any;
 }
 
-// 画像を処理
-const processedImages: ProcessedImage[] = [];
-if (currentYearData) {
-  for (const imageName of currentYearData.images) {
-    const imagePath = `../images/memory/${selectedYear}/${imageName}`;
-    const imageModule = imageModules[imagePath];
+interface YearData {
+  year: number;
+  images: ProcessedImage[];
+}
 
-    if (imageModule) {
-      const image: any = await imageModule();
-      const processedImage = await getImage({
-        src: image.default,
-        format: "webp",
-        widths: [210, 460, 620, 1200],
-      });
-      processedImages.push({
-        name: imageName,
-        year: selectedYear,
-        processed: processedImage
-      });
+// すべての年度の画像を処理
+const allYearData: YearData[] = [];
+
+for (const yearData of memoryData.years) {
+  const yearImages: ProcessedImage[] = [];
+
+  for (const imageName of yearData.images) {
+    // いくつかのパターンを試す（.jpg, .png, .webp）
+    const extensions = [".jpg", ".png", ".webp"];
+    let imageProcessed = false;
+
+    for (const ext of extensions) {
+      const baseImageName = imageName.replace(/\.[^/.]+$/, ""); // 拡張子を除去
+      const imagePathWithExt = `../images/memory/${yearData.year}/${baseImageName}${ext}`;
+      const imageModule = imageModules[imagePathWithExt];
+
+      if (imageModule) {
+        const image: any = await imageModule();
+        const processedImage = await getImage({
+          src: image.default,
+          format: "webp",
+          widths: [210, 460, 620, 1200],
+        });
+        yearImages.push({
+          name: imageName,
+          year: yearData.year,
+          processed: processedImage,
+        });
+        imageProcessed = true;
+        break;
+      }
     }
   }
+
+  if (yearImages.length > 0) {
+    allYearData.push({
+      year: yearData.year,
+      images: yearImages,
+    });
+  }
 }
+
+// 利用可能な年度のリスト（画像が存在する年のみ）
+const availableYears = allYearData.map((d) => d.year).sort((a, b) => b - a);
 ---
 
 <PageLayout title="思い出｜コッコ祭り 2025｜KOKKO Festival">
@@ -61,31 +84,44 @@ if (currentYearData) {
     </div>
     <section class="memory-content">
       <nav class="memory-content__years" aria-label="年度選択">
-        <button
-          class="memory-content__year-button memory-content__year-button--active"
-          type="button"
-          aria-pressed="true">２０２５</button
-        >
-        <button
-          class="memory-content__year-button"
-          type="button"
-          aria-pressed="false">２０２４</button
-        >
-        <button
-          class="memory-content__year-button"
-          type="button"
-          aria-pressed="false">２０２３</button
-        >
-        <button
-          class="memory-content__year-button"
-          type="button"
-          aria-pressed="false">２０２２</button
-        >
-        <button
-          class="memory-content__year-button"
-          type="button"
-          aria-pressed="false">２０２１</button
-        >
+        {
+          availableYears.map((year, index) => (
+            <button
+              class={`memory-content__year-button ${index === 0 ? "memory-content__year-button--active" : ""}`}
+              type="button"
+              data-year={year}
+              aria-pressed={index === 0 ? "true" : "false"}
+            >
+              {year
+                .toString()
+                .split("")
+                .map((d) =>
+                  d === "0"
+                    ? "０"
+                    : d === "1"
+                      ? "１"
+                      : d === "2"
+                        ? "２"
+                        : d === "3"
+                          ? "３"
+                          : d === "4"
+                            ? "４"
+                            : d === "5"
+                              ? "５"
+                              : d === "6"
+                                ? "６"
+                                : d === "7"
+                                  ? "７"
+                                  : d === "8"
+                                    ? "８"
+                                    : d === "9"
+                                      ? "９"
+                                      : d,
+                )
+                .join("")}
+            </button>
+          ))
+        }
       </nav>
       <!-- サムネイルギャラリー（Swiper） -->
       <section
@@ -94,28 +130,32 @@ if (currentYearData) {
         aria-label="思い出の写真ギャラリー"
       >
         <div class="swiper-wrapper">
-          {processedImages.map((image, index) => (
-            <article class="memory-gallery__item swiper-slide">
-              <picture class="memory-gallery__picture">
-                <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-                <source
-                  media="(min-width: 1024px)"
-                  srcset={image.processed.srcSet.toString()}
-                />
-                <!-- タブレット（744px以上）→ 中解像度版 -->
-                <source
-                  media="(min-width: 744px)"
-                  srcset={image.processed.srcSet.toString()}
-                />
-                <!-- スマホ（744px未満）→ 最小解像度版 -->
-                <img
-                  src={image.processed.src}
-                  alt={`${image.year}年コッコ祭りの様子${index + 1}`}
-                  class="memory-gallery__image"
-                />
-              </picture>
-            </article>
-          ))}
+          {
+            allYearData.map((yearData) =>
+              yearData.images.map((image: ProcessedImage, index: number) => (
+                <article
+                  class="memory-gallery__item swiper-slide"
+                  data-year={image.year}
+                >
+                  <picture class="memory-gallery__picture">
+                    <source
+                      media="(min-width: 1024px)"
+                      srcset={image.processed.srcSet.toString()}
+                    />
+                    <source
+                      media="(min-width: 744px)"
+                      srcset={image.processed.srcSet.toString()}
+                    />
+                    <img
+                      src={image.processed.src}
+                      alt={`${image.year}年コッコ祭りの様子${index + 1}`}
+                      class="memory-gallery__image"
+                    />
+                  </picture>
+                </article>
+              )),
+            )
+          }
         </div>
       </section>
     </section>
@@ -189,30 +229,36 @@ if (currentYearData) {
           <!-- メインスライダー（Swiper） -->
           <div class="memory-modal__slides swiper" id="memory-modal-main">
             <div class="swiper-wrapper">
-              {processedImages.map((image, index) => (
-                <article class="memory-modal__slide swiper-slide">
-                  <figure class="memory-modal__figure">
-                    <picture class="memory-modal__picture">
-                      <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-                      <source
-                        media="(min-width: 1024px)"
-                        srcset={image.processed.srcSet.toString()}
-                      />
-                      <!-- タブレット（744px以上）→ 中解像度版 -->
-                      <source
-                        media="(min-width: 744px)"
-                        srcset={image.processed.srcSet.toString()}
-                      />
-                      <!-- スマホ（744px未満）→ 最小解像度版 -->
-                      <img
-                        src={image.processed.src}
-                        alt={`${image.year}年コッコ祭りの様子${index + 1}`}
-                        class="memory-modal__image"
-                      />
-                    </picture>
-                  </figure>
-                </article>
-              ))}
+              {
+                allYearData.map((yearData) =>
+                  yearData.images.map(
+                    (image: ProcessedImage, index: number) => (
+                      <article
+                        class="memory-modal__slide swiper-slide"
+                        data-year={image.year}
+                      >
+                        <figure class="memory-modal__figure">
+                          <picture class="memory-modal__picture">
+                            <source
+                              media="(min-width: 1024px)"
+                              srcset={image.processed.srcSet.toString()}
+                            />
+                            <source
+                              media="(min-width: 744px)"
+                              srcset={image.processed.srcSet.toString()}
+                            />
+                            <img
+                              src={image.processed.src}
+                              alt={`${image.year}年コッコ祭りの様子${index + 1}`}
+                              class="memory-modal__image"
+                            />
+                          </picture>
+                        </figure>
+                      </article>
+                    ),
+                  ),
+                )
+              }
             </div>
           </div>
           <!-- ページャー next -->
@@ -749,6 +795,107 @@ if (currentYearData) {
           }
         });
       });
+
+      // 年度フィルタリング機能
+      const yearButtons = document.querySelectorAll(
+        ".memory-content__year-button",
+      );
+      let currentYear = parseInt(
+        yearButtons[0]?.getAttribute("data-year") || "2025",
+      );
+
+      const filterImagesByYear = (year: number) => {
+        // ギャラリーアイテムのフィルタリング
+        const allGalleryItems = document.querySelectorAll(
+          ".memory-gallery__item",
+        );
+        const allModalItems = document.querySelectorAll(".memory-modal__slide");
+
+        // すべて非表示
+        allGalleryItems.forEach((item) => {
+          (item as HTMLElement).style.display = "none";
+        });
+        allModalItems.forEach((item) => {
+          (item as HTMLElement).style.display = "none";
+        });
+
+        // 選択された年度のみ表示
+        const targetGalleryItems = document.querySelectorAll(
+          `.memory-gallery__item[data-year="${year}"]`,
+        );
+        const targetModalItems = document.querySelectorAll(
+          `.memory-modal__slide[data-year="${year}"]`,
+        );
+
+        targetGalleryItems.forEach((item) => {
+          (item as HTMLElement).style.display = "block";
+        });
+        targetModalItems.forEach((item) => {
+          (item as HTMLElement).style.display = "block";
+        });
+
+        // Swiper更新
+        if (thumbsGallery) {
+          thumbsGallery.updateSlides();
+          thumbsGallery.updateSize();
+          thumbsGallery.updateSlidesClasses();
+          thumbsGallery.slideTo(0);
+        }
+        if (mainGallery) {
+          mainGallery.updateSlides();
+          mainGallery.updateSize();
+          mainGallery.updateSlidesClasses();
+          mainGallery.slideTo(0);
+        }
+
+        // ギャラリーアイテムのクリックイベントを再設定
+        const visibleGalleryItems = document.querySelectorAll(
+          `.memory-gallery__item[data-year="${year}"]`,
+        );
+        visibleGalleryItems.forEach((item, index) => {
+          // 既存のイベントリスナーを削除
+          const newItem = item.cloneNode(true) as HTMLElement;
+          item.parentNode?.replaceChild(newItem, item);
+
+          // 新しいイベントリスナーを追加
+          newItem.addEventListener("click", () => {
+            openModal(index);
+          });
+          newItem.setAttribute("tabindex", "0");
+          newItem.setAttribute("role", "button");
+          newItem.addEventListener("keydown", (e) => {
+            if (
+              e instanceof KeyboardEvent &&
+              (e.key === "Enter" || e.key === " ")
+            ) {
+              e.preventDefault();
+              openModal(index);
+            }
+          });
+        });
+      };
+
+      // 年度ボタンのクリックイベント
+      yearButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const year = parseInt(button.getAttribute("data-year") || "2025");
+
+          // アクティブクラスの切り替え
+          yearButtons.forEach((btn) => {
+            btn.classList.remove("memory-content__year-button--active");
+            btn.setAttribute("aria-pressed", "false");
+          });
+          button.classList.add("memory-content__year-button--active");
+          button.setAttribute("aria-pressed", "true");
+
+          // フィルタリング実行
+          currentYear = year;
+          filterImagesByYear(year);
+        });
+      });
+
+      // 初期表示（最初の年度）
+      filterImagesByYear(currentYear);
 
       // クローズボタンのクリックイベント
       if (closeButton) {
