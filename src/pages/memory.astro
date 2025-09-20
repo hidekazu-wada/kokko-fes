@@ -612,9 +612,14 @@ const Img2025_003 = await getImage({
       }
 
       &__nav {
+        transition: opacity 0.3s ease;
         @include tablet-up {
         }
         @include desktop-up {
+        }
+        &.swiper-button-disabled {
+          opacity: 0.2;
+          pointer-events: none;
         }
 
         &--prev {
