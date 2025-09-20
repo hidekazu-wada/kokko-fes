@@ -149,7 +149,7 @@ const Img2025_003 = await getImage({
     role="dialog"
     aria-modal="true"
     aria-label="写真ギャラリーモーダル"
-    style="display: none;"
+    style="opacity: 0; visibility: hidden;"
   >
     <div class="memory-modal__overlay">
       <div class="memory-modal__container">
@@ -545,6 +545,7 @@ const Img2025_003 = await getImage({
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
       @include tablet-up {
       }
       @include desktop-up {
@@ -766,8 +767,10 @@ const Img2025_003 = await getImage({
       // モーダルを開く関数
       const openModal = (index: number) => {
         if (modal) {
-          modal.style.display = "flex";
+          modal.style.opacity = "1";
+          modal.style.visibility = "visible";
           document.body.style.overflow = "hidden";
+
           // クリックしたサムネイルに対応するスライドに移動
           if (mainGallery && typeof index === "number") {
             mainGallery.slideTo(index, 0);
@@ -778,7 +781,8 @@ const Img2025_003 = await getImage({
       // モーダルを閉じる関数
       const closeModal = () => {
         if (modal) {
-          modal.style.display = "none";
+          modal.style.opacity = "0";
+          modal.style.visibility = "hidden";
           document.body.style.overflow = "";
         }
       };
