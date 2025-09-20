@@ -192,6 +192,7 @@ const Img2025_003 = await getImage({
               height="90"
               viewBox="0 0 50 90"
               fill="none"
+              class="memory-modal__nav-icon"
             >
               <path
                 d="M0.706246 45.0505L5.74269 50.1535L10.8338 54.929L15.5496 60.0725L20.4859 65.0086L25.3734 70.0024L30.3498 74.8821L35.2572 79.8476L40.2303 84.7664L45.1567 89.9219L47.5654 87.6571L49.7991 85.2731L44.729 80.3537L39.8997 75.3015L34.9911 70.349L30.1417 65.325L25.1563 60.4463L20.2289 55.509L15.3704 50.486L10.3661 45.6225L5.4676 40.4505L3.40873 43.0565L0.706246 45.0505Z"
@@ -285,6 +286,7 @@ const Img2025_003 = await getImage({
               height="90"
               viewBox="0 0 50 90"
               fill="none"
+              class="memory-modal__nav-icon"
             >
               <path
                 d="M49.2938 45.0505L44.2573 50.1535L39.1662 54.929L34.4504 60.0725L29.5141 65.0086L24.6266 70.0024L19.6502 74.8821L14.7428 79.8476L9.76969 84.7664L4.84333 89.9219L2.43462 87.6571L0.200882 85.2731L5.27104 80.3537L10.1003 75.3015L15.0089 70.349L19.8583 65.325L24.8437 60.4463L29.7711 55.509L34.6296 50.486L39.6339 45.6225L44.5324 40.4505L46.5913 43.0565L49.2938 45.0505Z"
@@ -471,7 +473,47 @@ const Img2025_003 = await getImage({
 
     // Memory Gallery Section
     .memory-gallery {
+      .swiper-wrapper {
+        display: grid;
+        grid-template-columns: spx(210) spx(210) spx(210);
+        gap: spx(10);
+        justify-content: center;
+        justify-items: center;
+        margin-top: spx(40);
+        @include tablet-up {
+          grid-template-columns:
+            ppx(460 * 1.2) ppx(460 * 1.2) ppx(460 * 1.2)
+            ppx(460 * 1.2);
+          gap: ppx(30 * 1.2);
+          margin-top: ppx(130 * 1.2);
+        }
+        @include desktop-up {
+          grid-template-columns: ppx(460) ppx(460) ppx(460) ppx(460);
+          gap: ppx(30);
+          margin-top: ppx(130);
+        }
+      }
       &__item {
+        width: 100%;
+        height: spx(158);
+        border-radius: spx(10);
+        overflow: hidden;
+        cursor: pointer;
+        @include tablet-up {
+          height: ppx(345 * 1.2);
+          border-radius: ppx(20 * 1.2);
+        }
+        @include desktop-up {
+          height: ppx(345);
+          border-radius: ppx(20);
+        }
+        @include hover {
+          &:hover {
+            img {
+              transform: scale(1.1);
+            }
+          }
+        }
       }
 
       &__picture {
@@ -482,6 +524,11 @@ const Img2025_003 = await getImage({
       }
 
       &__image {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
       }
     }
 
@@ -500,6 +547,9 @@ const Img2025_003 = await getImage({
         opacity: 0.9;
         background: var(--black, #000);
         position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         @include tablet-up {
         }
         @include desktop-up {
@@ -507,6 +557,8 @@ const Img2025_003 = await getImage({
       }
 
       &__container {
+        width: max-content;
+        margin-inline: auto;
         @include tablet-up {
         }
         @include desktop-up {
@@ -514,9 +566,16 @@ const Img2025_003 = await getImage({
       }
 
       &__close {
+        position: absolute;
+        top: spx(20);
+        right: spx(20);
         @include tablet-up {
+          top: ppx(30 * 1.2);
+          right: ppx(50 * 1.2);
         }
         @include desktop-up {
+          top: ppx(30);
+          right: ppx(50);
         }
       }
 
@@ -524,24 +583,32 @@ const Img2025_003 = await getImage({
         display: block;
         width: spx(130);
         height: spx(130);
-        position: absolute;
-        top: spx(20);
-        right: spx(20);
+
         @include tablet-up {
           width: ppx(149 * 1.2);
           height: ppx(149 * 1.2);
-          top: ppx(30 * 1.2);
-          right: ppx(50 * 1.2);
         }
         @include desktop-up {
           width: ppx(149);
           height: ppx(149);
-          top: ppx(30);
-          right: ppx(50);
         }
       }
 
       &__slider {
+        display: grid;
+        grid-template:
+          "main main"
+          "prev next"
+          /1fr 1fr;
+        @include tablet-up {
+          grid-template:
+            "prev main next"
+            / 1fr max-content 1fr;
+          gap: ppx(50 * 1.2);
+        }
+        @include desktop-up {
+          gap: ppx(50);
+        }
       }
 
       &__nav {
@@ -551,26 +618,58 @@ const Img2025_003 = await getImage({
         }
 
         &--prev {
+          grid-area: prev;
+          margin-left: spx(30);
+          @include tablet-up {
+            margin-left: 0;
+          }
+          @include desktop-up {
+          }
         }
 
         &--next {
+          grid-area: next;
+          justify-self: flex-end;
+          margin-right: spx(30);
+          @include tablet-up {
+            margin-right: 0;
+          }
         }
       }
 
       &__nav-icon {
+        display: block;
+        width: spx(30);
         @include tablet-up {
+          width: ppx(50 * 1.2);
         }
         @include desktop-up {
+          width: ppx(50);
         }
       }
 
       &__slides {
+        grid-area: main;
+        width: spx(620);
+        height: spx(465);
+        border-radius: spx(25);
+        overflow: hidden;
+        @include tablet-up {
+          width: ppx(1200 * 1.2);
+          height: ppx(900 * 1.2);
+          border-radius: ppx(50 * 1.2);
+        }
+        @include desktop-up {
+          width: ppx(1200);
+          height: ppx(900);
+          border-radius: ppx(50);
+        }
+        .swiper-wrapper {
+        }
       }
 
       &__slide {
-        @include tablet-up {
-        }
-        @include desktop-up {
+        img {
         }
 
         &--active {
@@ -582,6 +681,8 @@ const Img2025_003 = await getImage({
       }
 
       &__figure {
+        width: 100%;
+        height: 100%;
         @include tablet-up {
         }
         @include desktop-up {
@@ -596,6 +697,10 @@ const Img2025_003 = await getImage({
       }
 
       &__image {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
         @include tablet-up {
         }
         @include desktop-up {
@@ -620,16 +725,6 @@ const Img2025_003 = await getImage({
         slidesPerView: "auto",
         spaceBetween: 10,
         freeMode: true,
-        breakpoints: {
-          744: {
-            slidesPerView: 3,
-            spaceBetween: 20,
-          },
-          1024: {
-            slidesPerView: 3,
-            spaceBetween: 30,
-          },
-        },
       });
 
       // メインスライダーの初期化（フェード効果付き）
@@ -639,7 +734,7 @@ const Img2025_003 = await getImage({
         fadeEffect: {
           crossFade: true,
         },
-        slidesPerView: 1,
+        slidesPerView: "auto",
         navigation: {
           nextEl: "#memory-modal-next",
           prevEl: "#memory-modal-prev",
