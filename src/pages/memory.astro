@@ -145,9 +145,11 @@ const Img2025_003 = await getImage({
   <!-- モーダル -->
   <div
     class="memory-modal"
+    id="memory-modal"
     role="dialog"
     aria-modal="true"
     aria-label="写真ギャラリーモーダル"
+    style="display: none;"
   >
     <div class="memory-modal__overlay">
       <div class="memory-modal__container">
@@ -534,8 +536,15 @@ const Img2025_003 = await getImage({
 
     // Memory Modal
     .memory-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100vw;
       height: 100vh;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       @include tablet-up {
       }
       @include desktop-up {
@@ -544,7 +553,7 @@ const Img2025_003 = await getImage({
       &__overlay {
         width: 100%;
         height: 100%;
-        opacity: 0.9;
+        opacity: 1;
         background: var(--black, #000);
         position: relative;
         display: flex;
@@ -747,6 +756,59 @@ const Img2025_003 = await getImage({
         thumbs: {
           swiper: thumbsGallery,
         },
+      });
+
+      // モーダル機能の実装
+      const modal = document.getElementById("memory-modal");
+      const galleryItems = document.querySelectorAll(".memory-gallery__item");
+      const closeButton = document.querySelector(".memory-modal__close");
+
+      // モーダルを開く関数
+      const openModal = (index: number) => {
+        if (modal) {
+          modal.style.display = "flex";
+          document.body.style.overflow = "hidden";
+          // クリックしたサムネイルに対応するスライドに移動
+          if (mainGallery && typeof index === "number") {
+            mainGallery.slideTo(index, 0);
+          }
+        }
+      };
+
+      // モーダルを閉じる関数
+      const closeModal = () => {
+        if (modal) {
+          modal.style.display = "none";
+          document.body.style.overflow = "";
+        }
+      };
+
+      // ギャラリーアイテムにクリックイベントを追加
+      galleryItems.forEach((item, index) => {
+        item.addEventListener("click", () => {
+          openModal(index);
+        });
+        // キーボードアクセシビリティ
+        item.setAttribute("tabindex", "0");
+        item.setAttribute("role", "button");
+        item.addEventListener("keydown", (e: KeyboardEvent) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openModal(index);
+          }
+        });
+      });
+
+      // クローズボタンのクリックイベント
+      if (closeButton) {
+        closeButton.addEventListener("click", closeModal);
+      }
+
+      // ESCキーで閉じる
+      document.addEventListener("keydown", (e: KeyboardEvent) => {
+        if (e.key === "Escape" && modal && modal.style.display !== "none") {
+          closeModal();
+        }
       });
     });
   </script>
