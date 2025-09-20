@@ -4,28 +4,48 @@ import PageLayout from "../layouts/PageLayout.astro";
 import PageBottomWave from "../components/common/PageBottomWave.astro";
 import Breadcrumb from "../components/common/Breadcrumb.astro";
 
-// 画像
+// 画像とデータ
 import { getImage } from "astro:assets";
-import memory2025Image001 from "../images/memory/2025/img-01.png";
-import memory2025Image002 from "../images/memory/2025/img-02.png";
-import memory2025Image003 from "../images/memory/2025/img-03.png";
+import memoryData from "../data/memory.json";
 
-// フォーマット
-const Img2025_001 = await getImage({
-  src: memory2025Image001,
-  format: "webp",
-  widths: [210, 460, 620, 1200],
-});
-const Img2025_002 = await getImage({
-  src: memory2025Image002,
-  format: "webp",
-  widths: [210, 460, 620, 1200],
-});
-const Img2025_003 = await getImage({
-  src: memory2025Image003,
-  format: "webp",
-  widths: [210, 460, 620, 1200],
-});
+// 動的に画像をインポート
+const imageModules = import.meta.glob('../images/memory/**/*.{jpg,jpeg,png,webp}');
+
+// 現在選択されている年（将来的にフィルタリング用）
+const selectedYear = 2025;
+
+// 選択された年のデータを取得
+const currentYearData = memoryData.years.find(y => y.year === selectedYear);
+
+// 型定義
+interface ProcessedImage {
+  name: string;
+  year: number;
+  processed: any;
+}
+
+// 画像を処理
+const processedImages: ProcessedImage[] = [];
+if (currentYearData) {
+  for (const imageName of currentYearData.images) {
+    const imagePath = `../images/memory/${selectedYear}/${imageName}`;
+    const imageModule = imageModules[imagePath];
+
+    if (imageModule) {
+      const image: any = await imageModule();
+      const processedImage = await getImage({
+        src: image.default,
+        format: "webp",
+        widths: [210, 460, 620, 1200],
+      });
+      processedImages.push({
+        name: imageName,
+        year: selectedYear,
+        processed: processedImage
+      });
+    }
+  }
+}
 ---
 
 <PageLayout title="思い出｜コッコ祭り 2025｜KOKKO Festival">
@@ -74,66 +94,28 @@ const Img2025_003 = await getImage({
         aria-label="思い出の写真ギャラリー"
       >
         <div class="swiper-wrapper">
-          <article class="memory-gallery__item swiper-slide">
-            <picture class="memory-gallery__picture">
-              <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-              <source
-                media="(min-width: 1024px)"
-                srcset={Img2025_001.srcSet.toString()}
-              />
-              <!-- タブレット（744px以上）→ 中解像度版 -->
-              <source
-                media="(min-width: 744px)"
-                srcset={Img2025_001.srcSet.toString()}
-              />
-              <!-- スマホ（744px未満）→ 最小解像度版 -->
-              <img
-                src={Img2025_001.src}
-                alt="2025年コッコ祭りの様子1"
-                class="memory-gallery__image"
-              />
-            </picture>
-          </article>
-          <article class="memory-gallery__item swiper-slide">
-            <picture class="memory-gallery__picture">
-              <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-              <source
-                media="(min-width: 1024px)"
-                srcset={Img2025_002.srcSet.toString()}
-              />
-              <!-- タブレット（744px以上）→ 中解像度版 -->
-              <source
-                media="(min-width: 744px)"
-                srcset={Img2025_002.srcSet.toString()}
-              />
-              <!-- スマホ（744px未満）→ 最小解像度版 -->
-              <img
-                src={Img2025_002.src}
-                alt="2025年コッコ祭りの様子2"
-                class="memory-gallery__image"
-              />
-            </picture>
-          </article>
-          <article class="memory-gallery__item swiper-slide">
-            <picture class="memory-gallery__picture">
-              <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-              <source
-                media="(min-width: 1024px)"
-                srcset={Img2025_003.srcSet.toString()}
-              />
-              <!-- タブレット（744px以上）→ 中解像度版 -->
-              <source
-                media="(min-width: 744px)"
-                srcset={Img2025_003.srcSet.toString()}
-              />
-              <!-- スマホ（744px未満）→ 最小解像度版 -->
-              <img
-                src={Img2025_003.src}
-                alt="2025年コッコ祭りの様子3"
-                class="memory-gallery__image"
-              />
-            </picture>
-          </article>
+          {processedImages.map((image, index) => (
+            <article class="memory-gallery__item swiper-slide">
+              <picture class="memory-gallery__picture">
+                <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+                <source
+                  media="(min-width: 1024px)"
+                  srcset={image.processed.srcSet.toString()}
+                />
+                <!-- タブレット（744px以上）→ 中解像度版 -->
+                <source
+                  media="(min-width: 744px)"
+                  srcset={image.processed.srcSet.toString()}
+                />
+                <!-- スマホ（744px未満）→ 最小解像度版 -->
+                <img
+                  src={image.processed.src}
+                  alt={`${image.year}年コッコ祭りの様子${index + 1}`}
+                  class="memory-gallery__image"
+                />
+              </picture>
+            </article>
+          ))}
         </div>
       </section>
     </section>
@@ -207,72 +189,30 @@ const Img2025_003 = await getImage({
           <!-- メインスライダー（Swiper） -->
           <div class="memory-modal__slides swiper" id="memory-modal-main">
             <div class="swiper-wrapper">
-              <article class="memory-modal__slide swiper-slide">
-                <figure class="memory-modal__figure">
-                  <picture class="memory-modal__picture">
-                    <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-                    <source
-                      media="(min-width: 1024px)"
-                      srcset={Img2025_001.srcSet.toString()}
-                    />
-                    <!-- タブレット（744px以上）→ 中解像度版 -->
-                    <source
-                      media="(min-width: 744px)"
-                      srcset={Img2025_001.srcSet.toString()}
-                    />
-                    <!-- スマホ（744px未満）→ 最小解像度版 -->
-                    <img
-                      src={Img2025_001.src}
-                      alt="2025年コッコ祭りの様子1"
-                      class="memory-modal__image"
-                    />
-                  </picture>
-                </figure>
-              </article>
-              <article class="memory-modal__slide swiper-slide">
-                <figure class="memory-modal__figure">
-                  <picture class="memory-modal__picture">
-                    <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-                    <source
-                      media="(min-width: 1024px)"
-                      srcset={Img2025_002.srcSet.toString()}
-                    />
-                    <!-- タブレット（744px以上）→ 中解像度版 -->
-                    <source
-                      media="(min-width: 744px)"
-                      srcset={Img2025_002.srcSet.toString()}
-                    />
-                    <!-- スマホ（744px未満）→ 最小解像度版 -->
-                    <img
-                      src={Img2025_002.src}
-                      alt="2025年コッコ祭りの様子2"
-                      class="memory-modal__image"
-                    />
-                  </picture>
-                </figure>
-              </article>
-              <article class="memory-modal__slide swiper-slide">
-                <figure class="memory-modal__figure">
-                  <picture class="memory-modal__picture">
-                    <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-                    <source
-                      media="(min-width: 1024px)"
-                      srcset={Img2025_003.srcSet.toString()}
-                    />
-                    <!-- タブレット（744px以上）→ 中解像度版 -->
-                    <source
-                      media="(min-width: 744px)"
-                      srcset={Img2025_003.srcSet.toString()}
-                    />
-                    <!-- スマホ（744px未満）→ 最小解像度版 -->
-                    <img
-                      src={Img2025_003.src}
-                      alt="2025年コッコ祭りの様子3"
-                      class="memory-modal__image"
-                    />
-                  </picture>
-                </figure>
-              </article>
+              {processedImages.map((image, index) => (
+                <article class="memory-modal__slide swiper-slide">
+                  <figure class="memory-modal__figure">
+                    <picture class="memory-modal__picture">
+                      <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+                      <source
+                        media="(min-width: 1024px)"
+                        srcset={image.processed.srcSet.toString()}
+                      />
+                      <!-- タブレット（744px以上）→ 中解像度版 -->
+                      <source
+                        media="(min-width: 744px)"
+                        srcset={image.processed.srcSet.toString()}
+                      />
+                      <!-- スマホ（744px未満）→ 最小解像度版 -->
+                      <img
+                        src={image.processed.src}
+                        alt={`${image.year}年コッコ祭りの様子${index + 1}`}
+                        class="memory-modal__image"
+                      />
+                    </picture>
+                  </figure>
+                </article>
+              ))}
             </div>
           </div>
           <!-- ページャー next -->
