@@ -545,7 +545,9 @@ const Img2025_003 = await getImage({
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
+      transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
       @include tablet-up {
       }
       @include desktop-up {
@@ -798,7 +800,10 @@ const Img2025_003 = await getImage({
         item.setAttribute("tabindex", "0");
         item.setAttribute("role", "button");
         item.addEventListener("keydown", (e) => {
-          if (e instanceof KeyboardEvent && (e.key === "Enter" || e.key === " ")) {
+          if (
+            e instanceof KeyboardEvent &&
+            (e.key === "Enter" || e.key === " ")
+          ) {
             e.preventDefault();
             openModal(index);
           }
@@ -812,7 +817,12 @@ const Img2025_003 = await getImage({
 
       // ESCキーで閉じる
       document.addEventListener("keydown", (e) => {
-        if (e instanceof KeyboardEvent && e.key === "Escape" && modal && modal.style.visibility === "visible") {
+        if (
+          e instanceof KeyboardEvent &&
+          e.key === "Escape" &&
+          modal &&
+          modal.style.visibility === "visible"
+        ) {
           closeModal();
         }
       });
