@@ -18,7 +18,7 @@ import PageHeadWaveDesktop from "../../images/common/page-header-wave-desktop.sv
   </h1>
   <picture>
     <source media="(min-width: 1024px)" srcset={PageHeadWaveDesktop.src} />
-    <source media="(min-width: 744px)" srcset={PageHeadWaveDesktop.src} />
+    <source media="(min-width: 744px)" srcset={PageHeadWaveTablet.src} />
     <img src={PageHeadWaveMobile.src} alt="" class="page-header__wave" />
   </picture>
   <img
@@ -55,6 +55,7 @@ import PageHeadWaveDesktop from "../../images/common/page-header-wave-desktop.sv
     left: 0;
     z-index: 2;
     width: 100%;
+    overflow-x: hidden;
     @include tablet-up {
     }
     @include desktop-up {
@@ -109,6 +110,11 @@ import PageHeadWaveDesktop from "../../images/common/page-header-wave-desktop.sv
       @include tablet-up {
       }
       @include desktop-up {
+      }
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
       }
     }
 
