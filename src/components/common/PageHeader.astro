@@ -6,32 +6,47 @@ import PageHeadWaveTablet from "../../images/common/page-header-wave-tablet.svg"
 import PageHeadWaveDesktop from "../../images/common/page-header-wave-desktop.svg";
 ---
 
-<div class="page-header">
-  <h1 class="page-header__title">
+<header class="page-header">
+  <h1 class="page-header__logo">
     <a href="/" class="page-header__logo-link">
       <img
-        class="page-header__logo-image"
         src={logoHorizontal.src}
         alt="コッコ祭りロゴ"
+        class="page-header__logo-img"
       />
     </a>
   </h1>
-  <picture>
-    <source media="(min-width: 1024px)" srcset={PageHeadWaveDesktop.src} />
-    <source media="(min-width: 744px)" srcset={PageHeadWaveTablet.src} />
-    <img src={PageHeadWaveMobile.src} alt="" class="page-header__wave" />
-  </picture>
+  <figure class="page-header__wave">
+    <picture class="page-header__wave-picture">
+      <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+      <source
+        media="(min-width: 1024px)"
+        srcset={PageHeadWaveDesktop.src.toString()}
+      />
+      <!-- タブレット（744px以上）→ 中解像度版 -->
+      <source
+        media="(min-width: 744px)"
+        srcset={PageHeadWaveTablet.src.toString()}
+      />
+      <!-- スマホ（744px未満）→ 最小解像度版 -->
+      <img
+        src={PageHeadWaveMobile.src}
+        alt="装飾用の波形画像"
+        class="page-header__wave-img"
+      />
+    </picture>
+  </figure>
   <img
-    class="page-header__tree page-header__tree--1"
     src={HeaderTree.src}
-    alt="装飾用の木のイラスト"
+    alt="装飾用の木の画像"
+    class="page-header__tree page-header__tree--left"
   />
   <img
-    class="page-header__tree page-header__tree--2"
     src={HeaderTree.src}
-    alt="装飾用の木のイラスト"
+    alt="装飾用の木の画像"
+    class="page-header__tree page-header__tree--right"
   />
-</div>
+</header>
 
 <style lang="scss">
   /* 必要なmixin/functionをインポート */
@@ -53,118 +68,114 @@ import PageHeadWaveDesktop from "../../images/common/page-header-wave-desktop.sv
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 2;
+    z-index: 10;
     width: 100%;
-    height: spx(276);
-    overflow-x: hidden;
     @include tablet-up {
-      height: tpx(388 * 1.2);
     }
     @include desktop-up {
-      height: ppx(485);
     }
 
-    &__title {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__logo-link {
-      display: block;
-      width: max-content;
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__logo-image {
-      display: block;
-      width: spx(289);
-      height: spx(67.695);
-      flex-shrink: 0;
+    &__logo {
+      position: absolute;
+      z-index: 3;
       top: spx(51);
       left: spx(28);
-      position: relative;
-      z-index: 3;
       @include tablet-up {
-        width: tpx(267);
-        height: tpx(62);
         top: tpx(51);
         left: tpx(51);
       }
       @include desktop-up {
-        width: ppx(333.999);
-        height: ppx(78.001);
         top: ppx(64);
         left: ppx(64);
       }
     }
 
-    &__wave {
-      position: absolute;
-      display: block;
-      width: 100%;
-      top: 0;
-      left: 0;
-      z-index: 2;
+    &__logo-link {
       @include tablet-up {
       }
       @include desktop-up {
       }
-      img {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+    }
+
+    &__logo-img {
+      display: block;
+      width: spx(289);
+      @include tablet-up {
+        width: tpx(267);
+      }
+      @include desktop-up {
+        width: ppx(334);
+      }
+    }
+
+    &__wave {
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      left: 0;
+      right: 0;
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__wave-picture {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__wave-img {
+      display: block;
+      width: 100%;
+      height: spx(197);
+      object-fit: cover;
+      @include tablet-up {
+        height: tpx(216 * 1.2);
+      }
+      @include desktop-up {
+        height: ppx(270);
       }
     }
 
     &__tree {
       position: absolute;
-      display: block;
       z-index: 1;
+      display: block;
+      width: spx(205);
       @include tablet-up {
+        width: tpx(515);
       }
       @include desktop-up {
+        width: ppx(645);
       }
 
-      &--1 {
-        width: spx(205);
-        height: spx(135.333);
-        flex-shrink: 0;
+      &--left {
         top: spx(140);
-        left: 0;
+        left: spx(-10);
         @include tablet-up {
-          width: tpx(492);
-          height: tpx(324);
           top: tpx(63);
+          left: tpx(-24);
         }
         @include desktop-up {
-          width: ppx(615);
-          height: ppx(406);
           top: ppx(79);
+          left: ppx(-30);
         }
       }
 
-      &--2 {
-        width: spx(205);
-        height: spx(135.333);
-        flex-shrink: 0;
-        top: spx(116);
-        right: 0;
+      &--right {
         transform: scaleX(-1);
+        top: spx(116);
+        right: spx(-10);
         @include tablet-up {
-          width: tpx(492);
-          height: tpx(324);
           top: tpx(23);
+          right: tpx(-24);
         }
         @include desktop-up {
-          width: ppx(615);
-          height: ppx(406);
           top: ppx(29);
+          right: ppx(-30);
         }
       }
     }
