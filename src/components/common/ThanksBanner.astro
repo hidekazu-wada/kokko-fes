@@ -122,9 +122,9 @@ const {
       transform 0.3s ease,
       opacity 0.3s ease;
     @include tablet-up {
-      padding: ppx(28 * 1.2) 0;
       flex-direction: row;
-      gap: ppx(79 * 1.2);
+      padding: tpx(30) 0;
+      gap: tpx(120);
       justify-content: center;
     }
     @include desktop-up {
@@ -138,10 +138,12 @@ const {
       align-items: center;
       gap: spx(2);
       @include tablet-up {
-        flex-flow: row;
-        gap: ppx(40) * 1.2;
+        align-items: flex-start;
+        gap: tpx(10);
       }
       @include desktop-up {
+        flex-flow: row;
+        align-items: center;
         gap: ppx(40);
       }
     }

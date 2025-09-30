@@ -92,6 +92,8 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
     }
 
     &__countdown {
+      color: var(--logo_color_3, #c99e2d);
+      font-weight: 700;
       @include tablet-up {
       }
       @include desktop-up {
@@ -99,3 +101,31 @@ import PageBottomWave from "../components/common/PageBottomWave.astro";
     }
   }
 </style>
+
+<script>
+  // カウントダウン機能
+  document.addEventListener("DOMContentLoaded", function () {
+    const countdownElement = document.querySelector(".error-404__countdown");
+    let countdown = 10; // 10秒から開始
+
+    // カウントダウンを更新する関数
+    function updateCountdown() {
+      if (countdownElement) {
+        countdownElement.textContent = countdown.toString();
+      }
+
+      if (countdown <= 0) {
+        // カウントダウンが0になったらトップページにジャンプ
+        window.location.href = "/";
+        return;
+      }
+
+      countdown--;
+      // 1秒後に再実行
+      setTimeout(updateCountdown, 1000);
+    }
+
+    // カウントダウン開始
+    updateCountdown();
+  });
+</script>

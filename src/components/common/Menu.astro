@@ -29,6 +29,21 @@ const balloon = await getImage({
     src={cloudImage.src}
     alt="雲のイメージ"
   />
+  <img
+    class="menu__cloud menu__cloud--4"
+    src={cloudImage.src}
+    alt="雲のイメージ"
+  />
+  <img
+    class="menu__cloud menu__cloud--5"
+    src={cloudImage.src}
+    alt="雲のイメージ"
+  />
+  <img
+    class="menu__cloud menu__cloud--6"
+    src={cloudImage.src}
+    alt="雲のイメージ"
+  />
   <picture class="menu__balloon">
     <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
     <source media="(min-width: 1024px)" srcset={balloon.srcSet.toString()} />
@@ -333,6 +348,42 @@ const balloon = await getImage({
           right: ppx(-368);
         }
       }
+      &--4 {
+        display: none;
+        @include tablet-up {
+          display: block;
+          width: tpx(621);
+          top: tpx(742);
+          left: tpx(110);
+        }
+        @include desktop-up {
+          display: none;
+        }
+      }
+      &--5 {
+        display: none;
+        @include tablet-up {
+          display: block;
+          width: tpx(621);
+          top: tpx(438);
+          left: tpx(787);
+        }
+        @include desktop-up {
+          display: none;
+        }
+      }
+      &--6 {
+        display: none;
+        @include tablet-up {
+          display: block;
+          width: tpx(621);
+          top: tpx(727);
+          right: tpx(-368);
+        }
+        @include desktop-up {
+          display: none;
+        }
+      }
     }
 
     &__balloon {
@@ -422,6 +473,7 @@ const balloon = await getImage({
       flex-flow: column;
       gap: spx(18);
       width: max-content;
+      margin-inline: auto;
       @include tablet-up {
         gap: ppx(36 * 1.2);
       }
