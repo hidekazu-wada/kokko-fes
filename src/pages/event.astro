@@ -500,9 +500,15 @@ const Tree = await getImage({
 
       &__link {
         color: var(--logo_color_2, #816259);
+        transition: color 0.3s ease;
         @include tablet-up {
         }
         @include desktop-up {
+        }
+        @include hover {
+          &:hover {
+            color: #c99e2d;
+          }
         }
       }
 

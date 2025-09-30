@@ -159,12 +159,12 @@ const optimizedRows = chunkArray(optimizedImages, 3);
       }
 
       &__header-wrapper {
-        padding-bottom: spx(100);
+        padding-bottom: spx(18);
         @include tablet-up {
-          padding-bottom: ppx(130 * 1.2);
+          padding-bottom: ppx(30 * 1.2);
         }
         @include desktop-up {
-          padding-bottom: ppx(130);
+          padding-bottom: ppx(30);
         }
       }
     }
@@ -220,7 +220,7 @@ const optimizedRows = chunkArray(optimizedImages, 3);
         @include tablet-up {
           display: grid;
           grid-template-columns: ppx(600 * 1.2) ppx(600 * 1.2) ppx(600 * 1.2);
-          gap: ppx(80 * 1.2);
+          gap: ppx(20 * 1.2);
           justify-content: center;
           padding-bottom: ppx(90 * 1.2);
           width: max-content;
@@ -228,7 +228,7 @@ const optimizedRows = chunkArray(optimizedImages, 3);
         }
         @include desktop-up {
           grid-template-columns: ppx(600) ppx(600) ppx(600);
-          gap: ppx(80);
+          gap: ppx(20);
           padding-bottom: ppx(90);
         }
         &:after {
@@ -309,14 +309,14 @@ const optimizedRows = chunkArray(optimizedImages, 3);
         overflow: hidden;
         box-shadow: spx(2) spx(4) spx(15) 0 rgba(0, 0, 0, 0.25);
         @include tablet-up {
-          width: ppx(600 * 1.2);
-          height: ppx(600 * 1.2);
+          width: ppx(450 * 1.2);
+          height: ppx(450 * 1.2);
           box-shadow: ppx(2 * 1.2) ppx(4 * 1.2) ppx(15 * 1.2) 0
             rgba(0, 0, 0, 0.25);
         }
         @include desktop-up {
-          width: ppx(600);
-          height: ppx(600);
+          width: ppx(450);
+          height: ppx(450);
           box-shadow: ppx(2) ppx(4) ppx(15) 0 rgba(0, 0, 0, 0.25);
         }
       }

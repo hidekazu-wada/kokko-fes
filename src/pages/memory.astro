@@ -368,6 +368,8 @@ const availableYears = allYearData.map((d) => d.year).sort((a, b) => b - a);
         transition:
           background 0.3s ease,
           color 0.3s ease;
+        white-space: nowrap;
+        padding-bottom: 0.1em;
         @include tablet-up {
           font-size: ppx(28 * 1.2);
           letter-spacing: ppx(-8.4 * 1.2);
@@ -375,6 +377,7 @@ const availableYears = allYearData.map((d) => d.year).sort((a, b) => b - a);
           height: ppx(50 * 1.2);
           border: ppx(2 * 1.2) solid var(--logo_color_3, #c99e2d);
           border-radius: ppx(15 * 1.2);
+          padding-bottom: 0;
         }
         @include desktop-up {
           font-size: ppx(28);
