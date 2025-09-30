@@ -3,22 +3,14 @@
 import PageLayout from "../layouts/PageLayout.astro";
 import PageBottomWave from "../components/common/PageBottomWave.astro";
 import Breadcrumb from "../components/common/Breadcrumb.astro";
+import PageTitle from "../components/common/PageTitle.astro";
 ---
 
 <PageLayout title="お問い合わせ ｜コッコ祭り 2025｜KOKKO Festival">
   <!-- inquiry content -->
   <section class="page-wrapper inquiry">
     <div class="inquiry__container">
-      <header class="inquiry__header">
-        <h1 class="inquiry__title">
-          <span class="inquiry__title-accent">お</span>
-          問い合わせ
-        </h1>
-        <p class="inquiry__subtitle">− CONTACT −</p>
-        <p class="inquiry__description">
-          以下のフォームに入力し、送信してください。
-        </p>
-      </header>
+      <PageTitle accent="お" title="問い合わせ" subtitle="CONTACT" />
       <div class="inquiry__form-wrapper">
         <form
           class="inquiry__form"
@@ -210,51 +202,6 @@ import Breadcrumb from "../components/common/Breadcrumb.astro";
       }
       @include desktop-up {
         padding-bottom: ppx(130);
-      }
-    }
-
-    &__header {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__title {
-      color: var(--base_5, #102a4d);
-      font-size: spx(60);
-      font-style: normal;
-      font-weight: 700;
-      line-height: 130%;
-      text-align: center;
-      @include tablet-up {
-        font-size: ppx(110 * 1.2);
-      }
-      @include desktop-up {
-        font-size: ppx(110);
-      }
-
-      &-accent {
-        color: var(--logo_color_3, #c99e2d);
-        @include tablet-up {
-        }
-        @include desktop-up {
-        }
-      }
-    }
-
-    &__subtitle {
-      color: var(--base_5, #102a4d);
-      text-align: center;
-      font-size: spx(26);
-      font-style: normal;
-      font-weight: 700;
-      line-height: 180%;
-      @include tablet-up {
-        font-size: ppx(37 * 1.2);
-      }
-      @include desktop-up {
-        font-size: ppx(37);
       }
     }
 

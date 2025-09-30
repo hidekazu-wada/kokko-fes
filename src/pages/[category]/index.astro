@@ -222,6 +222,13 @@ const categoryDataWithImages = {
         padding-bottom: ppx(130);
       }
     }
+    &__header {
+      @include tablet-up {
+      }
+      @include desktop-up {
+        margin-top: 4vw;
+      }
+    }
 
     &__title {
       color: var(--base_5, #102a4d);
@@ -239,6 +246,7 @@ const categoryDataWithImages = {
 
       &-accent {
         color: var(--base_5, #c99e2d);
+        letter-spacing: -0.2em;
       }
     }
 

@@ -4,6 +4,7 @@ import PageLayout from "../../layouts/PageLayout.astro";
 import PageBottomWave from "../../components/common/PageBottomWave.astro";
 import Breadcrumb from "../../components/common/Breadcrumb.astro";
 import NewsArticleList from "../../components/common/NewsArticleList.astro";
+import PageTitle from "../../components/common/PageTitle.astro";
 
 // データとタイプ
 import newsData from "../../data/news.json";
@@ -18,13 +19,7 @@ const categories = typedNewsData.categories;
   <!-- news list content -->
   <section class="page-wrapper news-list">
     <div class="news-list__container">
-      <header class="news-list__header">
-        <h1 class="news-list__title">
-          <span class="news-list__title-accent">お</span>
-          知らせ
-        </h1>
-        <p class="news-list__subtitle">− NEWS −</p>
-      </header>
+      <PageTitle accent="お" title="知らせ" subtitle="NEWS" />
       <nav class="news-filter">
         <div class="news-filter__wrapper">
           <button
@@ -166,51 +161,6 @@ const categories = typedNewsData.categories;
         padding-bottom: ppx(130);
       }
     }
-
-    &__header {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__title {
-      color: var(--base_5, #102a4d);
-      font-size: spx(60);
-      font-style: normal;
-      font-weight: 700;
-      line-height: 130%;
-      text-align: center;
-      @include tablet-up {
-        font-size: ppx(110 * 1.2);
-      }
-      @include desktop-up {
-        font-size: ppx(110);
-      }
-
-      &-accent {
-        color: var(--logo_color_3, #c99e2d);
-        @include tablet-up {
-        }
-        @include desktop-up {
-        }
-      }
-    }
-
-    &__subtitle {
-      color: var(--base_5, #102a4d);
-      text-align: center;
-      font-size: spx(26);
-      font-style: normal;
-      font-weight: 700;
-      line-height: 180%;
-      @include tablet-up {
-        font-size: ppx(37 * 1.2);
-      }
-      @include desktop-up {
-        font-size: ppx(37);
-      }
-    }
   }
 
   .news-filter {
@@ -266,7 +216,9 @@ const categories = typedNewsData.categories;
       border: 2px solid var(--logo_color_3, #c99e2d);
       background: var(--base_1, #fffcf2);
       cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.2s ease;
+      transition:
+        background-color 0.3s ease,
+        transform 0.2s ease;
       @include tablet-up {
         gap: ppx(10 * 1.2);
         border-radius: ppx(15 * 1.2);

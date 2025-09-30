@@ -3,6 +3,7 @@
 import PageLayout from "../../layouts/PageLayout.astro";
 import PageBottomWave from "../../components/common/PageBottomWave.astro";
 import Breadcrumb from "../../components/common/Breadcrumb.astro";
+import PageTitle from "../../components/common/PageTitle.astro";
 
 // データとタイプ
 import newsData from "../../data/news.json";
@@ -54,13 +55,7 @@ const nextArticle =
   <!-- news detail content -->
   <section class="page-wrapper news-detail">
     <div class="news-detail__container">
-      <header class="news-detail__header">
-        <h1 class="news-detail__title">
-          <span class="news-detail__title-accent">お</span>
-          知らせ
-        </h1>
-        <p class="news-detail__subtitle">− NEWS −</p>
-      </header>
+      <PageTitle accent="お" title="知らせ" subtitle="NEWS" />
       <article class="news-article">
         <header class="news-article__header">
           <div class="news-article__category">
@@ -199,50 +194,6 @@ const nextArticle =
       }
       @include desktop-up {
         padding-bottom: ppx(130);
-      }
-    }
-
-    &__header {
-      @include tablet-up {
-      }
-      @include desktop-up {
-      }
-    }
-
-    &__title {
-      color: var(--base_5, #102a4d);
-      font-size: spx(60);
-      font-style: normal;
-      font-weight: 700;
-      line-height: 130%;
-      text-align: center;
-      @include tablet-up {
-        font-size: ppx(110 * 1.2);
-      }
-      @include desktop-up {
-        font-size: ppx(110);
-      }
-
-      &-accent {
-        color: var(--logo_color_3, #c99e2d);
-        @include tablet-up {
-        }
-        @include desktop-up {
-        }
-      }
-    }
-    &__subtitle {
-      color: var(--base_5, #102a4d);
-      text-align: center;
-      font-size: spx(26);
-      font-style: normal;
-      font-weight: 700;
-      line-height: 180%;
-      @include tablet-up {
-        font-size: ppx(37 * 1.2);
-      }
-      @include desktop-up {
-        font-size: ppx(37);
       }
     }
   }

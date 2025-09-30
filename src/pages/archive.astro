@@ -3,6 +3,7 @@
 import PageLayout from "../layouts/PageLayout.astro";
 import PageBottomWave from "../components/common/PageBottomWave.astro";
 import Breadcrumb from "../components/common/Breadcrumb.astro";
+import PageTitle from "../components/common/PageTitle.astro";
 
 // 画像
 import { getImage } from "astro:assets";
@@ -91,14 +92,8 @@ const optimizedRows = chunkArray(optimizedImages, 3);
 
 <PageLayout title="過去のコッコ祭り｜コッコ祭り 2025｜KOKKO Festival">
   <section class="page-wrapper archive">
-    <div class="archive__container">
-      <header class="archive__header">
-        <h1 class="archive__title">
-          <span class="archive__title-accent">過</span>
-          去のコッコ祭り
-        </h1>
-        <p class="archive__subtitle">− ARCHIVE −</p>
-      </header>
+    <div class="archive__header-wrapper">
+      <PageTitle accent="過" title="去のコッコ祭り" subtitle="ARCHIVE" />
     </div>
 
     <main class="archive-content">
@@ -163,58 +158,13 @@ const optimizedRows = chunkArray(optimizedImages, 3);
         padding-bottom: ppx(228);
       }
 
-      &__container {
+      &__header-wrapper {
         padding-bottom: spx(100);
         @include tablet-up {
           padding-bottom: ppx(130 * 1.2);
         }
         @include desktop-up {
           padding-bottom: ppx(130);
-        }
-      }
-
-      &__header {
-        @include tablet-up {
-        }
-        @include desktop-up {
-        }
-      }
-
-      &__title {
-        color: var(--base_5, #102a4d);
-        font-size: spx(60);
-        font-style: normal;
-        font-weight: 700;
-        line-height: 130%;
-        text-align: center;
-        @include tablet-up {
-          font-size: ppx(110 * 1.2);
-        }
-        @include desktop-up {
-          font-size: ppx(110);
-        }
-
-        &-accent {
-          color: var(--logo_color_3, #c99e2d);
-          @include tablet-up {
-          }
-          @include desktop-up {
-          }
-        }
-      }
-
-      &__subtitle {
-        color: var(--base_5, #102a4d);
-        text-align: center;
-        font-size: spx(26);
-        font-style: normal;
-        font-weight: 700;
-        line-height: 180%;
-        @include tablet-up {
-          font-size: ppx(37 * 1.2);
-        }
-        @include desktop-up {
-          font-size: ppx(37);
         }
       }
     }

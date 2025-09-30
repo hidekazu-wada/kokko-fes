@@ -3,6 +3,7 @@
 import PageLayout from "../../layouts/PageLayout.astro";
 import PageBottomWave from "../../components/common/PageBottomWave.astro";
 import Breadcrumb from "../../components/common/Breadcrumb.astro";
+import PageTitle from "../../components/common/PageTitle.astro";
 
 // データ
 import categoriesData from "../../data/categories.json";
@@ -58,7 +59,7 @@ export async function getStaticPaths() {
   // すべてのカテゴリーをループ
   Object.keys(typedCategoriesData).forEach((categoryId) => {
     const categoryData = typedCategoriesData[categoryId];
-    
+
     // 各カテゴリーのアイテムごとに詳細ページのパスを生成
     categoryData.items.forEach((item: CategoryItem) => {
       const detailSlug = item.name.toLowerCase().replace(/\s+/g, "-");
@@ -106,7 +107,9 @@ try {
     .slice(0, maxImages)
     .map(async (imageName: string) => {
       try {
-        const imageModule = await import(`../../images/${category}/${imageName}`);
+        const imageModule = await import(
+          `../../images/${category}/${imageName}`
+        );
         return await getImage({
           src: imageModule.default,
           format: "webp",
@@ -420,6 +423,7 @@ if (formattedImages.length === 0) {
         }
         @include desktop-up {
           margin-bottom: ppx(80);
+          margin-top: 4vw;
         }
       }
 
@@ -439,6 +443,7 @@ if (formattedImages.length === 0) {
 
         &-accent {
           color: var(--logo_color_3, #c99e2d);
+          letter-spacing: -0.2em;
         }
       }
 

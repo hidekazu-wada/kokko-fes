@@ -3,6 +3,7 @@
 import PageLayout from "../layouts/PageLayout.astro";
 import PageBottomWave from "../components/common/PageBottomWave.astro";
 import Breadcrumb from "../components/common/Breadcrumb.astro";
+import PageTitle from "../components/common/PageTitle.astro";
 
 // 画像とデータ
 import { getImage } from "astro:assets";
@@ -73,14 +74,8 @@ const availableYears = allYearData.map((d) => d.year).sort((a, b) => b - a);
 
 <PageLayout title="思い出｜コッコ祭り 2025｜KOKKO Festival">
   <section class="page-wrapper memory">
-    <div class="memory__container">
-      <header class="memory__header">
-        <h1 class="memory__title">
-          <span class="memory__title-accent">思</span>
-          い出
-        </h1>
-        <p class="memory__subtitle">− MEMORY −</p>
-      </header>
+    <div class="memory__header-wrapper">
+      <PageTitle accent="思" title="い出" subtitle="MEMORY" />
     </div>
     <section class="memory-content">
       <nav class="memory-content__years" aria-label="年度選択">
@@ -308,58 +303,13 @@ const availableYears = allYearData.map((d) => d.year).sort((a, b) => b - a);
         padding-bottom: ppx(228);
       }
 
-      &__container {
+      &__header-wrapper {
         padding-bottom: spx(100);
         @include tablet-up {
           padding-bottom: ppx(130 * 1.2);
         }
         @include desktop-up {
           padding-bottom: ppx(130);
-        }
-      }
-
-      &__header {
-        @include tablet-up {
-        }
-        @include desktop-up {
-        }
-      }
-
-      &__title {
-        color: var(--base_5, #102a4d);
-        font-size: spx(60);
-        font-style: normal;
-        font-weight: 700;
-        line-height: 130%;
-        text-align: center;
-        @include tablet-up {
-          font-size: ppx(110 * 1.2);
-        }
-        @include desktop-up {
-          font-size: ppx(110);
-        }
-
-        &-accent {
-          color: var(--logo_color_3, #c99e2d);
-          @include tablet-up {
-          }
-          @include desktop-up {
-          }
-        }
-      }
-
-      &__subtitle {
-        color: var(--base_5, #102a4d);
-        text-align: center;
-        font-size: spx(26);
-        font-style: normal;
-        font-weight: 700;
-        line-height: 180%;
-        @include tablet-up {
-          font-size: ppx(37 * 1.2);
-        }
-        @include desktop-up {
-          font-size: ppx(37);
         }
       }
     }

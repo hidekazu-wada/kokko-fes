@@ -15,12 +15,16 @@ const { currentPageTitle, parentPage } = Astro.props;
 <nav class="breadcrumb" aria-label="パンくずリスト">
   <a href="/" class="breadcrumb__link">トップ</a>
   <span class="breadcrumb__separator">＞</span>
-  {parentPage && (
-    <>
-      <a href={parentPage.href} class="breadcrumb__link">{parentPage.title}</a>
-      <span class="breadcrumb__separator">＞</span>
-    </>
-  )}
+  {
+    parentPage && (
+      <>
+        <a href={parentPage.href} class="breadcrumb__link">
+          {parentPage.title}
+        </a>
+        <span class="breadcrumb__separator">＞</span>
+      </>
+    )
+  }
   <span class="breadcrumb__current">{currentPageTitle}</span>
 </nav>
 
@@ -30,7 +34,7 @@ const { currentPageTitle, parentPage } = Astro.props;
   @import "../../styles/mixins";
 
   .breadcrumb {
-    width: spx(560);
+    width: spx(620);
     margin-inline: auto;
     color: var(--logo_color_2, #816259);
     font-size: spx(24);

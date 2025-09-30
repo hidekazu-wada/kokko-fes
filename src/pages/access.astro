@@ -3,6 +3,7 @@
 import PageLayout from "../layouts/PageLayout.astro";
 import PageBottomWave from "../components/common/PageBottomWave.astro";
 import Breadcrumb from "../components/common/Breadcrumb.astro";
+import PageTitle from "../components/common/PageTitle.astro";
 
 // 画像
 import { getImage } from "astro:assets";
@@ -28,14 +29,8 @@ const Car = await getImage({
 
 <PageLayout title="アクセス｜コッコ祭り 2025｜KOKKO Festival">
   <section class="page-wrapper access-page">
-    <div class="access-page__container">
-      <header class="access-page__header">
-        <h1 class="access-page__title">
-          <span class="access-page__title-accent">ア</span>
-          クセス
-        </h1>
-        <p class="access-page__subtitle">− ACCESS −</p>
-      </header>
+    <div class="access-page__header-wrapper">
+      <PageTitle accent="ア" title="クセス" subtitle="ACCESS" />
     </div>
     <section class="venue">
       <article class="venue__info">
@@ -382,58 +377,13 @@ const Car = await getImage({
         padding-bottom: ppx(228);
       }
 
-      &__container {
+      &__header-wrapper {
         padding-bottom: spx(100);
         @include tablet-up {
           padding-bottom: ppx(130 * 1.2);
         }
         @include desktop-up {
           padding-bottom: ppx(130);
-        }
-      }
-
-      &__header {
-        @include tablet-up {
-        }
-        @include desktop-up {
-        }
-      }
-
-      &__title {
-        color: var(--base_5, #102a4d);
-        font-size: spx(60);
-        font-style: normal;
-        font-weight: 700;
-        line-height: 130%;
-        text-align: center;
-        @include tablet-up {
-          font-size: ppx(110 * 1.2);
-        }
-        @include desktop-up {
-          font-size: ppx(110);
-        }
-
-        &-accent {
-          color: var(--logo_color_3, #c99e2d);
-          @include tablet-up {
-          }
-          @include desktop-up {
-          }
-        }
-      }
-
-      &__subtitle {
-        color: var(--base_5, #102a4d);
-        text-align: center;
-        font-size: spx(26);
-        font-style: normal;
-        font-weight: 700;
-        line-height: 180%;
-        @include tablet-up {
-          font-size: ppx(37 * 1.2);
-        }
-        @include desktop-up {
-          font-size: ppx(37);
         }
       }
     }
@@ -586,17 +536,17 @@ const Car = await getImage({
         margin-inline: auto;
         margin-top: spx(30);
         transition: background-color 0.3s ease-in-out;
-        
+
         @include hover {
           &:hover {
             background: var(--logo_color_3, #c99e2d);
-            
+
             .venue__link-content .venue__link-icon path {
               fill: var(--logo_color_3, #c99e2d);
             }
           }
         }
-        
+
         @include tablet-up {
           width: ppx(420 * 1.2);
           height: ppx(90 * 1.2);
@@ -646,11 +596,11 @@ const Car = await getImage({
         top: 50%;
         transform: translateY(-50%);
         right: spx(12);
-        
+
         path {
           transition: fill 0.3s ease-in-out;
         }
-        
+
         @include tablet-up {
           width: ppx(56 * 1.2);
           height: ppx(56 * 1.2);
@@ -910,13 +860,13 @@ const Car = await getImage({
         transition: background-color 0.3s ease-in-out;
         border: none;
         cursor: pointer;
-        
+
         @include hover {
           &:hover {
             background: var(--logo_color_3, #c99e2d);
           }
         }
-        
+
         @include tablet-up {
           padding: ppx(5 * 1.2) ppx(22 * 1.2) ppx(10 * 1.2) ppx(32 * 1.2);
           gap: ppx(10 * 1.2);
