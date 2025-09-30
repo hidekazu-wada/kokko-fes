@@ -119,7 +119,9 @@ const Tree = await getImage({
               </dd>
             </div>
             <div class="event-details__item event-details__item--sponsor">
-              <dt class="event-details__term">協賛（順不同）</dt>
+              <dt class="event-details__term">
+                協賛<span class="event-details__term-suffix">（順不同）</span>
+              </dt>
               <dd class="event-details__description">
                 <ul class="event-details__sponsor-list">
                   <li class="event-details__sponsor-item">旭造園</li>
@@ -351,12 +353,12 @@ const Tree = await getImage({
         margin-top: spx(64);
         @include tablet-up {
           gap: ppx(20 * 1.2);
-          width: ppx(1300 * 1.2);
+          width: 62vw;
           margin-top: ppx(40 * 1.2);
         }
         @include desktop-up {
           gap: ppx(20);
-          width: ppx(1300);
+          width: 53vw;
           margin-top: ppx(40);
         }
       }
@@ -405,6 +407,15 @@ const Tree = await getImage({
         @include desktop-up {
           font-size: ppx(30);
         }
+        &-suffix {
+          font-size: spx(22);
+          @include tablet-up {
+            font-size: ppx(22 * 1.2);
+          }
+          @include desktop-up {
+            font-size: ppx(22);
+          }
+        }
       }
 
       &__description {
@@ -418,6 +429,7 @@ const Tree = await getImage({
         @include tablet-up {
           font-size: ppx(30 * 1.2);
           line-height: 180%;
+          letter-spacing: 0;
         }
         @include desktop-up {
           font-size: ppx(30);

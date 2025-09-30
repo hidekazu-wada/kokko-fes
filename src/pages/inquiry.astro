@@ -368,6 +368,28 @@ import PageTitle from "../components/common/PageTitle.astro";
         padding: ppx(20) ppx(30);
         border-radius: ppx(10);
       }
+
+      // プレイスホルダーのスタイル
+      &::placeholder {
+        color: var(--base_5, #102a4d);
+        opacity: 0.3; // 透明度を薄くする（0.4 = 40%の不透明度）
+      }
+
+      // ブラウザ対応
+      &::-webkit-input-placeholder {
+        color: var(--base_5, #102a4d);
+        opacity: 0.3;
+      }
+
+      &::-moz-placeholder {
+        color: var(--base_5, #102a4d);
+        opacity: 0.3;
+      }
+
+      &::-ms-input-placeholder {
+        color: var(--base_5, #102a4d);
+        opacity: 0.3;
+      }
     }
 
     &__select {
@@ -405,6 +427,28 @@ import PageTitle from "../components/common/PageTitle.astro";
         width: ppx(950);
         padding: ppx(20) ppx(30);
         border-radius: ppx(10);
+      }
+
+      // プレイスホルダーのスタイル
+      &::placeholder {
+        color: var(--base_5, #102a4d);
+        opacity: 0.3; // 透明度を薄くする（0.4 = 40%の不透明度）
+      }
+
+      // ブラウザ対応
+      &::-webkit-input-placeholder {
+        color: var(--base_5, #102a4d);
+        opacity: 0.3;
+      }
+
+      &::-moz-placeholder {
+        color: var(--base_5, #102a4d);
+        opacity: 0.3;
+      }
+
+      &::-ms-input-placeholder {
+        color: var(--base_5, #102a4d);
+        opacity: 0.3;
       }
     }
 
