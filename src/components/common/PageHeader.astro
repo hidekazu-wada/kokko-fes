@@ -112,11 +112,15 @@ import PageHeadWaveDesktop from "../../images/common/page-header-wave-desktop.sv
       position: absolute;
       z-index: 2;
       top: 0;
-      left: 0;
-      right: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 101vw;
+      height: spx(197);
       @include tablet-up {
+        height: tpx(216 * 1.2);
       }
       @include desktop-up {
+        height: 10.6vw;
       }
     }
 
@@ -130,13 +134,11 @@ import PageHeadWaveDesktop from "../../images/common/page-header-wave-desktop.sv
     &__wave-img {
       display: block;
       width: 100%;
-      height: spx(197);
+      height: 100%;
       object-fit: cover;
       @include tablet-up {
-        height: tpx(216 * 1.2);
       }
       @include desktop-up {
-        height: 10.6vw;
       }
     }
 
