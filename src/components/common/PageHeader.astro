@@ -70,7 +70,6 @@ import PageHeadWaveDesktop from "../../images/common/page-header-wave-desktop.sv
     left: 0;
     z-index: 10;
     width: 100%;
-    overflow-x: hidden;
     @include tablet-up {
     }
     @include desktop-up {
@@ -115,13 +114,10 @@ import PageHeadWaveDesktop from "../../images/common/page-header-wave-desktop.sv
       top: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 101vw;
-      height: spx(197);
+      width: 101%;
       @include tablet-up {
-        height: tpx(216 * 1.2);
       }
       @include desktop-up {
-        height: 10.6vw;
       }
     }
 
@@ -135,11 +131,13 @@ import PageHeadWaveDesktop from "../../images/common/page-header-wave-desktop.sv
     &__wave-img {
       display: block;
       width: 100%;
-      height: 100%;
+      height: spx(197);
       object-fit: cover;
       @include tablet-up {
+        height: tpx(216 * 1.2);
       }
       @include desktop-up {
+        height: 10.6vw;
       }
     }
 
