@@ -19,12 +19,18 @@ import conceptTitle from "../../images/top/concept-title.svg";
         <img src={conceptTitle.src} alt="concept" />
       </figure>
       <h2 class="concept__title">
-        ゆったり安らぐ<br />
-        のびのび遊ぶ
+        「自分って何歳だったっけ？」<br />
+        音と自然に包まれて、<br />
+        夢中で遊べる“ひみつきち”空間
       </h2>
     </header>
     <p class="concept__description">
-      急速に変化する世界、慌ただしい日常から離れて、大人も子供も心身をデトックス。西湖の豊かな自然に囲まれた環境で、ゆったりと過ごし、感性を解放する2日間。HAMAYOUリゾートが長年培ってきた自然体験のノウハウと、豊かな環境資源を活かした多様なコンテンツをお楽しみください。きっと、かけがえのない思い出と新たな発見が、皆様の日常生活へとつながる「ハレの日」となることでしょう。ぜひ、ご家族やお友達と一緒に、西湖の自然の中で心豊かな時間をお過ごしください。
+      冬の西湖が織りなす自然、温もり感じる焚き火、湖のさざめき、そして美しい音楽。
+      「もう歳だから」「良い歳して」…そんな当たり前の価値観を忘れ、
+      子供はもちろん、大人も関係なく楽しめる時間がここにあります。
+      心の底から夢中になったとき、あなたもきっと問いかけているはず。
+      「自分って何歳だったっけ？」と。 心から夢中になれる時間を過ごして
+      好奇心やワクワクという名の”ひみつきち”に再会してみませんか？
     </p>
   </div>
 </section>
@@ -67,12 +73,12 @@ import conceptTitle from "../../images/top/concept-title.svg";
 
       @include tablet-up {
         flex-flow: row;
-        gap: ppx(330) * 1.2;
+        gap: 12vw;
         justify-content: center;
         padding-bottom: ppx(90) * 1.2;
       }
       @include desktop-up {
-        gap: ppx(330);
+        gap: 12vw;
         padding-bottom: ppx(90);
       }
     }
@@ -106,18 +112,18 @@ import conceptTitle from "../../images/top/concept-title.svg";
     }
     &__title {
       color: var(--base_5, #102a4d);
-      font-size: spx(60);
+      font-size: 5vw;
       font-weight: 700;
       line-height: 160%;
       letter-spacing: spx(6);
       text-align: center;
       @include tablet-up {
         text-align: left;
-        font-size: ppx(90) * 1.2;
+        font-size: 2.4vw * 1.2;
         letter-spacing: ppx(9) * 1.2;
       }
       @include desktop-up {
-        font-size: ppx(90);
+        font-size: 2.4vw;
         letter-spacing: ppx(9);
       }
     }
