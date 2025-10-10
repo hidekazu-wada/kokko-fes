@@ -1,9 +1,10 @@
 ---
 export interface Props {
   title: string;
+  description?: string;
 }
 
-const { title } = Astro.props;
+const { title, description } = Astro.props;
 
 // メインSCSSファイルをインポート
 import "../styles/main.scss";
@@ -15,7 +16,7 @@ import Head from "../components/common/Head.astro";
 
 <!DOCTYPE html>
 <html lang="ja">
-  <Head title={title} />
+  <Head title={title} description={description} />
   <body>
     <Loading />
     <slot />

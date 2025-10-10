@@ -102,9 +102,20 @@ const categoryDataWithImages = {
   ...categoryData,
   items: processedItems,
 };
+
+// カテゴリごとのdescription
+const categoryDescriptions: { [key: string]: string } = {
+  eat: "コッコ祭りの「食べる」カテゴリ。地元グルメ、キッチンカー、特産品販売など、西湖・河口湖エリアの美味しい食が集結します。",
+  watch: "コッコ祭りの「観る」カテゴリ。和太鼓演奏、伝統工芸展示、郷土芸能ショーなど、文化と伝統を体感できるパフォーマンスが満載。",
+  play: "コッコ祭りの「遊ぶ」カテゴリ。工作体験、ゲームコーナー、写真撮影スポットなど、子どもから大人まで楽しめるアクティビティが盛りだくさん。",
+  make: "コッコ祭りの「作る」カテゴリ。陶芸体験、木工体験、お菓子作りなど、創造性を育むワークショップで特別な思い出を作ろう。",
+};
 ---
 
-<PageLayout title={`${categoryData.title} ｜コッコ祭り 2025｜KOKKO Festival`}>
+<PageLayout
+  title={`${categoryData.title} ｜コッコ祭り 2025｜KOKKO Festival`}
+  description={categoryDescriptions[category as string] || `コッコ祭りの${categoryData.title}カテゴリ。様々なアクティビティをお楽しみいただけます。`}
+>
   <section class={`page-wrapper category category--${category}`}>
     <div class="category__container">
       <header class="category__header">

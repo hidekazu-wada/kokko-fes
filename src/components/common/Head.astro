@@ -1,9 +1,12 @@
 ---
 export interface Props {
   title: string;
+  description?: string;
 }
 
-const { title } = Astro.props;
+const defaultDescription = "河口湖町西湖で開催されるイベント「コッコ祭り」で自然と文化を満喫！家族や友人と楽しめるアクティビティ、絶品グルメ、創造性あふれるワークショップ、圧巻のパフォーマンスが待っています。一日中飽きない感動体験をお届けします。";
+
+const { title, description = defaultDescription } = Astro.props;
 ---
 
 <head>
@@ -22,7 +25,7 @@ const { title } = Astro.props;
   />
   <meta
     name="description"
-    content="河口湖町西湖で開催されるイベント「コッコ祭り」で自然と文化を満喫！家族や友人と楽しめるアクティビティ、絶品グルメ、創造性あふれるワークショップ、圧巻のパフォーマンスが待っています。一日中飽きない感動体験をお届けします。"
+    content={description}
   />
   <!-- noindex 公開時削除 -->
   <!-- <meta name="robots" content="noindex" /> -->

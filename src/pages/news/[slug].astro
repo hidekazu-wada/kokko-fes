@@ -51,7 +51,10 @@ const nextArticle =
     : null;
 ---
 
-<PageLayout title={`${article.title} ｜コッコ祭り 2025｜KOKKO Festival`}>
+<PageLayout
+  title={`${article.title} ｜コッコ祭り 2025｜KOKKO Festival`}
+  description={article.excerpt || `コッコ祭り2025のお知らせ「${article.title}」。最新のイベント情報をお届けします。`}
+>
   <!-- news detail content -->
   <section class="page-wrapper news-detail">
     <div class="news-detail__container">
