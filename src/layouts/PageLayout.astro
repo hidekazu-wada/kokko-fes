@@ -2,9 +2,13 @@
 export interface Props {
   title: string;
   description?: string;
+  ogImage?: string;
+  ogUrl?: string;
+  ogType?: string;
+  structuredData?: object;
 }
 
-const { title, description } = Astro.props;
+const { title, description, ogImage, ogUrl, ogType, structuredData } = Astro.props;
 
 // メインSCSSファイルをインポート
 import "../styles/main.scss";
@@ -21,7 +25,14 @@ import Footer from "../components/common/Footer.astro";
 
 <!DOCTYPE html>
 <html lang="ja">
-  <Head title={title} description={description} />
+  <Head
+    title={title}
+    description={description}
+    ogImage={ogImage}
+    ogUrl={ogUrl}
+    ogType={ogType}
+    structuredData={structuredData}
+  />
   <body>
     <Loading />
     <main>

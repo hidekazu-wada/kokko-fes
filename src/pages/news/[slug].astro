@@ -49,11 +49,62 @@ const nextArticle =
   currentIndex < typedNewsData.articles.length - 1
     ? typedNewsData.articles[currentIndex + 1]
     : null;
+
+// 構造化データ (BreadcrumbList Schema + Article Schema)
+const structuredDataArray = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "トップ",
+        "item": "https://kokko-fes.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "お知らせ",
+        "item": "https://kokko-fes.com/news/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": article.title,
+        "item": `https://kokko-fes.com/news/${article.slug}/`
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    "headline": article.title,
+    "description": article.excerpt || `コッコ祭り2025のお知らせ「${article.title}」`,
+    "image": "https://kokko-fes.com/ogp-default.jpg",
+    "datePublished": article.publishedAt,
+    "author": {
+      "@type": "Organization",
+      "name": "コッコ祭り実行委員会",
+      "url": "https://kokko-fes.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "コッコ祭り実行委員会",
+      "url": "https://kokko-fes.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://kokko-fes.com/logo.png"
+      }
+    }
+  }
+];
 ---
 
 <PageLayout
   title={`${article.title} ｜コッコ祭り 2025｜KOKKO Festival`}
   description={article.excerpt || `コッコ祭り2025のお知らせ「${article.title}」。最新のイベント情報をお届けします。`}
+  structuredData={structuredDataArray}
 >
   <!-- news detail content -->
   <section class="page-wrapper news-detail">

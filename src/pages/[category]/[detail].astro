@@ -149,11 +149,38 @@ if (formattedImages.length === 0) {
     }),
   ];
 }
+
+// 構造化データ (BreadcrumbList Schema)
+const breadcrumbStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "トップ",
+      "item": "https://kokko-fes.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": categoryData.title,
+      "item": `https://kokko-fes.com/${categoryId}/`
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": itemData.name,
+      "item": `https://kokko-fes.com/${categoryId}/${detail}/`
+    }
+  ]
+};
 ---
 
 <PageLayout
   title={`${itemData.name} | ${categoryData.title} ｜コッコ祭り 2025｜KOKKO Festival`}
   description={`コッコ祭りの「${itemData.name}」。${itemData.description} 場所：${itemData.location}、時間：${itemData.time}、料金：${itemData.price}`}
+  structuredData={breadcrumbStructuredData}
 >
   <section class="page-wrapper detail-page">
     <div class="detail-page__container">

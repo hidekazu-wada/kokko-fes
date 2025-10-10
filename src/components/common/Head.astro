@@ -2,11 +2,25 @@
 export interface Props {
   title: string;
   description?: string;
+  ogImage?: string;
+  ogUrl?: string;
+  ogType?: string;
+  structuredData?: object; // 構造化データ（JSON-LD）
 }
 
 const defaultDescription = "河口湖町西湖で開催されるイベント「コッコ祭り」で自然と文化を満喫！家族や友人と楽しめるアクティビティ、絶品グルメ、創造性あふれるワークショップ、圧巻のパフォーマンスが待っています。一日中飽きない感動体験をお届けします。";
+const siteName = "コッコ祭り 2025｜KOKKO Festival";
+const siteUrl = "https://kokko-fes.com";
+const defaultOgImage = `${siteUrl}/ogp-default.jpg`; // デフォルトOGP画像
 
-const { title, description = defaultDescription } = Astro.props;
+const {
+  title,
+  description = defaultDescription,
+  ogImage = defaultOgImage,
+  ogUrl = Astro.url.href,
+  ogType = "website",
+  structuredData
+} = Astro.props;
 ---
 
 <head>
@@ -29,6 +43,30 @@ const { title, description = defaultDescription } = Astro.props;
   />
   <!-- noindex 公開時削除 -->
   <!-- <meta name="robots" content="noindex" /> -->
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href={ogUrl} />
+
+  <!-- OGP (Open Graph Protocol) -->
+  <meta property="og:site_name" content={siteName} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content={ogType} />
+  <meta property="og:url" content={ogUrl} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:locale" content="ja_JP" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+
+  <!-- 構造化データ (JSON-LD) -->
+  {structuredData && (
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  )}
+
   <!-- Google fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
