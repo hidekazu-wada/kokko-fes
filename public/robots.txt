@@ -1,0 +1,10 @@
+# robots.txt for kokko-fes.com
+
+# すべての検索エンジンクローラーに対する設定
+User-agent: *
+
+# すべてのページのクロールを許可
+Allow: /
+
+# サイトマップの場所
+Sitemap: https://kokko-fes.com/sitemap-index.xml

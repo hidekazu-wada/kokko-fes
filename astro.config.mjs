@@ -1,8 +1,12 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
+  // サイトURL（本番環境）
+  site: 'https://kokko-fes.com',
+
   // Vercel用の最適化
   output: 'static',
   build: {
@@ -13,5 +17,8 @@ export default defineConfig({
     service: {
       entrypoint: 'astro/assets/services/noop'
     }
-  }
+  },
+
+  // サイトマップの自動生成
+  integrations: [sitemap()]
 });
