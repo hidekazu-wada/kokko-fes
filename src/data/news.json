@@ -24,123 +24,23 @@
   "articles": [
     {
       "id": "news-001",
-      "slug": "important-announcement-2024",
+      "slug": "important-announcement-2025",
       "title": "コッコ祭り2025開催決定のお知らせ",
       "category": "important",
-      "publishedAt": "2024-12-15",
+      "publishedAt": "2025-10-15",
       "image": "/images/news/news-001.jpg",
       "excerpt": "コッコ祭り2025の開催が正式に決定いたしました。詳細につきましては下記をご確認ください。",
-      "content": "<h2>コッコ祭り2025開催について</h2><p>皆様のご支援により、コッコ祭り2025の開催が正式に決定いたしました。</p><p>開催日程や会場、出展者募集などの詳細情報は随時更新してまいります。</p>"
+      "content": "<p>皆様のご支援により、コッコ祭り2025の開催が正式に決定いたしました。</p><p>開催日程や会場、出展者募集などの詳細情報は随時更新してまいります。</p>"
     },
     {
       "id": "news-002",
-      "slug": "event-schedule-update",
-      "title": "イベントスケジュール更新のご案内",
-      "category": "event",
-      "publishedAt": "2024-12-10",
+      "slug": "vendor-recruitment-closed",
+      "title": "出店者募集締切とお礼",
+      "category": "recruitment",
+      "publishedAt": "2024-12-17",
       "image": "/images/news/news-002.jpg",
-      "excerpt": "コッコ祭り2025のイベントスケジュールを更新いたしました。",
-      "content": "<h2>イベントスケジュール更新</h2><p>コッコ祭り2025のイベントスケジュールを更新いたしました。</p><p>新たに追加されたプログラムや時間変更等がございますので、ご確認ください。</p>"
-    },
-    {
-      "id": "news-003",
-      "slug": "vendor-recruitment",
-      "title": "出展者募集を開始いたします",
-      "category": "recruitment",
-      "publishedAt": "2024-12-05",
-      "image": "/images/news/news-003.jpg",
-      "excerpt": "コッコ祭り2025への出展者募集を開始いたします。",
-      "content": "<h2>出展者募集について</h2><p>コッコ祭り2025への出展者募集を開始いたします。</p><p>募集要項や申込方法につきましては、詳細ページをご確認ください。</p>"
-    },
-    {
-      "id": "news-004",
-      "slug": "general-information",
-      "title": "一般的なお知らせ",
-      "category": "other",
-      "publishedAt": "2024-12-01",
-      "image": "/images/news/news-004.jpg",
-      "excerpt": "コッコ祭りに関する一般的なお知らせです。",
-      "content": "<h2>一般的なお知らせ</h2><p>コッコ祭りに関する一般的なお知らせです。</p><p>その他の情報については随時更新してまいります。</p>"
-    },
-    {
-      "id": "news-005",
-      "slug": "transportation-guide",
-      "title": "会場へのアクセス・交通案内について",
-      "category": "important",
-      "publishedAt": "2024-11-28",
-      "image": "/images/news/news-005.jpg",
-      "excerpt": "コッコ祭り2025会場への交通アクセス情報をお知らせいたします。",
-      "content": "<h2>アクセス情報</h2><p>会場までの交通手段や駐車場情報について詳しくご案内いたします。</p><p>公共交通機関のご利用をお勧めいたします。</p>"
-    },
-    {
-      "id": "news-006",
-      "slug": "stage-performers",
-      "title": "メインステージ出演者発表",
-      "category": "event",
-      "publishedAt": "2024-11-25",
-      "image": "/images/news/news-006.jpg",
-      "excerpt": "コッコ祭り2025メインステージの出演者が決定いたしました。",
-      "content": "<h2>出演者発表</h2><p>今年のメインステージには地元アーティストや伝統芸能団体が出演予定です。</p><p>タイムテーブルは後日発表いたします。</p>"
-    },
-    {
-      "id": "news-007",
-      "slug": "food-booth-recruitment",
-      "title": "飲食ブース出店者追加募集",
-      "category": "recruitment",
-      "publishedAt": "2024-11-20",
-      "image": "/images/news/news-007.jpg",
-      "excerpt": "飲食ブースの出店者を追加募集いたします。",
-      "content": "<h2>飲食ブース募集</h2><p>地域の特産品や手作り料理を提供していただける出店者を募集しています。</p><p>応募期限は12月末までとなります。</p>"
-    },
-    {
-      "id": "news-008",
-      "slug": "parking-information",
-      "title": "駐車場利用に関するご案内",
-      "category": "other",
-      "publishedAt": "2024-11-18",
-      "image": "/images/news/news-008.jpg",
-      "excerpt": "当日の駐車場利用について重要なご案内があります。",
-      "content": "<h2>駐車場のご案内</h2><p>会場周辺の駐車場は数に限りがございます。</p><p>できる限り公共交通機関をご利用ください。</p>"
-    },
-    {
-      "id": "news-009",
-      "slug": "security-measures",
-      "title": "開催時の安全対策について",
-      "category": "important",
-      "publishedAt": "2024-11-15",
-      "image": "/images/news/news-009.jpg",
-      "excerpt": "コッコ祭り2025開催時の安全対策についてお知らせいたします。",
-      "content": "<h2>安全対策</h2><p>来場者の皆様に安心してお楽しみいただけるよう、各種安全対策を実施いたします。</p><p>ご協力をお願いいたします。</p>"
-    },
-    {
-      "id": "news-010",
-      "slug": "workshop-schedule",
-      "title": "体験ワークショップのスケジュール公開",
-      "category": "event",
-      "publishedAt": "2024-11-12",
-      "image": "/images/news/news-010.jpg",
-      "excerpt": "各種体験ワークショップの詳細スケジュールを公開いたします。",
-      "content": "<h2>ワークショップ情報</h2><p>伝統工芸から現代アートまで、様々な体験プログラムをご用意しております。</p><p>事前予約が必要なものもございますのでご確認ください。</p>"
-    },
-    {
-      "id": "news-011",
-      "slug": "volunteer-recruitment",
-      "title": "当日運営ボランティア募集",
-      "category": "recruitment",
-      "publishedAt": "2024-11-10",
-      "image": "/images/news/news-011.jpg",
-      "excerpt": "コッコ祭り2025の運営をお手伝いいただけるボランティアを募集しています。",
-      "content": "<h2>ボランティア募集</h2><p>会場案内、受付、清掃など様々な業務でご協力いただける方を募集しています。</p><p>地域の皆様のご参加をお待ちしております。</p>"
-    },
-    {
-      "id": "news-012",
-      "slug": "weather-contingency",
-      "title": "雨天時の開催について",
-      "category": "other",
-      "publishedAt": "2024-11-08",
-      "image": "/images/news/news-012.jpg",
-      "excerpt": "雨天時の開催可否についてご案内いたします。",
-      "content": "<h2>雨天時の対応</h2><p>小雨の場合は予定通り開催いたします。</p><p>荒天の場合の判断基準と連絡方法についてお知らせいたします。</p>"
+      "excerpt": "「コッコ祭り2025」出店者募集は締め切りました。多数のご応募、誠にありがとうございました。来年度もご期待ください。",
+      "content": "<p>「コッコ祭り2025」への出店者募集は、多数のご応募をいただき、誠にありがとうございました。<br>募集は、先日をもちまして締め切らせていただきました。<br>たくさんのご関心をお寄せいただきましたこと、心より感謝申し上げます。</p><p>来年度の開催も予定しております。<br>詳細が決まり次第、改めてこちらのページ（またはSNS）等にてご案内させていただきます。<br>またのご応募を心よりお待ちしております。</p>"
     }
   ]
 }
