@@ -154,26 +154,26 @@ if (formattedImages.length === 0) {
 const breadcrumbStructuredData = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
-  "itemListElement": [
+  itemListElement: [
     {
       "@type": "ListItem",
-      "position": 1,
-      "name": "トップ",
-      "item": "https://kokko-fes.com/"
+      position: 1,
+      name: "トップ",
+      item: "https://kokko-fes.com/",
     },
     {
       "@type": "ListItem",
-      "position": 2,
-      "name": categoryData.title,
-      "item": `https://kokko-fes.com/${categoryId}/`
+      position: 2,
+      name: categoryData.title,
+      item: `https://kokko-fes.com/${categoryId}/`,
     },
     {
       "@type": "ListItem",
-      "position": 3,
-      "name": itemData.name,
-      "item": `https://kokko-fes.com/${categoryId}/${detail}/`
-    }
-  ]
+      position: 3,
+      name: itemData.name,
+      item: `https://kokko-fes.com/${categoryId}/${detail}/`,
+    },
+  ],
 };
 ---
 
@@ -579,7 +579,7 @@ const breadcrumbStructuredData = {
         width: spx(620);
         height: spx(398);
         border-radius: spx(18);
-        object-fit: cover;
+        object-fit: contain;
         @include tablet-up {
           width: ppx(1400 * 1.2);
           height: ppx(900 * 1.2);

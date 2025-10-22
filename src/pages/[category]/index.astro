@@ -47,35 +47,48 @@ export async function getStaticPaths() {
 const { category } = Astro.params;
 const { categoryData } = Astro.props;
 
-// 動的画像インポート
-let demoImage: any;
+// フォールバック画像をインポート
+let fallbackImage: any;
 try {
-  const imageModule = await import(`../../images/${category}/demo.png`);
-  demoImage = imageModule.default;
+  const fallbackModule = await import(`../../images/${category}/demo.png`);
+  fallbackImage = fallbackModule.default;
 } catch (error) {
-  console.error(`Demo image not found for ${category}, using fallback`);
-  // フォールバック画像を使用
-  const fallbackModule = await import(`../../images/eat/demo.png`);
-  demoImage = fallbackModule.default;
+  console.warn(`Demo image not found for ${category}, using eat/demo.png`);
+  const eatFallbackModule = await import(`../../images/eat/demo.png`);
+  fallbackImage = eatFallbackModule.default;
 }
 
-// 画像処理
+// 画像処理：各アイテムのimageフィールドを使用
 const processedItems = await Promise.all(
   categoryData.items.map(async (item: CategoryItem) => {
     try {
       const isProduction = import.meta.env.PROD;
       let optimizedImage;
+      let itemImage;
+
+      // 各アイテムの画像を動的にインポート
+      try {
+        const itemImageModule = await import(
+          `../../images/${category}/${item.image}`
+        );
+        itemImage = itemImageModule.default;
+      } catch (imageError) {
+        console.warn(
+          `Image not found: ${category}/${item.image}, using fallback`,
+        );
+        itemImage = fallbackImage;
+      }
 
       if (isProduction) {
         optimizedImage = {
           src: "/assets/demo.B4vCVBYL.png",
-          width: demoImage.width,
-          height: demoImage.height,
+          width: itemImage.width,
+          height: itemImage.height,
           srcSet: "/assets/demo.B4vCVBYL.png",
         };
       } else {
         optimizedImage = await getImage({
-          src: demoImage,
+          src: itemImage,
           format: "webp",
           widths: [620],
         });
@@ -106,7 +119,8 @@ const categoryDataWithImages = {
 // カテゴリごとのdescription
 const categoryDescriptions: { [key: string]: string } = {
   eat: "コッコ祭りの「食べる」カテゴリ。地元グルメ、キッチンカー、特産品販売など、西湖・河口湖エリアの美味しい食が集結します。",
-  watch: "コッコ祭りの「観る」カテゴリ。和太鼓演奏、伝統工芸展示、郷土芸能ショーなど、文化と伝統を体感できるパフォーマンスが満載。",
+  watch:
+    "コッコ祭りの「観る」カテゴリ。和太鼓演奏、伝統工芸展示、郷土芸能ショーなど、文化と伝統を体感できるパフォーマンスが満載。",
   play: "コッコ祭りの「遊ぶ」カテゴリ。工作体験、ゲームコーナー、写真撮影スポットなど、子どもから大人まで楽しめるアクティビティが盛りだくさん。",
   make: "コッコ祭りの「作る」カテゴリ。陶芸体験、木工体験、お菓子作りなど、創造性を育むワークショップで特別な思い出を作ろう。",
 };
@@ -114,7 +128,8 @@ const categoryDescriptions: { [key: string]: string } = {
 
 <PageLayout
   title={`${categoryData.title} ｜コッコ祭り 2025｜KOKKO Festival`}
-  description={categoryDescriptions[category as string] || `コッコ祭りの${categoryData.title}カテゴリ。様々なアクティビティをお楽しみいただけます。`}
+  description={categoryDescriptions[category as string] ||
+    `コッコ祭りの${categoryData.title}カテゴリ。様々なアクティビティをお楽しみいただけます。`}
 >
   <section class={`page-wrapper category category--${category}`}>
     <div class="category__container">
@@ -189,7 +204,7 @@ const categoryDescriptions: { [key: string]: string } = {
                       </dd>
                     </div>
                     <div class="category__card-detail">
-                      <dt class="category__card-detail-label">時間：</dt>
+                      <dt class="category__card-detail-label">日程：</dt>
                       <dd class="category__card-detail-value">{item.time}</dd>
                     </div>
                   </dl>

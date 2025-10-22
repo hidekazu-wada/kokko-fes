@@ -7,37 +7,78 @@
     "description": "レストラン・キッチンカーでの美味しい食事",
     "items": [
       {
-        "name": "地元グルメ",
-        "description": "地元の新鮮な食材を使った郷土料理や創作料理をお楽しみいただけます。",
-        "detailInfo": "<p>地元グルメコーナーでは、地域の農家から直送された<strong>新鮮な野菜</strong>や<strong>特産品</strong>を使用した料理を提供しています。</p><p>伝統的な郷土料理から、シェフのオリジナル創作料理まで、幅広いメニューをご用意しております。</p><ul><li>特製郷土弁当</li><li>季節の野菜カレー</li><li>地元米のおにぎり</li></ul><p>アレルギー対応も可能ですので、お気軽にお声がけください。</p>",
-        "image": "demo.png",
-        "images": ["gm1.png", "gm2.png", "gm3.png"],
-        "location": "展示ホールA",
-        "time": "10:00-16:00",
-        "snsUrl": "https://twitter.com/kokko_festival",
-        "price": "無料"
+        "name": "もぐもぐルーク",
+        "description": "タコスやレモネードを中心に販売予定です。",
+        "detailInfo": "<p>タコスとレモネードは手作りに拘りました<br>国産のお肉と野菜を使い安心と安全を心がけています。</p>",
+        "image": "もぐもぐルーク/img-1.jpg",
+        "images": ["もぐもぐルーク/img-1.jpg"],
+        "location": "調整中",
+        "time": "12/6・12/7",
+        "snsUrl": "https://www.instagram.com/mogumoguruku7/",
+        "price": "有料"
       },
       {
-        "name": "キッチンカー",
-        "description": "バラエティ豊かなキッチンカーが集結。世界各国の料理をお手軽に楽しめます。",
-        "detailInfo": "<p>人気のキッチンカーが<em>10店舗以上</em>出店！</p><p>イタリアン、メキシカン、アジアンなど、世界各国の本格的な料理をお手軽価格で提供します。</p><p><strong>人気メニュー：</strong></p><ul><li>本格タコス</li><li>クラフトバーガー</li><li>タイカレー</li><li>クレープ</li></ul>",
-        "image": "demo.png",
-        "images": ["gm1.png", "gm2.png"],
-        "location": "外部エリア",
-        "time": "11:00-15:00",
-        "snsUrl": "https://instagram.com/kokko_kitchen",
-        "price": "各店舗による"
+        "name": "Crepe Gin",
+        "description": "クレープを中心に販売予定です。",
+        "detailInfo": "<p>他にはないボリューム満点のクレープをぜひ召し上がってください</p>",
+        "image": "CrepeGin/img-1.png",
+        "images": ["CrepeGin/img-1.png", "CrepeGin/img-2.jpg"],
+        "location": "調整中",
+        "time": "12/7",
+        "snsUrl": "https://www.instagram.com/crepe_gin/",
+        "price": "有料"
       },
       {
-        "name": "特産品販売",
-        "description": "地域の特産品や手作りの加工品など、お土産にぴったりの商品が並びます。",
-        "detailInfo": "<p>地元生産者が丹精込めて作った<strong>特産品</strong>や<strong>手作り加工品</strong>を販売しています。</p><p>お土産に最適な商品ラインナップ：</p><ul><li>地元産はちみつ</li><li>手作りジャム各種</li><li>伝統工芸品</li><li>地酒・地ビール</li></ul><p><em>お買い上げ金額に応じてオリジナルグッズをプレゼント！</em></p>",
-        "image": "demo.png",
-        "images": ["gm1.png"],
-        "location": "展示ホールB",
-        "time": "09:00-17:00",
-        "snsUrl": "https://facebook.com/kokko_market",
-        "price": "入場無料"
+        "name": "米粉クレープ alto",
+        "description": "クレープを中心に販売予定です。",
+        "detailInfo": "<p>山梨県北杜市産米粉100%<br>こだわりのもちもちクレープ</p>",
+        "image": "米粉クレープalto/img-1.jpg",
+        "images": ["米粉クレープalto/img-1.jpg", "米粉クレープalto/img-2.jpg"],
+        "location": "調整中",
+        "time": "12/6",
+        "snsUrl": "https://www.instagram.com/alto.crepe/",
+        "price": "有料"
+      },
+      {
+        "name": "唐揚げ専門店いがらし",
+        "description": "こだわりの唐揚げを販売予定です。",
+        "detailInfo": "<p>山梨県富士吉田市にある唐揚げ専門店です🐔<br>高級醤油「下総醤油」を当店では贅沢に使用しています。<br>店内仕込み店内揚げたて！すりたてのにんにくと合わせた特製醤油ダレに、鶏もも肉を一日以上じっくり漬け込んでいます。<br>こだわりの油でカラッと揚げることで、ジューシーでザクザク食感が美味しい唐揚げに仕上げました🐓</p>",
+        "image": "唐揚げ専門店いがらし/img-1.jpg",
+        "images": [
+          "唐揚げ専門店いがらし/img-1.jpg",
+          "唐揚げ専門店いがらし/img-2.jpg",
+          "唐揚げ専門店いがらし/img-3.jpg"
+        ],
+        "location": "調整中",
+        "time": "12/6・12/7",
+        "snsUrl": "https://www.instagram.com/karaage_igarashi/",
+        "price": "有料"
+      },
+      {
+        "name": "ピッツァカーポリーナ",
+        "description": "薪窯で焼くピザを中心に販売予定です。",
+        "detailInfo": "<p>夫婦ふたりのキッチンカー<br>薪窯焼き『ピッツァ カーポリーナ』<br>＼「ミミまでおいしい！」とよく言われます／<br>その秘密は、国産小麦100％の自家製生地。<br>さらに薪窯で焼き上げることで、香ばしくモッチリとした食感に。<br>イタリアで料理修業を積んだシェフが、一枚一枚、心を込めて焼き上げます。<br>ぜひ、焼きたてをお召し上がりください🍕</p>",
+        "image": "ピッツァカーポリーナ/img-1.jpg",
+        "images": [
+          "ピッツァカーポリーナ/img-1.jpg",
+          "ピッツァカーポリーナ/img-2.jpg",
+          "ピッツァカーポリーナ/img-3.jpg"
+        ],
+        "location": "調整中",
+        "time": "12/6・12/7",
+        "snsUrl": "",
+        "price": "有料"
+      },
+      {
+        "name": "ぷっくりにゃんこ",
+        "description": "猫のカタチ大判焼を販売予定です。",
+        "detailInfo": "<p>ココでしか味わえない「猫のカタチ大判焼」<br>見てにっこり、食べてほっこり、ぷっくりにゃんこ<br>生地はふっくら、もっちり、中身はたっぷり！</p>",
+        "image": "ぷっくりにゃんこ/img-1.jpg",
+        "images": ["ぷっくりにゃんこ/img-1.jpg", "ぷっくりにゃんこ/img-2.jpg"],
+        "location": "調整中",
+        "time": "12/7",
+        "snsUrl": "https://www.instagram.com/puccuri_nyanko_2022/",
+        "price": "有料"
       }
     ]
   },
