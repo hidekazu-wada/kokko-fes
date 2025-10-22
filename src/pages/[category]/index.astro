@@ -47,52 +47,53 @@ export async function getStaticPaths() {
 const { category } = Astro.params;
 const { categoryData } = Astro.props;
 
-// フォールバック画像をインポート
-let fallbackImage: any;
-try {
-  const fallbackModule = await import(`../../images/${category}/demo.png`);
-  fallbackImage = fallbackModule.default;
-} catch (error) {
-  console.warn(`Demo image not found for ${category}, using eat/demo.png`);
-  const eatFallbackModule = await import(`../../images/eat/demo.png`);
-  fallbackImage = eatFallbackModule.default;
+// すべての画像を事前にインポート（Viteの動的インポート制限を回避）
+const allImages: Record<string, { default: any }> = import.meta.glob('../../images/**/*.{png,jpg,jpeg,webp,PNG,JPG,JPEG,WEBP}', { eager: true });
+
+// 画像パスを正規化してマッピングから取得
+function getImageFromGlob(category: string, imagePath: string) {
+  const path1 = `../../images/${category}/${imagePath}`;
+  if (allImages[path1]) {
+    return allImages[path1].default;
+  }
+
+  const path2 = `/src/images/${category}/${imagePath}`;
+  if (allImages[path2]) {
+    return allImages[path2].default;
+  }
+
+  const fallbackPath = `../../images/${category}/demo.png`;
+  if (allImages[fallbackPath]) {
+    return allImages[fallbackPath].default;
+  }
+
+  const eatFallbackPath = `../../images/eat/demo.png`;
+  if (allImages[eatFallbackPath]) {
+    return allImages[eatFallbackPath].default;
+  }
+
+  return null;
 }
 
 // 画像処理：各アイテムのimageフィールドを使用
 const processedItems = await Promise.all(
   categoryData.items.map(async (item: CategoryItem) => {
     try {
-      const isProduction = import.meta.env.PROD;
-      let optimizedImage;
-      let itemImage;
+      const itemImage = getImageFromGlob(category, item.image);
 
-      // 各アイテムの画像を動的にインポート
-      try {
-        const itemImageModule = await import(
-          `../../images/${category}/${item.image}`
-        );
-        itemImage = itemImageModule.default;
-      } catch (imageError) {
-        console.warn(
-          `Image not found: ${category}/${item.image}, using fallback`,
-        );
-        itemImage = fallbackImage;
-      }
-
-      if (isProduction) {
-        optimizedImage = {
-          src: "/assets/demo.B4vCVBYL.png",
-          width: itemImage.width,
-          height: itemImage.height,
-          srcSet: "/assets/demo.B4vCVBYL.png",
+      if (!itemImage) {
+        console.warn(`Image not found: ${category}/${item.image}`);
+        return {
+          ...item,
+          processedImage: null,
         };
-      } else {
-        optimizedImage = await getImage({
-          src: itemImage,
-          format: "webp",
-          widths: [620],
-        });
       }
+
+      const optimizedImage = await getImage({
+        src: itemImage,
+        format: "webp",
+        widths: [620],
+      });
 
       return {
         ...item,

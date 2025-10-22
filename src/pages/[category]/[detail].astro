@@ -84,17 +84,40 @@ export async function getStaticPaths() {
 const { categoryData, itemData, categoryId } = Astro.props;
 const { category, detail } = Astro.params;
 
-// デフォルト画像を動的にインポート
-let DefaultImage: any;
-try {
-  const defaultImageModule = await import(`../../images/${category}/demo.png`);
-  DefaultImage = defaultImageModule.default;
-} catch (error) {
-  console.warn(`Default image not found for ${category}, using fallback`);
-  // フォールバック画像を使用
-  const fallbackModule = await import(`../../images/eat/demo.png`);
-  DefaultImage = fallbackModule.default;
+// すべての画像を事前にインポート（Viteの動的インポート制限を回避）
+const allImages: Record<string, { default: any }> = import.meta.glob('../../images/**/*.{png,jpg,jpeg,webp,PNG,JPG,JPEG,WEBP}', { eager: true });
+
+// 画像パスを正規化してマッピングから取得
+function getImageFromGlob(category: string, imagePath: string) {
+  // 相対パスでの検索
+  const path1 = `../../images/${category}/${imagePath}`;
+  if (allImages[path1]) {
+    return allImages[path1].default;
+  }
+
+  // 絶対パスでの検索
+  const path2 = `/src/images/${category}/${imagePath}`;
+  if (allImages[path2]) {
+    return allImages[path2].default;
+  }
+
+  // フォールバック画像を探す
+  const fallbackPath = `../../images/${category}/demo.png`;
+  if (allImages[fallbackPath]) {
+    return allImages[fallbackPath].default;
+  }
+
+  // 最後のフォールバック
+  const eatFallbackPath = `../../images/eat/demo.png`;
+  if (allImages[eatFallbackPath]) {
+    return allImages[eatFallbackPath].default;
+  }
+
+  return null;
 }
+
+// デフォルト画像を取得
+const DefaultImage = getImageFromGlob(category, 'demo.png');
 
 // 動的画像インポート
 let formattedImages: any[] = [];
@@ -102,20 +125,19 @@ const maxImages = 6;
 const imageList = itemData.images || [];
 
 try {
-  // 画像モジュールを動的にインポート
+  // 画像モジュールをマッピングから取得
   const imagePromises = imageList
     .slice(0, maxImages)
     .map(async (imageName: string) => {
-      try {
-        const imageModule = await import(
-          `../../images/${category}/${imageName}`
-        );
+      const imageModule = getImageFromGlob(category, imageName);
+
+      if (imageModule) {
         return await getImage({
-          src: imageModule.default,
+          src: imageModule,
           format: "webp",
           widths: [87, 170, 620, 900, 1400],
         });
-      } catch (error) {
+      } else {
         console.warn(`Image not found: ${imageName}, using default`);
         // デフォルト画像を使用
         return await getImage({
@@ -130,17 +152,19 @@ try {
 } catch (error) {
   console.error("Error loading images:", error);
   // エラー時はデフォルト画像を1枚表示
-  formattedImages = [
-    await getImage({
-      src: DefaultImage,
-      format: "webp",
-      widths: [87, 170, 620, 900, 1400],
-    }),
-  ];
+  if (DefaultImage) {
+    formattedImages = [
+      await getImage({
+        src: DefaultImage,
+        format: "webp",
+        widths: [87, 170, 620, 900, 1400],
+      }),
+    ];
+  }
 }
 
 // 画像が0枚の場合はデフォルト画像を1枚表示
-if (formattedImages.length === 0) {
+if (formattedImages.length === 0 && DefaultImage) {
   formattedImages = [
     await getImage({
       src: DefaultImage,
