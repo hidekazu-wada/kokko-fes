@@ -24,7 +24,8 @@
     "styleable",
     "taberu",
     "tomaru",
-    "tsukuru"
+    "tsukuru",
+    "Vite"
   ],
   "[astro]": {
     "editor.formatOnSave": true,
