@@ -85,7 +85,10 @@ const { categoryData, itemData, categoryId } = Astro.props;
 const { category, detail } = Astro.params;
 
 // すべての画像を事前にインポート（Viteの動的インポート制限を回避）
-const allImages: Record<string, { default: any }> = import.meta.glob('../../images/**/*.{png,jpg,jpeg,webp,PNG,JPG,JPEG,WEBP}', { eager: true });
+const allImages: Record<string, { default: any }> = import.meta.glob(
+  "../../images/**/*.{png,jpg,jpeg,webp,PNG,JPG,JPEG,WEBP}",
+  { eager: true },
+);
 
 // 画像パスを正規化してマッピングから取得
 function getImageFromGlob(category: string, imagePath: string) {
@@ -117,7 +120,7 @@ function getImageFromGlob(category: string, imagePath: string) {
 }
 
 // デフォルト画像を取得
-const DefaultImage = getImageFromGlob(category, 'demo.png');
+const DefaultImage = getImageFromGlob(category, "demo.png");
 
 // 動的画像インポート
 let formattedImages: any[] = [];
@@ -958,27 +961,28 @@ const breadcrumbStructuredData = {
         border-radius: spx(20);
         background: var(--base_1, #fffcf2);
         width: spx(620);
-        height: spx(75);
+        min-height: spx(55);
+        height: auto;
         display: grid;
         grid-template-columns: spx(112) auto;
         gap: spx(10);
         align-items: center;
-        padding: 0 spx(30);
+        padding: spx(10) spx(30);
         @include tablet-up {
           width: ppx(1200 * 1.2);
-          height: ppx(88 * 1.2);
+          min-height: ppx(68 * 1.2);
           grid-template-columns: ppx(120 * 1.2) auto;
           gap: ppx(20 * 1.2);
           border-radius: ppx(20 * 1.2);
-          padding: 0 ppx(50 * 1.2);
+          padding: ppx(10 * 1.2) ppx(50 * 1.2);
         }
         @include desktop-up {
           width: ppx(1200);
-          height: ppx(88);
+          min-height: ppx(68);
           grid-template-columns: ppx(120) auto;
           gap: ppx(20);
           border-radius: ppx(20);
-          padding: 0 ppx(50);
+          padding: ppx(10) ppx(50);
         }
 
         &-label {
@@ -1008,6 +1012,11 @@ const breadcrumbStructuredData = {
           }
           @include desktop-up {
             font-size: ppx(30);
+          }
+          a {
+            display: block;
+            overflow-wrap: break-word;
+            line-height: 1.2;
           }
         }
       }
