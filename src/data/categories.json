@@ -79,6 +79,17 @@
         "time": "12/7",
         "snsUrl": "https://www.instagram.com/puccuri_nyanko_2022/",
         "price": "有料"
+      },
+      {
+        "name": "369hunt",
+        "description": "ジビエを活かした料理を中心に販売予定です。",
+        "detailInfo": "<p>『Hunt it,eat it,and use it all』の精神で鹿の捕獲から精肉、革の活用までを一貫して手掛けることを目標に活動している369Huntです。</p><p>皆様にジビエを気軽に楽しんでもらえるお料理を提供いたします。</p><p>どのようにお肉や革になっていくのか展示コーナーも設けます。少しでも身近に感じていただけたら幸いです。</p>",
+        "image": "369hunt/img-1.png",
+        "images": ["369hunt/img-1.png"],
+        "location": "調整中",
+        "time": "12/6・12/7",
+        "snsUrl": "https://www.instagram.com/369hunt/",
+        "price": "有料"
       }
     ]
   },
