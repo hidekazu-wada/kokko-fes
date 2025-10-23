@@ -101,36 +101,14 @@
     "description": "展示・パフォーマンス・伝統芸能など",
     "items": [
       {
-        "name": "和太鼓演奏",
-        "description": "迫力満点の和太鼓パフォーマンス。伝統と革新が融合した圧巻のステージです。",
-        "detailInfo": "<p>プロの和太鼓奏者による<strong>迫力満点のパフォーマンス</strong>をお楽しみください。</p><p>伝統的な曲目からオリジナルアレンジまで、幅広いレパートリーをご用意しています。</p><ul><li>1日5回公演（各約30分）</li><li>体験コーナーあり</li><li>撮影OK</li></ul><p><em>お子様の体験参加も大歓迎です！</em></p>",
+        "name": "準備中",
+        "description": "",
+        "detailInfo": "<p></p>",
         "image": "demo.png",
-        "location": "展示ホールA",
-        "time": "10:00-16:00",
-        "snsUrl": "https://twitter.com/wadaiko_kokko",
-        "price": "無料",
-        "images": ["demo.png"]
-      },
-      {
-        "name": "伝統工芸展示",
-        "description": "地域の伝統工芸品を一堂に集めた特別展示。職人による実演も行われます。",
-        "detailInfo": "<p>地域に伝わる<strong>伝統工芸品</strong>を一堂に集めた特別展示会です。</p><p>匠の技を目の前でご覧いただけます：</p><ul><li>陶芸品の展示・販売</li><li>木工品の実演</li><li>染物ワークショップ</li><li>竹細工展示</li></ul><p><strong>職人さんとの交流コーナー</strong>もあり、作品にまつわるストーリーを直接聞くことができます。</p>",
-        "image": "demo.png",
-        "location": "展示ホールB",
-        "time": "09:00-17:00",
-        "snsUrl": "https://instagram.com/craft_kokko",
-        "price": "入場無料",
-        "images": ["demo.png"]
-      },
-      {
-        "name": "郷土芸能ショー",
-        "description": "地域に伝わる伝統芸能の数々。歴史と文化を感じる特別な時間をお楽しみください。",
-        "detailInfo": "<p>地域に<em>300年以上</em>伝わる伝統芸能を特別公演いたします。</p><p><strong>プログラム：</strong></p><ul><li>13:00～ 獅子舞</li><li>13:20～ 神楽</li><li>13:40～ 民謡</li></ul><p>専門家による解説付きで、初めての方でも楽しんでいただけます。</p><p><em>座席は先着順となりますので、お早めにお越しください。</em></p>",
-        "image": "demo.png",
-        "location": "メインステージ",
-        "time": "13:00-14:00",
-        "snsUrl": "https://facebook.com/geinou_kokko",
-        "price": "無料観覧",
+        "location": "調整中",
+        "time": "12/6・12/7",
+        "snsUrl": "",
+        "price": "無料(チケット料金に含む)",
         "images": ["demo.png"]
       }
     ]
@@ -143,43 +121,30 @@
     "description": "体験・ワークショップ・ゲームなど",
     "items": [
       {
-        "name": "工作体験",
-        "description": "親子で楽しめる工作体験。オリジナル作品を作って思い出に残しましょう。",
-        "detailInfo": "<p>お子様から大人まで楽しめる<strong>工作体験コーナー</strong>です。</p><p>年齢別のプログラムをご用意：</p><ul><li>3～6歳：かんたん工作</li><li>7～12歳：本格工作</li><li>13歳以上：アート作品</li></ul><p><em>スタッフが丁寧にサポートしますので、初めてでも安心！</em></p><p>作った作品はお持ち帰りいただけます。</p>",
-        "image": "demo.png",
-        "location": "体験エリア",
-        "time": "10:00-16:00",
-        "snsUrl": "https://twitter.com/play_kokko",
-        "price": "材料費500円",
+        "name": "フリー焚き火",
+        "description": "備え付けの器具で自由に焚き火が楽しめる！",
+        "detailInfo": "<p>焚き火台をで自由に焚き火が楽しめます。<br>器具等は備え付けのため手ぶらでOK！<br>焚き火はフィンランド語で[kokko]です。<br>これはメイン会場のBBQハウスの名前にもなっており、焚き火はコッコ祭りの代名詞の一つなんです！<br>ゆれる炎、煙の香り、顔を照らす柔らかな光、どこをとっても特別な時間になること間違いなし！<br>※混雑時は譲り合ってお使いください。</p>",
+        "image": "フリー焚き火/img-1.jpeg",
+        "images": ["フリー焚き火/img-1.jpeg"],
+        "location": "コッコ",
+        "time": "12/6・12/7",
+        "snsUrl": "",
+        "price": "無料(チケット料金に含む)"
+      },
+      {
+        "name": "屋内キッズルーム",
+        "description": "屋内のキッズルームをご用意しています。「ちびっこあつまれー！」",
+        "detailInfo": "<p>室内でお子様が自由に遊べるスペースがホテル1Fにございます。<br>お手洗いや自動販売機もすぐ近くにございます。<br>温かい室内でのびのびお遊びください！<br>※お子様をひとりにしないようご注意ください。</p>",
+        "image": "屋内キッズルーム/img-1.png",
         "images": [
-          "craft-01.png",
-          "craft-02.png",
-          "craft-03.png",
-          "craft-04.png",
-          "craft-05.png"
-        ]
-      },
-      {
-        "name": "ゲームコーナー",
-        "description": "昔懐かしい縁日ゲームから最新のアトラクションまで、幅広い年齢層が楽しめます。",
-        "detailInfo": "<p>大人も子どもも楽しめる<strong>ゲームコーナー</strong>をご用意しました！</p><p>人気ゲーム：</p><ul><li>輪投げ</li><li>射的</li><li>スーパーボールすくい</li><li>千本引き</li></ul><p><strong>豪華景品もご用意！</strong></p><p>ゲームチケットは<em>1枚100円</em>から。まとめ買いがお得です！</p>",
-        "image": "demo.png",
-        "location": "子どもエリア",
-        "time": "09:00-17:00",
-        "snsUrl": "https://instagram.com/game_kokko",
-        "price": "1回100円〜",
-        "images": ["demo.png"]
-      },
-      {
-        "name": "写真撮影スポット",
-        "description": "フォトジェニックな撮影スポットで素敵な思い出を残しましょう。",
-        "detailInfo": "<p><strong>SNS映え</strong>する撮影スポットを各所に設置！</p><p>撮影スポットの特徴：</p><ul><li>季節のフォトブース</li><li>巨大オブジェ</li><li>イルミネーション</li><li>着ぐるみフォトスポット</li></ul><p><em>#kokko祭り2025</em> でシェアしてください！</p><p>プロカメラマンによる無料撮影サービスもあります。</p>",
-        "image": "demo.png",
-        "location": "メインエントランス",
-        "time": "終日",
-        "snsUrl": "https://facebook.com/photo_kokko",
-        "price": "無料",
-        "images": ["demo.png"]
+          "屋内キッズルーム/img-1.png",
+          "屋内キッズルーム/img-2.png",
+          "屋内キッズルーム/img-3.png"
+        ],
+        "location": "ホテル内　楓B",
+        "time": "12/6・12/7",
+        "snsUrl": "",
+        "price": "無料(チケット料金に含む)"
       }
     ]
   },
@@ -191,36 +156,14 @@
     "description": "手作り体験・クラフト・ワークショップなど",
     "items": [
       {
-        "name": "陶芸体験",
-        "description": "プロの陶芸家による指導で、オリジナルの器を作ることができます。",
-        "detailInfo": "<p>プロの陶芸家が<strong>丁寧に指導</strong>いたします。</p><p>体験コース：</p><ul><li>ろくろ体験（60分）</li><li>絵付け体験（45分）</li><li>手びねり体験（90分）</li></ul><p><strong>作品は後日配送</strong>いたします。</p><p><em>エプロンの貸し出しもありますので、服装を気にせず参加いただけます。</em></p>",
+        "name": "準備中",
+        "description": "",
+        "detailInfo": "<p></p>",
         "image": "demo.png",
-        "location": "工芸エリア",
-        "time": "10:00-16:00",
-        "snsUrl": "https://twitter.com/craft_pottery",
-        "price": "体験料 2,000円",
-        "images": ["demo.png"]
-      },
-      {
-        "name": "木工体験",
-        "description": "自然の木材を使って、世界に一つだけの作品を作りましょう。",
-        "detailInfo": "<p>自然の<strong>木の温もり</strong>を感じながら、オリジナル作品を作りましょう。</p><p>作れるもの：</p><ul><li>木製コースター</li><li>ペン立て</li><li>小物入れ</li><li>キーホルダー</li></ul><p>工具の使い方から<em>丁寧にレクチャー</em>します。</p><p><strong>小学生以上</strong>から参加可能です。</p>",
-        "image": "demo.png",
-        "location": "工芸エリア",
-        "time": "10:00-15:00",
-        "snsUrl": "https://instagram.com/wood_craft",
-        "price": "材料費 1,500円",
-        "images": ["demo.png"]
-      },
-      {
-        "name": "お菓子作り",
-        "description": "パティシエと一緒に、本格的なお菓子作りを体験できます。",
-        "detailInfo": "<p>プロのパティシエが<strong>本格スイーツ作り</strong>を教えます！</p><p>本日のメニュー：</p><ul><li>カップケーキ</li><li>クッキー</li><li>マカロン</li></ul><p><em>作ったお菓子はお持ち帰りいただけます。</em></p><p><strong>アレルギー対応</strong>も可能です。事前にお申し出ください。</p><p>定員：各回10名まで</p>",
-        "image": "demo.png",
-        "location": "キッチンスタジオ",
-        "time": "11:00-14:00",
-        "snsUrl": "https://facebook.com/sweets_kokko",
-        "price": "参加費 1,000円",
+        "location": "調整中",
+        "time": "12/6・12/7",
+        "snsUrl": "",
+        "price": "無料(チケット料金に含む)",
         "images": ["demo.png"]
       }
     ]
