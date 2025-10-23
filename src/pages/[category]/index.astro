@@ -172,7 +172,7 @@ const categoryDescriptions: { [key: string]: string } = {
                         </picture>
                       )}
                       <div class="category__card-overlay">
-                        <span class="category__card-title">{item.name}</span>
+                        <span class="category__card-title" set:html={item.name}></span>
                       </div>
                       <svg
                         class="category__card-play-icon"

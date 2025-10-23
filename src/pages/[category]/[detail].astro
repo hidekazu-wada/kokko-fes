@@ -223,10 +223,8 @@ const breadcrumbStructuredData = {
 
       <main class="detail-content">
         <header class="detail-content__header">
-          <h2 class="detail-content__title">{itemData.name}</h2>
-          <p class="detail-content__description">
-            {itemData.description}
-          </p>
+          <h2 class="detail-content__title" set:html={itemData.name}></h2>
+          <p class="detail-content__description" set:html={itemData.description}></p>
         </header>
 
         <section class="detail-content__media">
