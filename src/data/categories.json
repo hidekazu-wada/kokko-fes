@@ -101,15 +101,15 @@
     "description": "展示・パフォーマンス・伝統芸能など",
     "items": [
       {
-        "name": "準備中",
-        "description": "",
-        "detailInfo": "<p></p>",
-        "image": "demo.png",
-        "location": "調整中",
-        "time": "12/6・12/7",
+        "name": "打ち上げ花火",
+        "description": "冬の湖で、迫力の冬花火をお楽しみください！",
+        "detailInfo": "<p>コッコ祭り名物の打ち上げ花火！<br>冬の澄んだ空に迫力の花火が打ち上がります。<br>ドリンクやフードを片手にお楽しみください。<br>終了後はレストランでの夕食（要予約）や<br>コッコでのキャンドルナイトなど<br>まだまだ楽しめることが盛りだくさんです。</p>",
+        "image": "打ち上げ花火/img-1.png",
+        "images": ["打ち上げ花火/img-1.png"],
+        "location": "湖畔",
+        "time": "12/6 17:30ごろ",
         "snsUrl": "",
-        "price": "無料(チケット料金に含む)",
-        "images": ["demo.png"]
+        "price": "無料(チケット料金に含む)"
       }
     ]
   },
@@ -182,11 +182,11 @@
         "description": "",
         "detailInfo": "<p></p>",
         "image": "demo.png",
+        "images": ["demo.png"],
         "location": "調整中",
         "time": "12/6・12/7",
         "snsUrl": "",
-        "price": "無料(チケット料金に含む)",
-        "images": ["demo.png"]
+        "price": "無料(チケット料金に含む)"
       }
     ]
   }
