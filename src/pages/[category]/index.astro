@@ -140,7 +140,7 @@ const categoryDescriptions: { [key: string]: string } = {
           {categoryData.title.slice(1)}
         </h1>
         <p class="category__subtitle">{categoryData.subtitle}</p>
-        <p class="category__description">{categoryData.description}</p>
+        <p class="category__description" set:html={categoryData.description}></p>
       </header>
 
       <ul class="category__list">
