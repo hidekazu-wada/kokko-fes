@@ -363,7 +363,7 @@ const breadcrumbStructuredData = {
           <aside class="detail-info__details">
             <dl class="detail-info__detail">
               <dt class="detail-info__detail-label">場所</dt>
-              <dd class="detail-info__detail-value">{itemData.location}</dd>
+              <dd class="detail-info__detail-value" set:html={itemData.location}></dd>
             </dl>
             <dl class="detail-info__detail">
               <dt class="detail-info__detail-label">日程</dt>

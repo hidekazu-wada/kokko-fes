@@ -200,9 +200,7 @@ const categoryDescriptions: { [key: string]: string } = {
                   <dl class="category__card-details">
                     <div class="category__card-detail">
                       <dt class="category__card-detail-label">場所：</dt>
-                      <dd class="category__card-detail-value">
-                        {item.location}
-                      </dd>
+                      <dd class="category__card-detail-value" set:html={item.location}></dd>
                     </div>
                     <div class="category__card-detail">
                       <dt class="category__card-detail-label">日程：</dt>
