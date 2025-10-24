@@ -143,6 +143,17 @@
         "time": "12/6　時間調整中",
         "snsUrl": "https://www.instagram.com/don.kogakushu/?hl=ja",
         "price": "無料(チケット料金に含む)"
+      },
+      {
+        "name": "和太鼓 白檀",
+        "description": "地元山梨で活躍する和太鼓 白檀による<br>パフォーマンスステージです！<br>ちびっこ白檀も頑張るぞ！",
+        "detailInfo": "<p>結成12年目の和太鼓チーム！</p>",
+        "image": "和太鼓 白檀/img-1.png",
+        "images": ["和太鼓 白檀/img-1.png"],
+        "location": "ホテル内 ホール(紅葉)",
+        "time": "12/6　時間調整中",
+        "snsUrl": "https://www.instagram.com/wadaiko__byakudan/?hl=ja",
+        "price": "無料(チケット料金に含む)"
       }
     ]
   },
