@@ -232,6 +232,17 @@
         "time": "12/6・12/7",
         "snsUrl": "https://www.instagram.com/bamboo_fujieda/?hl=ja",
         "price": "有料　調整中"
+      },
+      {
+        "name": "うぐいす笛作り",
+        "description": "竹でうぐいす笛を作る体験です。<br>シンプルながら、音が鳴るポイント探しが醍醐味です！",
+        "detailInfo": "<p>竹の素朴な素材を切り出し、穴を開け、吹くための絶妙な角度を探る。<br>シンプルながらも工夫が光る、世界に一つのあなたの笛。<br>大人も子供も一緒に楽しめるクラフト体験です。<br>自分で音を生み出す原体験をお楽しみください。<br>提供：竹部(バンブ)</p>",
+        "image": "うぐいす笛作り/img-1.png",
+        "images": ["うぐいす笛作り/img-1.png"],
+        "location": "コッコ内 竹部(バンブ)ブース",
+        "time": "12/6・12/7",
+        "snsUrl": "https://www.instagram.com/bamboo_fujieda/?hl=ja",
+        "price": "有料　調整中"
       }
     ]
   }
