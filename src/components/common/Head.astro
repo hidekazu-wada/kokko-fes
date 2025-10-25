@@ -8,7 +8,8 @@ export interface Props {
   structuredData?: object; // 構造化データ（JSON-LD）
 }
 
-const defaultDescription = "河口湖町西湖で開催されるイベント「コッコ祭り」で自然と文化を満喫！家族や友人と楽しめるアクティビティ、絶品グルメ、創造性あふれるワークショップ、圧巻のパフォーマンスが待っています。一日中飽きない感動体験をお届けします。";
+const defaultDescription =
+  "河口湖町西湖で開催されるイベント「コッコ祭り」で自然と文化を満喫！家族や友人と楽しめるアクティビティ、絶品グルメ、創造性あふれるワークショップ、圧巻のパフォーマンスが待っています。一日中飽きない感動体験をお届けします。";
 const siteName = "コッコ祭り 2025｜KOKKO Festival";
 const siteUrl = "https://kokko-fes.com";
 const defaultOgImage = `${siteUrl}/ogp-default.jpg`; // デフォルトOGP画像
@@ -19,7 +20,7 @@ const {
   ogImage = defaultOgImage,
   ogUrl = Astro.url.href,
   ogType = "website",
-  structuredData
+  structuredData,
 } = Astro.props;
 
 const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
@@ -39,10 +40,7 @@ const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
     name="keywords"
     content="コッコ祭り,kokko fes,イベント,こども,アクティビティ,自然体験,河口湖,西湖,山梨,宿泊"
   />
-  <meta
-    name="description"
-    content={description}
-  />
+  <meta name="description" content={description} />
   <!-- noindex 公開時削除 -->
   <!-- <meta name="robots" content="noindex" /> -->
 
@@ -65,23 +63,35 @@ const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
   <meta name="twitter:image" content={ogImage} />
 
   <!-- 構造化データ (JSON-LD) -->
-  {structuredData && (
-    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
-  )}
+  {
+    structuredData && (
+      <script
+        type="application/ld+json"
+        set:html={JSON.stringify(structuredData)}
+      />
+    )
+  }
 
   <!-- Google Analytics (GA4) -->
-  {gaId && (
-    <>
-      <script async 
-src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
-      <script is:inline define:vars={{ gaId }}>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', gaId);
-      </script>
-    </>
-  )}
+  {
+    gaId && (
+      <>
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+        />
+        <script
+          is:inline
+          set:html={`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${gaId}');
+        `}
+        />
+      </>
+    )
+  }
 
   <!-- Google fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
