@@ -176,6 +176,17 @@
         "time": "12/6　時間調整中",
         "snsUrl": "https://www.instagram.com/taikoshu_ryugetsu/?hl=ja",
         "price": "無料(チケット料金に含む)"
+      },
+      {
+        "name": "岩崎けんいち Night Live",
+        "description": "山梨発愛と勇気のシンガーソングライター",
+        "detailInfo": "<p>愛と勇気のシンガーソングライター「岩崎けんいち」によるライブ<br>「どうせ無理」な事も「きっと、うまくいく」と思わせてくれる<br>そんな、優しくてパワフルな歌声が響きわたります。</p>",
+        "image": "岩崎けんいち/img-1.png",
+        "images": ["岩崎けんいち/img-1.png"],
+        "location": "レストラン",
+        "time": "12/6 20:00-20:30",
+        "snsUrl": "https://www.iwa-ken.com/",
+        "price": "無料"
       }
     ]
   },
