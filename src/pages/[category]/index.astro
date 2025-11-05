@@ -2,29 +2,9 @@
 // メインSCSSファイルをインポート
 import "../../styles/main.scss";
 
-// データ
-import categoriesData from "../../data/categories.json";
-
-// 型定義
-interface CategoryItem {
-  name: string;
-  image: string;
-  location: string;
-  time: string;
-}
-
-interface CategoryData {
-  id: string;
-  title: string;
-  titleAccent: string;
-  subtitle: string;
-  description: string;
-  items: CategoryItem[];
-}
-
-interface CategoriesData {
-  [key: string]: CategoryData;
-}
+// データ取得（MicroCMS対応）
+import { getCategoriesData, getAllCategoryIds } from "../../lib/categoryData";
+import type { CategoryItem, Category } from "../../types/contents";
 
 // 画像処理
 import { getImage } from "astro:assets";
@@ -36,16 +16,16 @@ import Breadcrumb from "../../components/common/Breadcrumb.astro";
 
 // 動的ルーティング設定
 export async function getStaticPaths() {
-  const typedCategoriesData = categoriesData as CategoriesData;
+  const categoriesData = await getCategoriesData();
 
-  return Object.keys(typedCategoriesData).map((categoryId) => ({
+  return Object.keys(categoriesData).map((categoryId) => ({
     params: { category: categoryId },
-    props: { categoryData: typedCategoriesData[categoryId] },
+    props: { categoryData: categoriesData[categoryId] },
   }));
 }
 
 const { category } = Astro.params;
-const { categoryData } = Astro.props;
+const { categoryData } = Astro.props as { categoryData: Category };
 
 // すべての画像を事前にインポート（Viteの動的インポート制限を回避）
 const allImages: Record<string, { default: any }> = import.meta.glob('../../images/**/*.{png,jpg,jpeg,webp,PNG,JPG,JPEG,WEBP}', { eager: true });
@@ -79,29 +59,43 @@ function getImageFromGlob(category: string, imagePath: string) {
 const processedItems = await Promise.all(
   categoryData.items.map(async (item: CategoryItem) => {
     try {
-      const itemImage = getImageFromGlob(category, item.image);
+      // MicroCMSのURLかローカルパスかを判定
+      const isExternalUrl = item.image.startsWith('http://') || item.image.startsWith('https://');
 
-      if (!itemImage) {
-        console.warn(`Image not found: ${category}/${item.image}`);
+      if (isExternalUrl) {
+        // MicroCMSなどの外部URL：そのまま使用
         return {
           ...item,
-          processedImage: null,
+          processedImage: {
+            src: item.image,
+          },
+        };
+      } else {
+        // ローカル画像：従来通りの処理
+        const itemImage = getImageFromGlob(category, item.image);
+
+        if (!itemImage) {
+          console.warn(`[WARN] Image not found: ${category}/${item.image}`);
+          return {
+            ...item,
+            processedImage: null,
+          };
+        }
+
+        const optimizedImage = await getImage({
+          src: itemImage,
+          format: "webp",
+          widths: [620],
+        });
+
+        return {
+          ...item,
+          processedImage: optimizedImage,
         };
       }
-
-      const optimizedImage = await getImage({
-        src: itemImage,
-        format: "webp",
-        widths: [620],
-      });
-
-      return {
-        ...item,
-        processedImage: optimizedImage,
-      };
     } catch (error) {
       console.error(
-        `Error processing image for ${category}/${item.image}:`,
+        `[ERROR] Error processing image for ${category}/${item.image}:`,
         error,
       );
       return {
@@ -155,21 +149,13 @@ const categoryDescriptions: { [key: string]: string } = {
                   >
                     <div class="category__card-image-wrapper">
                       {item.processedImage && (
-                        <picture class="category__card-image">
-                          <source
-                            media="(min-width: 1024px)"
-                            srcset={item.processedImage.srcSet.toString()}
-                          />
-                          <source
-                            media="(min-width: 744px)"
-                            srcset={item.processedImage.srcSet.toString()}
-                          />
+                        <div class="category__card-image">
                           <img
                             src={item.processedImage.src}
                             alt={item.name}
                             class="category__card-img"
                           />
-                        </picture>
+                        </div>
                       )}
                       <div class="category__card-overlay">
                         <span class="category__card-title" set:html={item.name}></span>

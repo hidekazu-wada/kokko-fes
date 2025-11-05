@@ -5,8 +5,9 @@ import PageBottomWave from "../../components/common/PageBottomWave.astro";
 import Breadcrumb from "../../components/common/Breadcrumb.astro";
 import PageTitle from "../../components/common/PageTitle.astro";
 
-// データ
-import categoriesData from "../../data/categories.json";
+// データ取得（MicroCMS対応）
+import { getCategoriesData } from "../../lib/categoryData";
+import type { CategoryItem, Category } from "../../types/contents";
 
 // 画像
 import Hiking from "../../images/common/hiking-illustration.png";
@@ -26,39 +27,13 @@ const treesImage = await getImage({
   widths: [140, 150, 170],
 });
 
-// 型定義
-interface CategoryItem {
-  name: string;
-  description: string;
-  detailInfo: string;
-  image: string;
-  images?: string[];
-  location: string;
-  time: string;
-  snsUrl: string;
-  price: string;
-}
-
-interface CategoryData {
-  id: string;
-  title: string;
-  titleAccent: string;
-  subtitle: string;
-  description: string;
-  items: CategoryItem[];
-}
-
-interface CategoriesData {
-  [key: string]: CategoryData;
-}
-
 export async function getStaticPaths() {
-  const typedCategoriesData = categoriesData as CategoriesData;
+  const categoriesData = await getCategoriesData();
   const paths: any[] = [];
 
   // すべてのカテゴリーをループ
-  Object.keys(typedCategoriesData).forEach((categoryId) => {
-    const categoryData = typedCategoriesData[categoryId];
+  Object.keys(categoriesData).forEach((categoryId) => {
+    const categoryData = categoriesData[categoryId];
 
     // 各カテゴリーのアイテムごとに詳細ページのパスを生成
     categoryData.items.forEach((item: CategoryItem) => {
@@ -132,28 +107,39 @@ try {
   const imagePromises = imageList
     .slice(0, maxImages)
     .map(async (imageName: string) => {
-      const imageModule = getImageFromGlob(category, imageName);
+      // MicroCMSのURLかローカルパスかを判定
+      const isExternalUrl = imageName.startsWith('http://') || imageName.startsWith('https://');
 
-      if (imageModule) {
-        return await getImage({
-          src: imageModule,
-          format: "webp",
-          widths: [87, 170, 620, 900, 1400],
-        });
+      if (isExternalUrl) {
+        // MicroCMSなどの外部URL：そのまま使用
+        return {
+          src: imageName,
+        };
       } else {
-        console.warn(`Image not found: ${imageName}, using default`);
-        // デフォルト画像を使用
-        return await getImage({
-          src: DefaultImage,
-          format: "webp",
-          widths: [87, 170, 620, 900, 1400],
-        });
+        // ローカル画像：従来通りの処理
+        const imageModule = getImageFromGlob(category, imageName);
+
+        if (imageModule) {
+          return await getImage({
+            src: imageModule,
+            format: "webp",
+            widths: [87, 170, 620, 900, 1400],
+          });
+        } else {
+          console.warn(`[WARN] Image not found: ${imageName}, using default`);
+          // デフォルト画像を使用
+          return await getImage({
+            src: DefaultImage,
+            format: "webp",
+            widths: [87, 170, 620, 900, 1400],
+          });
+        }
       }
     });
 
   formattedImages = await Promise.all(imagePromises);
 } catch (error) {
-  console.error("Error loading images:", error);
+  console.error("[ERROR] Error loading images:", error);
   // エラー時はデフォルト画像を1枚表示
   if (DefaultImage) {
     formattedImages = [
@@ -237,21 +223,11 @@ const breadcrumbStructuredData = {
                 formattedImages.map((image, index) => (
                   <div class="swiper-slide">
                     <figure class="detail-content__main-figure">
-                      <picture>
-                        <source
-                          media="(min-width: 1024px)"
-                          srcset={image.srcSet.toString()}
-                        />
-                        <source
-                          media="(min-width: 744px)"
-                          srcset={image.srcSet.toString()}
-                        />
-                        <img
-                          src={image.src}
-                          alt={`${itemData.name} - 画像${index + 1}`}
-                          class="detail-content__main-img"
-                        />
-                      </picture>
+                      <img
+                        src={image.src}
+                        alt={`${itemData.name} - 画像${index + 1}`}
+                        class="detail-content__main-img"
+                      />
                     </figure>
                   </div>
                 ))
@@ -265,21 +241,11 @@ const breadcrumbStructuredData = {
                 formattedImages.map((image, index) => (
                   <div class="swiper-slide">
                     <figure class="detail-content__thumbnail">
-                      <picture>
-                        <source
-                          media="(min-width: 1024px)"
-                          srcset={image.srcSet.toString()}
-                        />
-                        <source
-                          media="(min-width: 744px)"
-                          srcset={image.srcSet.toString()}
-                        />
-                        <img
-                          src={image.src}
-                          alt={`${itemData.name} - サムネイル${index + 1}`}
-                          class="detail-content__thumbnail-img"
-                        />
-                      </picture>
+                      <img
+                        src={image.src}
+                        alt={`${itemData.name} - サムネイル${index + 1}`}
+                        class="detail-content__thumbnail-img"
+                      />
                     </figure>
                   </div>
                 ))
@@ -299,67 +265,28 @@ const breadcrumbStructuredData = {
               fill="#FFFCF2"></path>
           </svg>
           <figure class="detail-info__hero">
-            <picture class="detail-info__hero-picture">
-              <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-              <source
-                media="(min-width: 1024px)"
-                srcset={HikingImage.srcSet.toString()}
-              />
-              <!-- タブレット（744px以上）→ 中解像度版 -->
-              <source
-                media="(min-width: 744px)"
-                srcset={HikingImage.srcSet.toString()}
-              />
-              <!-- スマホ（744px未満）→ 最小解像度版 -->
-              <img
-                src={HikingImage.src}
-                alt="ハイキングイラスト"
-                class="detail-info__hero-img"
-              />
-            </picture>
+            <img
+              src={HikingImage.src}
+              alt="ハイキングイラスト"
+              class="detail-info__hero-img"
+            />
           </figure>
           <article class="detail-info__article">
             <header class="detail-info__article-header">
               <figure class="detail-info__article-icon">
-                <picture class="detail-info__article-picture">
-                  <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-                  <source
-                    media="(min-width: 1024px)"
-                    srcset={treesImage.srcSet.toString()}
-                  />
-                  <!-- タブレット（744px以上）→ 中解像度版 -->
-                  <source
-                    media="(min-width: 744px)"
-                    srcset={treesImage.srcSet.toString()}
-                  />
-                  <!-- スマホ（744px未満）→ 最小解像度版 -->
-                  <img
-                    src={treesImage.src}
-                    alt="木のイラスト"
-                    class="detail-info__article-img"
-                  />
-                </picture>
+                <img
+                  src={treesImage.src}
+                  alt="木のイラスト"
+                  class="detail-info__article-img"
+                />
               </figure>
               <h3 class="detail-info__article-title">基本情報</h3>
               <figure class="detail-info__article-decoration">
-                <picture class="detail-info__article-decoration-picture">
-                  <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-                  <source
-                    media="(min-width: 1024px)"
-                    srcset={treesImage.srcSet.toString()}
-                  />
-                  <!-- タブレット（744px以上）→ 中解像度版 -->
-                  <source
-                    media="(min-width: 744px)"
-                    srcset={treesImage.srcSet.toString()}
-                  />
-                  <!-- スマホ（744px未満）→ 最小解像度版 -->
-                  <img
-                    src={treesImage.src}
-                    alt="木のイラスト"
-                    class="detail-info__article-decoration-img"
-                  />
-                </picture>
+                <img
+                  src={treesImage.src}
+                  alt="木のイラスト"
+                  class="detail-info__article-decoration-img"
+                />
               </figure>
             </header>
           </article>
@@ -871,13 +798,6 @@ const breadcrumbStructuredData = {
         }
 
         &-icon {
-          @include tablet-up {
-          }
-          @include desktop-up {
-          }
-        }
-
-        &-picture {
           display: block;
           width: spx(140);
           @include tablet-up {
@@ -891,10 +811,6 @@ const breadcrumbStructuredData = {
         &-img {
           display: block;
           width: 100%;
-          @include tablet-up {
-          }
-          @include desktop-up {
-          }
         }
 
         &-title {
@@ -917,30 +833,19 @@ const breadcrumbStructuredData = {
         }
 
         &-decoration {
+          display: block;
+          width: spx(140);
           transform: scaleX(-1);
           @include tablet-up {
+            width: ppx(170 * 1.2);
           }
           @include desktop-up {
-          }
-
-          &-picture {
-            display: block;
-            width: spx(140);
-            @include tablet-up {
-              width: ppx(170 * 1.2);
-            }
-            @include desktop-up {
-              width: ppx(170);
-            }
+            width: ppx(170);
           }
 
           &-img {
             display: block;
             width: 100%;
-            @include tablet-up {
-            }
-            @include desktop-up {
-            }
           }
         }
       }

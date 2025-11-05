@@ -16,7 +16,14 @@ export default defineConfig({
     // Vercelでの画像最適化の問題を回避
     service: {
       entrypoint: 'astro/assets/services/noop'
-    }
+    },
+    // MicroCMSの画像ドメインを許可
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.microcms-assets.io'
+      }
+    ]
   },
 
   // サイトマップの自動生成
