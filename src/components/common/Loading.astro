@@ -22,20 +22,33 @@ import logoOnlyCircle from "../../images/common/logo-only-circle.svg";
       loadingElement.style.display = 'none';
     }
   } else {
-    // 初回訪問 - ローディング画面を表示し、3秒後にフェードアウト
+    // 初回訪問 - ローディング画面を表示し、画像読み込み完了後にフェードアウト
     localStorage.setItem(VISITED_KEY, 'true');
-    
-    setTimeout(() => {
-      if (loadingElement) {
+
+    // フェードアウト処理の関数
+    const fadeOutLoading = () => {
+      if (loadingElement && loadingElement.style.opacity !== '0') {
         loadingElement.style.transition = 'opacity 0.5s ease-out';
         loadingElement.style.opacity = '0';
-        
+
         // フェードアウト完了後に要素を削除
         setTimeout(() => {
           loadingElement.style.display = 'none';
         }, 500);
       }
-    }, 3000);
+    };
+
+    // 画像読み込み完了を検知（高速化）
+    if (document.readyState === 'complete') {
+      // すでに読み込み完了している場合は即座に実行
+      fadeOutLoading();
+    } else {
+      // 読み込み完了を待つ
+      window.addEventListener('load', fadeOutLoading);
+    }
+
+    // 最大3秒のタイムアウト（保険として残す）
+    setTimeout(fadeOutLoading, 3000);
   }
 </script>
 
