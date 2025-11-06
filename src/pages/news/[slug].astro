@@ -21,10 +21,11 @@ export async function getStaticPaths() {
 import { getImage } from "astro:assets";
 import DemoImage from "../../images/news-detail/demo.png";
 
-// フォーマット
+// フォーマット（Sharp使用 - WebP形式、高品質）
 const Demo = await getImage({
   src: DemoImage,
-  format: "webp", // WebP形式で最適化
+  format: "webp",
+  quality: 85,
   widths: [560, 900, 1400],
 });
 

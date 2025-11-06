@@ -85,6 +85,7 @@ const processedItems = await Promise.all(
         const optimizedImage = await getImage({
           src: itemImage,
           format: "webp",
+          quality: 85,
           widths: [620],
         });
 

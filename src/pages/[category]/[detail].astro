@@ -19,11 +19,13 @@ import { getImage } from "astro:assets";
 const HikingImage = await getImage({
   src: Hiking,
   format: "webp",
+  quality: 85,
   widths: [206, 300, 367],
 });
 const treesImage = await getImage({
   src: trees,
   format: "webp",
+  quality: 85,
   widths: [140, 150, 170],
 });
 
@@ -123,6 +125,7 @@ try {
           return await getImage({
             src: imageModule,
             format: "webp",
+            quality: 85,
             widths: [87, 170, 620, 900, 1400],
           });
         } else {
@@ -131,6 +134,7 @@ try {
           return await getImage({
             src: DefaultImage,
             format: "webp",
+            quality: 85,
             widths: [87, 170, 620, 900, 1400],
           });
         }
@@ -146,6 +150,7 @@ try {
       await getImage({
         src: DefaultImage,
         format: "webp",
+        quality: 85,
         widths: [87, 170, 620, 900, 1400],
       }),
     ];
@@ -158,6 +163,7 @@ if (formattedImages.length === 0 && DefaultImage) {
     await getImage({
       src: DefaultImage,
       format: "webp",
+      quality: 85,
       widths: [87, 170, 620, 900, 1400],
     }),
   ];

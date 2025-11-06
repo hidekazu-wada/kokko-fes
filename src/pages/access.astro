@@ -14,15 +14,17 @@ import FujisanSt from "../images/access/from-fujisan-st.svg";
 import KawaguchikoSt from "../images/access/from-kawaguchiko-st.svg";
 import MenuClose from "../images/menu/menu-close.svg";
 
-// フォーマット
+// フォーマット（Sharp使用 - WebP形式、高品質）
 const BusTrain = await getImage({
   src: ByBusTrain,
   format: "webp",
+  quality: 85,
   widths: [410, 470],
 });
 const Car = await getImage({
   src: ByCar,
   format: "webp",
+  quality: 85,
   widths: [349, 410],
 });
 ---

@@ -5,10 +5,11 @@ import cloudImage from "../../images/menu/menu-cloud.svg";
 import menuCloseImage from "../../images/menu/menu-close.svg";
 import logoHorizontal from "../../images/menu/logo-horizontal.svg";
 
-// フォーマット
+// フォーマット（Sharp使用 - WebP形式、高品質）
 const balloon = await getImage({
   src: balloonImage,
   format: "webp",
+  quality: 85,
   widths: [185, 278, 345],
 });
 ---

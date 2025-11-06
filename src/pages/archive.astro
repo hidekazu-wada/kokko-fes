@@ -75,12 +75,13 @@ function chunkArray<T>(array: T[], chunkSize: number): T[][] {
 
 const archiveRows = chunkArray(archiveItems, 3);
 
-// 画像の最適化処理
+// 画像の最適化処理（Sharp使用 - WebP形式、高品質）
 const optimizedImages = await Promise.all(
   archiveItems.map(async (item) => {
     const img = await getImage({
       src: item.image,
       format: "webp",
+      quality: 85,
       widths: [500, 600],
     });
     return { ...item, optimizedImage: img };

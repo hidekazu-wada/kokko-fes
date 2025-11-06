@@ -1,6 +1,7 @@
 ---
-// Swiper CSS
-import "swiper/swiper-bundle.css";
+// Swiper CSS（必要なモジュールのみインポート - バンドルサイズ削減）
+import "swiper/css";
+import "swiper/css/effect-fade";
 // 画像
 import { getImage } from "astro:assets";
 import logoOnlyCircle from "../../images/common/logo-only-circle.svg";
@@ -11,30 +12,35 @@ import categorySlideTsukuru from "../../images/top/category-slide-tsukuru.jpg";
 import categorySlideMiru from "../../images/top/category-slide-miru.png";
 import categorySlideTomaru from "../../images/top/category-slide-tomaru.jpg";
 
-// フォーマット
+// 画像最適化（Sharp使用 - WebP形式、複数サイズで配信）
 const Slide01 = await getImage({
   src: categorySlideAsobu,
   format: "webp",
+  quality: 85, // 品質を明示的に指定（85%推奨）
   widths: [660, 900, 1315],
 });
 const Slide02 = await getImage({
   src: categorySlideTaberu,
   format: "webp",
+  quality: 85,
   widths: [660, 900, 1315],
 });
 const Slide03 = await getImage({
   src: categorySlideTsukuru,
   format: "webp",
+  quality: 85,
   widths: [660, 900, 1315],
 });
 const Slide04 = await getImage({
   src: categorySlideMiru,
   format: "webp",
+  quality: 85,
   widths: [660, 900, 1315],
 });
 const Slide05 = await getImage({
   src: categorySlideTomaru,
   format: "webp",
+  quality: 85,
   widths: [660, 900, 1315],
 });
 ---
