@@ -1,7 +1,16 @@
 ---
+import { getImage } from "astro:assets";
 import logo from "../../images/common/logo.svg";
-import heroImage from "../../images/top/hero-img.svg";
+import heroImageSrc from "../../images/top/hero-img.webp";
 import cloudImage from "../../images/top/hero-cloud.svg";
+
+// Hero画像を最適化（レスポンシブ対応 - 複数サイズ生成）
+const heroImage = await getImage({
+  src: heroImageSrc,
+  format: "webp",
+  quality: 85,
+  widths: [720, 1440, 2560], // SP/タブレット/PC用
+});
 ---
 
 <section class="hero">
@@ -19,7 +28,25 @@ import cloudImage from "../../images/top/hero-cloud.svg";
     </div>
     <address class="hero__venue">HAMAYOU リゾート</address>
   </div>
-  <img class="hero__image" src={heroImage.src} alt="ヒーローイメージ" />
+
+  <!-- LCP要素：最優先で読み込み（パフォーマンス最適化） -->
+  <picture>
+    <source
+      type="image/webp"
+      srcset={heroImage.srcSet.attribute}
+      sizes="100vw"
+    />
+    <img
+      class="hero__image"
+      src={heroImage.src}
+      alt="ヒーローイメージ"
+      width={2560}
+      height={880}
+      fetchpriority="high"
+      loading="eager"
+    />
+  </picture>
+
   <img
     class="hero__cloud-image cloud-1"
     src={cloudImage.src}
