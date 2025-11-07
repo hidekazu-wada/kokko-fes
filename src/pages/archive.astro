@@ -114,13 +114,17 @@ const optimizedRows = chunkArray(optimizedImages, 3);
                         <source
                           media="(min-width: 1024px)"
                           srcset={item.optimizedImage.srcSet.attribute}
+                          sizes="600px"
                         />
                         <source
                           media="(min-width: 744px)"
                           srcset={item.optimizedImage.srcSet.attribute}
+                          sizes="500px"
                         />
                         <img
                           src={item.optimizedImage.src}
+                          srcset={item.optimizedImage.srcSet.attribute}
+                          sizes="(min-width: 1024px) 600px, (min-width: 744px) 500px, 500px"
                           alt={`${item.year}年コッコ祭りの様子`}
                           class="archive-item__img"
                         />

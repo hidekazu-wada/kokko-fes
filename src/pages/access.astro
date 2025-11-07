@@ -100,16 +100,20 @@ const Car = await getImage({
             <source
               media="(min-width: 1024px)"
               srcset={BusTrain.srcSet.attribute}
+              sizes="470px"
             />
             <!-- タブレット（744px以上）→ 中解像度版 -->
             <source
               media="(min-width: 744px)"
               srcset={BusTrain.srcSet.attribute}
+              sizes="410px"
             />
             <!-- スマホ（744px未満）→ 最小解像度版 -->
             <img
               class="transportation__img"
               src={BusTrain.src}
+              srcset={BusTrain.srcSet.attribute}
+              sizes="(min-width: 1024px) 470px, (min-width: 744px) 410px, 410px"
               alt="バス・電車でのアクセス"
             />
           </picture>
@@ -185,13 +189,20 @@ const Car = await getImage({
             <source
               media="(min-width: 1024px)"
               srcset={Car.srcSet.attribute}
+              sizes="410px"
             />
             <!-- タブレット（744px以上）→ 中解像度版 -->
-            <source media="(min-width: 744px)" srcset={Car.srcSet.attribute} />
+            <source
+              media="(min-width: 744px)"
+              srcset={Car.srcSet.attribute}
+              sizes="349px"
+            />
             <!-- スマホ（744px未満）→ 最小解像度版 -->
             <img
               class="transportation__img"
               src={Car.src}
+              srcset={Car.srcSet.attribute}
+              sizes="(min-width: 1024px) 410px, (min-width: 744px) 349px, 349px"
               alt="お車でのアクセス"
             />
           </picture>

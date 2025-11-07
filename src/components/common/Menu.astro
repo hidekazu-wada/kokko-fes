@@ -47,11 +47,24 @@ const balloon = await getImage({
   />
   <picture class="menu__balloon">
     <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
-    <source media="(min-width: 1024px)" srcset={balloon.srcSet.attribute} />
+    <source
+      media="(min-width: 1024px)"
+      srcset={balloon.srcSet.attribute}
+      sizes="345px"
+    />
     <!-- タブレット（744px以上）→ 中解像度版 -->
-    <source media="(min-width: 744px)" srcset={balloon.srcSet.attribute} />
+    <source
+      media="(min-width: 744px)"
+      srcset={balloon.srcSet.attribute}
+      sizes="278px"
+    />
     <!-- スマホ（744px未満）→ 最小解像度版 -->
-    <img src={balloon.src} alt="風船に乗った子どものイラスト" />
+    <img
+      src={balloon.src}
+      srcset={balloon.srcSet.attribute}
+      sizes="(min-width: 1024px) 345px, (min-width: 744px) 278px, 185px"
+      alt="風船に乗った子どものイラスト"
+    />
   </picture>
   <div class="modal" id="menu-modal">
     <button type="button" class="modal__close">

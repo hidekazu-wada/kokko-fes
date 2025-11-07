@@ -22,11 +22,13 @@ import PageHeadWaveDesktop from "../../images/common/page-header-wave-desktop.sv
       <source
         media="(min-width: 1024px)"
         srcset={PageHeadWaveDesktop.src.toString()}
+        sizes="100vw"
       />
       <!-- タブレット（744px以上）→ 中解像度版 -->
       <source
         media="(min-width: 744px)"
         srcset={PageHeadWaveTablet.src.toString()}
+        sizes="100vw"
       />
       <!-- スマホ（744px未満）→ 最小解像度版 -->
       <img

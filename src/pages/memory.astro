@@ -140,13 +140,17 @@ const availableYears = allYearData.map((d) => d.year).sort((a, b) => b - a);
                     <source
                       media="(min-width: 1024px)"
                       srcset={image.processed.srcSet.attribute}
+                      sizes="620px"
                     />
                     <source
                       media="(min-width: 744px)"
                       srcset={image.processed.srcSet.attribute}
+                      sizes="460px"
                     />
                     <img
                       src={image.processed.src}
+                      srcset={image.processed.srcSet.attribute}
+                      sizes="(min-width: 1024px) 620px, (min-width: 744px) 460px, 210px"
                       alt={`${image.year}年コッコ祭りの様子${index + 1}`}
                       class="memory-gallery__image"
                     />
@@ -241,10 +245,12 @@ const availableYears = allYearData.map((d) => d.year).sort((a, b) => b - a);
                             <source
                               media="(min-width: 1024px)"
                               srcset={image.processed.srcSet.attribute}
+                              sizes="1200px"
                             />
                             <source
                               media="(min-width: 744px)"
                               srcset={image.processed.srcSet.attribute}
+                              sizes="1200px"
                             />
                             <img
                               src={image.processed.src}

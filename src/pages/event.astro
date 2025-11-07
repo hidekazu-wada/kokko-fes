@@ -32,15 +32,19 @@ const Tree = await getImage({
               <source
                 media="(min-width: 1024px)"
                 srcset={Tree.srcSet.attribute}
+                sizes="170px"
               />
               <!-- タブレット（744px以上）→ 中解像度版 -->
               <source
                 media="(min-width: 744px)"
                 srcset={Tree.srcSet.attribute}
+                sizes="155px"
               />
               <!-- スマホ（744px未満）→ 最小解像度版 -->
               <img
                 src={Tree.src}
+                srcset={Tree.srcSet.attribute}
+                sizes="(min-width: 1024px) 170px, (min-width: 744px) 155px, 140px"
                 alt="クリスマスツリーのイラスト"
                 class="event-overview__tree-img"
               />
@@ -53,15 +57,19 @@ const Tree = await getImage({
               <source
                 media="(min-width: 1024px)"
                 srcset={Tree.srcSet.attribute}
+                sizes="170px"
               />
               <!-- タブレット（744px以上）→ 中解像度版 -->
               <source
                 media="(min-width: 744px)"
                 srcset={Tree.srcSet.attribute}
+                sizes="155px"
               />
               <!-- スマホ（744px未満）→ 最小解像度版 -->
               <img
                 src={Tree.src}
+                srcset={Tree.srcSet.attribute}
+                sizes="(min-width: 1024px) 170px, (min-width: 744px) 155px, 140px"
                 alt="クリスマスツリーのイラスト"
                 class="event-overview__tree-img"
               />

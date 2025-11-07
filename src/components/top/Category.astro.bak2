@@ -161,19 +161,17 @@ const Slide05 = await getImage({
             <source
               media="(min-width: 1024px)"
               srcset={Slide01.srcSet.attribute}
-              sizes="440px"
             />
             <!-- タブレット（744px以上）→ 中解像度版 -->
             <source
               media="(min-width: 744px)"
               srcset={Slide01.srcSet.attribute}
-              sizes="660px"
             />
             <!-- スマホ（744px未満）→ 最小解像度版 -->
             <img
               src={Slide01.src}
               srcset={Slide01.srcSet.attribute}
-              sizes="(min-width: 1024px) 440px, (min-width: 744px) 660px, 395px"
+              sizes="(min-width: 1024px) 33vw, (min-width: 744px) 50vw, 100vw"
               alt="遊ぶ"
               class="category__item-image"
             />
@@ -214,19 +212,17 @@ const Slide05 = await getImage({
             <source
               media="(min-width: 1024px)"
               srcset={Slide02.srcSet.attribute}
-              sizes="440px"
             />
             <!-- タブレット（744px以上）→ 中解像度版 -->
             <source
               media="(min-width: 744px)"
               srcset={Slide02.srcSet.attribute}
-              sizes="660px"
             />
             <!-- スマホ（744px未満）→ 最小解像度版 -->
             <img
               src={Slide02.src}
               srcset={Slide02.srcSet.attribute}
-              sizes="(min-width: 1024px) 440px, (min-width: 744px) 660px, 395px"
+              sizes="(min-width: 1024px) 33vw, (min-width: 744px) 50vw, 100vw"
               alt="食べる"
               class="category__item-image"
             />
@@ -268,19 +264,17 @@ const Slide05 = await getImage({
             <source
               media="(min-width: 1024px)"
               srcset={Slide03.srcSet.attribute}
-              sizes="440px"
             />
             <!-- タブレット（744px以上）→ 中解像度版 -->
             <source
               media="(min-width: 744px)"
               srcset={Slide03.srcSet.attribute}
-              sizes="660px"
             />
             <!-- スマホ（744px未満）→ 最小解像度版 -->
             <img
               src={Slide03.src}
               srcset={Slide03.srcSet.attribute}
-              sizes="(min-width: 1024px) 440px, (min-width: 744px) 660px, 395px"
+              sizes="(min-width: 1024px) 33vw, (min-width: 744px) 50vw, 100vw"
               alt="作る"
               class="category__item-image"
             />
@@ -321,19 +315,17 @@ const Slide05 = await getImage({
             <source
               media="(min-width: 1024px)"
               srcset={Slide04.srcSet.attribute}
-              sizes="440px"
             />
             <!-- タブレット（744px以上）→ 中解像度版 -->
             <source
               media="(min-width: 744px)"
               srcset={Slide04.srcSet.attribute}
-              sizes="660px"
             />
             <!-- スマホ（744px未満）→ 最小解像度版 -->
             <img
               src={Slide04.src}
               srcset={Slide04.srcSet.attribute}
-              sizes="(min-width: 1024px) 440px, (min-width: 744px) 660px, 395px"
+              sizes="(min-width: 1024px) 33vw, (min-width: 744px) 50vw, 100vw"
               alt="見る"
               class="category__item-image"
             />
@@ -374,13 +366,11 @@ const Slide05 = await getImage({
             <source
               media="(min-width: 1024px)"
               srcset={Slide05.srcSet.attribute}
-              sizes="440px"
             />
             <!-- タブレット（744px以上）→ 中解像度版 -->
             <source
               media="(min-width: 744px)"
               srcset={Slide05.srcSet.attribute}
-              sizes="660px"
             />
             <!-- スマホ（744px未満）→ 最小解像度版 -->
             <img

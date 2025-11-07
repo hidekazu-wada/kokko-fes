@@ -61,8 +61,16 @@ import overviewBottomTabletUp from "../../images/top/overview-bottom-tablet-up.s
   </article>
 
   <picture class="overview__bottom-image-wrapper">
-    <source media="(min-width: 1024px)" srcset={overviewBottomTabletUp.src} />
-    <source media="(min-width: 744px)" srcset={overviewBottomTabletUp.src} />
+    <source
+      media="(min-width: 1024px)"
+      srcset={overviewBottomTabletUp.src}
+      sizes="100vw"
+    />
+    <source
+      media="(min-width: 744px)"
+      srcset={overviewBottomTabletUp.src}
+      sizes="100vw"
+    />
     <img
       src={overviewBottomMobile.src}
       alt="開催概要"

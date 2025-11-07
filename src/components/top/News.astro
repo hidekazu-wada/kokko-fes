@@ -9,10 +9,12 @@ import NewsArticleList from "../common/NewsArticleList.astro";
     <source
       media="(min-width: 1024px)"
       srcset={newsHeadTabletUp.src.toString()}
+      sizes="100vw"
     />
     <source
       media="(min-width: 744px)"
       srcset={newsHeadTabletUp.src.toString()}
+      sizes="100vw"
     />
     <img src={newsHeadMobile.src} alt="kokko festival" class="news__head-img" />
   </picture>
