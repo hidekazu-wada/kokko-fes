@@ -105,6 +105,8 @@ const heroImage = await getImage({
     &__logo {
       display: block;
       width: spx(354);
+      height: auto;
+      aspect-ratio: 354 / 347; // Layout Shift防止：ロゴのアスペクト比を事前確保
       margin-inline: auto;
       @include tablet-up {
         width: ppx(567) * 1.2;
@@ -116,32 +118,39 @@ const heroImage = await getImage({
     &__date-wrapper {
       width: spx(667);
       height: spx(60);
+      min-height: spx(60); // Layout Shift防止：最小高さを確保
       background-color: white;
       border-radius: spx(50);
       display: flex;
       justify-content: center;
+      align-items: center; // Layout Shift防止：垂直中央揃え
       margin-inline: auto;
       margin-top: spx(34);
       @include tablet-up {
         width: ppx(1066) * 1.2;
         height: ppx(95) * 1.2;
+        min-height: ppx(95) * 1.2;
         border-radius: ppx(80) * 1.2;
         margin-top: ppx(42) * 1.2;
       }
       @include desktop-up {
         width: ppx(1066);
         height: ppx(95);
+        min-height: ppx(95);
         border-radius: ppx(80);
         margin-top: ppx(42);
       }
     }
 
     &__date {
+      display: flex;
+      align-items: center; // Layout Shift防止：垂直中央揃え
+      gap: spx(2); // Layout Shift防止：要素間の余白を明示
       &-item {
         color: var(--base_5, #102a4d);
         font-size: spx(37);
         font-weight: 700;
-        line-height: normal;
+        line-height: 1.2; // Layout Shift防止：line-heightを明示
         @include tablet-up {
           font-size: ppx(59) * 1.2;
         }
@@ -164,15 +173,20 @@ const heroImage = await getImage({
       color: var(--base_5, #102a4d);
       font-size: spx(36);
       font-weight: 700;
-      line-height: normal;
+      line-height: 1.2; // Layout Shift防止：line-heightを明示
+      min-height: spx(
+        43
+      ); // Layout Shift防止：最小高さを確保（font-size * line-height）
       text-align: center;
       margin-top: spx(15);
       @include tablet-up {
         font-size: ppx(45) * 1.2;
+        min-height: ppx(54) * 1.2;
         margin-top: ppx(37) * 1.2;
       }
       @include desktop-up {
         font-size: ppx(45);
+        min-height: ppx(54);
         margin-top: ppx(37);
       }
     }
@@ -181,6 +195,7 @@ const heroImage = await getImage({
       display: block;
       width: 100%;
       height: auto;
+      aspect-ratio: 2560 / 880; // Layout Shift防止：アスペクト比を事前確保
       margin-top: spx(62);
       position: relative;
       z-index: 2;
