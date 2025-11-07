@@ -113,11 +113,11 @@ const optimizedRows = chunkArray(optimizedImages, 3);
                       <picture class="archive-item__picture">
                         <source
                           media="(min-width: 1024px)"
-                          srcset={item.optimizedImage.srcSet.toString()}
+                          srcset={item.optimizedImage.srcSet.attribute}
                         />
                         <source
                           media="(min-width: 744px)"
-                          srcset={item.optimizedImage.srcSet.toString()}
+                          srcset={item.optimizedImage.srcSet.attribute}
                         />
                         <img
                           src={item.optimizedImage.src}

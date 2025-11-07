@@ -31,12 +31,12 @@ const Tree = await getImage({
               <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
               <source
                 media="(min-width: 1024px)"
-                srcset={Tree.srcSet.toString()}
+                srcset={Tree.srcSet.attribute}
               />
               <!-- タブレット（744px以上）→ 中解像度版 -->
               <source
                 media="(min-width: 744px)"
-                srcset={Tree.srcSet.toString()}
+                srcset={Tree.srcSet.attribute}
               />
               <!-- スマホ（744px未満）→ 最小解像度版 -->
               <img
@@ -52,12 +52,12 @@ const Tree = await getImage({
               <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
               <source
                 media="(min-width: 1024px)"
-                srcset={Tree.srcSet.toString()}
+                srcset={Tree.srcSet.attribute}
               />
               <!-- タブレット（744px以上）→ 中解像度版 -->
               <source
                 media="(min-width: 744px)"
-                srcset={Tree.srcSet.toString()}
+                srcset={Tree.srcSet.attribute}
               />
               <!-- スマホ（744px未満）→ 最小解像度版 -->
               <img

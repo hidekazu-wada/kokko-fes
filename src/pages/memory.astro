@@ -139,11 +139,11 @@ const availableYears = allYearData.map((d) => d.year).sort((a, b) => b - a);
                   <picture class="memory-gallery__picture">
                     <source
                       media="(min-width: 1024px)"
-                      srcset={image.processed.srcSet.toString()}
+                      srcset={image.processed.srcSet.attribute}
                     />
                     <source
                       media="(min-width: 744px)"
-                      srcset={image.processed.srcSet.toString()}
+                      srcset={image.processed.srcSet.attribute}
                     />
                     <img
                       src={image.processed.src}
@@ -240,11 +240,11 @@ const availableYears = allYearData.map((d) => d.year).sort((a, b) => b - a);
                           <picture class="memory-modal__picture">
                             <source
                               media="(min-width: 1024px)"
-                              srcset={image.processed.srcSet.toString()}
+                              srcset={image.processed.srcSet.attribute}
                             />
                             <source
                               media="(min-width: 744px)"
-                              srcset={image.processed.srcSet.toString()}
+                              srcset={image.processed.srcSet.attribute}
                             />
                             <img
                               src={image.processed.src}

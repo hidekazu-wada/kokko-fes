@@ -99,12 +99,12 @@ const Car = await getImage({
             <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
             <source
               media="(min-width: 1024px)"
-              srcset={BusTrain.srcSet.toString()}
+              srcset={BusTrain.srcSet.attribute}
             />
             <!-- タブレット（744px以上）→ 中解像度版 -->
             <source
               media="(min-width: 744px)"
-              srcset={BusTrain.srcSet.toString()}
+              srcset={BusTrain.srcSet.attribute}
             />
             <!-- スマホ（744px未満）→ 最小解像度版 -->
             <img
@@ -184,10 +184,10 @@ const Car = await getImage({
             <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
             <source
               media="(min-width: 1024px)"
-              srcset={Car.srcSet.toString()}
+              srcset={Car.srcSet.attribute}
             />
             <!-- タブレット（744px以上）→ 中解像度版 -->
-            <source media="(min-width: 744px)" srcset={Car.srcSet.toString()} />
+            <source media="(min-width: 744px)" srcset={Car.srcSet.attribute} />
             <!-- スマホ（744px未満）→ 最小解像度版 -->
             <img
               class="transportation__img"

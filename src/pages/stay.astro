@@ -45,12 +45,12 @@ const Rakuten = await getImage({
                 <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
                 <source
                   media="(min-width: 1024px)"
-                  srcset={Jaran.srcSet.toString()}
+                  srcset={Jaran.srcSet.attribute}
                 />
                 <!-- タブレット（744px以上）→ 中解像度版 -->
                 <source
                   media="(min-width: 744px)"
-                  srcset={Jaran.srcSet.toString()}
+                  srcset={Jaran.srcSet.attribute}
                 />
                 <!-- スマホ（744px未満）→ 最小解像度版 -->
                 <img
@@ -95,12 +95,12 @@ const Rakuten = await getImage({
                 <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
                 <source
                   media="(min-width: 1024px)"
-                  srcset={Rakuten.srcSet.toString()}
+                  srcset={Rakuten.srcSet.attribute}
                 />
                 <!-- タブレット（744px以上）→ 中解像度版 -->
                 <source
                   media="(min-width: 744px)"
-                  srcset={Rakuten.srcSet.toString()}
+                  srcset={Rakuten.srcSet.attribute}
                 />
                 <!-- スマホ（744px未満）→ 最小解像度版 -->
                 <img
