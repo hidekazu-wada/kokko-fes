@@ -17,31 +17,31 @@ const Slide01 = await getImage({
   src: categorySlideAsobu,
   format: "webp",
   quality: 85, // 品質を明示的に指定（85%推奨）
-  widths: [660, 900, 1315],
+  widths: [395, 660, 900, 1315],
 });
 const Slide02 = await getImage({
   src: categorySlideTaberu,
   format: "webp",
   quality: 85,
-  widths: [660, 900, 1315],
+  widths: [395, 660, 900, 1315],
 });
 const Slide03 = await getImage({
   src: categorySlideTsukuru,
   format: "webp",
   quality: 85,
-  widths: [660, 900, 1315],
+  widths: [395, 660, 900, 1315],
 });
 const Slide04 = await getImage({
   src: categorySlideMiru,
   format: "webp",
   quality: 85,
-  widths: [660, 900, 1315],
+  widths: [395, 660, 900, 1315],
 });
 const Slide05 = await getImage({
   src: categorySlideTomaru,
   format: "webp",
   quality: 85,
-  widths: [660, 900, 1315],
+  widths: [395, 660, 900, 1315],
 });
 ---
 
@@ -160,12 +160,12 @@ const Slide05 = await getImage({
             <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
             <source
               media="(min-width: 1024px)"
-              srcset={Slide01.srcSet.toString()}
+              srcset={Slide01.srcSet.attribute}
             />
             <!-- タブレット（744px以上）→ 中解像度版 -->
             <source
               media="(min-width: 744px)"
-              srcset={Slide01.srcSet.toString()}
+              srcset={Slide01.srcSet.attribute}
             />
             <!-- スマホ（744px未満）→ 最小解像度版 -->
             <img src={Slide01.src} alt="遊ぶ" class="category__item-image" />
@@ -205,12 +205,12 @@ const Slide05 = await getImage({
             <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
             <source
               media="(min-width: 1024px)"
-              srcset={Slide02.srcSet.toString()}
+              srcset={Slide02.srcSet.attribute}
             />
             <!-- タブレット（744px以上）→ 中解像度版 -->
             <source
               media="(min-width: 744px)"
-              srcset={Slide02.srcSet.toString()}
+              srcset={Slide02.srcSet.attribute}
             />
             <!-- スマホ（744px未満）→ 最小解像度版 -->
             <img src={Slide02.src} alt="食べる" class="category__item-image" />
@@ -251,12 +251,12 @@ const Slide05 = await getImage({
             <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
             <source
               media="(min-width: 1024px)"
-              srcset={Slide03.srcSet.toString()}
+              srcset={Slide03.srcSet.attribute}
             />
             <!-- タブレット（744px以上）→ 中解像度版 -->
             <source
               media="(min-width: 744px)"
-              srcset={Slide03.srcSet.toString()}
+              srcset={Slide03.srcSet.attribute}
             />
             <!-- スマホ（744px未満）→ 最小解像度版 -->
             <img src={Slide03.src} alt="作る" class="category__item-image" />
@@ -296,12 +296,12 @@ const Slide05 = await getImage({
             <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
             <source
               media="(min-width: 1024px)"
-              srcset={Slide04.srcSet.toString()}
+              srcset={Slide04.srcSet.attribute}
             />
             <!-- タブレット（744px以上）→ 中解像度版 -->
             <source
               media="(min-width: 744px)"
-              srcset={Slide04.srcSet.toString()}
+              srcset={Slide04.srcSet.attribute}
             />
             <!-- スマホ（744px未満）→ 最小解像度版 -->
             <img src={Slide04.src} alt="見る" class="category__item-image" />
@@ -341,12 +341,12 @@ const Slide05 = await getImage({
             <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
             <source
               media="(min-width: 1024px)"
-              srcset={Slide05.srcSet.toString()}
+              srcset={Slide05.srcSet.attribute}
             />
             <!-- タブレット（744px以上）→ 中解像度版 -->
             <source
               media="(min-width: 744px)"
-              srcset={Slide05.srcSet.toString()}
+              srcset={Slide05.srcSet.attribute}
             />
             <!-- スマホ（744px未満）→ 最小解像度版 -->
             <img src={Slide05.src} alt="泊まる" class="category__item-image" />
