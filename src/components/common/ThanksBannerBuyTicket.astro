@@ -1,0 +1,66 @@
+---
+
+---
+
+<a
+  href="https://hamayouresort.rezio.shop/ja-JP/product/J3GSYM"
+  target="_blank"
+  class="event-thanks__buy-ticket"
+>
+  <span>チケットの購入はこちらから </span>
+</a>
+<style lang="scss">
+  /* 必要なmixin/functionをインポート */
+  @import "../../styles/variables";
+  @import "../../styles/functions";
+  @import "../../styles/mixins";
+
+  // Event Thanks Block
+  .event-thanks {
+    &__buy-ticket {
+      display: block;
+      width: max-content;
+      height: spx(80);
+      border-radius: spx(50);
+      border: 1px solid var(--base_1, #fffcf2);
+      background: var(--logo_color_3, #c99e2d);
+      padding: spx(10) spx(40);
+      transition:
+        background 0.3s ease,
+        color 0.3s ease;
+      @include tablet-up {
+        height: ppx(80) * 1.2;
+        border-radius: ppx(50) * 1.2;
+        padding: ppx(10) * 1.2 ppx(40) * 1.2;
+      }
+      @include desktop-up {
+        height: ppx(80);
+        border-radius: ppx(50);
+        padding: ppx(10) ppx(40);
+      }
+      @include hover {
+        &:hover {
+          background: var(--logo_color_2, #fffcf2);
+          span {
+            color: var(--base_1, #c99e2d);
+          }
+        }
+      }
+      span {
+        color: var(--base_1, #fffcf2);
+        text-align: center;
+        font-size: spx(28);
+        font-style: normal;
+        font-weight: 700;
+        line-height: 180%; /* 46.8px */
+        display: block;
+        @include tablet-up {
+          font-size: ppx(32 * 1.2);
+        }
+        @include desktop-up {
+          font-size: ppx(32);
+        }
+      }
+    }
+  }
+</style>
