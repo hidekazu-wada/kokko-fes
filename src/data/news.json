@@ -23,6 +23,16 @@
   ],
   "articles": [
     {
+      "id": "news-003",
+      "slug": "timetable-released-2025",
+      "title": "タイムスケジュール公開のお知らせ",
+      "category": "important",
+      "publishedAt": "2025-12-02",
+      "image": "/images/news-detail/demo.png",
+      "excerpt": "コッコ祭り2025のタイムスケジュール（タイムテーブル）を公開いたしました。各日のプログラムや時間をご確認いただけます。",
+      "content": "<p>この度、コッコ祭り2025のタイムスケジュール（タイムテーブル）を公開いたしました。</p><p>2日間のプログラムや各イベントの開催時間を、PDF形式でご確認いただけます。</p><p>タイムスケジュールは、<a href=\"/event\">イベント情報ページ</a>または<a href=\"/timetable.pdf\" target=\"_blank\">こちらから直接PDFを閲覧</a>することができます。</p><p>当日のスケジュールを事前にご確認いただき、お楽しみいただけるプログラムをお選びください。</p><p>皆様のご来場を心よりお待ちしております。</p>"
+    },
+    {
       "id": "news-001",
       "slug": "important-announcement-2025",
       "title": "コッコ祭り2025開催決定のお知らせ",
