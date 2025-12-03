@@ -8,6 +8,8 @@ import PageTitle from "../../components/common/PageTitle.astro";
 // データとタイプ
 import newsData from "../../data/news.json";
 import type { NewsData, NewsArticle, NewsCategory } from "../../types/news.ts";
+import faqData from "../../data/faq.json";
+import type { FAQData, FAQItem, FAQCategory } from "../../types/faq.ts";
 
 // 開発用の静的パス設定
 export async function getStaticPaths() {
@@ -42,6 +44,10 @@ if (!article) {
   throw new Error(`Article not found for slug: ${slug}`);
 }
 
+// FAQデータの取得（よくある質問の記事の場合）
+const typedFaqData = faqData as FAQData;
+const isFaqPage = article.slug === "faq-2025";
+
 // 前後の記事を取得
 const currentIndex = typedNewsData.articles.findIndex((a) => a.slug === slug);
 const prevArticle =
@@ -56,55 +62,57 @@ const structuredDataArray = [
   {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [
+    itemListElement: [
       {
         "@type": "ListItem",
-        "position": 1,
-        "name": "トップ",
-        "item": "https://kokko-fes.com/"
+        position: 1,
+        name: "トップ",
+        item: "https://kokko-fes.com/",
       },
       {
         "@type": "ListItem",
-        "position": 2,
-        "name": "お知らせ",
-        "item": "https://kokko-fes.com/news/"
+        position: 2,
+        name: "お知らせ",
+        item: "https://kokko-fes.com/news/",
       },
       {
         "@type": "ListItem",
-        "position": 3,
-        "name": article.title,
-        "item": `https://kokko-fes.com/news/${article.slug}/`
-      }
-    ]
+        position: 3,
+        name: article.title,
+        item: `https://kokko-fes.com/news/${article.slug}/`,
+      },
+    ],
   },
   {
     "@context": "https://schema.org",
     "@type": "NewsArticle",
-    "headline": article.title,
-    "description": article.excerpt || `コッコ祭り2025のお知らせ「${article.title}」`,
-    "image": "https://kokko-fes.com/ogp-default.jpg",
-    "datePublished": article.publishedAt,
-    "author": {
+    headline: article.title,
+    description:
+      article.excerpt || `コッコ祭り2025のお知らせ「${article.title}」`,
+    image: "https://kokko-fes.com/ogp-default.jpg",
+    datePublished: article.publishedAt,
+    author: {
       "@type": "Organization",
-      "name": "コッコ祭り実行委員会",
-      "url": "https://kokko-fes.com"
+      name: "コッコ祭り実行委員会",
+      url: "https://kokko-fes.com",
     },
-    "publisher": {
+    publisher: {
       "@type": "Organization",
-      "name": "コッコ祭り実行委員会",
-      "url": "https://kokko-fes.com",
-      "logo": {
+      name: "コッコ祭り実行委員会",
+      url: "https://kokko-fes.com",
+      logo: {
         "@type": "ImageObject",
-        "url": "https://kokko-fes.com/logo.png"
-      }
-    }
-  }
+        url: "https://kokko-fes.com/logo.png",
+      },
+    },
+  },
 ];
 ---
 
 <PageLayout
   title={`${article.title} ｜コッコ祭り 2025｜KOKKO Festival`}
-  description={article.excerpt || `コッコ祭り2025のお知らせ「${article.title}」。最新のイベント情報をお届けします。`}
+  description={article.excerpt ||
+    `コッコ祭り2025のお知らせ「${article.title}」。最新のイベント情報をお届けします。`}
   structuredData={structuredDataArray}
 >
   <!-- news detail content -->
@@ -125,7 +133,42 @@ const structuredDataArray = [
             {article.title}
           </h2>
           <span class="news-article__divider"></span>
-          <main class="news-article__body" set:html={article.content} />
+          {
+            isFaqPage ? (
+              <div class="news-article__faq">
+                <main class="news-article__body" set:html={article.content} />
+                <div class="faq-list">
+                  {typedFaqData.categories.map((category) => {
+                    const categoryFaqs = typedFaqData.faqs.filter(
+                      (faq) => faq.category === category.id,
+                    );
+                    if (categoryFaqs.length === 0) return null;
+                    return (
+                      <section class="faq-category">
+                        <h3 class="faq-category__title">{category.name}</h3>
+                        <dl class="faq-category__list">
+                          {categoryFaqs.map((faq) => (
+                            <div class="faq-item">
+                              <dt class="faq-item__question">
+                                <span class="faq-item__q">Q</span>
+                                {faq.question}
+                              </dt>
+                              <dd class="faq-item__answer">
+                                <span class="faq-item__a">A</span>
+                                <span set:html={faq.answer} />
+                              </dd>
+                            </div>
+                          ))}
+                        </dl>
+                      </section>
+                    );
+                  })}
+                </div>
+              </div>
+            ) : (
+              <main class="news-article__body" set:html={article.content} />
+            )
+          }
         </section>
 
         <nav class="news-navigation">
@@ -594,6 +637,174 @@ const structuredDataArray = [
       }
       @include desktop-up {
         font-size: ppx(30);
+      }
+    }
+
+    &__faq {
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+  }
+
+  .faq-list {
+    margin-top: spx(40);
+    @include tablet-up {
+      margin-top: ppx(60 * 1.2);
+    }
+    @include desktop-up {
+      margin-top: ppx(60);
+    }
+  }
+
+  .faq-category {
+    margin-bottom: spx(50);
+    @include tablet-up {
+      margin-bottom: ppx(70 * 1.2);
+    }
+    @include desktop-up {
+      margin-bottom: ppx(70);
+    }
+
+    &__title {
+      color: var(--logo_color_2, #816259);
+      font-size: spx(32);
+      font-weight: 700;
+      line-height: 180%;
+      margin-bottom: spx(30);
+      padding-bottom: spx(15);
+      border-bottom: 2px solid var(--logo_color_3, #c99e2d);
+      @include tablet-up {
+        font-size: ppx(36 * 1.2);
+        margin-bottom: ppx(40 * 1.2);
+        padding-bottom: ppx(20 * 1.2);
+      }
+      @include desktop-up {
+        font-size: ppx(36);
+        margin-bottom: ppx(40);
+        padding-bottom: ppx(20);
+      }
+    }
+
+    &__list {
+      display: flex;
+      flex-direction: column;
+      gap: spx(25);
+      @include tablet-up {
+        gap: ppx(35 * 1.2);
+      }
+      @include desktop-up {
+        gap: ppx(35);
+      }
+    }
+  }
+
+  .faq-item {
+    display: flex;
+    flex-direction: column;
+    gap: spx(15);
+    padding: spx(25) spx(20);
+    border-radius: spx(15);
+    background: var(--base_2, #fcf2c9);
+    @include tablet-up {
+      gap: ppx(20 * 1.2);
+      padding: ppx(35 * 1.2) ppx(40 * 1.2);
+      border-radius: ppx(20 * 1.2);
+    }
+    @include desktop-up {
+      gap: ppx(20);
+      padding: ppx(35) ppx(40);
+      border-radius: ppx(20);
+    }
+
+    &__question {
+      display: flex;
+      align-items: baseline;
+      gap: spx(12);
+      color: var(--base_5, #102a4d);
+      font-size: spx(28);
+      font-weight: 700;
+      line-height: 180%;
+      @include tablet-up {
+        gap: ppx(15 * 1.2);
+        font-size: ppx(32 * 1.2);
+      }
+      @include desktop-up {
+        gap: ppx(15);
+        font-size: ppx(32);
+      }
+    }
+
+    &__q {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: spx(40);
+      height: spx(40);
+      border-radius: 50%;
+      background: var(--logo_color_3, #c99e2d);
+      color: var(--base_1, #fffcf2);
+      font-size: spx(24);
+      font-weight: 700;
+      flex-shrink: 0;
+      @include tablet-up {
+        width: ppx(45 * 1.2);
+        height: ppx(45 * 1.2);
+        font-size: ppx(28 * 1.2);
+      }
+      @include desktop-up {
+        width: ppx(45);
+        height: ppx(45);
+        font-size: ppx(28);
+      }
+    }
+
+    &__answer {
+      display: flex;
+      align-items: baseline;
+      gap: spx(12);
+      color: var(--base_5, #102a4d);
+      font-size: spx(26);
+      font-weight: 500;
+      line-height: 180%;
+      padding-left: spx(52);
+      @include tablet-up {
+        gap: ppx(15 * 1.2);
+        font-size: ppx(30 * 1.2);
+        padding-left: ppx(60 * 1.2);
+      }
+      @include desktop-up {
+        gap: ppx(15);
+        font-size: ppx(30);
+        padding-left: ppx(60);
+      }
+    }
+
+    &__a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: spx(40);
+      height: spx(40);
+      border-radius: 50%;
+      background: var(--logo_color_2, #816259);
+      color: var(--base_1, #fffcf2);
+      font-size: spx(24);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-left: spx(-52);
+      @include tablet-up {
+        width: ppx(45 * 1.2);
+        height: ppx(45 * 1.2);
+        font-size: ppx(28 * 1.2);
+        margin-left: ppx(-60 * 1.2);
+      }
+      @include desktop-up {
+        width: ppx(45);
+        height: ppx(45);
+        font-size: ppx(28);
+        margin-left: ppx(-60);
       }
     }
   }

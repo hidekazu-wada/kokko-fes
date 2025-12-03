@@ -23,6 +23,16 @@
   ],
   "articles": [
     {
+      "id": "news-005",
+      "slug": "faq-2025",
+      "title": "よくある質問",
+      "category": "other",
+      "publishedAt": "2025-12-02",
+      "image": "/images/news-detail/demo.png",
+      "excerpt": "コッコ祭り2025に関するよくある質問をまとめました。チケット、アクセス、服装、プログラムなど、ご来場前にご確認ください。",
+      "content": "<p>コッコ祭り2025に関するよくある質問をまとめました。ご来場前にご確認いただき、より快適にお楽しみいただけますようお願いいたします。</p>"
+    },
+    {
       "id": "news-004",
       "slug": "volunteer-recruitment-closed-2025",
       "title": "ボランティア募集締切のお知らせ",
