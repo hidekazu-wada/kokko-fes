@@ -9,6 +9,7 @@ import PageTitle from "../components/common/PageTitle.astro";
 import { getImage } from "astro:assets";
 import ByBusTrain from "../images/access/by_bus-train.png";
 import ByCar from "../images/access/by_car.png";
+import ParkingMap from "../images/access/parking-map.webp";
 import Shinjyuku from "../images/access/from-shinjyuku.svg";
 import FujisanSt from "../images/access/from-fujisan-st.svg";
 import KawaguchikoSt from "../images/access/from-kawaguchiko-st.svg";
@@ -26,6 +27,12 @@ const Car = await getImage({
   format: "webp",
   quality: 85,
   widths: [349, 410],
+});
+const ParkingMapImage = await getImage({
+  src: ParkingMap,
+  format: "webp",
+  quality: 100,
+  widths: [620, 1200, 1800],
 });
 ---
 
@@ -281,19 +288,30 @@ const Car = await getImage({
         <header class="parking__header">
           <h2 class="parking__title"><span>駐車場</span></h2>
         </header>
-        <div class="parking__pdf">
-          <span
-            style="
-            text-align: center; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center;
-            width: 100%;
-            height: 100%;
-            "
-            >準備中</span
-          >
-        </div>
+        <figure class="parking__map">
+          <picture class="parking__map-picture">
+            <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+            <source
+              media="(min-width: 1024px)"
+              srcset={ParkingMapImage.srcSet.attribute}
+              sizes="1800px"
+            />
+            <!-- タブレット（744px以上）→ 中解像度版 -->
+            <source
+              media="(min-width: 744px)"
+              srcset={ParkingMapImage.srcSet.attribute}
+              sizes="1200px"
+            />
+            <!-- スマホ（744px未満）→ 最小解像度版 -->
+            <img
+              class="parking__map-img"
+              src={ParkingMapImage.src}
+              srcset={ParkingMapImage.srcSet.attribute}
+              sizes="(min-width: 1024px) 1800px, (min-width: 744px) 1200px, 620px"
+              alt="駐車場マップ"
+            />
+          </picture>
+        </figure>
       </article>
     </section>
     <Breadcrumb currentPageTitle="アクセス" />
@@ -1026,21 +1044,41 @@ const Car = await getImage({
         }
       }
 
-      &__pdf {
+      &__map {
         margin-top: spx(60);
-        width: spx(620);
-        height: spx(434);
-        background-color: white;
+        width: 100%;
+        max-width: spx(620);
         margin-inline: auto;
         @include tablet-up {
           margin-top: ppx(80 * 1.2);
-          width: ppx(1800 * 1.2);
-          height: ppx(600 * 1.2);
+          max-width: ppx(1800 * 1.2);
         }
         @include desktop-up {
           margin-top: ppx(80);
-          width: ppx(1800);
-          height: ppx(600);
+          max-width: ppx(1500);
+        }
+      }
+
+      &__map-picture {
+        display: block;
+        width: 100%;
+        @include tablet-up {
+        }
+        @include desktop-up {
+        }
+      }
+
+      &__map-img {
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        border-radius: spx(15);
+        @include tablet-up {
+          border-radius: ppx(20 * 1.2);
+        }
+        @include desktop-up {
+          border-radius: ppx(20);
         }
       }
     }
