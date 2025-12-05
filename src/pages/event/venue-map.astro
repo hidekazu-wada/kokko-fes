@@ -1,0 +1,137 @@
+---
+// コンポーネント
+import PageLayout from "../../layouts/PageLayout.astro";
+import PageBottomWave from "../../components/common/PageBottomWave.astro";
+import Breadcrumb from "../../components/common/Breadcrumb.astro";
+import PageTitle from "../../components/common/PageTitle.astro";
+
+// 画像
+import { getImage } from "astro:assets";
+import VenueMapImage from "../../images/event/venue-map.webp";
+
+// フォーマット（Sharp使用 - WebP形式、高品質）
+const VenueMapImg = await getImage({
+  src: VenueMapImage,
+  format: "webp",
+  quality: 100,
+  widths: [620, 1200, 1800],
+});
+---
+
+<PageLayout
+  title="会場マップ｜コッコ祭り 2025｜KOKKO Festival"
+  description="コッコ祭り2025の会場マップ。会場内の各エリアや施設の位置をご確認いただけます。"
+>
+  <section class="page-wrapper venue-map-page">
+    <div class="venue-map-page__container">
+      <PageTitle accent="会" title="場マップ" subtitle="VENUE MAP" />
+      <article class="venue-map-content">
+        <figure class="venue-map-content__map">
+          <picture class="venue-map-content__map-picture">
+            <!-- デスクトップ（1024px以上）→ 最高解像度版 -->
+            <source
+              media="(min-width: 1024px)"
+              srcset={VenueMapImg.srcSet.attribute}
+              sizes="1800px"
+            />
+            <!-- タブレット（744px以上）→ 中解像度版 -->
+            <source
+              media="(min-width: 744px)"
+              srcset={VenueMapImg.srcSet.attribute}
+              sizes="1200px"
+            />
+            <!-- スマホ（744px未満）→ 最小解像度版 -->
+            <img
+              class="venue-map-content__map-img"
+              src={VenueMapImg.src}
+              srcset={VenueMapImg.srcSet.attribute}
+              sizes="(min-width: 1024px) 1800px, (min-width: 744px) 1200px, 620px"
+              alt="コッコ祭り2025 会場マップ"
+            />
+          </picture>
+        </figure>
+      </article>
+    </div>
+    <Breadcrumb
+      currentPageTitle="会場マップ"
+      parentPage={{ title: "イベント情報", href: "/event" }}
+    />
+    <PageBottomWave />
+  </section>
+</PageLayout>
+
+<style lang="scss">
+  @import "../../styles/variables";
+  @import "../../styles/functions";
+  @import "../../styles/mixins";
+
+  .venue-map-page {
+    padding-top: spx(296);
+    position: relative;
+    min-height: 90vh;
+    padding-bottom: spx(99);
+    @include tablet-up {
+      padding-top: ppx(253 * 1.2);
+      padding-bottom: ppx(228 * 1.2);
+    }
+    @include desktop-up {
+      padding-top: ppx(253);
+      padding-bottom: ppx(228);
+    }
+
+    &__container {
+      padding-bottom: spx(100);
+      @include tablet-up {
+        padding-bottom: ppx(130 * 1.2);
+      }
+      @include desktop-up {
+        padding-bottom: ppx(130);
+      }
+    }
+  }
+
+  .venue-map-content {
+    margin-top: spx(60);
+    @include tablet-up {
+      margin-top: ppx(80 * 1.2);
+    }
+    @include desktop-up {
+      margin-top: ppx(80);
+    }
+
+    &__map {
+      width: 100%;
+      max-width: spx(620);
+      margin-inline: auto;
+      @include tablet-up {
+        max-width: ppx(1800 * 1.2);
+      }
+      @include desktop-up {
+        max-width: ppx(1600);
+      }
+    }
+
+    &__map-picture {
+      display: block;
+      width: 100%;
+      @include tablet-up {
+      }
+      @include desktop-up {
+      }
+    }
+
+    &__map-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: spx(15);
+      @include tablet-up {
+        border-radius: ppx(20 * 1.2);
+      }
+      @include desktop-up {
+        border-radius: ppx(20);
+      }
+    }
+  }
+</style>

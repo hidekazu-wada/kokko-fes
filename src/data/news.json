@@ -23,6 +23,16 @@
   ],
   "articles": [
     {
+      "id": "news-008",
+      "slug": "venue-map-released-2025",
+      "title": "会場マップ公開のお知らせ",
+      "category": "important",
+      "publishedAt": "2025-12-05",
+      "image": "/images/news-detail/demo.png",
+      "excerpt": "コッコ祭り2025の会場マップを公開いたしました。会場内の各エリアや施設の位置をご確認いただけます。",
+      "content": "<p>この度、コッコ祭り2025の<strong>会場マップ</strong>を公開いたしました。</p><p>会場内の各エリアや施設の位置、遊ぶ・食べる・作る・見るなどのコンテンツエリアを、<a href=\"/event/venue-map\" style=\"color: #c99e2d;\">会場マップページ</a>でご確認いただけます。</p><p>当日、会場内をスムーズに移動していただけるよう、事前に会場マップをご確認いただくことをおすすめいたします。特に、お子さまとご一緒のご来場の際は、迷子防止のためにも会場の構造を把握していただくと安心です。</p><p>また、<a href=\"/access\" style=\"color: #c99e2d;\">駐車場マップ</a>や<a href=\"/timetable.pdf\" target=\"_blank\" style=\"color: #c99e2d;\">タイムスケジュール</a>と合わせてご確認いただくと、より快適にお楽しみいただけます。</p><p>皆様のご来場を心よりお待ちしております。</p>"
+    },
+    {
       "id": "news-007",
       "slug": "countdown-to-kokko-fes-2025",
       "title": "いよいよ明日開催！コッコ祭り2025が始まります",
