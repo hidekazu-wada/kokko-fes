@@ -16,14 +16,7 @@ export default defineConfig({
     // Sharp使用（高速・高品質な画像最適化）
     service: {
       entrypoint: 'astro/assets/services/sharp'
-    },
-    // MicroCMSの画像ドメインを許可
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'images.microcms-assets.io'
-      }
-    ]
+    }
   },
 
   // リンクのプリフェッチを有効化（ホバー時に次ページを先読み）

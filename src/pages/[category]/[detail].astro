@@ -5,7 +5,7 @@ import PageBottomWave from "../../components/common/PageBottomWave.astro";
 import Breadcrumb from "../../components/common/Breadcrumb.astro";
 import PageTitle from "../../components/common/PageTitle.astro";
 
-// データ取得（MicroCMS対応）
+// データ取得
 import { getCategoriesData } from "../../lib/categoryData";
 import type { CategoryItem, Category } from "../../types/contents";
 
@@ -109,11 +109,11 @@ try {
   const imagePromises = imageList
     .slice(0, maxImages)
     .map(async (imageName: string) => {
-      // MicroCMSのURLかローカルパスかを判定
-      const isExternalUrl = imageName.startsWith('http://') || imageName.startsWith('https://');
+      // public/ 配下のパスか、src/images/ 配下の相対パスかを判定
+      const isPublicPath = imageName.startsWith('/');
 
-      if (isExternalUrl) {
-        // MicroCMSなどの外部URL：そのまま使用
+      if (isPublicPath) {
+        // public/ 配下の画像：そのまま使用
         return {
           src: imageName,
         };

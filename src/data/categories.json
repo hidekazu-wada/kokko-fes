@@ -9,10 +9,12 @@
       {
         "name": "もぐもぐルーク",
         "description": "タコスやレモネードを中心に販売予定です。",
-        "detailInfo": "<p>タコスとレモネードは手作りに拘りました<br>国産のお肉と野菜を使い安心と安全を心がけています。</p>",
-        "image": "もぐもぐルーク/img-1.jpg",
-        "images": ["もぐもぐルーク/img-1.jpg"],
-        "location": "調整中",
+        "detailInfo": "<p>タコスとレモネードは手作りに拘りました</p><p>国産のお肉と野菜を使い安心と安全を心がけています。</p>",
+        "image": "/images/categories/eat/01-1.jpg",
+        "images": [
+          "/images/categories/eat/01-1.jpg"
+        ],
+        "location": "モルック広場周辺",
         "time": "12/6・12/7",
         "snsUrl": "https://www.instagram.com/mogumoguruku7/",
         "price": "有料"
@@ -21,9 +23,12 @@
         "name": "Crepe Gin",
         "description": "クレープを中心に販売予定です。",
         "detailInfo": "<p>他にはないボリューム満点のクレープをぜひ召し上がってください</p>",
-        "image": "CrepeGin/img-1.png",
-        "images": ["CrepeGin/img-1.png", "CrepeGin/img-2.jpg"],
-        "location": "調整中",
+        "image": "/images/categories/eat/02-1.png",
+        "images": [
+          "/images/categories/eat/02-1.png",
+          "/images/categories/eat/02-2.jpg"
+        ],
+        "location": "ほどほどの森エリア",
         "time": "12/7",
         "snsUrl": "https://www.instagram.com/crepe_gin/",
         "price": "有料"
@@ -32,9 +37,12 @@
         "name": "米粉クレープ alto",
         "description": "クレープを中心に販売予定です。",
         "detailInfo": "<p>山梨県北杜市産米粉100%<br>こだわりのもちもちクレープ</p>",
-        "image": "米粉クレープalto/img-1.jpg",
-        "images": ["米粉クレープalto/img-1.jpg", "米粉クレープalto/img-2.jpg"],
-        "location": "調整中",
+        "image": "/images/categories/eat/03-1.jpg",
+        "images": [
+          "/images/categories/eat/03-1.jpg",
+          "/images/categories/eat/03-2.jpg"
+        ],
+        "location": "ほどほどの森エリア",
         "time": "12/6",
         "snsUrl": "https://www.instagram.com/alto.crepe/",
         "price": "有料"
@@ -43,13 +51,13 @@
         "name": "唐揚げ専門店いがらし",
         "description": "こだわりの唐揚げを販売予定です。",
         "detailInfo": "<p>山梨県富士吉田市にある唐揚げ専門店です🐔<br>高級醤油「下総醤油」を当店では贅沢に使用しています。<br>店内仕込み店内揚げたて！すりたてのにんにくと合わせた特製醤油ダレに、鶏もも肉を一日以上じっくり漬け込んでいます。<br>こだわりの油でカラッと揚げることで、ジューシーでザクザク食感が美味しい唐揚げに仕上げました🐓</p>",
-        "image": "唐揚げ専門店いがらし/img-1.jpg",
+        "image": "/images/categories/eat/04-1.jpg",
         "images": [
-          "唐揚げ専門店いがらし/img-1.jpg",
-          "唐揚げ専門店いがらし/img-2.jpg",
-          "唐揚げ専門店いがらし/img-3.jpg"
+          "/images/categories/eat/04-1.jpg",
+          "/images/categories/eat/04-2.jpg",
+          "/images/categories/eat/04-3.jpg"
         ],
-        "location": "調整中",
+        "location": "モルック広場周辺",
         "time": "12/6・12/7",
         "snsUrl": "https://www.instagram.com/karaage_igarashi/",
         "price": "有料"
@@ -58,13 +66,13 @@
         "name": "ピッツァカーポリーナ",
         "description": "薪窯で焼くピザを中心に販売予定です。",
         "detailInfo": "<p>夫婦ふたりのキッチンカー<br>薪窯焼き『ピッツァ カーポリーナ』<br>＼「ミミまでおいしい！」とよく言われます／<br>その秘密は、国産小麦100％の自家製生地。<br>さらに薪窯で焼き上げることで、香ばしくモッチリとした食感に。<br>イタリアで料理修業を積んだシェフが、一枚一枚、心を込めて焼き上げます。<br>ぜひ、焼きたてをお召し上がりください🍕</p>",
-        "image": "ピッツァカーポリーナ/img-1.png",
+        "image": "/images/categories/eat/05-1.png",
         "images": [
-          "ピッツァカーポリーナ/img-1.png",
-          "ピッツァカーポリーナ/img-2.png",
-          "ピッツァカーポリーナ/img-3.png"
+          "/images/categories/eat/05-1.png",
+          "/images/categories/eat/05-2.png",
+          "/images/categories/eat/05-3.png"
         ],
-        "location": "調整中",
+        "location": "コッコ周辺",
         "time": "12/6・12/7",
         "snsUrl": "https://www.instagram.com/caporina2011/",
         "price": "有料"
@@ -73,8 +81,11 @@
         "name": "ぷっくりにゃんこ",
         "description": "猫のカタチ大判焼を販売予定です。",
         "detailInfo": "<p>ココでしか味わえない「猫のカタチ大判焼」<br>見てにっこり、食べてほっこり、ぷっくりにゃんこ<br>生地はふっくら、もっちり、中身はたっぷり！</p>",
-        "image": "ぷっくりにゃんこ/img-1.jpg",
-        "images": ["ぷっくりにゃんこ/img-1.jpg", "ぷっくりにゃんこ/img-2.jpg"],
+        "image": "/images/categories/eat/06-1.jpg",
+        "images": [
+          "/images/categories/eat/06-1.jpg",
+          "/images/categories/eat/06-2.jpg"
+        ],
         "location": "調整中",
         "time": "12/7",
         "snsUrl": "https://www.instagram.com/puccuri_nyanko_2022/",
@@ -83,10 +94,14 @@
       {
         "name": "369hunt",
         "description": "ジビエを活かした料理を中心に販売予定です。",
-        "detailInfo": "<p>『Hunt it,eat it,and use it all』の精神で鹿の捕獲から精肉、革の活用までを一貫して手掛けることを目標に活動している369Huntです。</p><p>皆様にジビエを気軽に楽しんでもらえるお料理を提供いたします。</p><p>どのようにお肉や革になっていくのか展示コーナーも設けます。少しでも身近に感じていただけたら幸いです。</p>",
-        "image": "369hunt/img-1.png",
-        "images": ["369hunt/img-1.png"],
-        "location": "調整中",
+        "detailInfo": "<p>鹿の捕獲から解体、そして料理まで。</p><p>今回は山梨産の鹿肉で作ったソーセージでジビエドッグと、</p><p>体温まる猪汁をご提供します。</p>",
+        "image": "/images/categories/eat/07-1.jpg",
+        "images": [
+          "/images/categories/eat/07-1.jpg",
+          "/images/categories/eat/07-2.jpg",
+          "/images/categories/eat/07-3.png"
+        ],
+        "location": "レストラン周辺エリア",
         "time": "12/6・12/7",
         "snsUrl": "https://www.instagram.com/369hunt/",
         "price": "有料"
@@ -95,11 +110,84 @@
         "name": "カリアムドゥ",
         "description": "スパイスカレープレートや限定のラム料理などを販売予定です。",
         "detailInfo": "<p>富士吉田市の南インドスパイス料理「カリアムドゥ」です。<br>インド直輸入スパイスのカレープレート、タンドリーチキン、発酵クレープ「ドーサ」やお子様カレーなどをご用意。<br>コッコ祭り限定「生ラムソーセージ」や「ラムチョップスパイス焼き」販売します。</p>",
-        "image": "カリアムドゥ/img-1.png",
-        "images": ["カリアムドゥ/img-1.png"],
+        "image": "/images/categories/eat/08-1.png",
+        "images": [
+          "/images/categories/eat/08-1.png"
+        ],
         "location": "調整中",
         "time": "12/6・12/7",
         "snsUrl": "https://www.instagram.com/kari.amudhu/",
+        "price": "有料"
+      },
+      {
+        "name": "AIM Brew LAB.",
+        "description": "西湖のブルワリーで作ったクラフトビールを販売します",
+        "detailInfo": "<p>西湖の名産を作りたい！</p><p>地元の人にも遊びに来る人にも愛されるビールを作りたい！と思い立ち上がりました。</p>",
+        "image": "/images/categories/eat/09-1.png",
+        "images": [
+          "/images/categories/eat/09-1.png"
+        ],
+        "location": "メイン会場コッコ周辺",
+        "time": "12/6",
+        "snsUrl": "https://www.instagram.com/aim_saiko?igsh=bXIzamF6Nmx0bHd1",
+        "price": "有料"
+      },
+      {
+        "name": "おむすび屋 坤",
+        "description": "こだわりの無添加おむすびを販売します。",
+        "detailInfo": "<p>全て無添加の素材を使用したおむすびです！</p><p>鉄羽釜を使用し、炊き方にもこだわっています。</p><p>体に優しいだけでなく、具材もたっぷり</p><p>大満足なおむすびをぜひお召し上がりください♫</p>",
+        "image": "/images/categories/eat/10-1.jpg",
+        "images": [
+          "/images/categories/eat/10-1.jpg",
+          "/images/categories/eat/10-2.jpg"
+        ],
+        "location": "メイン会場コッコ内",
+        "time": "12/6・12/7",
+        "snsUrl": "https://www.instagram.com/omusubi_kon?igsh=MXh1a2szeXdxaGI1eQ==",
+        "price": "有料"
+      },
+      {
+        "name": "cafe tinymany",
+        "description": "ホットサンドなどを販売します。",
+        "detailInfo": "<p>山梨県を拠点に活動するキッチンカーtinymanyです！</p><p>自家焙煎コーヒー、山梨県内の鹿肉を使用したジビエ料理、</p><p>当店人気のりんご飴などを販売しております！</p><p>ぜひ、お越しの際はお立ち寄りくださいませ。</p>",
+        "image": "/images/categories/eat/11-1.png",
+        "images": [
+          "/images/categories/eat/11-1.png",
+          "/images/categories/eat/11-2.png",
+          "/images/categories/eat/11-3.png",
+          "/images/categories/eat/11-4.png"
+        ],
+        "location": "メイン会場コッコ周辺",
+        "time": "12/6・12/7",
+        "snsUrl": "https://www.instagram.com/cafe_tinymany?igsh=MXUzZ2RtMmIxZ291MQ==",
+        "price": "有料"
+      },
+      {
+        "name": "はるちゃんキッチン、比沙家諏訪",
+        "description": "長野県産りんごを使用したりんご飴を販売します",
+        "detailInfo": "<p>長野のりんご農家さんから直接入荷し、</p><p>新鮮な旬のりんごを使ったりんご飴です。</p>",
+        "image": "/images/categories/eat/12-1.jpg",
+        "images": [
+          "/images/categories/eat/12-1.jpg",
+          "/images/categories/eat/12-2.jpg"
+        ],
+        "location": "調整中",
+        "time": "12/6",
+        "snsUrl": "https://www.instagram.com/hisaya_suwa?igsh=bno3ZHJydW12cG41",
+        "price": "有料"
+      },
+      {
+        "name": "a!detta COFFEE STAND",
+        "description": "フレンチプレスで淹れるスペシャルティコーヒーの提供・販売です。",
+        "detailInfo": "<p>フレンチプレスで淹れるスペシャルティコーヒーと豆の販売を行います</p>",
+        "image": "/images/categories/eat/13-1.png",
+        "images": [
+          "/images/categories/eat/13-1.png",
+          "/images/categories/eat/13-2.png"
+        ],
+        "location": "レストラン内",
+        "time": "12/6　12:00-16:30\n12/7　10:00-13:30",
+        "snsUrl": "",
         "price": "有料"
       }
     ]
@@ -114,9 +202,11 @@
       {
         "name": "打ち上げ花火",
         "description": "冬の湖で、迫力の冬花火をお楽しみください！",
-        "detailInfo": "<p>コッコ祭り名物の打ち上げ花火！<br>冬の澄んだ空に迫力の花火が打ち上がります。<br>ドリンクやフードを片手にお楽しみください。<br>終了後はレストランでの夕食（要予約）や<br>コッコでのキャンドルナイトなど<br>まだまだ楽しめることが盛りだくさんです。</p>",
-        "image": "打ち上げ花火/img-1.jpeg",
-        "images": ["打ち上げ花火/img-1.jpeg"],
+        "detailInfo": "<p>コッコ祭り名物の打ち上げ花火！</p><p>冬の澄んだ空に迫力の花火が打ち上がります。</p><p>ドリンクやフードを片手にお楽しみください。</p><p>終了後はレストランでの夕食（要予約）や</p><p>コッコでのキャンドルナイトなど</p><p>まだまだ楽しめることが盛りだくさんです。</p>",
+        "image": "/images/categories/watch/01-1.jpg",
+        "images": [
+          "/images/categories/watch/01-1.jpg"
+        ],
         "location": "湖畔",
         "time": "12/6 17:30ごろ",
         "snsUrl": "",
@@ -125,9 +215,11 @@
       {
         "name": "甲府ソノリテ吹奏楽団<br>ワクワク♪ファミリーコンサート",
         "description": "コッコ祭り2025のグランドフィナーレ♪<br>指揮者体験のチャンスもあります！",
-        "detailInfo": "<p>コッコ祭りのグランドフィナーレは体験型のファミリーコンサート！</p><p>みんなが知っている定番曲やクリスマスにまつわる曲などを目の前で、生演奏で楽しめます。</p><p>それだけでなく、指揮者体験や楽器紹介なども含めた60分ほどの体験型のファミリーコンサートです！</p><p>コッコ祭りのクライマックスは、ご家族皆様でお楽しみいただける体験型ファミリーコンサートで締めくくります！</p><p>定番曲に加え、季節の訪れを感じさせるクリスマステーマ曲など、すべて目の前での迫力ある生演奏でお届けします！</p><p>聴くだけでは終わらないのが本コンサートの魅力！<br>指揮者体験や楽器紹介コーナーもあり、知的好奇心を刺激し、音楽をより身近に感じていただけます。</p><p>特別な思い出となる、感動と体験が融合した60分間に、ぜひご期待ください。</p><p style=\"margin-top:1em;\">コッコ祭り実行委員会</p><p style=\"margin-top:1em;\">提供：ソノリテ甲府吹奏楽団</p><p style=\"margin-top:1em;\">団体紹介</p><p>ソノリテ甲府吹奏楽団は、社会人および学生で構成され、山梨県甲府市を拠点に活動する吹奏楽団です。</p>「ソノリテ」とはイタリア語で”共鳴、よく響くこと”を意味する言葉で、<br>この意の通り我々の響きをこれからも発信し続け、<br>「感動できる演奏」を目指し前進していこうと考えております。<br>吹奏楽コンクールへの参加の他、地域イベントでの演奏、定期演奏会などを通じて、<br>音楽の楽しさを広める活動を行っています。</p><p style=\"margin-top:1em;\">【これまでの活動例】<br>・定期演奏会の開催<br>・吹奏楽コンクール、その他吹奏楽連盟関連行事への参加<br>・音楽鑑賞教室の開催<br>・地域や団体などの行事での演奏<br>・山梨県内小中高校への吹奏楽指導など</p>",
-        "image": "甲府ソノリテ吹奏楽団/img-1.png",
-        "images": ["甲府ソノリテ吹奏楽団/img-1.png"],
+        "detailInfo": "<p>コッコ祭りのグランドフィナーレは体験型のファミリーコンサート！</p><p>みんなが知っている定番曲やクリスマスにまつわる曲などを目の前で、生演奏で楽しめます。</p><p>それだけでなく、指揮者体験や楽器紹介なども含めた60分ほどの体験型のファミリーコンサートです！</p><p>コッコ祭りのクライマックスは、ご家族皆様でお楽しみいただける体験型ファミリーコンサートで締めくくります！</p><p>定番曲に加え、季節の訪れを感じさせるクリスマステーマ曲など、すべて目の前での迫力ある生演奏でお届けします！</p><p>聴くだけでは終わらないのが本コンサートの魅力！</p><p>指揮者体験や楽器紹介コーナーもあり、知的好奇心を刺激し、音楽をより身近に感じていただけます。</p><p>特別な思い出となる、感動と体験が融合した60分間に、ぜひご期待ください。</p><p>コッコ祭り実行委員会</p><p>提供：ソノリテ甲府吹奏楽団</p><hr><p>【団体紹介】</p><p>ソノリテ甲府吹奏楽団は、社会人および学生で構成され、山梨県甲府市を拠点に活動する吹奏楽団です。</p><p>「ソノリテ」とはイタリア語で&quot;共鳴、よく響くこと&quot;を意味する言葉で、</p><p>この意の通り我々の響きをこれからも発信し続け、</p><p>「感動できる演奏」を目指し前進していこうと考えております。</p><p>吹奏楽コンクールへの参加の他、地域イベントでの演奏、定期演奏会などを通じて、</p><p>音楽の楽しさを広める活動を行っています。</p><hr><p>【これまでの活動例】</p><p>・定期演奏会の開催</p><p>・吹奏楽コンクール、その他吹奏楽連盟関連行事への参加</p><p>・音楽鑑賞教室の開催</p><p>・地域や団体などの行事での演奏</p><p>・山梨県内小中高校への吹奏楽指導など</p>",
+        "image": "/images/categories/watch/02-1.png",
+        "images": [
+          "/images/categories/watch/02-1.png"
+        ],
         "location": "ホテル内 ホール（紅葉）",
         "time": "12/7　開場13:00　開演13:30",
         "snsUrl": "https://www.instagram.com/sonoritetete_kofu/?hl=ja",
@@ -136,9 +228,12 @@
       {
         "name": "キャンドルナイト",
         "description": "コッコ祭りの夜をキャンドルが彩ります！<br>焚き火やドリンクをお供に、お楽しみください。",
-        "detailInfo": "<p>メイン開場、コッコ内をキャンドルがジャック！<br>揺らめくキャンドルの灯りが、コッコ祭りの夜を<br>素敵なひとときにしてくれること間違いなし！<br>花火が終わってもまだまだ楽しめる<br>大小様々なキャンドルが演出する<br>癒しの時間をお楽しみください。<br>提供：Le Ciel candle</p>",
-        "image": "キャンドルナイト/img-1.jpeg",
-        "images": ["キャンドルナイト/img-1.jpeg", "キャンドルナイト/img-2.png"],
+        "detailInfo": "<p>メイン開場、コッコ内をキャンドルがジャック！</p><p>揺らめくキャンドルの灯りが、コッコ祭りの夜を</p><p>素敵なひとときにしてくれること間違いなし！</p><p>花火が終わってもまだまだ楽しめる&lt;br /&gt;大小様々なキャンドルが演出する</p><p>癒しの時間をお楽しみください。</p><p>提供：Le Ciel candle</p>",
+        "image": "/images/categories/watch/03-1.jpg",
+        "images": [
+          "/images/categories/watch/03-1.jpg",
+          "/images/categories/watch/03-2.png"
+        ],
         "location": "コッコ内",
         "time": "12/6 16:30頃〜19:30頃",
         "snsUrl": "",
@@ -147,11 +242,13 @@
       {
         "name": "鼓楽衆『呑』",
         "description": "鼓楽衆『呑』による<br>和太鼓パフォーマンスステージです",
-        "detailInfo": "<p>同じ高校の和太鼓部を卒業したメンバーで2018年8月15日に結成した和太鼓ユニットです。<br>普段は東京の多摩地域のイベントを中心に演奏活動を行っています。<br>見てくださる方々が息を「呑む」ような演奏を目指しています！</p>",
-        "image": "鼓楽衆『呑』/img-1.png",
-        "images": ["鼓楽衆『呑』/img-1.png"],
+        "detailInfo": "<p>同じ高校の和太鼓部を卒業したメンバーで2018年8月15日に結成した和太鼓ユニットです。</p><p>普段は東京の多摩地域のイベントを中心に演奏活動を行っています。</p><p>見てくださる方々が息を「呑む」ような演奏を目指しています！</p>",
+        "image": "/images/categories/watch/04-1.png",
+        "images": [
+          "/images/categories/watch/04-1.png"
+        ],
         "location": "ホテル内 ホール(紅葉)",
-        "time": "12/6　時間調整中",
+        "time": "12/6　17:00-17:30",
         "snsUrl": "https://www.instagram.com/don.kogakushu/?hl=ja",
         "price": "無料(チケット料金に含む)"
       },
@@ -159,34 +256,121 @@
         "name": "和太鼓 白檀",
         "description": "地元山梨で活躍する和太鼓 白檀による<br>パフォーマンスステージです！<br>ちびっこ白檀も頑張るぞ！",
         "detailInfo": "<p>結成12年目の和太鼓チーム！</p>",
-        "image": "和太鼓 白檀/img-1.png",
-        "images": ["和太鼓 白檀/img-1.png"],
+        "image": "/images/categories/watch/05-1.png",
+        "images": [
+          "/images/categories/watch/05-1.png"
+        ],
         "location": "ホテル内 ホール(紅葉)",
-        "time": "12/6　時間調整中",
+        "time": "12/6　15:30-16:00",
         "snsUrl": "https://www.instagram.com/wadaiko__byakudan/?hl=ja",
         "price": "無料(チケット料金に含む)"
       },
       {
         "name": "太鼓衆 龍月",
         "description": "多様なジャンルの音楽と伝統音楽の和太鼓を融合させた<br>独自の演奏スタイルのパフォーマンスをお届け！",
-        "detailInfo": "<p>自主ライブ、イベント出演、祭りでの奉納演舞等、各地で活動。<br>多様なジャンルの音楽と和太鼓の伝統音楽を融合させた独自の演奏スタイルを特徴としています。<br>2019年8月【一般社団法人 日本太鼓同盟】を立ち上げ、〝和と輪を繋ぐ〟をモットーに活動しています。<br>年に3〜4回程の自主公演『響縁〜KYOUEN〜』を開催。<br>興味のある方是非お気軽にご連絡ください。<br>目指せ！100団体！</p>",
-        "image": "太鼓衆 龍月/img-1.png",
-        "images": ["太鼓衆 龍月/img-1.png"],
+        "detailInfo": "<p>自主ライブ、イベント出演、祭りでの奉納演舞等、各地で活動。</p><p>多様なジャンルの音楽と和太鼓の伝統音楽を融合させた独自の演奏スタイルを特徴としています。</p><p>2019年8月【一般社団法人 日本太鼓同盟】を立ち上げ、〝和と輪を繋ぐ〟をモットーに活動しています。</p><p>年に3〜4回程の自主公演『響縁〜KYOUEN〜』を開催。</p><p>興味のある方是非お気軽にご連絡ください。</p><p>目指せ！100団体！</p>",
+        "image": "/images/categories/watch/06-1.png",
+        "images": [
+          "/images/categories/watch/06-1.png"
+        ],
         "location": "ホテル内 ホール(紅葉)",
-        "time": "12/6　時間調整中",
+        "time": "12/6　16:15-16:45",
         "snsUrl": "https://www.instagram.com/taikoshu_ryugetsu/?hl=ja",
         "price": "無料(チケット料金に含む)"
       },
       {
         "name": "岩崎けんいち Night Live",
         "description": "山梨発愛と勇気のシンガーソングライター",
-        "detailInfo": "<p>愛と勇気のシンガーソングライター「岩崎けんいち」によるライブ<br>「どうせ無理」な事も「きっと、うまくいく」と思わせてくれる<br>そんな、優しくてパワフルな歌声が響きわたります。</p>",
-        "image": "岩崎けんいち/img-1.png",
-        "images": ["岩崎けんいち/img-1.png"],
+        "detailInfo": "<p>愛と勇気のシンガーソングライター「岩崎けんいち」によるライブ</p><p>「どうせ無理」な事も「きっと、うまくいく」と思わせてくれる</p><p>そんな、優しくてパワフルな歌声が響きわたります。</p>",
+        "image": "/images/categories/watch/07-1.png",
+        "images": [
+          "/images/categories/watch/07-1.png"
+        ],
         "location": "レストラン",
         "time": "12/6 20:00-20:30",
         "snsUrl": "https://www.iwa-ken.com/",
         "price": "無料"
+      },
+      {
+        "name": "クラブ富士山<br>ZUMBA Kids Jr.",
+        "description": "ZUMBAとは音楽に合わせて楽しくからだを動かすダンスです！",
+        "detailInfo": "<p>富士河口湖町総合型地域スポーツクラブ　クラブ富士山のプログラムの1つです。</p><p>年長児から小学6年生までの53名が在籍しています。</p><p>また中学生以上の大人のクラスもあります。</p><p>ZUMBAは音楽に合わせて楽しくからだを動かすダンスなので誰でも気軽に踊れます。</p><p>クラブのレッスンは11月で終了しますが春になったら一緒に踊りましょう。</p>",
+        "image": "/images/categories/watch/08-1.jpg",
+        "images": [
+          "/images/categories/watch/08-1.jpg",
+          "/images/categories/watch/08-2.jpg"
+        ],
+        "location": "ホテル内 ホール(紅葉)",
+        "time": "12/6　14:00-14:40",
+        "snsUrl": "https://www.town.fujikawaguchiko.lg.jp/ka/club223.php",
+        "price": "無料"
+      },
+      {
+        "name": "もくめ書店",
+        "description": "森の移動書店が道志村からやってきた！",
+        "detailInfo": "<p>コッコ祭りでは本と雑貨の販売をします。</p><p>子供も大人も楽しめるものを取り揃えます。</p><p>提供：もくめ書店</p><p>お店の紹介</p><p>道志村の山間の森の中にポツンとたたずむ森の本屋です。</p><p>自然の中で読書を楽しむことができるカフェもあります。</p><p>鳥の声と川のせせらぎの中でぜひゆっくりと本を読みにいらしてください。</p>",
+        "image": "/images/categories/watch/09-1.png",
+        "images": [
+          "/images/categories/watch/09-1.png"
+        ],
+        "location": "ほどほどの森エリア",
+        "time": "12/6・12/7",
+        "snsUrl": "https://www.instagram.com/mokume_books/",
+        "price": "有料"
+      },
+      {
+        "name": "JOMONさんがやってきた<br>短編映画上映＆トークイベント",
+        "description": "巨大な丸木舟で日本の海を航海するJOMONさんに迫る<br>短編ドキュメンタリーの上映と本人登壇のトークイベントです。",
+        "detailInfo": "<p>日本の海をゆっくりと航海する巨大な丸木舟のことを知っていますか？</p><p>作った道具は石おのと全国1600人の人たち。</p><p>航海の目的は「美しい地球を取り戻すこと」。</p><p>今年からスタートしたこの大航海、なぜこんなことをしているのか？</p><p>そんなことを知ってもらうために、みなさんとお話をする会です。</p>",
+        "image": "/images/categories/watch/10-1.png",
+        "images": [
+          "/images/categories/watch/10-1.png"
+        ],
+        "location": "レストラン内",
+        "time": "12/6　13:30-14:30　15:30-16:30\n12/7　11:30-12:30　9:00-10:00（湖畔清掃）",
+        "snsUrl": "https://www.instagram.com/jomon.carpenter/",
+        "price": "無料(チケット料金に含む)"
+      },
+      {
+        "name": "立体音響ミュージアム",
+        "description": "西湖で収録した音を組み込んだ約10分の音楽作品",
+        "detailInfo": "<p>西湖。それは今回の作品の主人公。</p><p>時代とともに移り変わっていく湖を取り巻く環境を 、湖目線で観察してみる。</p><p>今では、このように観光客で賑わうこの地。</p><p>戦後、かつて西湖に住む人々は畑・酪農・養蚕を中心に生計を立てて暮らしていた。</p><p>しかし、1966年9月に発生した土砂災害によって彼らの暮らしていた集落が壊滅した。</p><p>被災後、この地に住む人々は知恵を出し合い、樹海を切り拓き対岸への移住を決意。</p><p>今まで暮らしてきた自分たちの故郷を離れ、も う1度新たな故郷を作り出した。</p><p>一方で、いつの時代になっても変わらないのは木々のざわめき。湖に向かい川を流れて</p><p>いく水の音。動物たちの会話。それは、今も耳をすませば聞こえてくる。</p><p>この地で起こった破滅。復興。そして今。</p><p>人々の生活と季節の移り変わり。</p><p>そして 、そこにはいつも水が共にあった。</p><p>水。すなわち命。</p><p>この瞬間も、遥か昔から未来に向けて流れ続けている。</p><p>戦後〜現在・未来の西湖を取り巻いてきた歴史を 、即興的に演奏される、サックス・ピ</p><p>ア ノ・ドラム・エレキベースのセッションとともに4.1chのサラウンドで表現した。</p><p>作品の中で聴こえ てくる、水の音。木々の音。小鳥の囀り。作曲者自身が、</p><p>足を運び、収集した今の西湖の音たち。あなたを包むように360°聞こえる</p><p>西湖の音に耳を澄ませていただければと思う </p><p>by LOUIE</p>",
+        "image": "/images/categories/watch/11-1.jpg",
+        "images": [
+          "/images/categories/watch/11-1.jpg"
+        ],
+        "location": "ホテル内　楓A",
+        "time": "12/6　13:00-　14:00-　15:00-\n\n12/7　11:00-　12:00-　13:00-",
+        "snsUrl": "",
+        "price": "無料（チケットに含む）"
+      },
+      {
+        "name": "Vin.cage(ビンケージ)",
+        "description": "【和太鼓】の枠から飛び出して<br>新たな表現を実験・挑戦するグループ",
+        "detailInfo": "<p>Vin.cage(ビンケージ)</p><p>2024年に結成されたプロジェクト。</p><p>メンバー全員が和太鼓に精通。自分たちの音楽的ルーツである【和太鼓】の枠から飛び出し、新たな表現方法を実験していく。一方で、和太鼓のみの演奏では、よりクオリティの高い演奏を目指し、挑戦を行う。</p>",
+        "image": "/images/categories/watch/12-1.png",
+        "images": [
+          "/images/categories/watch/12-1.png",
+          "/images/categories/watch/12-2.png"
+        ],
+        "location": "ホテル内　ホール会場紅葉",
+        "time": "12/6　13:20-13:40",
+        "snsUrl": "https://www.instagram.com/vin.cage___?igsh=MTl0ajd0bmVvNm9oOQ==",
+        "price": "無料（チケット料金に含む）"
+      },
+      {
+        "name": "スタジオKDC",
+        "description": "ダンススタジオKDCから2チームが出演",
+        "detailInfo": "<p>street dance circle -FLASH-（1枚目の写真のチーム）</p><p>今回はキッズクラスとロック&amp;ヒップホップクラス合同で発表させて頂きます！</p><p>始めたばかりのメンバーもいるので沢山応援して頂けると嬉しいです☺︎</p><p>KDC AXIS（2枚目の写真のチーム）</p><p>こんにちは</p><p>山梨富士吉田市からきました</p><p>KDC AXISです。</p><p>今回はJAZZとCHEERを</p><p>踊ります。</p><p>応援宜しくお願いします</p>",
+        "image": "/images/categories/watch/13-1.png",
+        "images": [
+          "/images/categories/watch/13-1.png",
+          "/images/categories/watch/13-2.png"
+        ],
+        "location": "ホテル内　ホール会場紅葉",
+        "time": "12/6　12:30-13:00",
+        "snsUrl": "",
+        "price": "無料（チケット料金に含む）"
       }
     ]
   },
@@ -195,17 +379,17 @@
     "title": "遊ぶ",
     "titleAccent": "遊",
     "subtitle": "− PLAY −",
-    "description": "大人も子供も楽しめる遊びが盛りだくさん<br>遊びに没頭すれば、そこはまるで ”ひみつきち”<br>思い出に残る遊び体験を！<br>※情報随時更新・追加中",
+    "description": "大人も子供も楽しめる遊びが盛りだくさん<br>遊びに没頭すれば、そこはまるで \"ひみつきち\"<br>思い出に残る遊び体験を！<br>※情報随時更新・追加中",
     "items": [
       {
         "name": "屋内キッズルーム",
         "description": "屋内のキッズルームをご用意しています。「ちびっこあつまれー！」",
-        "detailInfo": "<p>室内でお子様が自由に遊べるスペースがホテル1Fにございます。<br>お手洗いや自動販売機もすぐ近くにございます。<br>温かい室内でのびのびお遊びください！<br>※お子様をひとりにしないようご注意ください。</p>",
-        "image": "屋内キッズルーム/img-1.png",
+        "detailInfo": "<p>室内でお子様が自由に遊べるスペースがホテル1Fにございます。</p><p>お手洗いや自動販売機もすぐ近くにございます。</p><p>温かい室内でのびのびお遊びください！</p><p>※お子様をひとりにしないようご注意ください。</p>",
+        "image": "/images/categories/play/01-1.png",
         "images": [
-          "屋内キッズルーム/img-1.png",
-          "屋内キッズルーム/img-2.png",
-          "屋内キッズルーム/img-3.png"
+          "/images/categories/play/01-1.png",
+          "/images/categories/play/01-2.png",
+          "/images/categories/play/01-3.png"
         ],
         "location": "ホテル内　楓B",
         "time": "12/6・12/7",
@@ -215,9 +399,12 @@
       {
         "name": "ウッドパーク",
         "description": "屋内で遊べる木のテーマパーク！",
-        "detailInfo": "<p>あっと驚く木の遊び道具や遊具がたくさん！<br>実際に触って、遊んで、木の音や温もりを感じてみてください。<br>提供：木工工房五作</p>",
-        "image": "ウッドパーク/img-1.jpeg",
-        "images": ["ウッドパーク/img-1.jpeg"],
+        "detailInfo": "<p>あっと驚く木の遊び道具や遊具がたくさん！</p><p>実際に触って、遊んで、木の音や温もりを感じてみてください。</p><p>提供：木工工房五作</p>",
+        "image": "/images/categories/play/02-1.jpg",
+        "images": [
+          "/images/categories/play/02-1.jpg",
+          "/images/categories/play/02-2.jpg"
+        ],
         "location": "体育館内",
         "time": "12/6・12/7",
         "snsUrl": "",
@@ -226,31 +413,39 @@
       {
         "name": "ウッドカヌー体験",
         "description": "冬の澄んだ西湖を木製カヌーでクルージング！",
-        "detailInfo": "<p>山梨県都留市の「鹿留カヌー工房」で製作された、間伐材を使用した手作りの木製カヌーで湖に繰り出そう！<br>森と湖の美しさを感じながら、西湖でのクルージングをお楽しみください。<br>漕ぎ方等のレッスンもあり、初めての方でも安心してご利用いただけます。<br>レッスン15分、体験45分で合計1時間を目安に体験いただきます。</p>",
-        "image": "ウッドカヌー体験/img-1.png",
-        "images": ["ウッドカヌー体験/img-1.png", "ウッドカヌー体験/img-2.png"],
+        "detailInfo": "<p>山梨県都留市の「鹿留カヌー工房」で製作された、間伐材を使用した手作りの木製カヌーで湖に繰り出そう！</p><p>森と湖の美しさを感じながら、西湖でのクルージングをお楽しみください。</p><p>漕ぎ方等のレッスンもあり、初めての方でも安心してご利用いただけます。</p><p>レッスン15分、体験45分で合計1時間を目安に体験いただきます。</p>",
+        "image": "/images/categories/play/03-1.png",
+        "images": [
+          "/images/categories/play/03-1.png",
+          "/images/categories/play/03-2.png"
+        ],
         "location": "湖畔",
-        "time": "12/6　12:00-15:00まで受付<br>12/7　 9:00-14:00まで受付",
+        "time": "12/6　12:00-15:00まで受付\n12/7　10:00-14:00まで受付",
         "snsUrl": "https://www.instagram.com/canoe_factory_shishidome/",
         "price": "2500円/艇　1時間"
       },
       {
         "name": "チルアウト・DJブース",
         "description": "専属DJがメイン会場をチルな音楽で演出<br>焚き火も、クラフトも、お食事も心地よく♪",
-        "detailInfo": "<p>コッコ内で行われるあらゆるコトに素敵な音楽を添えてくれる<br>DJはいわば、心強い演出家です！<br>焚き火×音楽<br>クラフト×音楽<br>お食事×音楽<br>キャンドル×音楽などなど...<br>心地よい音に包まれて、チルアウト<br>みんな遊びに没頭できるはず！<br>踊りたい人も歓迎、ぜひブースの近くへ！<br>提供：music anywhere</p>",
-        "image": "チルアウト・DJブース/img-1.png",
-        "images": ["チルアウト・DJブース/img-1.png"],
+        "detailInfo": "<p>コッコ内で行われるあらゆるコトに素敵な音楽を添えてくれるDJはいわば、心強い演出家です！</p><p>焚き火×音楽<br>クラフト×音楽<br>お食事×音楽<br>キャンドル×音楽などなど...<br>心地よい音に包まれて、チルアウト</p><p>みんな遊びに没頭できるはず！</p><p>踊りたい人も歓迎、ぜひブースの近くへ！</p><p>提供：music anywhere</p>",
+        "image": "/images/categories/play/04-1.png",
+        "images": [
+          "/images/categories/play/04-1.png"
+        ],
         "location": "コッコ内",
         "time": "12/6・12/7",
         "snsUrl": "",
-        "price": "2500円/艇　1時間"
+        "price": "無料（チケット料金に含む）"
       },
       {
         "name": "アスレチックゾーン",
-        "description": "専属DJがメイン会場をチルな音楽で演出<br>焚き火も、クラフトも、お食事も心地よく♪",
-        "detailInfo": "<p>ホテル横の遊戯エリア「ほどほどの森」にはトランポリンやツリーハウスをはじめ、<br>ブランコやハンモック、アスレチックなど遊べる遊具が満載です！<br>ぶら下がる遊具の下は芝生になっているので自然の中でのびのびと遊んでいただけます！</p>",
-        "image": "アスレチックゾーン/img-1.jpeg",
-        "images": ["アスレチックゾーン/img-1.jpeg"],
+        "description": "裸足で歩ける芝生の広場に設置された<br>トランポリンやアスレチックでのびのび遊べます",
+        "detailInfo": "<p>ホテル横の遊戯エリア「ほどほどの森」には</p><p>トランポリンやツリーハウスをはじめ</p><p>ブランコやハンモック、アスレチックなど</p><p>遊べる遊具が満載です！</p><p>ぶら下がる遊具の下は芝生になっているので</p><p>自然の中でのびのびと遊んでいただけます！</p>",
+        "image": "/images/categories/play/05-1.jpg",
+        "images": [
+          "/images/categories/play/05-1.jpg",
+          "/images/categories/play/05-2.jpg"
+        ],
         "location": "ほどほどの森エリア",
         "time": "12/6・12/7",
         "snsUrl": "",
@@ -259,29 +454,73 @@
       {
         "name": "モルック大会",
         "description": "今年もやりますエンジョイなモルック大会！<br>初めてでも、大人でも子供でも熱くなれるスポーツです！",
-        "detailInfo": "<p>エントリーフォーム準備中<br>シンプルながら奥深いアウトドアスポーツ<br>「モルック」で老若男女問わず熱くなるひととき<br>木の温もりを感じる素材感や<br>木が木にぶつかる音なんとも心地よい<br>癒し系のスポーツでもあります♪<br>ルールのレクチャーもあり、初めての参加も歓迎です。<br>上位入賞には景品をご用意しております！<br>雨天時は屋内会場で開催するのでご安心ください！</p>",
-
-        "image": "モルック大会/img-1.jpeg",
-        "images": ["モルック大会/img-1.jpeg"],
-        "location": "晴天時　モルック広場<br>雨天時　体育館内 芝生ゾーン",
-        "time": "12/6 13:00-15:00<br/>12/7 11:00-13:00",
+        "detailInfo": "<p>レクチャー付きで初めてでも安心！</p><p><a href=\"https://docs.google.com/forms/d/1qdSZEToyqEup5CrnGksFdhRcJliJqK11kDZe7ygMfBc/edit#responses\" target=\"_blank\" rel=\"noopener noreferrer\"><span style=\"color: #c99e2d\">エントリーはこちら</span></a>から！</p><p>シンプルながら奥深いアウトドアスポーツ</p><p>「モルック」で老若男女問わず熱くなるひととき</p><p>木の温もりを感じる素材感や</p><p>木が木にぶつかる音なんとも心地よい</p><p>癒し系のスポーツでもあります♪</p><p>ルールのレクチャーもあり、初めての参加も歓迎です。</p><p>上位入賞には景品をご用意しております！</p><p>雨天時は屋内会場で開催するのでご安心ください！</p>",
+        "image": "/images/categories/play/06-1.jpg",
+        "images": [
+          "/images/categories/play/06-1.jpg"
+        ],
+        "location": "晴天時　モルック広場 雨天時<br>体育館内　芝生ゾーン",
+        "time": "12/6 13:00-15:00\n12/7 11:00-13:00",
         "snsUrl": "",
         "price": "無料(チケット料金に含む)"
       },
       {
         "name": "貸切焚き火ベース",
         "description": "焚き火テーブルを貸し切って、イベントを回る拠点に！",
-        "detailInfo": "<p>薪2束、革手袋・火ばさみ、マシュマロ等のセットをお渡しします。<br>屋根付き屋外スペースの焚き火テーブルを貸し切って<br>焚き火やマシュマロを楽しめます！<br>荷物置きやイベントを回る拠点としてお使いください！<br>※お荷物・貴重品はご自身で管理をお願いいたします。<br>　紛失・盗難に関して一切の責任を負いかねます。</p>",
-        "image": "貸切焚き火ベース/img-1.jpeg",
+        "detailInfo": "<p>薪2束、革手袋・火ばさみ、などのセットをお渡しします。</p><p>屋根付き屋外スペースの焚き火テーブルを貸し切って</p><p>手ぶらで焚き火を楽しめます！</p><p>荷物置きやイベントを回る拠点としてお使いください！</p><p>※お荷物・貴重品はご自身で管理をお願いいたします。</p><p>　紛失・盗難に関して一切の責任を負いかねます。</p>",
+        "image": "/images/categories/play/07-1.jpg",
         "images": [
-          "貸切焚き火ベース/img-1.jpeg",
-          "貸切焚き火ベース/img-2.jpeg",
-          "貸切焚き火ベース/img-3.jpeg"
+          "/images/categories/play/07-1.jpg",
+          "/images/categories/play/07-2.jpg",
+          "/images/categories/play/07-3.jpg"
         ],
         "location": "コッコ内",
         "time": "12/6 13:00-18:00<br>12/7 9:00-15:00",
         "snsUrl": "",
-        "price": "3,000円/組〜"
+        "price": "1,000円〜 / 組 "
+      },
+      {
+        "name": "樹海ネイチャーツアー",
+        "description": "青木ヶ原樹海の特徴がよく出たショートルートを歩きます。",
+        "detailInfo": "<p>小雨決行</p><p>普段着・靴でお楽しみいただけるネイチャーツアーです。</p><p>青木ヶ原樹海の特徴がよく出たショートルートを歩き、</p><p>溶岩が作りだしたパワースポット「竜宮洞穴」を巡ります。</p><p>短時間で樹海を満喫できるツアーです。</p><p>※時間などにより行程を変更することがあります。</p><p>◆ツアースケジュール</p><p>1ツアー15名まで</p><p>12/6</p><p>①13:00出発　14:30戻り</p><p>②14:30出発　16:00戻り</p><p>12/7</p><p>①10:30出発　12:00戻り</p>",
+        "image": "/images/categories/play/08-1.png",
+        "images": [
+          "/images/categories/play/08-1.png",
+          "/images/categories/play/08-2.png"
+        ],
+        "location": "総合受付にて受付",
+        "time": "12/6・12/7",
+        "snsUrl": "https://hikeandseek.jp/",
+        "price": "無料"
+      },
+      {
+        "name": "サウンドバス体験",
+        "description": "不思議な音色の楽器を使ったヒーリングセッションです",
+        "detailInfo": "<p>音、波動による約20分のヒーリングセッションです。</p><p>音に包まれ安らぐ時間をぜひご体験ください</p><p>定員：8名</p><p>先着順で会場内予約ボードにて承ります。</p><p>【注意】楽器が割れものであること</p><p>また静かな室内が望ましいという性質上</p><p>小さなお子様を伴っての参加や</p><p>複数家族で参加をする場合などは</p><p>事前にご相談ください。</p><p>提供：Le Ciel healing</p>",
+        "image": "/images/categories/play/09-1.png",
+        "images": [
+          "/images/categories/play/09-1.png",
+          "/images/categories/play/09-2.png"
+        ],
+        "location": "コッコ周辺　ゲル内",
+        "time": "12/6　14:00-　16:30-　19:00-\n12/7　9:30-　10:00-　10:30-",
+        "snsUrl": "https://www.instagram.com/lecielkaco/",
+        "price": "無料(チケット料金に含む)"
+      },
+      {
+        "name": "マウンテンバイク<br>電動キックボードレンタル",
+        "description": "自転車や電動キックボードで西湖を探検しよう！",
+        "detailInfo": "<p>お一人1時間500円でレンタル</p><p>参加条件</p><p>20インチ自転車　小学校低学年程度</p><p>24インチ自転車　小学生高学年程度</p><p>電動キックボード　16歳以上の方</p><p>天候次第で富士山がよく見える根場浜や</p><p>日本の原風景が楽しめる西湖いやしの里根場</p><p>※別途入館料が必要です。</p><p>周囲約10kmの西湖を周遊など</p><p>楽しみ方がたくさんあります！</p>",
+        "image": "/images/categories/play/10-1.jpg",
+        "images": [
+          "/images/categories/play/10-1.jpg",
+          "/images/categories/play/10-2.jpg",
+          "/images/categories/play/10-3.jpg"
+        ],
+        "location": "キャンプ場内　ブース",
+        "time": "12/6　12:00-15:00\n12/7　10:00-15:00",
+        "snsUrl": "https://www.bonvelo.jp/",
+        "price": "500円/1時間"
       }
     ]
   },
@@ -295,36 +534,88 @@
       {
         "name": "ピッツアづくり体験",
         "description": "ピッツア職人が優しく教える、薪窯ピッツア体験！",
-        "detailInfo": "<p>コーン、ツナ、ベーコン、チーズなど好きな具材を載せて本格薪窯でオリジナルのピッツアを焼こう！<br>コッコ祭り内のキッチンカーとしても実際に出店・販売している現役のピッツア職人がレクチャーいたします。<br>自分の手で薪窯で焼いたピッツアはきっと思い出に残る体験になるでしょう！<br>提供：ピッツァカーポリーナ</p>",
-
-        "image": "ピッツアづくり体験/img-1.png",
-        "images": ["ピッツアづくり体験/img-1.png"],
+        "detailInfo": "<p>コーン、ツナ、ベーコン、チーズなど好きな具材を載せて</p><p>本格薪窯でオリジナルのピッツアを焼こう！</p><p>コッコ祭り内のキッチンカーとしても</p><p>実際に出店・販売している</p><p>現役のピッツア職人がレクチャーいたします。</p><p>自分の手で薪窯で焼いたピッツアは</p><p>きっと思い出に残る体験になるでしょう！</p><p>マルゲリータ・・・・・・・・1700円</p><p>マルゲリータチーズ増し・・・1900円</p><p>サラミとチーズ・・・・・・・2000円</p><p>持ち帰り箱・・・・・・・・・100円</p><p>紙皿・・・・・・・・・・・・無料</p><p>提供：ピッツァカーポリーナ</p><p>よろしくお願いいたします。</p>",
+        "image": "/images/categories/make/01-1.png",
+        "images": [
+          "/images/categories/make/01-1.png",
+          "/images/categories/make/01-2.png"
+        ],
         "location": "コッコ内 ピザ窯",
         "time": "12/6・12/7　時間調整中",
         "snsUrl": "https://www.instagram.com/caporina2011/",
-        "price": "1500円"
+        "price": "1700円〜"
       },
       {
-        "name": "竹のクックギアづくり",
-        "description": "竹でクックギア（調理道具）をつくる体験です。<br>焚き火などをしながらゆったりお楽しみください。",
-        "detailInfo": "<p>竹を切り削り磨き、一点モノを作りましょう。<br>焚き火をしながらクラフトすれば、削りくずや切れ端は燃料に焚き火の燃料になります。<br>日を囲みながら、こだわりの一点ものを作るちょっと大人なクラフトタイムをお楽しみください。<br>※クックギアのイメージ画像は準備中です。<br>提供：竹部(バンブ)</p>",
-        "image": "竹のクックギアづくり/img-1.png",
-        "images": ["竹のクックギアづくり/img-1.png"],
+        "name": "竹のクラフト",
+        "description": "竹で簡単なクラフトを行います。<br>焚き火などをしながらゆったりお楽しみください。",
+        "detailInfo": "<p>竹を切り削り磨き、一点モノを作りましょう。</p><p>焚き火をしながらクラフトすれば、</p><p>削りくずや切れ端は燃料に焚き火の燃料になります。</p><p>竹のトングやうぐいす笛などが作れます。</p><p>竹とんぼや竹馬などでも遊べます！</p><p>提供：竹部(バンブ)</p>",
+        "image": "/images/categories/make/02-1.png",
+        "images": [
+          "/images/categories/make/02-1.png",
+          "/images/categories/make/02-2.png"
+        ],
         "location": "コッコ内 竹部(バンブ)ブース",
         "time": "12/6・12/7",
         "snsUrl": "https://www.instagram.com/bamboo_fujieda/?hl=ja",
-        "price": "有料　調整中"
+        "price": "有料"
       },
       {
-        "name": "うぐいす笛作り",
-        "description": "竹でうぐいす笛を作る体験です。<br>シンプルながら、音が鳴るポイント探しが醍醐味です！",
-        "detailInfo": "<p>竹の素朴な素材を切り出し、穴を開け、吹くための絶妙な角度を探る。<br>シンプルながらも工夫が光る、世界に一つのあなたの笛。<br>大人も子供も一緒に楽しめるクラフト体験です。<br>自分で音を生み出す原体験をお楽しみください。<br>提供：竹部(バンブ)</p>",
-        "image": "うぐいす笛作り/img-1.png",
-        "images": ["うぐいす笛作り/img-1.png"],
-        "location": "コッコ内 竹部(バンブ)ブース",
+        "name": "木製ミニカー・ペンダント作り",
+        "description": "木でオリジナルミニカーやペンダントを作ろう",
+        "detailInfo": "<p>木製おもちゃのミニカーやペンダントを</p><p>オリジナルにカスタマイズしてお持ち帰り！</p><p>ミニカーは走らせるコースもあります。</p><p>提供：木工工房五作</p>",
+        "image": "/images/categories/make/03-1.png",
+        "images": [
+          "/images/categories/make/03-1.png"
+        ],
+        "location": "体育館内",
         "time": "12/6・12/7",
-        "snsUrl": "https://www.instagram.com/bamboo_fujieda/?hl=ja",
-        "price": "有料　調整中"
+        "snsUrl": "",
+        "price": "ペンダント200円 ・ミニカー800円"
+      },
+      {
+        "name": "レザークラフト",
+        "description": "鹿革の魅力をお伝えするクラフトワークショップです。",
+        "detailInfo": "<p>鹿革の魅力をお伝えする</p><p>クラフトワークショップで</p><p>森の循環を体感していただけたらと思います。</p><p>どのようにお肉や革になっていくのか</p><p>展示コーナーも設けます。</p><p>少しでも身近に感じていただけたら幸いです。</p>",
+        "image": "/images/categories/make/04-1.png",
+        "images": [
+          "/images/categories/make/04-1.png",
+          "/images/categories/make/04-2.png"
+        ],
+        "location": "ホテル内 ロビー",
+        "time": "12/6・12/7",
+        "snsUrl": "https://www.instagram.com/369hunt/",
+        "price": "有料"
+      },
+      {
+        "name": "キャンドル作り体験",
+        "description": "オリジナルキャンドルを作る体験です",
+        "detailInfo": "<p>キャンドルアーティストによるワークショップで</p><p>手作りのオリジナルキャンドル作りをお楽しみください。</p>",
+        "image": "/images/categories/make/05-1.jpg",
+        "images": [
+          "/images/categories/make/05-1.jpg",
+          "/images/categories/make/05-2.jpg"
+        ],
+        "location": "コッコ内",
+        "time": "12/6　12:00-16:30頃\n12/7　10:00-15:00頃",
+        "snsUrl": "https://www.instagram.com/lecielcandle/",
+        "price": "有料"
+      },
+      {
+        "name": "木工クラフト体験",
+        "description": "木製のキーチェーンやカップから楽器まで作成できます。",
+        "detailInfo": "<p>名入れキーチェーン・・・1200円</p><p>名前をレーザー刻印できる</p><p>手軽なクラフトです</p><p>ククサキット製作体験・・2500-5500円</p><p>北欧ラップランド地方に古くから伝わる木製のマグカップ</p><p>「贈られた人は幸せになる」という言い伝えがあります。</p><p>オリジナルカズー・・・・1600円　新商品特化</p><p>所要時間30分！ハミングするだけで演奏できる楽器です。</p><p>みんなでその場で合奏しよう！</p>",
+        "image": "/images/categories/make/06-1.png",
+        "images": [
+          "/images/categories/make/06-1.png",
+          "/images/categories/make/06-2.png",
+          "/images/categories/make/06-3.png",
+          "/images/categories/make/06-4.png",
+          "/images/categories/make/06-5.png"
+        ],
+        "location": "コッコ周辺　湖側",
+        "time": "12/6　12:00-16:00頃\n12/7　10:00-13:00頃",
+        "snsUrl": "https://www.instagram.com/canoe_factory_shishidome/",
+        "price": "有料"
       }
     ]
   }

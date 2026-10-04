@@ -2,7 +2,7 @@
 // メインSCSSファイルをインポート
 import "../../styles/main.scss";
 
-// データ取得（MicroCMS対応）
+// データ取得
 import { getCategoriesData, getAllCategoryIds } from "../../lib/categoryData";
 import type { CategoryItem, Category } from "../../types/contents";
 
@@ -59,11 +59,11 @@ function getImageFromGlob(category: string, imagePath: string) {
 const processedItems = await Promise.all(
   categoryData.items.map(async (item: CategoryItem) => {
     try {
-      // MicroCMSのURLかローカルパスかを判定
-      const isExternalUrl = item.image.startsWith('http://') || item.image.startsWith('https://');
+      // public/ 配下のパスか、src/images/ 配下の相対パスかを判定
+      const isPublicPath = item.image.startsWith('/');
 
-      if (isExternalUrl) {
-        // MicroCMSなどの外部URL：そのまま使用
+      if (isPublicPath) {
+        // public/ 配下の画像：そのまま使用
         return {
           ...item,
           processedImage: {
