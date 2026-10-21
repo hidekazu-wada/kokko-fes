@@ -13,9 +13,9 @@
     "astro": "^7.4.1",
     "sass": "^1.89.2",
     "sharp": "^0.34.4",
-    "swiper": "^11.2.10"
+    "swiper": "^14.3.0"
   },
   "devDependencies": {
-    "prettier-plugin-astro": "^0.14.1"
+    "prettier-plugin-astro": "^1.1.1"
   }
 }
