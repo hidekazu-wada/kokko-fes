@@ -9,15 +9,16 @@ export default defineConfig({
 
   // Vercel用の最適化
   output: 'static',
-  // Astro 6 で既定が 'jsx' に変わり、要素間の空白が詰まって文字の間隔が変わるため、従来どおりに戻す
+  // Astro 7 で既定が 'jsx' に変わり、要素間の空白が詰まって文字の間隔が変わるため、従来どおりに戻す
   compressHTML: true,
   build: {
     assets: 'assets'
   },
   image: {
     // Sharp使用（高速・高品質な画像最適化）
+    // Astro 5 と同じ大きさで書き出すため、Sharp を薄く包んだもの（src/lib/sharpImageService.ts）を使う
     service: {
-      entrypoint: 'astro/assets/services/sharp'
+      entrypoint: './src/lib/sharpImageService.ts'
     }
   },
 
