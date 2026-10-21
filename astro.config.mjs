@@ -9,6 +9,8 @@ export default defineConfig({
 
   // Vercel用の最適化
   output: 'static',
+  // Astro 6 で既定が 'jsx' に変わり、要素間の空白が詰まって文字の間隔が変わるため、従来どおりに戻す
+  compressHTML: true,
   build: {
     assets: 'assets'
   },
@@ -23,6 +25,14 @@ export default defineConfig({
   prefetch: {
     prefetchAll: true,
     defaultStrategy: 'hover'
+  },
+
+  // Astro 7（Vite 8）で CSS の書き出し先の既定が新しいブラウザ向け（Safari 16.4 以上）に変わり、
+  // メディアクエリが新しい書き方になる。古い iPhone で崩れないよう、Astro 5（Vite 6）のときの対象に戻す
+  vite: {
+    build: {
+      cssTarget: ['chrome87', 'edge88', 'firefox78', 'safari14']
+    }
   },
 
   // サイトマップの自動生成
