@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
-    "astro": "^7.4.1",
-    "sass": "^1.89.2",
+    "astro": "^7.4.5",
+    "sass": "^1.107.1",
     "sharp": "^0.35.5",
     "swiper": "^12.1.2"
   },
